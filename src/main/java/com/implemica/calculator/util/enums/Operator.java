@@ -101,10 +101,10 @@ public enum Operator {
         keys.put(new KeyCodeCombination(KeyCode.M, KeyCodeCombination.CONTROL_DOWN),        MS);
     }
 
-    private static final Operator[] DISABLED = new Operator[] {
-            NEGATE, COMMA, ADD, SUBTRACT, MULTIPLY, DIVIDE, INVERSE, SQR, SQRT, PERCENT, MC, MR, M_PLUS, M_MINUS, MS};
-
-    Operator() {}
+    Operator() {
+        id = "";
+        text = "";
+    }
 
     Operator(String id, String text) {
         this.id = id;
@@ -129,20 +129,6 @@ public enum Operator {
         throw new IllegalStateException("Can't find button with id " + id);
     }
 
-    public static Operator searchByText(String text) {
-        for (Operator item : values()) {
-            if (item.getText().equals(text)) {
-                return item;
-            }
-        }
-
-        throw new IllegalStateException("Can't find button with text" + text);
-    }
-
-    public static Operator searchButtonByCode(KeyCodeCombination code) {
-        return keys.get(code);
-    }
-
     public static Operator searchButtonByEvent(KeyEvent event) {
         for (KeyCodeCombination code : keys.keySet()) {
             if (code.match(event)) {
@@ -151,13 +137,5 @@ public enum Operator {
         }
 
         return  null;
-    }
-
-    public static Operator[] getDisabled() {
-        return DISABLED;
-    }
-
-    public static HashMap<KeyCodeCombination, Operator> getKeyMap() {
-        return keys;
     }
 }

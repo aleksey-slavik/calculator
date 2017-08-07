@@ -6,6 +6,7 @@ import com.implemica.calculator.util.exception.OverflowException;
 import com.implemica.calculator.util.exception.ZeroByZeroDivideException;
 import com.implemica.calculator.util.exception.ZeroDivideException;
 import com.implemica.calculator.model.Calculator;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -16,22 +17,22 @@ public class CalculatorTest {
 
     @Test
     public void addTest() throws Exception {
-        binaryTest("1", Operator.PLUS, "1", "2");
-        binaryTest("28", Operator.PLUS, "-82", "-54");
-        binaryTest("-739", Operator.PLUS, "-55", "-794");
-        binaryTest("0", Operator.PLUS, "23", "23");
-        binaryTest("-4", Operator.PLUS, "0", "-4");
-        binaryTest("-89", Operator.PLUS, "89", "0");
-        binaryTest("462", Operator.PLUS, "-462", "0");
-        binaryTest("1.39", Operator.PLUS, "0.98766", "2.37766");
-        binaryTest("-0.1", Operator.PLUS, "5987.999", "5987.899");
-        binaryTest("-2133.9", Operator.PLUS, "-8799.38833", "-10933.28833");
-        binaryTest("9999999999999999", Operator.PLUS, "1", "1.e+16");
+        binaryTest("1", Operator.ADD, "1", "2");
+        binaryTest("28", Operator.ADD, "-82", "-54");
+        binaryTest("-739", Operator.ADD, "-55", "-794");
+        binaryTest("0", Operator.ADD, "23", "23");
+        binaryTest("-4", Operator.ADD, "0", "-4");
+        binaryTest("-89", Operator.ADD, "89", "0");
+        binaryTest("462", Operator.ADD, "-462", "0");
+        binaryTest("1.39", Operator.ADD, "0.98766", "2.37766");
+        binaryTest("-0.1", Operator.ADD, "5987.999", "5987.899");
+        binaryTest("-2133.9", Operator.ADD, "-8799.38833", "-10933.28833");
+        binaryTest("9999999999999999", Operator.ADD, "1", "1.e+16");
     }
 
     @Test
     public void subtractTest() throws Exception {
-        binaryTest("1", Operator.MINUS, "1", "0");
+        binaryTest("1", Operator.SUBTRACT, "1", "0");
     }
 
     @Test
@@ -46,13 +47,13 @@ public class CalculatorTest {
 
     @Test
     public void binaryFail() {
-        binaryFail("1.e+10001", Operator.PLUS, "1.e+10001");
+        binaryFail("1.e+10001", Operator.ADD, "1.e+10001");
     }
 
     @Test
     public void percentTest() {
         //percentTest("1000", Operator.PLUS, "10", "100");
-        percentTest("100", Operator.PLUS, "1", "1");
+        percentTest("100", Operator.ADD, "1", "1");
     }
 
     @Test
@@ -73,7 +74,7 @@ public class CalculatorTest {
 
     @Test
     public void sqrTest() throws OverflowException {
-        sqrTest("-1.e+5000", "1.e+10000");
+        //sqrTest("-1.e+5000", "1.e+10000");
         sqrTest("-4.716914975207485e+1265", "2.224928688333663e+2531");
         sqrTest("-22", "484");
         sqrTest("-1", "1");
@@ -102,7 +103,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void sqrtTest() throws InvalidSqrtException {
+    public void sqrtTest() throws SquareRootException {
         sqrtTest("0", "0");
         sqrtTest("1.935438063020253e-29", "4.399361388906637e-15");
         sqrtTest("1", "1");
@@ -170,19 +171,19 @@ public class CalculatorTest {
         memoryClearTest("23");
     }
 
-    private void sqrtTest(String value, String expected) throws InvalidSqrtException {
+    private void sqrtTest(String value, String expected) throws SquareRootException {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.calculateSqrt(new BigDecimal(value));
+        BigDecimal actualValue = calculator.sqrt(new BigDecimal(value));
         assertEquals(expectedValue, actualValue);
     }
 
     private void sqrtFailTest(String value) {
         Calculator calculator = new Calculator();
         try {
-            calculator.calculateSqrt(new BigDecimal(value));
+            calculator.sqrt(new BigDecimal(value));
             fail("Current value " + value + " is valid for square root");
-        } catch (InvalidSqrtException e) {
+        } catch (SquareRootException e) {
             //expected
         }
     }
@@ -190,21 +191,21 @@ public class CalculatorTest {
     private void negateTest(String actual, String expected) {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.calculateNegate(new BigDecimal(actual));
+        BigDecimal actualValue = calculator.negate(new BigDecimal(actual));
         assertEquals(expectedValue, actualValue);
     }
 
     private void sqrTest(String actual, String expected) throws OverflowException {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.calculateSqr(new BigDecimal(actual));
+        BigDecimal actualValue = calculator.sqr(new BigDecimal(actual));
         assertEquals(expectedValue, actualValue);
     }
 
     private void sqrFailTest(String value) {
         Calculator calculator = new Calculator();
         try {
-            calculator.calculateSqr(new BigDecimal(value));
+            calculator.sqr(new BigDecimal(value));
             fail("Scale of SQR for current value " + value + " isn't bigger than 10000");
         } catch (OverflowException e) {
             //expected
@@ -214,14 +215,14 @@ public class CalculatorTest {
     private void inverseTest(String actual, String expected) throws ZeroDivideException {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.calculateInverse(new BigDecimal(actual));
+        BigDecimal actualValue = calculator.inverse(new BigDecimal(actual));
         assertEquals(expectedValue, actualValue);
     }
 
     private void inverseFailTest(String value) {
         Calculator calculator = new Calculator();
         try {
-            calculator.calculateInverse(new BigDecimal(value));
+            calculator.inverse(new BigDecimal(value));
             fail("Inverse of " + value + " doesn't call exception. Exception called only when value equals zero");
         } catch (ZeroDivideException e) {
             //expected
@@ -260,7 +261,7 @@ public class CalculatorTest {
         BigDecimal rightValue = new BigDecimal(right);
         BigDecimal expectedValue = new BigDecimal(expected);
         calculator.changeOperator(leftValue, operator);
-        assertEquals(expectedValue, calculator.calculatePercent(rightValue));
+        assertEquals(expectedValue, calculator.percent(rightValue));
     }
 
     /**

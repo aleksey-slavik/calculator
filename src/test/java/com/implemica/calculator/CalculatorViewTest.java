@@ -173,6 +173,7 @@ public class CalculatorViewTest {
         testExpression("4 7 2 3 3 9 9 M- 2 3 7 7 M- MR", "-4725776");
     }
 
+    /*
     //todo
     @Test
     public void testClearEntryButton() {
@@ -929,6 +930,7 @@ public class CalculatorViewTest {
     }
 
     //todo
+    */
 
     private void testExpression(String expression, String expected) throws Exception{
         controller.push(KeyCode.ESCAPE);
