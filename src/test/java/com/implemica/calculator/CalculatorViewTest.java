@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
@@ -42,6 +41,8 @@ public class CalculatorViewTest {
         testExpression("1 2 3 4 5 6 7 8 9 0", "1234567890");
         testExpression("1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6", "1234567890123456");
         testExpression("1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0", "1234567890123456");
+        testExpression("1 2 3 4 5 6 7 8 9 0 , 1 2 3 4 5 6", "1234567890,123456");
+        testExpression("1 2 3 4 5 6 7 8 9 0 , 1 2 3 4 5 6 NG", "-1234567890,123456");
     }
 
     @Test

@@ -86,12 +86,6 @@ public class NumericFormatter {
         return result;
     }
 
-    public static BigDecimal formatValue(BigDecimal value) {
-        String format = format(value);
-        format = format.replace(COMMA, DOT);
-        return new BigDecimal(format);
-    }
-
     private static int getCountOfIntegerDigits(BigDecimal value) {
         return value.toPlainString().indexOf(DOT);
     }

@@ -14,13 +14,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -257,6 +260,9 @@ public class Controller implements Initializable{
 
     @FXML
     private AnchorPane title;
+
+    @FXML
+    private AnchorPane root;
 
     @FXML
     private Button menuShow;
@@ -1029,5 +1035,55 @@ public class Controller implements Initializable{
 
         left.setVisible(true);
         historyField.setText(historyValue.substring(historyPos, historyPos + HISTORY_FIELD_SIZE));
+    }
+
+    @FXML
+    private void checkCursor(MouseEvent event) {
+        if (event.getX() > root.getWidth() - 5 || event.getX() < root.getLayoutX() + 5) {
+            root.setCursor(Cursor.E_RESIZE);
+        } else if (event.getY() > root.getHeight() - 5 || event.getY() < root.getLayoutY() + 5) {
+            root.setCursor(Cursor.N_RESIZE);
+        } else {
+            root.setCursor(Cursor.DEFAULT);
+        }
+    }
+
+    private boolean isBottomResize;
+    private double dx, dy;
+
+    @FXML
+    private void beginResizeWindow(MouseEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        if (event.getX() > stage.getWidth() - 5) {
+            isBottomResize = false;
+            dx = event.getSceneX();
+        }
+
+        if (event.getX() < stage.getX() + 5) {
+            isBottomResize = true;
+            dx = stage.getWidth() - event.getX();
+        }
+
+        if (event.getY() > stage.getHeight() - 5) {
+            isBottomResize = false;
+            dy = event.getSceneY();
+        }
+
+        if (event.getY() < stage.getY() + 5) {
+            isBottomResize = true;
+            dy = stage.getHeight() - event.getY();
+        }
+    }
+
+    @FXML
+    private void processResizeWindow(MouseEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        if (isBottomResize) {
+            stage.setWidth(event.getX() + dx);
+            stage.setHeight(event.getY() + dy);
+        } else {
+            stage.setX(event.getScreenX() - dx);
+            stage.setY(event.getScreenY() - dy);
+        }
     }
 }
