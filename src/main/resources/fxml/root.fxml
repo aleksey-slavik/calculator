@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="468.0" minWidth="320.0" onKeyPressed="#operatorKeyClick" prefHeight="500.0" prefWidth="320.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.implemica.calculator.controller.Controller">
+      <GridPane hgap="5.0" layoutX="60.0" layoutY="175.0" vgap="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="82.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+            <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators" text="±" GridPane.rowIndex="8" />
+            <Button fx:id="one" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="1" GridPane.rowIndex="7" />
+            <Button fx:id="zero" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Button fx:id="two" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="2" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button fx:id="four" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="4" GridPane.rowIndex="6" />
+            <Button fx:id="five" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="5" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button fx:id="six" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="6" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Button fx:id="three" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="3" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Button fx:id="comma" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonCommaClick" styleClass="digits" text="," GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Button fx:id="equals" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonEqualsClick" styleClass="operators_blue" text="=" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Button fx:id="add" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators_blue" text="＋" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Button fx:id="subtract" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators_blue" text="-" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Button fx:id="seven" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="7" GridPane.rowIndex="5" />
+            <Button fx:id="clear_expr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="controls" text="CE" GridPane.rowIndex="4" />
+            <Button fx:id="percent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators" text="\%" GridPane.rowIndex="3" />
+            <Button fx:id="sqrt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators" text="√" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="sqr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators" text="𝑥²" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="inverse" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators" text="¹⁄𝑥" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="clear" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="controls" text="C" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="controls" text="⌫" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="divide" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators_blue" text="÷" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Button fx:id="eight" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="8" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="nine" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonDigitClick" styleClass="digits" text="9" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button fx:id="multiply" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#operatorEventClick" styleClass="operators_blue" text="×" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <GridPane alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="2">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" styleClass="memory" text="M▾" GridPane.columnIndex="5">
+            <tooltip>
+               <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory" />
+            </tooltip></Button>
+                <Button fx:id="memory_store" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#operatorEventClick" prefHeight="25.0" prefWidth="45.0" styleClass="memory" text="MS" GridPane.columnIndex="4">
+            <tooltip>
+               <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory store" />
+            </tooltip></Button>
+                <Button fx:id="memory_minus" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#operatorEventClick" prefHeight="25.0" prefWidth="45.0" styleClass="memory" text="M-" GridPane.columnIndex="3">
+            <tooltip>
+               <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory subtract" />
+            </tooltip></Button>
+                <Button fx:id="memory_add" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#operatorEventClick" prefHeight="25.0" prefWidth="45.0" styleClass="memory" text="M+" GridPane.columnIndex="2">
+            <tooltip>
+               <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory add" />
+            </tooltip></Button>
+                <Button fx:id="memory_recall" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#operatorEventClick" prefHeight="25.0" prefWidth="45.0" styleClass="memory" text="MR" GridPane.columnIndex="1">
+            <tooltip>
+               <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory recall" />
+            </tooltip></Button>
+                <Button fx:id="memory_clear" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#operatorEventClick" prefHeight="25.0" prefWidth="45.0" styleClass="memory" text="MC">
+            <tooltip>
+               <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Clear all memory" />
+            </tooltip></Button>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+            </GridPane>
+            <Label fx:id="numericField" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="numeric" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0" GridPane.columnSpan="4">
+            <Label fx:id="historyField" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="history" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="left" alignment="CENTER" contentDisplay="CENTER" layoutY="9.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#leftClick" prefHeight="25.0" prefWidth="25.0" styleClass="history_controls" text="&lt;" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+            <Button fx:id="right" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="5.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#rightClick" prefHeight="25.0" prefWidth="25.0" styleClass="history_controls" text="&gt;" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" />
+      </AnchorPane>
+
+      </GridPane>
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" styleClass="title" text="Standard" AnchorPane.leftAnchor="60.0" />
+      <Button fx:id="history" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="big_button" AnchorPane.rightAnchor="0.0">
+         <tooltip>
+            <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" contentDisplay="CENTER" text="History" />
+         </tooltip></Button>
+      <Button fx:id="menuShow" layoutY="13.0" mnemonicParsing="false" onAction="#buttonMenuClick" prefHeight="50.0" prefWidth="50.0" styleClass="big_button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    </AnchorPane>
+   <AnchorPane fx:id="title" onMouseMoved="#moveWindow" prefHeight="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <Button fx:id="hide" maxHeight="30.0" maxWidth="50.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#processHide" prefHeight="30.0" prefWidth="50.0" styleClass="hide" text="–" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
+       <Button fx:id="exit" mnemonicParsing="false" onAction="#processExit" prefHeight="30.0" prefWidth="50.0" styleClass="exit" text="✕" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+       <Button fx:id="expand" maxHeight="30.0" maxWidth="50.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#processExpand" prefHeight="30.0" prefWidth="50.0" styleClass="hide" text="⬜" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
+      <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" text="Calculator" AnchorPane.leftAnchor="15.0" />
+   </AnchorPane>
+   <AnchorPane fx:id="navigator" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" styleClass="background" translateX="-250" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <Button fx:id="menuClose" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#buttonMenuClick" prefHeight="50.0" prefWidth="50.0" styleClass="big_button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               <Label maxHeight="50.0" minHeight="50.0" prefHeight="50.0" styleClass="title" text="Calculator" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      </AnchorPane>
+      <AnchorPane layoutY="418.0" styleClass="about" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <ImageView fx:id="about" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label text="About" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      </AnchorPane>
+         <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+         <Separator layoutX="14.0" layoutY="417.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+   </AnchorPane>
+</AnchorPane>
