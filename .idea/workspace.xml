@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="enum fix">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller$1.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest$1.class" afterPath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest.class" />
+    <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/Launcher.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/Launcher.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/util/format/NumericFormatter.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/util/format/NumericFormatter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/root.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/root.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,13 +33,25 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="1085" column="48" lean-forward="false" selection-start-line="1085" selection-start-column="48" selection-end-line="1085" selection-end-column="48" />
+            <state relative-caret-position="-32">
+              <caret line="1062" column="34" lean-forward="true" selection-start-line="1062" selection-start-column="34" selection-end-line="1062" selection-end-column="34" />
               <folding>
                 <element signature="e#14528#14529#0" expanded="true" />
                 <element signature="e#14573#14574#0" expanded="true" />
                 <element signature="e#16887#16888#0" expanded="true" />
                 <element signature="e#16934#16935#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResizeListener.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ResizeListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="56" column="13" lean-forward="false" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,14 +67,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="root.fxml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="root.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
           <provider editor-type-id="JavaFX-Scene-Builder">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="13" column="125" lean-forward="false" selection-start-line="13" selection-start-column="125" selection-end-line="13" selection-end-column="125" />
+              <caret line="13" column="126" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="126" />
               <folding />
             </state>
           </provider>
@@ -106,8 +113,8 @@
       <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+            <state relative-caret-position="148">
+              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,6 +123,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -130,12 +144,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/enums/Operator.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ResizeListener.java" />
       </list>
     </option>
   </component>
@@ -267,6 +282,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -650,6 +695,14 @@
       <option name="presentableId" value="Default" />
       <updated>1502095030712</updated>
     </task>
+    <task id="LOCAL-00001" summary="add resize window">
+      <created>1502115954086</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1502115954086</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -674,6 +727,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -685,7 +739,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -710,7 +764,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="enum fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="enum fix" />
+    <MESSAGE value="add resize window" />
+    <option name="LAST_COMMIT_MESSAGE" value="add resize window" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -779,6 +834,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="126" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="126" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
@@ -787,20 +853,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="1085" column="48" lean-forward="false" selection-start-line="1085" selection-start-column="48" selection-end-line="1085" selection-end-column="48" />
+        <state relative-caret-position="-32">
+          <caret line="1062" column="34" lean-forward="true" selection-start-line="1062" selection-start-column="34" selection-end-line="1062" selection-end-column="34" />
           <folding>
             <element signature="e#14528#14529#0" expanded="true" />
             <element signature="e#14573#14574#0" expanded="true" />
@@ -810,14 +866,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="125" lean-forward="false" selection-start-line="13" selection-start-column="125" selection-end-line="13" selection-end-column="125" />
-          <folding />
+        <state relative-caret-position="148">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ResizeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="56" column="13" lean-forward="false" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
