@@ -15,8 +15,6 @@ import java.math.BigDecimal;
  */
 public class Calculator {
 
-    private static final String DEFAULT_HISTORY_VALUE = "";
-
     private static final BigDecimal HUNDRED = BigDecimal.valueOf(100);
 
     /**
@@ -43,10 +41,14 @@ public class Calculator {
      */
     private boolean isNextOperator;
 
-    public void setOperator(BigDecimal value, Operator operator) {
+    public void changeOperator(BigDecimal value, Operator operator) {
         isNextOperator = false;
         left = value;
         this.operator = operator;
+    }
+
+    public Operator getOperator() {
+        return operator;
     }
 
     public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
@@ -140,15 +142,15 @@ public class Calculator {
         return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
-    private BigDecimal percent(BigDecimal value) {
+    public BigDecimal percent(BigDecimal value) {
         return left.multiply(value.divide(HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP)).stripTrailingZeros();
     }
 
-    private BigDecimal negate(BigDecimal value) {
+    public BigDecimal negate(BigDecimal value) {
         return value.negate();
     }
 
-    private BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
+    public BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
         if (value.equals(BigDecimal.ZERO)) {
             throw new ZeroDivideException("Divide by zero in inverse method");
         }
@@ -156,11 +158,17 @@ public class Calculator {
         return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
-    private BigDecimal sqr(BigDecimal value) {
-        return value.pow(2);
+    public BigDecimal sqr(BigDecimal value) throws OverflowException {
+        BigDecimal res = value.pow(2);
+
+        if (Math.abs(res.scale()) >= MAX_SCALE) {
+            throw new OverflowException("Scale of result of sqr is bigger than max scale value");
+        }
+
+        return res;
     }
 
-    private BigDecimal sqrt(BigDecimal value) throws SquareRootException {
+    public BigDecimal sqrt(BigDecimal value) throws SquareRootException {
         if (value.compareTo(BigDecimal.ZERO) < 0) {
             throw new SquareRootException("Can't get square root of " + value.toPlainString() + ". Non negative number is needed");
         }
@@ -172,32 +180,32 @@ public class Calculator {
         return sqrt(value); //todo
     }
 
-    private void clear() {
+    public void clearAll() {
         left = BigDecimal.ZERO;
         right = BigDecimal.ZERO;
     }
 
-    private void clearEntry() {
+    public void clearEntry() {
         right = BigDecimal.ZERO;
     }
 
-    private void memoryClear() {
+    public void memoryClear() {
         memory = BigDecimal.ZERO;
     }
 
-    private void memoryStore(BigDecimal value) {
+    public void memoryStore(BigDecimal value) {
         memory = value;
     }
 
-    private void memoryAdd(BigDecimal value) {
+    public void memoryAdd(BigDecimal value) {
         memory = memory.add(value);
     }
 
-    private void memorySubtract(BigDecimal value) {
+    public void memorySubtract(BigDecimal value) {
         memory = memory.subtract(value);
     }
 
-    private BigDecimal memoryRecall() {
+    public BigDecimal memoryRecall() {
         return memory;
     }
 }

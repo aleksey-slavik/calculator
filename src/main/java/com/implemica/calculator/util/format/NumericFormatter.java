@@ -101,7 +101,7 @@ public class NumericFormatter {
      * @param number    given number
      * @return          rounded number
      */
-    private static BigDecimal round(BigDecimal number) {
+    public static BigDecimal round(BigDecimal number) {
         if (isIntegerNumber(number) || number.compareTo(MIN) < 0) {
             return number;
         }
