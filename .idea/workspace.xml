@@ -702,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502115954086</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add resize listener">
+      <created>1502122874848</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1502122874848</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -765,7 +772,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="enum fix" />
     <MESSAGE value="add resize window" />
-    <option name="LAST_COMMIT_MESSAGE" value="add resize window" />
+    <MESSAGE value="add resize listener" />
+    <option name="LAST_COMMIT_MESSAGE" value="add resize listener" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
