@@ -39,7 +39,7 @@ public class ResizeListener implements EventHandler<MouseEvent>{
 
     private Stage stage;
 
-    ResizeListener(Stage stage, Scene scene) {
+    public ResizeListener(Stage stage, Scene scene) {
         this.stage = stage;
         this.scene = scene;
     }
