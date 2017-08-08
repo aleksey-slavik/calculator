@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/User-Interface-Menu-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/calc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/circle-backup-time-history-recent-time-machine-glyph-256.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/images/history.png" afterPath="$PROJECT_DIR$/src/main/resources/images/history.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/images/icon.png" afterPath="$PROJECT_DIR$/src/main/resources/images/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/images/menu.png" afterPath="$PROJECT_DIR$/src/main/resources/images/menu.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller$1.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/view/CalculatorView.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/view/CalculatorView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/images/about.png" afterPath="$PROJECT_DIR$/target/classes/images/about.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/images/history.png" afterPath="$PROJECT_DIR$/target/classes/images/history.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/images/icon.png" afterPath="$PROJECT_DIR$/target/classes/images/icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/images/menu.png" afterPath="$PROJECT_DIR$/target/classes/images/menu.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest$1.class" afterPath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/implemica/calculator/CalculatorViewTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/root.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/root.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,7 +35,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-14305">
@@ -44,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuAdapter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MenuAdapter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/adapter/MenuAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="485">
               <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -839,7 +840,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502122894391</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="change view logic">
+      <created>1502189602907</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1502189602907</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -902,7 +910,8 @@
     <MESSAGE value="enum fix" />
     <MESSAGE value="add resize window" />
     <MESSAGE value="add resize listener" />
-    <option name="LAST_COMMIT_MESSAGE" value="add resize listener" />
+    <MESSAGE value="change view logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="change view logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1187,16 +1196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/adapter/MenuAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1218,6 +1217,16 @@
         <state relative-caret-position="-14305">
           <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/adapter/MenuAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
