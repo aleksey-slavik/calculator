@@ -1,11 +1,16 @@
 package com.implemica.calculator.view;
 
+import com.implemica.calculator.Launcher;
+import com.implemica.calculator.view.adapter.MenuAdapter;
 import com.implemica.calculator.view.listener.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -44,6 +49,10 @@ public class CalculatorView {
 
     private static final String ABOUT_SELECTOR = "#about";
 
+    private static final String TITLE_SELECTOR = "#title";
+
+    private static final String LIST_SELECTOR = "#listView";
+
     public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         Parent root = loader.load(getClass().getResourceAsStream(ROOT_PATH));
@@ -76,14 +85,34 @@ public class CalculatorView {
         menuClose.setOnAction(navigatorListener);
 
         //add move listener
+        AnchorPane title = (AnchorPane) scene.lookup(TITLE_SELECTOR);
+        MoveWindowListener moveWindowListener = new MoveWindowListener(primaryStage);
+        title.setOnMousePressed(moveWindowListener);
+        title.setOnMouseDragged(moveWindowListener);
 
         //add icon for history button
+        Button history = (Button) scene.lookup(HISTORY_SELECTOR);
+        Image historyImage = new Image(getClass().getResourceAsStream(HISTORY_ICON_PATH));
+        ImageView imageView = new ImageView(historyImage);
+        history.setGraphic(imageView);
 
-        //add icon for menu buttons
+        //add icon for menuOpen button
+        Image menuImage = new Image(Launcher.class.getResourceAsStream(MENU_ICON_PATH));
+        imageView = new ImageView(menuImage);
+        menuOpen.setGraphic(imageView);
+
+        //add icon for menuClose button
+        imageView = new ImageView(menuImage);
+        menuClose.setGraphic(imageView);
 
         //add icon for about button
+        ImageView about = (ImageView) scene.lookup(ABOUT_SELECTOR);
+        Image aboutImage = new Image(Launcher.class.getResourceAsStream(ABOUT_ICON_PATH));
+        about.setImage(aboutImage);
 
         //init listview
+        ListView<String> listView = (ListView<String>) scene.lookup(LIST_SELECTOR);
+        listView.setItems(MenuAdapter.init());
 
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(APP_ICON_PATH)));

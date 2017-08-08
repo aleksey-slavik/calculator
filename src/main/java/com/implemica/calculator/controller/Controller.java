@@ -1,6 +1,5 @@
 package com.implemica.calculator.controller;
 
-import com.implemica.calculator.Launcher;
 import com.implemica.calculator.model.Calculator;
 import com.implemica.calculator.util.enums.Operator;
 import com.implemica.calculator.util.exception.OverflowException;
@@ -9,23 +8,12 @@ import com.implemica.calculator.util.exception.ZeroByZeroDivideException;
 import com.implemica.calculator.util.exception.ZeroDivideException;
 import com.implemica.calculator.util.format.NumericFormatter;
 import javafx.animation.PauseTransition;
-import javafx.animation.TranslateTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
@@ -121,10 +109,6 @@ public class Controller implements Initializable{
     private static final String FONT_STYLE_SMALL = "-fx-font-size: " + NUMERIC_FIELD_FONT_SMALL + "pt;";
 
     private static final String SEPARATOR = " ";
-
-    private double xPos;
-
-    private double yPos;
 
     private int historyPos;
 
@@ -244,24 +228,6 @@ public class Controller implements Initializable{
     private Button memory_store;
 
     @FXML
-    private Button history;
-
-    @FXML
-    private AnchorPane title;
-
-    @FXML
-    private Button menuShow;
-
-    @FXML
-    private Button menuClose;
-
-    @FXML
-    private ImageView about;
-
-    @FXML
-    private ListView<String> listView;
-
-    @FXML
     private Button left;
 
     @FXML
@@ -270,16 +236,6 @@ public class Controller implements Initializable{
     private Button[] disabled;
 
     private Button[] disabledMemory;
-
-    private ObservableList<String> observableList;
-
-    public Controller() {
-        observableList = FXCollections.observableArrayList();
-        observableList.addAll(
-                "Standard", "Scientific", "Programmer", "Date Calculation",
-                "Currency", "Volume", "Length", "Weight and Mass", "Temperature", "Energy",
-                "Area", "Speed", "Time", "Power", "Data", "Pressure", "Angle");
-    }
 
     @FXML
     private void buttonDigitClick(ActionEvent event) {
@@ -900,26 +856,6 @@ public class Controller implements Initializable{
         disableMemoryButtons(true);
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
-
-        Image historyImage = new Image(Launcher.class.getResourceAsStream("/images/history.png"));
-        ImageView imageView = new ImageView(historyImage);
-        history.setGraphic(imageView);
-
-        Image menuImage = new Image(Launcher.class.getResourceAsStream("/images/menu.png"));
-        imageView = new ImageView(menuImage);
-        imageView.setFitWidth(30);
-        imageView.setFitHeight(30);
-        menuShow.setGraphic(imageView);
-
-        imageView = new ImageView(menuImage);
-        imageView.setFitWidth(30);
-        imageView.setFitHeight(30);
-        menuClose.setGraphic(imageView);
-
-        Image aboutImage = new Image(Launcher.class.getResourceAsStream("/images/about.png"));
-        about.setImage(aboutImage);
-
-        listView.setItems(observableList);
     }
 
     private void disableButtons(boolean disable) {
@@ -934,21 +870,6 @@ public class Controller implements Initializable{
         for (Button item : disabledMemory) {
             item.setDisable(disable);
         }
-    }
-
-    @FXML
-    private void moveWindow() {
-        Stage stage = (Stage) title.getScene().getWindow();
-
-        title.setOnMousePressed(mouseEvent -> {
-            xPos = stage.getX() - mouseEvent.getScreenX();
-            yPos = stage.getY() - mouseEvent.getScreenY();
-        });
-
-        title.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() + xPos);
-            stage.setY(mouseEvent.getScreenY() + yPos);
-        });
     }
 
     @FXML
