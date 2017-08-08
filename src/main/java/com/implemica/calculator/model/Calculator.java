@@ -177,7 +177,7 @@ public class Calculator {
             return BigDecimal.ZERO;
         }
 
-        return sqrt(value); //todo
+        return sqrt(value, BigDecimal.ONE);
     }
 
     public void clearAll() {
@@ -207,5 +207,30 @@ public class Calculator {
 
     public BigDecimal memoryRecall() {
         return memory;
+    }
+
+    private static BigDecimal sqrt(BigDecimal number, BigDecimal guess)
+    {
+        BigDecimal two = BigDecimal.valueOf(2);
+        BigDecimal result = BigDecimal.ZERO;
+        BigDecimal flipA = result;
+        BigDecimal flipB = result;
+        boolean first = true;
+        while( result.compareTo(guess) != 0 )
+        {
+            if(!first)
+                guess = result;
+            else
+                first=false;
+
+            result = number.divide(guess, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).add(guess).divide(two, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+            // handle flip flops
+            if(result.equals(flipB))
+                return flipA;
+
+            flipB = flipA;
+            flipA = result;
+        }
+        return result;
     }
 }
