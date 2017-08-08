@@ -105,7 +105,7 @@
          <tooltip>
             <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" contentDisplay="CENTER" text="History" />
          </tooltip></Button>
-      <Button fx:id="menuShow" layoutY="13.0" mnemonicParsing="false" onAction="#buttonMenuClick" prefHeight="50.0" prefWidth="50.0" styleClass="big_button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="menuShow" layoutY="13.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="big_button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
     </AnchorPane>
    <AnchorPane fx:id="title" onMouseMoved="#moveWindow" prefHeight="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
        <Button fx:id="hide" maxHeight="30.0" maxWidth="50.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="hide" text="–" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
@@ -115,7 +115,7 @@
    </AnchorPane>
    <AnchorPane fx:id="navigator" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" styleClass="background" translateX="-250" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="32.0">
       <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <Button fx:id="menuClose" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#buttonMenuClick" prefHeight="50.0" prefWidth="50.0" styleClass="big_button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               <Button fx:id="menuClose" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="big_button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                <Label maxHeight="50.0" minHeight="50.0" prefHeight="50.0" styleClass="title" text="Calculator" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       </AnchorPane>
       <AnchorPane layoutY="418.0" styleClass="about" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

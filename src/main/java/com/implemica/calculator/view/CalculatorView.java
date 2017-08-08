@@ -1,5 +1,6 @@
 package com.implemica.calculator.view;
 
+import com.implemica.calculator.view.listener.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,12 @@ public class CalculatorView {
 
     private static final String APP_ICON_PATH = "/images/icon.png";
 
+    private static final String HISTORY_ICON_PATH = "/images/history.png";
+
+    private static final String MENU_ICON_PATH = "/images/menu.png";
+
+    private static final String ABOUT_ICON_PATH = "/images/about.png";
+
     private static final String TITLE = "Calculator";
 
     private static final String EXIT_SELECTOR = "#exit";
@@ -29,13 +36,13 @@ public class CalculatorView {
 
     private static final String HIDE_SELECTOR = "#hide";
 
-    private static final String MENU_SELECTOR = "";
+    private static final String MENU_OPEN_SELECTOR = "#menuShow";
 
-    private static final String HISTORY_SELECTOR = "";
+    private static final String MENU_CLOSE_SELECTOR = "#menuClose";
 
-    private Button menu;
+    private static final String HISTORY_SELECTOR = "#history";
 
-    private Button history;
+    private static final String ABOUT_SELECTOR = "#about";
 
     public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -60,6 +67,23 @@ public class CalculatorView {
         //add hide listener
         Button hide = (Button) scene.lookup(HIDE_SELECTOR);
         hide.setOnAction(new HideListener(primaryStage));
+
+        //add menu listener
+        Button menuOpen = (Button) scene.lookup(MENU_OPEN_SELECTOR);
+        Button menuClose = (Button) scene.lookup(MENU_CLOSE_SELECTOR);
+        NavigatorListener navigatorListener = new NavigatorListener(scene);
+        menuOpen.setOnAction(navigatorListener);
+        menuClose.setOnAction(navigatorListener);
+
+        //add move listener
+
+        //add icon for history button
+
+        //add icon for menu buttons
+
+        //add icon for about button
+
+        //init listview
 
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(APP_ICON_PATH)));

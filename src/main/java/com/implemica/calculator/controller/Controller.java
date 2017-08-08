@@ -247,22 +247,7 @@ public class Controller implements Initializable{
     private Button history;
 
     @FXML
-    private Button exit;
-
-    @FXML
-    private Button expand;
-
-    @FXML
-    private Button hide;
-
-    @FXML
-    private AnchorPane navigator;
-
-    @FXML
     private AnchorPane title;
-
-    @FXML
-    private AnchorPane root;
 
     @FXML
     private Button menuShow;
@@ -294,23 +279,6 @@ public class Controller implements Initializable{
                 "Standard", "Scientific", "Programmer", "Date Calculation",
                 "Currency", "Volume", "Length", "Weight and Mass", "Temperature", "Energy",
                 "Area", "Speed", "Time", "Power", "Data", "Pressure", "Angle");
-    }
-
-
-
-    @FXML
-    private void buttonMenuClick() {
-
-        TranslateTransition openMenu = new TranslateTransition(new Duration(350), navigator);
-        openMenu.setToX(0);
-        TranslateTransition closeMenu = new TranslateTransition(new Duration(350), navigator);
-
-        if (navigator.getTranslateX() != 0) {
-            openMenu.play();
-        } else {
-            closeMenu.setToX(-(navigator.getWidth()));
-            closeMenu.play();
-        }
     }
 
     @FXML
