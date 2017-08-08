@@ -17,7 +17,7 @@ public class CalculatorViewTest {
 
     @BeforeClass
     public static void init() {
-        FXTestUtils.launchApp(CalculatorView.class);
+        FXTestUtils.launchApp(Launcher.class);
         controller = new GuiTest() {
             @Override
             protected Parent getRootNode() {

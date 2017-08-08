@@ -39,9 +39,9 @@ public class ResizeListener implements EventHandler<MouseEvent>{
 
     private Stage stage;
 
-    public ResizeListener(Stage stage) {
+    ResizeListener(Stage stage, Scene scene) {
         this.stage = stage;
-        scene = stage.getScene();
+        this.scene = scene;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ResizeListener implements EventHandler<MouseEvent>{
             isResizeV = true;
             isMoveH = false;
             isMoveV = true;
-        } else if (event.getX() > scene.getWidth() - BORDER && event.getY() < scene.getHeight() - BORDER) {
+        } else if (event.getX() > scene.getWidth() - BORDER && event.getY() > scene.getHeight() - BORDER) {
             scene.setCursor(Cursor.SE_RESIZE);
             isResizeH = true;
             isResizeV = true;
@@ -92,7 +92,7 @@ public class ResizeListener implements EventHandler<MouseEvent>{
             isResizeV = false;
             isMoveH = (event.getX() < BORDER);
             isMoveV = false;
-        } else if (event.getY() < BORDER || event.getY() > scene.getHeight() -BORDER) {
+        } else if (event.getY() < BORDER || event.getY() > scene.getHeight() - BORDER) {
             scene.setCursor(Cursor.N_RESIZE);
             isResizeH = false;
             isResizeV = true;
@@ -108,7 +108,7 @@ public class ResizeListener implements EventHandler<MouseEvent>{
     }
 
     private void changeWidth(MouseEvent event) {
-        if (stage.getWidth() < MIN_WIDTH) {
+        if (stage.getWidth() <= MIN_WIDTH) {
             if (isMoveH) {
                 deltaX = stage.getX() - event.getScreenX();
                 if (event.getX() < 0) {
@@ -132,7 +132,7 @@ public class ResizeListener implements EventHandler<MouseEvent>{
     }
 
     private void changeHeight(MouseEvent event) {
-        if (stage.getHeight() < MIN_HEIGHT) {
+        if (stage.getHeight() <= MIN_HEIGHT) {
             if (isMoveV) {
                 deltaY = stage.getY() - event.getScreenY();
                 if (event.getY() < 0) {

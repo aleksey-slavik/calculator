@@ -1,6 +1,5 @@
 package com.implemica.calculator.view;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,14 +12,19 @@ import javafx.stage.StageStyle;
  *
  * @author Slavik Aleksey V.
  */
-public class CalculatorView extends Application{
+public class CalculatorView {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         Parent root = loader.load(getClass().getResourceAsStream("/fxml/root.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/root.css").toExternalForm());
+
+        ResizeListener resizeListener = new ResizeListener(primaryStage, scene);
+        scene.setOnMouseMoved(resizeListener);
+        scene.setOnMousePressed(resizeListener);
+        scene.setOnMouseDragged(resizeListener);
+
         primaryStage.setTitle("Calculator");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon.png")));
         primaryStage.setScene(scene);
