@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Resize font of buttons during window resize
@@ -59,7 +58,32 @@ public class ButtonResizeListener implements InvalidationListener{
 
     static {
         digits.add("#zero");
-        //todo
+        digits.add("#one");
+        digits.add("#two");
+        digits.add("#three");
+        digits.add("#four");
+        digits.add("#five");
+        digits.add("#six");
+        digits.add("#seven");
+        digits.add("#eight");
+        digits.add("#nine");
+        digits.add("#comma");
+
+        binary.add("#equals");
+        binary.add("#add");
+        binary.add("#subtract");
+        binary.add("#divide");
+        binary.add("#multiply");
+
+        unary.add("#negate");
+        unary.add("#percent");
+        unary.add("#sqr");
+        unary.add("#sqrt");
+        unary.add("#inverse");
+
+        clear.add("#clear");
+        clear.add("#clear_expr");
+        clear.add("#backspace");
     }
 
     @Override
@@ -99,6 +123,6 @@ public class ButtonResizeListener implements InvalidationListener{
     }
 
     private String getFontString(int size) {
-        return "-fx-font-size: " + size + "px;";
+        return "-fx-font-size: " + size + "pt;";
     }
 }
