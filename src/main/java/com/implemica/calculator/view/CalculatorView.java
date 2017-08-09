@@ -56,7 +56,7 @@ public class CalculatorView {
 
     private static final String NUMERIC_FIELD_SELECTOR = "#numericField";
 
-    private static final String HISTORY_FIELD_SELECTOR = "#historyField";
+    //private static final String HISTORY_FIELD_SELECTOR = "#historyField";
 
     public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -125,8 +125,6 @@ public class CalculatorView {
         //add numeric field font resize
         Label numericLabel = (Label) scene.lookup(NUMERIC_FIELD_SELECTOR);
         numericLabel.textProperty().addListener(new NumericResizeListener(scene));
-
-        //add
 
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(APP_ICON_PATH)));

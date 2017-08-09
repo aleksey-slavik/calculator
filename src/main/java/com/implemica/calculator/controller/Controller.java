@@ -60,7 +60,7 @@ public class Controller implements Initializable{
 
     private static final int NUMERIC_FIELD_SIZE = 16;
 
-    private static final int HISTORY_FIELD_SIZE = 34;
+    //private static final int HISTORY_FIELD_SIZE = 34;
 
     private static final String DOT = ".";
 
@@ -86,9 +86,10 @@ public class Controller implements Initializable{
 
     private static final String SEPARATOR = " ";
 
+    /**
+     * End point of shown history
+     */
     private int historyPos;
-
-    //private String historyValue = DEFAULT_HISTORY_FIELD_VALUE;
 
     private boolean isLastNumber;
 
@@ -485,15 +486,17 @@ public class Controller implements Initializable{
     }
 
     private void setHistoryFieldText(String value) {
-        if (value.length() > HISTORY_FIELD_SIZE) {
+        if (value.length() > getLabelSize()) {
             left.setVisible(true);
             right.setVisible(false);
             history.setHistory(value);
-            historyField.setText(value.substring(value.length() - HISTORY_FIELD_SIZE));
+            historyPos = history.getHistory().length();
+            historyField.setText(value.substring(value.length() - getLabelSize()));
         } else {
             left.setVisible(false);
-            right.setVisible(false);
+            //right.setVisible(false);
             historyField.setText(value);
+            historyPos = history.getHistory().length();
         }
     }
 
@@ -778,6 +781,22 @@ public class Controller implements Initializable{
         disableMemoryButtons(true);
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
+
+        historyField.widthProperty().addListener(observable -> {
+            if (getLabelSize() > history.getHistory().length()) {
+                historyField.setText(history.getHistory());
+            } else {
+                if (getLabelSize() < history.getHistory().substring(0, historyPos).length()) {
+                    historyField.setText(history.getHistory().substring(0, historyPos));
+                    left.setVisible(true);
+                } else {
+                    int newPos = historyPos - getLabelSize();
+                    newPos = newPos < 0 ? 0 : newPos;
+                    historyField.setText(history.getHistory().substring(newPos, historyPos));
+                    left.setVisible(false);
+                }
+            }
+        });
     }
 
     private void disableButtons(boolean disable) {
@@ -796,27 +815,38 @@ public class Controller implements Initializable{
 
     @FXML
     private void leftClick() {
-        historyPos -= HISTORY_FIELD_SIZE;
+        historyPos -= getLabelSize();
 
-        if (historyPos < 0) {
-            historyPos = 0;
+        if (historyPos - getLabelSize() < 0) {
+            historyPos = getLabelSize();
             left.setVisible(false);
         }
 
         right.setVisible(true);
-        historyField.setText(history.getHistory().substring(historyPos, historyPos + HISTORY_FIELD_SIZE));
+        historyField.setText(history.getHistory().substring(historyPos - getLabelSize(), historyPos));
     }
 
     @FXML
     private void rightClick() {
-        historyPos += HISTORY_FIELD_SIZE;
+        historyPos += getLabelSize();
 
-        if (historyPos + HISTORY_FIELD_SIZE > history.getHistory().length()) {
-            historyPos = history.getHistory().length() - HISTORY_FIELD_SIZE;
+        if (historyPos > history.getHistory().length()) {
+            historyPos = history.getHistory().length();
             right.setVisible(false);
         }
 
-        left.setVisible(true);
-        historyField.setText(history.getHistory().substring(historyPos, historyPos + HISTORY_FIELD_SIZE));
+        int delta = historyPos - getLabelSize();
+
+        if (delta < 0) {
+            left.setVisible(false);
+            historyField.setText(history.getHistory().substring(0, historyPos));
+        } else {
+            left.setVisible(true);
+            historyField.setText(history.getHistory().substring(delta, historyPos));
+        }
+    }
+
+    private int getLabelSize() {
+        return (int) (historyField.getWidth() / 7.5);
     }
 }
