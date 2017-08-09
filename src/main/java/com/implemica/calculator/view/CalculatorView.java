@@ -114,6 +114,9 @@ public class CalculatorView {
         ListView<String> listView = (ListView<String>) scene.lookup(LIST_SELECTOR);
         listView.setItems(MenuAdapter.init());
 
+        //add button font resize
+        scene.heightProperty().addListener(new ButtonResizeListener(scene));
+
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(APP_ICON_PATH)));
         primaryStage.setScene(scene);

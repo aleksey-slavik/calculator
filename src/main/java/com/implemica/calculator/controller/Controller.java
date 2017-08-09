@@ -1,6 +1,7 @@
 package com.implemica.calculator.controller;
 
 import com.implemica.calculator.model.Calculator;
+import com.implemica.calculator.model.History;
 import com.implemica.calculator.util.enums.Operator;
 import com.implemica.calculator.util.exception.OverflowException;
 import com.implemica.calculator.util.exception.SquareRootException;
@@ -134,6 +135,8 @@ public class Controller implements Initializable{
 
     private Calculator calculator = new Calculator();
 
+    private History history = new History();
+
     @FXML
     private Label numericField;
 
@@ -259,10 +262,6 @@ public class Controller implements Initializable{
         }
     }
 
-    private void replaceLastSign(String sign) {
-        replace(SEPARATOR + sign);
-    }
-
     private void processBinaryOperator(Operator operator, String sign) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         if (isLockedScreen) {
             return;
@@ -272,7 +271,7 @@ public class Controller implements Initializable{
 
         if (isSequence) {
             if (isLastNumber) {
-                replaceLastSign(operator.getText());
+                history.replaceLastSign(operator.getText());
                 calculator.changeOperator(getNumericFieldNumber(), operator);
             } else {
                 appendHistoryFieldText(SEPARATOR + value + SEPARATOR + sign);
@@ -383,11 +382,11 @@ public class Controller implements Initializable{
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(functionSurround(NEGATE_TEXT, value));
+            setHistoryFieldText(history.surround(NEGATE_TEXT, value));
         } else if (isUnaryResult) {
-            functionSurround(NEGATE_TEXT);
+            history.surround(NEGATE_TEXT);
         } else {
-            appendHistoryFieldText(SEPARATOR + functionSurround(NEGATE_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(NEGATE_TEXT, value));
         }
 
         setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
@@ -403,11 +402,11 @@ public class Controller implements Initializable{
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(functionSurround(SQR_TEXT, value));
+            setHistoryFieldText(history.surround(SQR_TEXT, value));
         } else if (isUnaryResult) {
-            functionSurround(SQR_TEXT);
+            history.surround(SQR_TEXT);
         } else {
-            appendHistoryFieldText(SEPARATOR + functionSurround(SQR_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(SQR_TEXT, value));
         }
 
         try {
@@ -428,11 +427,11 @@ public class Controller implements Initializable{
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(functionSurround(SQRT_TEXT, value));
+            setHistoryFieldText(history.surround(SQRT_TEXT, value));
         } else if (isUnaryResult) {
-            functionSurround(SQRT_TEXT);
+            history.surround(SQRT_TEXT);
         } else {
-            appendHistoryFieldText(SEPARATOR + functionSurround(SQRT_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(SQRT_TEXT, value));
         }
 
         setNumericFieldNumber(calculator.sqrt(getNumericFieldNumber()));
@@ -465,11 +464,11 @@ public class Controller implements Initializable{
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(functionSurround(INVERSE_TEXT, value));
+            setHistoryFieldText(history.surround(INVERSE_TEXT, value));
         } else if (isUnaryResult){
-            functionSurround(INVERSE_TEXT);
+            history.surround(INVERSE_TEXT);
         } else {
-            appendHistoryFieldText(SEPARATOR + functionSurround(INVERSE_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(INVERSE_TEXT, value));
         }
 
         setNumericFieldNumber(calculator.inverse(getNumericFieldNumber()));
@@ -534,45 +533,6 @@ public class Controller implements Initializable{
         } else {
             numericField.setStyle(FONT_STYLE_SMALL);
         }
-    }
-
-    /**
-     * Replace last element in history
-     * @param expr
-     */
-    private void replace(String expr) {
-        String str = getHistoryFieldText();
-        int last = str.lastIndexOf(SEPARATOR);
-        last = last == -1 ? 0 : last;
-        setHistoryFieldText(str.substring(0, last) + expr);
-    }
-
-    /**
-     * Surround given value using given function
-     * @param func
-     * @param value
-     * @return
-     */
-    private String functionSurround(String func, String value) {
-        return func + "(" + value + ")";
-    }
-
-    /**
-     * Surround last element
-     * @return
-     */
-    private void functionSurround(String func) {
-        if (getHistoryFieldText().contains(SEPARATOR)) {
-            replace(SEPARATOR + functionSurround(func, getLastElement()));
-        } else {
-            replace(functionSurround(func, getLastElement()));
-        }
-    }
-
-    private String getLastElement() {
-        String history = getHistoryFieldText();
-        int begin = history.lastIndexOf(SEPARATOR) + 1;
-        return history.substring(begin, history.length());
     }
 
     private void appendNumericFieldText(String value) {
@@ -845,6 +805,7 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         disabled = new Button[] {
                 divide, multiply, subtract, add, comma, negate,
                 memory_store, memory_recall, memory_minus, memory_add, memory_clear,
