@@ -223,9 +223,11 @@ public class Controller implements Initializable{
             setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             disableButtons(false);
             disableMemoryButtons(isMemoryLocked);
+            calculator.resetOperator();
+            history.clearHistory();
         }
 
-        if (getNumericFieldText().length() == NUMERIC_FIELD_SIZE && !isLastNumber) {
+        if (getNumericFieldText().replace(COMMA, "").replace("-", "").length() == NUMERIC_FIELD_SIZE && !isLastNumber) {
             return;
         }
 
@@ -249,6 +251,7 @@ public class Controller implements Initializable{
         if (isSequence) {
             if (isLastNumber) {
                 history.replaceLastSign(operator.getText());
+                setHistoryFieldText(history.getHistory());
                 calculator.changeOperator(getNumericFieldNumber(), operator);
             } else {
                 appendHistoryFieldText(SEPARATOR + value + SEPARATOR + sign);
@@ -274,9 +277,12 @@ public class Controller implements Initializable{
     @FXML
     private void buttonEqualsClick() {
         if (isLockedScreen) {
-            setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
+            setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             disableButtons(false);
+            disableMemoryButtons(isMemoryLocked);
+            calculator.resetOperator();
+            history.clearHistory();
         }
 
         if (isUnaryResult && !isSequence) {
@@ -422,6 +428,9 @@ public class Controller implements Initializable{
             setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
             disableButtons(false);
+            disableMemoryButtons(isMemoryLocked);
+            calculator.resetOperator();
+            history.clearHistory();
         }
 
         String value = getNumericFieldText();
@@ -494,7 +503,7 @@ public class Controller implements Initializable{
             historyField.setText(value.substring(value.length() - getLabelSize()));
         } else {
             left.setVisible(false);
-            //right.setVisible(false);
+            right.setVisible(false);
             historyField.setText(value);
             historyPos = history.getHistory().length();
         }
@@ -743,16 +752,21 @@ public class Controller implements Initializable{
         isUnaryResult = false;
         isSequence = false;
         disableButtons(false);
+        disableMemoryButtons(isMemoryLocked);
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
         calculator.clearAll();
+        history.clearHistory();
     }
 
     private void processClearExpr() {
         if (isLockedScreen) {
             disableButtons(false);
+            disableMemoryButtons(isMemoryLocked);
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
             setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
+            history.clearHistory();
+            calculator.resetOperator();
         } else {
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
             calculator.clearEntry();

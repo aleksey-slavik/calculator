@@ -95,7 +95,7 @@ public class History {
      *
      * @return  last element of history
      */
-    public String getLastElement() {
+    private String getLastElement() {
         int start = history.lastIndexOf(SPACE) + 1;
         return history.substring(start);
     }
@@ -105,7 +105,7 @@ public class History {
      *
      * @param text  expression
      */
-    public void replace(String text) {
+    private void replace(String text) {
         int lastSpace = history.lastIndexOf(SPACE);
 
         if (lastSpace == -1) {

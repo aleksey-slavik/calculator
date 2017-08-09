@@ -51,6 +51,10 @@ public class Calculator {
         return operator;
     }
 
+    public void resetOperator() {
+        operator = Operator.EMPTY;
+    }
+
     public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         if (!isNextOperator) {
             right = value;
@@ -183,6 +187,7 @@ public class Calculator {
     public void clearAll() {
         left = BigDecimal.ZERO;
         right = BigDecimal.ZERO;
+        resetOperator();
     }
 
     public void clearEntry() {
