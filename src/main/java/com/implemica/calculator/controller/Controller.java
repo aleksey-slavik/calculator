@@ -58,28 +58,9 @@ public class Controller implements Initializable{
      */
     private static final String MESSAGE_INVALID_INPUT = "Invalid input";
 
-    /**
-     * Big font size for numeric field
-     */
-    private static final int NUMERIC_FIELD_FONT_BIG = 30;
-
-    /**
-     * Medium font size for numeric field
-     */
-    private static final int NUMERIC_FIELD_FONT_MEDIUM = 24;
-
-    /**
-     * Small font size for numeric field
-     */
-    private static final int NUMERIC_FIELD_FONT_SMALL = 18;
-
     private static final int NUMERIC_FIELD_SIZE = 16;
 
     private static final int HISTORY_FIELD_SIZE = 34;
-
-    private static final int BIG_FONT_COUNT = 12;
-
-    private static final int MEDIUM_FONT_COUNT = 15;
 
     private static final String DOT = ".";
 
@@ -103,17 +84,11 @@ public class Controller implements Initializable{
 
     private static final String INVERSE_TEXT = "1/";
 
-    private static final String FONT_STYLE_BIG = "-fx-font-size: " + NUMERIC_FIELD_FONT_BIG + "pt;";
-
-    private static final String FONT_STYLE_MEDIUM = "-fx-font-size: " + NUMERIC_FIELD_FONT_MEDIUM + "pt;";
-
-    private static final String FONT_STYLE_SMALL = "-fx-font-size: " + NUMERIC_FIELD_FONT_SMALL + "pt;";
-
     private static final String SEPARATOR = " ";
 
     private int historyPos;
 
-    private String historyValue = DEFAULT_HISTORY_FIELD_VALUE;
+    //private String historyValue = DEFAULT_HISTORY_FIELD_VALUE;
 
     private boolean isLastNumber;
 
@@ -246,6 +221,7 @@ public class Controller implements Initializable{
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
             setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             disableButtons(false);
+            disableMemoryButtons(isMemoryLocked);
         }
 
         if (getNumericFieldText().length() == NUMERIC_FIELD_SIZE && !isLastNumber) {
@@ -283,7 +259,7 @@ public class Controller implements Initializable{
             if (isUnaryResult) {
                 appendHistoryFieldText(SEPARATOR + sign);
             } else {
-                historyValue = value + SEPARATOR + sign;
+                history.setHistory(value + SEPARATOR + sign);
                 setHistoryFieldText(value + SEPARATOR + sign);
             }
         }
@@ -485,7 +461,6 @@ public class Controller implements Initializable{
             return;
         }*/
         numericField.setText(value);
-        checkSize();
     }
 
     private BigDecimal getNumericFieldNumber() {
@@ -513,25 +488,12 @@ public class Controller implements Initializable{
         if (value.length() > HISTORY_FIELD_SIZE) {
             left.setVisible(true);
             right.setVisible(false);
-            historyValue = value;
+            history.setHistory(value);
             historyField.setText(value.substring(value.length() - HISTORY_FIELD_SIZE));
         } else {
             left.setVisible(false);
             right.setVisible(false);
             historyField.setText(value);
-        }
-    }
-
-    /**
-     * Check font size of numeric field
-     */
-    private void checkSize() {
-        if (getNumericFieldText().length() <= BIG_FONT_COUNT) {
-            numericField.setStyle(FONT_STYLE_BIG);
-        } else if (getNumericFieldText().length() < MEDIUM_FONT_COUNT) {
-            numericField.setStyle(FONT_STYLE_MEDIUM);
-        } else {
-            numericField.setStyle(FONT_STYLE_SMALL);
         }
     }
 
@@ -541,12 +503,11 @@ public class Controller implements Initializable{
         }*/
 
         numericField.setText(getNumericFieldText() + value);
-        checkSize();
     }
 
     private void appendHistoryFieldText(String value) {
-        historyValue += value;
-        setHistoryFieldText(historyValue);
+        history.appendHistory(value);
+        setHistoryFieldText(history.getHistory());
     }
 
     @FXML
@@ -843,19 +804,19 @@ public class Controller implements Initializable{
         }
 
         right.setVisible(true);
-        historyField.setText(historyValue.substring(historyPos, historyPos + HISTORY_FIELD_SIZE));
+        historyField.setText(history.getHistory().substring(historyPos, historyPos + HISTORY_FIELD_SIZE));
     }
 
     @FXML
     private void rightClick() {
         historyPos += HISTORY_FIELD_SIZE;
 
-        if (historyPos + HISTORY_FIELD_SIZE > historyValue.length()) {
-            historyPos = historyValue.length() - HISTORY_FIELD_SIZE;
+        if (historyPos + HISTORY_FIELD_SIZE > history.getHistory().length()) {
+            historyPos = history.getHistory().length() - HISTORY_FIELD_SIZE;
             right.setVisible(false);
         }
 
         left.setVisible(true);
-        historyField.setText(historyValue.substring(historyPos, historyPos + HISTORY_FIELD_SIZE));
+        historyField.setText(history.getHistory().substring(historyPos, historyPos + HISTORY_FIELD_SIZE));
     }
 }

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,13 +46,17 @@ public class CalculatorView {
 
     private static final String MENU_CLOSE_SELECTOR = "#menuClose";
 
-    private static final String HISTORY_SELECTOR = "#history";
+    private static final String HISTORY_SELECTOR = "#historyShow";
 
     private static final String ABOUT_SELECTOR = "#about";
 
     private static final String TITLE_SELECTOR = "#title";
 
     private static final String LIST_SELECTOR = "#listView";
+
+    private static final String NUMERIC_FIELD_SELECTOR = "#numericField";
+
+    private static final String HISTORY_FIELD_SELECTOR = "#historyField";
 
     public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -110,12 +115,18 @@ public class CalculatorView {
         Image aboutImage = new Image(Launcher.class.getResourceAsStream(ABOUT_ICON_PATH));
         about.setImage(aboutImage);
 
-        //init listview
+        //init menu list of items
         ListView<String> listView = (ListView<String>) scene.lookup(LIST_SELECTOR);
         listView.setItems(MenuAdapter.init());
 
         //add button font resize
         scene.heightProperty().addListener(new ButtonResizeListener(scene));
+
+        //add numeric field font resize
+        Label numericLabel = (Label) scene.lookup(NUMERIC_FIELD_SELECTOR);
+        numericLabel.textProperty().addListener(new NumericResizeListener(scene));
+
+        //add
 
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(APP_ICON_PATH)));
