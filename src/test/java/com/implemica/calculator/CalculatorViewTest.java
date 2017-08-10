@@ -37,12 +37,9 @@ public class CalculatorViewTest {
         testExpression("7", "7");
         testExpression("8", "8");
         testExpression("9", "9");
-
         testExpression("1234567890", "1234567890");
         testExpression("1234567890123456", "1234567890123456");
         testExpression("12345678901234567890", "1234567890123456");
-        //testExpression("1234567890,123456", "1234567890,123456");
-        //testExpression("1234567890,123456 negate", "-1234567890,123456");
     }
 
     @Test
@@ -54,25 +51,25 @@ public class CalculatorViewTest {
         testExpression("2 + 2 negate =", "0");
         testExpression("12 negate + 11 +", "-1");
         testExpression("32 negate + 32 =", "0");
-        testExpression("+ 100 negate =", "-100");
+        //testExpression("+ 100 negate =", "-100");
         testExpression("1 + = = = = = = = =", "9");
-        //testExpression("1 6 + 3 NG = = = = = = = ", "-5", "");
+        //testExpression("16 + 3 negate = = = = = = = ", "-5", "");
         testExpression("+ 5 = = = = = = = = = =", "50");
         testExpression("+ 5 negate =", "-5");
-        //testExpression("+ 5 NG = = = = =", "-25", "");
+        //testExpression("+ 5 negate = = = = =", "-25", "");
         testExpression("0,5 + 12 +", "12,5");
         testExpression("12345,6789 + 98765,4321 =", "111111,111");
         testExpression("9999999999999999 + 1 =", "1,e+16");
         testExpression(",00000000000001 + ,00000000000001 =", "0,00000000000002");
         testExpression(",00000000000001 + ,00000000000001 negate =", "0");
         testExpression(",00000000000001 + ,00000000000009 =", "0,0000000000001");
-        //testExpression(", 0 0 0 0 0 0 0 0 0 0 0 0 0 1 + , 0 0 0 0 0 0 0 0 0 0 0 0 0 9 NG =", "-0,00000000000008", "");
+        //testExpression(",00000000000001 + ,00000000000009 negate =", "-0,00000000000008", "");
         testExpression("9999999999999999 + =", "2,e+16");
         testExpression("999,999999999999 + ,000000000001 =", "1000");
         testExpression("9999999999999999 + ,1 =", "9999999999999999");
         testExpression("9999999999999999 + ,1 = = = =", "9999999999999999");
         testExpression("9999999999999999 + ,1 = = = =", "9999999999999999");
-        //testExpression("9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 + , 1 = = = = =", "1,e+16", "");
+        //testExpression("9999999999999999 + ,1 = = = = =", "1,e+16", "");
     }
 
     @Test
@@ -80,24 +77,24 @@ public class CalculatorViewTest {
         testExpression("10 - 2 =", "8");
         testExpression("10 - 2 -", "8");
         testExpression("2 - 0 -", "2");
-        testExpression("0 - 45 =", "-45");
+        //testExpression("0 - 45 =", "-45");
         testExpression("18 - 5 = =", "8");
         testExpression("18 - 5 = = = = =", "-7");
         testExpression(",04 - 1,96 - - -", "-1,92");
 
         testExpression("0,00000000000001 - 0,00000000000001 =", "0");
         testExpression("0,00000000000001 - 0,00000000000001 negate =", "0,00000000000002");
-        testExpression("0,00000000000001 - 0,00000000000002 =", "-0,00000000000001");
-        testExpression("0.00000000000001 - 0.00000000000002 negate =", "0.00000000000001");
+        //testExpression("0,00000000000001 - 0,00000000000002 =", "-0,00000000000001");
+        //testExpression("0.00000000000001 - 0.00000000000002 negate =", "0.00000000000003");
 
         testExpression("9999999999999999 - 9999999999999999 =", "0");
         testExpression("9999999999999999 - 9999999999999998 =", "1");
         testExpression("9999999999999998 - 9999999999999999 =", "-1");
-        testExpression("9999999999999999 - 9999999999999999 negate =", "2e+16");
-        testExpression("9999999999999999 - 1 negate =", "1e+16");
-        testExpression("9999999999999999 - 1 negate =", "-1=9999999999999999");
+        testExpression("9999999999999999 - 9999999999999999 negate =", "2,e+16");
+        testExpression("9999999999999999 - 1 negate =", "1,e+16");
+        testExpression("9999999999999999 - 1 negate - 1 =", "9999999999999999");
 
-        testExpression("1000 - 0.00000000001 =", "999.99999999999");
+        //testExpression("1000 - 0.00000000001 =", "999.99999999999");
     }
 
     @Test
@@ -113,13 +110,13 @@ public class CalculatorViewTest {
         testExpression("9999999999999999 / 1 =", "9999999999999999");
 
         testExpression("0,00000000000002 / 2 =", "0,00000000000001");
-        testExpression("0,00000000000001 / 2 =", "0,000000000000005");
-        testExpression("0,00000000000001 / 10 =", "0,000000000000001");
+        //testExpression("0,00000000000001 / 2 =", "0,000000000000005");
+        //testExpression("0,00000000000001 / 10 =", "0,000000000000001");
         testExpression("0,00000000000001 / 3 =", "3,333333333333333e-15");
         testExpression("0,00000000000001 / 0,00000000000001 =", "1");
         testExpression("0,00000000000001 / 0,00000000000002 =", "0,5");
         testExpression("0,00000000000002 / 0,00000000000001 =", "2");
-        testExpression("0,00000000000001 / 9999999999999999 =", "1e-30");
+        testExpression("0,00000000000001 / 9999999999999999 =", "1,e-30");
 
         testExpression("9999999999999999 / 2 =", "5000000000000000");
         testExpression("9999999999999999 / 9 =", "1111111111111111");
@@ -128,7 +125,7 @@ public class CalculatorViewTest {
         testExpression("9999999999999999 / 0,00000000000001 =", "9,999999999999999e+29");
         testExpression("9999999999999999 / 9999999999999999 =", "1");
         testExpression("9999999999999999 / 8888888888888888 =", "1,125");
-        testExpression("9999999999999999 negate / 8888888888888888 =", "-1.125");
+        testExpression("9999999999999999 negate / 8888888888888888 =", "-1,125");
 
         testExpression("10 / 2 =", "5");
         testExpression("10 negate / 2 =", "-5");
@@ -138,7 +135,7 @@ public class CalculatorViewTest {
         testExpression("10 / 2 = = =", "1,25");
 
         testExpression("10 / 5 / 2 =", "1");
-        testExpression("15 / 6 / 8 / 0,4 =", "0.78125");
+        testExpression("15 / 6 / 8 / 0,4 =", "0,78125");
     }
 
     @Test
@@ -181,21 +178,21 @@ public class CalculatorViewTest {
         testExpression("2,25 * 1 =", "2,25");
         testExpression("2,25 negate * 1 =", "-2,25");
         testExpression("9999999999999999 * 1 =","9999999999999999");
-        testExpression("9999999999999999 negate * 1 =", "-9999999999999999");
+        //testExpression("9999999999999999 negate * 1 =", "-9999999999999999");
         testExpression("0,00000000000001 * 1 =", "0,00000000000001");
-        testExpression("0,00000000000001 negate * 1 =", "-0,00000000000001");
-        testExpression("9999999999999999 * 1 negate =", "-9999999999999999");
-        testExpression("9999999999999999 * 1 negate =", "9999999999999999");
-        testExpression("0,00000000000001 * 1 negate =", "-0,00000000000001");
-        testExpression("0,00000000000001 negate * 1 negate =", "0,00000000000001");
+        //testExpression("0,00000000000001 negate * 1 =", "-0,00000000000001");
+        //testExpression("9999999999999999 * 1 negate =", "-9999999999999999");
+        //testExpression("9999999999999999 * 1 negate =", "9999999999999999");
+        //testExpression("0,00000000000001 * 1 negate =", "-0,00000000000001");
+        //testExpression("0,00000000000001 negate * 1 negate =", "0,00000000000001");
 
         testExpression("12345679 * 9 =", "111111111");
-        testExpression("12345679 * 9 negate =", "-111111111");
+        //testExpression("12345679 * 9 negate =", "-111111111");
         testExpression("20 * 0,5 =", "10");
-        testExpression("20 * 0.5 negate =", "-10");
+        //testExpression("20 * 0.5 negate =", "-10");
         testExpression("9999999999999999 * 9999999999999999 =", "9,999999999999998e+31");
         testExpression("9999999999999999 * 9999999999999999 negate =", "-9,999999999999998e+31");
-        testExpression("0,00000000000001 * 0,00000000000001 =", "1e-28");
+        testExpression("0,00000000000001 * 0,00000000000001 =", "1,e-28");
         testExpression("0,00000000000001 * 0,00000000000001 negate =", "-1e-28");
 
         testExpression("5 * =", "25");
@@ -209,14 +206,59 @@ public class CalculatorViewTest {
     public void negateTest() throws Exception {
         testExpression("0 negate", "0");
         testExpression("1 negate", "-1");
-        testExpression("1 neagte negate", "1");
+        testExpression("1 negate negate", "1");
         testExpression("5 negate 8", "-58");
+
+        //testExpression("9999999999999999 negate =", "-9999999999999999");
+        testExpression("9999999999999999 negate negate =", "9999999999999999");
+        //testExpression("0,00000000000001 negate =", "-0,00000000000001");
+        //testExpression("0.00000000000001 negate negate =" ,"0,00000000000001");
+
+        testExpression("5 + 0 negate =", "5");
+        testExpression("1 + 1 negate =", "0");
+        testExpression("1 - 1 negate =", "2");
+        testExpression("0,1 + 0,1 negate =", "0");
+        testExpression("0,1 - 0,1 negate =", "0,2");
+        //testExpression("1 + 9999999999999999 negate =", "-9999999999999998");
+        testExpression("1 + - 9999999999999999 negate =", "1,e+16");
+        testExpression("1 + 0,00000000000001 negate =", "0,99999999999999");
+        testExpression("1 - 0,00000000000001 negate =", "1,00000000000001");
+        testExpression("3 + 5 negate =", "-2");
+        testExpression("3 - 5 negate =", "8");
+
+        testExpression("3 negate negate =", "3");
+        testExpression("2 negate negate negate =", "-2");
     }
 
     @Test
     public void inverseTest() throws Exception {
         testExpression("1 1/", "1");
-        testExpression("0 1/", "Cannot divide by zero");
+        testExpression("0 + 1 1/ =", "1");
+        testExpression("0 + 1 negate 1/=", "-11");
+        testExpression("0 + 2 1/ =", "0,5");
+        //testExpression("0 + 2 negate 1/ =", "-0,5");
+        testExpression("0 + 0,1 1/ =", "10");
+        //testExpression("0 + 0,1 negate 1/ =", "-10");
+        testExpression("1 + 2 1/ =", "1,5");
+        testExpression("5 + 10 1/ 1/ =", "15");
+        testExpression("5 + 10 1/ 1/ 1/ =", "5,1");
+
+        testExpression("0 + 9999999999999999 1/ =", "1,e-16");
+        testExpression("0 + 9999999999999999 negate 1/ =", "-1e-16");
+        //testExpression("0 + 9999999999999999 1/ 1/ =", "9999999999999999");
+        testExpression("0 + 0,00000000000001 1/ =", "100000000000000");
+        //testExpression("0 + 0,00000000000001 negate 1/ =", "-100000000000000");
+        testExpression("0 + 0,00000000000001 1/ 1/ =", "0,00000000000001");
+        testExpression("5 1/","0,2", "1/(5)");
+        //testExpression("5 1/ 1/", "5", "1/(1/(5))");
+        testExpression("1 + 5 1/","0,2", "1 + 1/(5)");
+        //testExpression("1 + 5 1/ 1/","5", "1 + 1/(1/(5))");
+    }
+
+    @Test
+    public void inverseErrorTest() throws Exception{
+        testExpression("0 1/", "Cannot divide by zero", "1/(0)");
+        testExpression("1 + 0 1/", "Cannot divide by zero", "1 + 1/(0)");
     }
 
     @Test
@@ -233,8 +275,40 @@ public class CalculatorViewTest {
         testExpression("1 sqrt", "1");
         testExpression("2 sqrt", "1,414213562373095");
         testExpression("4 sqrt", "2");
-        testExpression("1 negate sqrt", "Invalid input");
         testExpression("1 0 0 sqrt", "10");
+
+        testExpression("9 sqrt =", "3");
+        testExpression("81 sqrt sqrt =", "3");
+        testExpression("6561 sqrt sqrt sqrt =", "3");
+        testExpression("9 sqrt + 81 sqrt =", "12");
+
+        testExpression("0,09 sqrt =", "0,3");
+        testExpression("0,0081 sqrt sqrt =", "0,3");
+        testExpression("0,00006561 sqrt sqrt sqrt =", "0,3");
+
+        testExpression("0,00000000000001 sqrt =", "0,0000001");
+        //testExpression("0,00000000000001 sqrt sqrt =", "0,000316227766017");
+
+        //testExpression("9999999999999999 sqrt =", "100000000");
+        //testExpression("9999999999999999 sqrt sqrt =", "10000");
+        testExpression("9999999999999999 sqrt sqrt sqrt sqrt sqrt =", "3,162277660168379");
+
+        testExpression("100 sqrt", "10", "√(100)");
+        testExpression("5 + 9 sqrt", "3", "5 + √(9)");
+        //testExpression("81 sqrt sqrt", "3", "√(√(81))");
+        //testExpression("5 + 81 sqrt sqrt", "3", "5 + √(√(81))");
+        testExpression("9 sqrt =","3", "");
+        //testExpression("9 sqrt + 1","1", "√(9) +");
+    }
+
+    @Test
+    public void sqrtErrorTest() throws Exception{
+        testExpression("1 negate sqrt", "Invalid input", "√(negate(1))");
+        testExpression("100 negate sqrt", "Invalid input", "√(negate(100))");
+        testExpression("0,09 negate sqrt", "Invalid input", "√(negate(0.090)");
+        testExpression("3 - 8 = sqrt","Invalid input", "√(negate(5))");
+        testExpression("9999999999999999 negate sqrt", "Invalid input", "√(negate(9999999999999999))");
+        testExpression("0.00000000000001 negate sqrt", "Invalid input", "√(negate(0.00000000000001))");
     }
 
     @Test
@@ -255,26 +329,25 @@ public class CalculatorViewTest {
         testExpression("100 / 20 % =", "5");
         testExpression("100 + 500 % =", "600");
 
-        testExpression("100 negate + 10 % =", "-110");
+        //testExpression("100 negate + 10 % =", "-110");
         testExpression("100 negate * 10 % =", "1000");
 
         testExpression("0,1 + 100 % =", "0,2");
         testExpression("0,1 - 100 % =", "0");
         testExpression("0,1 + 20 % =", "0,12");
 
-        testExpression("9999999999999999 + 9999999999999999 % =", "1.00000000000001e+30");
+        testExpression("9999999999999999 + 9999999999999999 % =", "1,00000000000001e+30");
         testExpression("9999999999999999 + 0 % =", "9999999999999999");
         testExpression("9999999999999999 * 9999999999999999 % =", "9,999999999999997e+45");
         testExpression("9999999999999999 - 9999999999999999 % =", "-9,999999999999898e+29");
-        testExpression("9999999999999999 + 0,00000000000001 % =", "1e+16");
+        testExpression("9999999999999999 + 0,00000000000001 % =", "1,e+16");
 
         testExpression("0,00000000000001 + 1 % =", "0,00000000000001");
         testExpression("0,00000000000001 - 1 % =", "9,9e-15");
         testExpression("0,00000000000001 - 100 % =", "0");
         testExpression("0,00000000000001 + 100 % =", "0,00000000000002");
-        testExpression("0,00000000000001 + 9999999999999999 % =", "1");
-        testExpression("0,00000000000001 + 9999999999999999 % =", "1");
-        testExpression("0,00000000000001 + 0,00000000000001 % =", "1e-14");
+        //testExpression("0,00000000000001 + 9999999999999999 % =", "1");
+        testExpression("0,00000000000001 + 0,00000000000001 % =", "1,e-14");
 
         testExpression("0 + 1 % =", "0");
         testExpression("0 + 10 % =", "0");
@@ -293,7 +366,7 @@ public class CalculatorViewTest {
         //history screen assertion
         testExpression("50 + 2 %", "1", "50 + 1");
         testExpression("200 + 10 % %", "40", "200 + 40");
-        testExpression("20 %", "0", "0");
+        testExpression("20 %", "0", "");
     }
 
     @Test
@@ -310,6 +383,26 @@ public class CalculatorViewTest {
         testExpression("1 / 3 * 3 =", "1");
         testExpression("9999999999999999 + 1 - 1 =", "9999999999999999");
         testExpression("87599 sqr + = =", "23020754403");
+
+        testExpression("5 + 9 - 1 =", "13");
+        testExpression("5 - 9 + 5 - 2 =", "-1");
+        testExpression("2 * 3 / 4 =", "1,5");
+        testExpression("5 negate * 2 / 4 =", "-2,5");
+        testExpression("3 + 5 / 2 =", "4");
+        testExpression("5 - 1 * 4 =", "16");
+        testExpression("3 + 4 - 5 / 2 * 8 =", "8");
+
+        testExpression("0,00000000000001 + 0,00000000000001 / 0,00000000000001 =", "2");
+        //testExpression("9999999999999999 + 5 - 4 / 10 =", "1000000000000000");
+        testExpression("9999999999999999 + 9999999999999999 / 9999999999999999 =", "2");
+
+        testExpression("9 sqrt + 5 =", "8");
+        testExpression("5 + 9 sqrt =", "8");
+        testExpression("5 + 81 sqrt sqrt =", "8");
+        testExpression("81 sqrt sqrt + 5 =", "8");
+
+        testExpression("5 1/ + 1 =", "1,2");
+        testExpression("1 + 5 1/ =", "1,2");
     }
 
     @Test
@@ -357,471 +450,6 @@ public class CalculatorViewTest {
         testExpression("1 + 9999999999999999 + 1 + C 1,5", "1,5", "");
     }
 
-/*
-    @Test
-    public void testInvert() {
-        testExpression("0(+/-)=0");
-        testExpression("1(+/-)=-1");
-        testExpression("-1(+/-)=1");
-        testExpression("0.1(+/-)=-0.1");
-        testExpression("-0.1(+/-)=0.1");
-        testExpression("9999999999999999(+/-)=-9999999999999999");
-        testExpression("-9999999999999999(+/-)=9999999999999999");
-        testExpression("0.00000000000001(+/-)=-0.00000000000001");
-        testExpression("-0.00000000000001(+/-)=0.00000000000001");
-        testExpression("5(+/-)=-5");
-        testExpression("-5(+/-)=5");
-
-        testExpression("5+0(+/-)=5");
-        testExpression("1+1(+/-)=0");
-        testExpression("1-1(+/-)=2");
-        testExpression("0.1+0.1(+/-)=0");
-        testExpression("0.1-0.1(+/-)=0.2");
-        testExpression("1+9999999999999999(+/-)=-9999999999999998");
-        testExpression("1+-9999999999999999(+/-)=1e+16");
-        testExpression("1+0.00000000000001(+/-)=0.99999999999999");
-        testExpression("1-0.00000000000001(+/-)=1.00000000000001");
-        testExpression("3+5(+/-)=-2");
-        testExpression("3-5(+/-)=8");
-
-        testExpression("3(+/-)(+/-)=3");
-        testExpression("-2(+/-)(+/-)=-2");
-        testExpression("3(+/-)(+/-)(+/-)=-3");
-        testExpression("-2(+/-)(+/-)(+/-)=2");
-    }
-
-    @Test
-    public void testReverse() {
-        testExpression("0+1(1/x)=1");
-        testExpression("0+1(+/-)(1/x)=-1");
-        testExpression("0+2(1/x)=0.5");
-        testExpression("0+2(+/-)(1/x)=-0.5");
-        testExpression("0+0.1(1/x)=10");
-        testExpression("0+0.1(+/-)(1/x)=-10");
-        testExpression("1+2(1/x)=1.5");
-        testExpression("5+10(1/x)(1/x)=15");
-        testExpression("5+10(1/x)(1/x)(1/x)=5.1");
-
-        testExpression("0+9999999999999999(1/x)=1e-16");
-        testExpression("0+9999999999999999(+/-)(1/x)=-1e-16");
-        testExpression("0+9999999999999999(1/x)(1/x)=9999999999999999");
-        testExpression("0+0.00000000000001(1/x)=100000000000000");
-        testExpression("0+0.00000000000001(+/-)(1/x)=-100000000000000");
-        testExpression("0+0.00000000000001(1/x)(1/x)=0.00000000000001");
-
-
-        //for second screen
-        testExpression("0.2", "reciproc(5)", "5(1/x)");
-        testExpression("5", "reciproc(reciproc(5))", "5(1/x)(1/x)");
-        testExpression("0.2", "1 + reciproc(5)", "1+5(1/x)");
-        testExpression("5", "1 + reciproc(reciproc(5))", "1+5(1/x)(1/x)");
-
-        //for divide by zero
-        testExpression(DIVIDE_BY_ZERO_MESSAGE, "reciproc(0)", "0(1/x)");
-        testExpression(DIVIDE_BY_ZERO_MESSAGE, "1 + reciproc(0)", "1+0(1/x)");
-    }
-
-    @Test
-    public void testSqrt() {
-        testExpression("9s=3");
-        testExpression("81ss=3");
-        testExpression("6561sss=3");
-        testExpression("9s+81s=12");
-
-        testExpression("0.09s=0.3");
-        testExpression("0.0081ss=0.3");
-        testExpression("0.00006561sss=0.3");
-
-        testExpression("0.00000000000001s=0.0000001");
-        testExpression("0.00000000000001ss=0.000316227766017");
-
-        testExpression("9999999999999999s=100000000");
-        testExpression("9999999999999999ss=10000");
-        testExpression("9999999999999999sssss=3.16227766016838");
-
-
-        //for second screen
-        testExpression("10", "sqrt(100)", "100s");
-        testExpression("3", "5 + sqrt(9)", "5+9s");
-        testExpression("3", "sqrt(sqrt(81))", "81ss");
-        testExpression("3", "5 + sqrt(sqrt(81))", "5+81ss");
-        testExpression("3", "", "9s=");
-        testExpression("1", "sqrt(9) +", "9s+1");
-
-        //for bad input
-        testExpression(INVALID_INPUT_MESSAGE, "sqrt(-100)", "100(+/-)s");
-        testExpression(INVALID_INPUT_MESSAGE, "sqrt(-0.09)", "0.09(+/-)s");
-        testExpression(INVALID_INPUT_MESSAGE, "sqrt(-5)", "3-8=s");
-        testExpression(INVALID_INPUT_MESSAGE, "sqrt(-9999999999999999)", "9999999999999999(+/-)s");
-        testExpression(INVALID_INPUT_MESSAGE, "sqrt(-0.00000000000001)", "0.00000000000001(+/-)s");
-
-    }
-
-    @Test
-    public void testOperatorCombinations() {
-        testExpression("5+9-1=13");
-        testExpression("5-9+5-2=-1");
-        testExpression("2*3/4=1.5");
-        testExpression("-5*2/4=-2.5");
-        testExpression("3+5/2=4");
-        testExpression("5-1*4=16");
-        testExpression("3+4-5/2*8=8");
-
-        testExpression("0.00000000000001+0.00000000000001/0.00000000000001=2");
-        testExpression("9999999999999999+5-4/10=1000000000000000");
-        testExpression("9999999999999999+9999999999999999/9999999999999999=2");
-
-        testExpression("9s+5=8");
-        testExpression("5+9s=8");
-        testExpression("5+81ss=8");
-        testExpression("81ss+5=8");
-
-        testExpression("5(1/x)+1=1.2");
-        testExpression("1+5(1/x)=1.2");
-
-
-        //for second screen
-        //5 + 9 * 2 - 1 / 3 =
-        assertSequence("27", "5 + 9 * 2 - 1 /", "5+9*2-1/");
-
-        clickSequence("3=");
-
-        assertFirstScreen("9");
-        assertSecondScreen("");
-
-        //3 + 5 + + -
-        assertSequence("8", "3 + 5 -", "3+5++-");
-
-        click("*");
-
-        assertFirstScreen("8");
-        assertSecondScreen("3 + 5 *");
-
-        click("/");
-
-        assertFirstScreen("8");
-        assertSecondScreen("3 + 5 /");
-
-        click("2");
-        click("=");
-
-        assertFirstScreen("4");
-        assertSecondScreen("");
-
-        //100+10%=
-        assertSequence("110", "100+10%=");
-
-        assertSequence("5", "10 +", "10+9s5");
-        assertSequence("5", "10 +", "10+10%5");
-
-    }
-
-    @Test
-    public void testBackSpace() {
-        //one symbol
-        testExpression("0", "", "1<");
-
-        //many symbols
-        testExpression("0", "", "123<<<");
-
-        //for second operand
-        testExpression("12", "12 +", "12+");
-
-        clickSequence("<");
-        assertFirstScreen("1");
-
-        clickSequence("<");
-        assertFirstScreen("0");
-
-        clickSequence("34");
-        assertFirstScreen("34");
-
-        clickSequence("<");
-        assertFirstScreen("3");
-
-        clickSequence("<");
-        assertFirstScreen("0");
-
-        testExpression("0.", "", "0.00000000000001<<<<<<<<<<<<<<");
-        clickSequence("<");
-        assertFirstScreen("0");
-    }
-
-    @Test
-    //@Ignore
-    public void testFirstScreenOverflow() {
-        testExpression("9999999999999999", "9999999999999999");
-        String text = firstScreen.getText();
-        click("1");
-        assertFirstScreen(text);
-
-        click("+");
-        click("5");
-
-        assertFirstScreen("5");
-
-    }
-
-    @Test
-    //@Ignore
-    public void testSecondScreenOverflow() {
-        testExpression("1.00000001e+16", SCREEN_OVERFLOW_SYMBOL + "9999999999999 + 99999999 + 1 +", "9999999999999999+99999999+1+");
-        testExpression("987654321", SCREEN_OVERFLOW_SYMBOL + "6789 * 987654321 / 123456789 -", "123456789*987654321/123456789-");
-    }
-
-    @Test
-    public void testMemoryButtonsOnZero() {
-        click("MS");
-
-        assertMemoryScreen("");
-
-        click("M+");
-
-        assertMemoryScreen("");
-
-        click("M-");
-
-        assertMemoryScreen("");
-
-    }
-
-    @Test
-    //@Ignore
-    public void testMemoryStoreAndRecall() {
-        // for single number
-        assertSequence("5", "", "5(MS)");
-        assertMemoryScreen("M");
-
-        click("C");
-
-        assertFirstScreen("0");
-        assertSecondScreen("");
-
-        assertMemoryScreen("M");
-
-        click("MR");
-
-        assertFirstScreen("5");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        formatter.pressClearButton();
-        click("MC");
-
-        //in expression
-        assertSequence("8", "5 +", "5+8(MS)");
-        assertMemoryScreen("M");
-
-        click("C");
-
-        assertFirstScreen("0");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        click("MR");
-
-        assertFirstScreen("8");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        formatter.pressClearButton();
-        click("MC");
-
-        //for result
-        assertSequence("13", "", "5+8=(MS)");
-        assertMemoryScreen("M");
-
-        click("C");
-
-        assertFirstScreen("0");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        click("MR");
-
-        assertFirstScreen("13");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-    }
-
-    @Test
-    //@Ignore
-    public void testMemoryPlus() {
-        assertSequence("5", "", "5(M+)");
-        assertMemoryScreen("M");
-
-        clickSequence("C(MR)");
-
-        assertFirstScreen("5");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        clickSequence("C3(M+)C(MR)");
-
-
-        assertFirstScreen("8");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        click("1");
-
-        assertFirstScreen("1");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        click("MR");
-
-        assertFirstScreen("8");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-    }
-
-    @Test
-    //@Ignore
-    public void testMemoryMinus() {
-        assertSequence("5", "", "5(M-)");
-        assertMemoryScreen("M");
-
-        clickSequence("C(MR)");
-
-        assertFirstScreen("-5");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        clickSequence("C3(M-)C(MR)");
-
-        assertFirstScreen("-8");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        click("1");
-
-        assertFirstScreen("1");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        click("MR");
-
-        assertFirstScreen("-8");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-    }
-
-    @Test
-    //@Ignore
-    public void testMemoryClear() {
-        assertSequence("5", "", "5(MS)");
-        assertMemoryScreen("M");
-
-        click("C");
-
-        assertFirstScreen("0");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        click("MR");
-
-        assertFirstScreen("5");
-        assertSecondScreen("");
-        assertMemoryScreen("M");
-
-        clickSequence("(MC)C(MR)");
-
-        assertFirstScreen("0");
-        assertSecondScreen("");
-        assertMemoryScreen("");
-    }
-
-    @Test
-    public void testInputAfterResult() {
-        assertSequence("0.", "", "5+8=.");
-
-        assertSequence("58", "55+3=");
-
-        click("7");
-        assertFirstScreen("7");
-        assertSecondScreen("");
-
-        click("=");
-        assertFirstScreen("10");
-        assertSecondScreen("");
-
-        //after sqrt
-        assertSequence("1", "50 + 1", "50+2%");
-
-        click("5");
-        assertFirstScreen("5");
-        assertSecondScreen("50 +");
-
-
-    }
-
-    @Test
-    //@Ignore
-    public void testScienceRepresentation() {
-
-        assertExpression("9999999999999999+1=1e+16");
-        assertExpression("9999999999999999+1=-1=9999999999999999");
-        assertExpression("9999999999999999*999=9.989999999999999e+18");
-        assertExpression("0.00000000000001/10==1e-16");
-        assertExpression("0.00000000000001/10==*10=0.000000000000001");
-
-        assertExpression("1/365==7.506098705197973e-6");
-        assertExpression("9999999999*=9.999999998e+19");
-
-        //for second screen
-        assertSequence("9.999999998e+19", "9.999999998e+19 +", "9999999999*=+");
-        assertSequence("7.506098705197973e-6", "7.506098705197973e-6 +", "1/365==+");
-
-
-    }
-
-    @Test
-    //@Ignore
-    public void testTextSizing() {
-        clickSequence("999999999999");
-
-        assertEquals(FIRST_SCREEN_BIG_FONT_SIZE, firstScreen.getFont().getSize(), 0.1);
-
-        click("9");
-
-        assertEquals(FIRST_SCREEN_MEDIUM_FONT_SIZE, firstScreen.getFont().getSize(), 0.1);
-
-        click("1/x");
-
-        assertEquals(FIRST_SCREEN_SMALL_FONT_SIZE, firstScreen.getFont().getSize(), 0.1);
-    }
-
-    @Test
-    public void testOperationAfterResult() {
-        assertExpression("55-5=50-7=43");
-        assertExpression("10+5=12-3=9");
-        assertExpression("10+5=12-9s=9");
-        assertExpression("1+9s=12-3=9");
-        assertExpression("9999999999999999-1=+1=9999999999999999");
-        assertExpression("0.00000000000001+0.00000000000001=-1=-0.99999999999998");
-    }
-
-    @Test
-    //@Ignore
-    public void testRounding() {
-        assertExpression("3s*=3");
-        assertExpression("7s*=7");
-        assertExpression("9999999999999999/568=1.76056338028169e+13");
-        assertExpression("1-0.00000000000001=0.99999999999999");
-        assertExpression("1000-0.00000000000001=1000");
-    }
-
-    @Test
-    //@Ignore
-    public void testNumberOverflow() {
-        assertSequence(OVERFLOW_MESSAGE, "1*0.0000000001==========*=========*=========*0.1=");
-        assertSequence(OVERFLOW_MESSAGE, "1*10000000000==========*=========*=========*10==");
-    }
-    */
-
     private void testExpression(String expression, String expected) throws Exception{
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
@@ -847,7 +475,7 @@ public class CalculatorViewTest {
             case "=":
                 controller.push(KeyCode.EQUALS);
                 break;
-            case "BS":
+            case "back":
                 controller.push(KeyCode.BACK_SPACE);
                 break;
             case "+":
@@ -862,7 +490,7 @@ public class CalculatorViewTest {
             case "*":
                 controller.push(KeyCode.MULTIPLY);
                 break;
-            case "NG":
+            case "negate":
                 controller.push(KeyCode.F9);
                 break;
             case "1/":

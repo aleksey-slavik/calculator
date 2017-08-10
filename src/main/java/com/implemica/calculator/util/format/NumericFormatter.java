@@ -3,6 +3,7 @@ package com.implemica.calculator.util.format;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -44,12 +45,8 @@ public class NumericFormatter {
         scienceForm.setGroupingUsed(false);
         scienceForm.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT));
 
-        DecimalFormatSymbols format = new DecimalFormatSymbols(Locale.ROOT);
-        format.setDecimalSeparator(',');
-        format.setGroupingSeparator(' ');
-        plainForm.setGroupingUsed(true);
-        plainForm.setGroupingSize(3);
-        plainForm.setDecimalFormatSymbols(format);
+        plainForm.setGroupingUsed(false);
+        plainForm.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT));
     }
 
     /**
@@ -86,8 +83,6 @@ public class NumericFormatter {
         if (result.contains(DOT)) {
             result = result.replace(DOT, COMMA);
         }
-
-        System.out.println(result);
 
         return result;
     }

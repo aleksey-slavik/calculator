@@ -56,8 +56,6 @@ public class CalculatorView {
 
     private static final String NUMERIC_FIELD_SELECTOR = "#numericField";
 
-    //private static final String HISTORY_FIELD_SELECTOR = "#historyField";
-
     public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         Parent root = loader.load(getClass().getResourceAsStream(ROOT_PATH));

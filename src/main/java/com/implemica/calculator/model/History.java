@@ -130,4 +130,11 @@ public class History {
     public void clearHistory() {
         setHistory(DEFAULT_VALUE);
     }
+
+    /**
+     * Return true if history is empty
+     */
+    public boolean isEmpty() {
+        return history.equals(DEFAULT_VALUE);
+    }
 }
