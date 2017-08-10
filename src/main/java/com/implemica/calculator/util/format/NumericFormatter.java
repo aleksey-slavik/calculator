@@ -44,8 +44,12 @@ public class NumericFormatter {
         scienceForm.setGroupingUsed(false);
         scienceForm.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT));
 
-        plainForm.setGroupingUsed(false);
-        plainForm.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT));
+        DecimalFormatSymbols format = new DecimalFormatSymbols(Locale.ROOT);
+        format.setDecimalSeparator(',');
+        format.setGroupingSeparator(' ');
+        plainForm.setGroupingUsed(true);
+        plainForm.setGroupingSize(3);
+        plainForm.setDecimalFormatSymbols(format);
     }
 
     /**
@@ -82,6 +86,8 @@ public class NumericFormatter {
         if (result.contains(DOT)) {
             result = result.replace(DOT, COMMA);
         }
+
+        System.out.println(result);
 
         return result;
     }

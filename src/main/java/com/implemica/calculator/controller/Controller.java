@@ -483,7 +483,8 @@ public class Controller implements Initializable{
         number = number.stripTrailingZeros();
         //setNumericFieldText(NumericFormatter.format(number));
         if (number.toPlainString().replace(DOT, "").replace("-", "").length() <= NUMERIC_FIELD_SIZE) {
-            setNumericFieldText(number.toPlainString().replace(DOT, COMMA));
+            //setNumericFieldText(number.toPlainString().replace(DOT, COMMA));
+            setNumericFieldText(NumericFormatter.format(number));
         } else {
             number = NumericFormatter.round(number);
             setNumericFieldText(NumericFormatter.format(number));
@@ -514,7 +515,8 @@ public class Controller implements Initializable{
             return;
         }*/
 
-        numericField.setText(getNumericFieldText() + value);
+        //numericField.setText(getNumericFieldText() + value);
+        setNumericFieldText(getNumericFieldText() + value);
     }
 
     private void appendHistoryFieldText(String value) {

@@ -36,7 +36,7 @@ public class ButtonResizeListener implements InvalidationListener{
 
     private static final int CLEAR_MEDIUM_FONT_SIZE = 20;
 
-    private static final int CLEAR_SMALL_FONT_SIZE = 16;
+    private static final int CLEAR_SMALL_FONT_SIZE = 12;
 
     private static final double BIG_HEIGHT = 700;
 
