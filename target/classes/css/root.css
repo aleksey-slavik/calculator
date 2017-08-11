@@ -6,7 +6,7 @@
     -fx-padding: 5 5 5 5;
     -fx-background-radius: 0;
     -fx-background-color: #fbfbfb;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Frutiger Neue LT W1G Medium";
     -fx-font-size: 16pt;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .numeric {
-    -fx-font-family: "Arial Unicode MS";
+    -fx-font-family: "Frutiger LT Std 65 Bold";
     -fx-font-size: 35pt;
 }
 
