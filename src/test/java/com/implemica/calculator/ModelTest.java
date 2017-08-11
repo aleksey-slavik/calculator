@@ -6,14 +6,13 @@ import com.implemica.calculator.util.exception.OverflowException;
 import com.implemica.calculator.util.exception.ZeroByZeroDivideException;
 import com.implemica.calculator.util.exception.ZeroDivideException;
 import com.implemica.calculator.model.Calculator;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-public class CalculatorTest {
+public class ModelTest {
 
     @Test
     public void addTest() throws Exception {
@@ -27,7 +26,7 @@ public class CalculatorTest {
         binaryTest("1.39", Operator.ADD, "0.98766", "2.37766");
         binaryTest("-0.1", Operator.ADD, "5987.999", "5987.899");
         binaryTest("-2133.9", Operator.ADD, "-8799.38833", "-10933.28833");
-        binaryTest("9999999999999999", Operator.ADD, "1", "1.e+16");
+        binaryTest("9999999999999999", Operator.ADD, "1", "10000000000000000");
     }
 
     @Test

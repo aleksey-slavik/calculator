@@ -10,7 +10,7 @@ import org.loadui.testfx.utils.FXTestUtils;
 
 import static org.junit.Assert.*;
 
-public class CalculatorViewTest {
+public class ControllerTest {
 
     private static GuiTest controller;
 
@@ -37,9 +37,9 @@ public class CalculatorViewTest {
         testExpression("7", "7");
         testExpression("8", "8");
         testExpression("9", "9");
-        testExpression("1234567890", "1234567890");
-        testExpression("1234567890123456", "1234567890123456");
-        testExpression("12345678901234567890", "1234567890123456");
+        testExpression("1234567890", "1 234 567 890");
+        testExpression("1234567890123456", "1 234 567 890 123 456");
+        testExpression("12345678901234567890", "1 234 567 890 123 456");
     }
 
     @Test
@@ -51,25 +51,24 @@ public class CalculatorViewTest {
         testExpression("2 + 2 negate =", "0");
         testExpression("12 negate + 11 +", "-1");
         testExpression("32 negate + 32 =", "0");
-        //testExpression("+ 100 negate =", "-100");
+        testExpression("+ 100 negate =", "-100");
         testExpression("1 + = = = = = = = =", "9");
         //testExpression("16 + 3 negate = = = = = = = ", "-5", "");
         testExpression("+ 5 = = = = = = = = = =", "50");
         testExpression("+ 5 negate =", "-5");
         //testExpression("+ 5 negate = = = = =", "-25", "");
         testExpression("0,5 + 12 +", "12,5");
-        testExpression("12345,6789 + 98765,4321 =", "111111,111");
+        testExpression("12345,6789 + 98765,4321 =", "111 111,111");
         testExpression("9999999999999999 + 1 =", "1,e+16");
         testExpression(",00000000000001 + ,00000000000001 =", "0,00000000000002");
         testExpression(",00000000000001 + ,00000000000001 negate =", "0");
         testExpression(",00000000000001 + ,00000000000009 =", "0,0000000000001");
-        //testExpression(",00000000000001 + ,00000000000009 negate =", "-0,00000000000008", "");
+        testExpression(",00000000000001 + ,00000000000009 negate =", "-0,00000000000008", "");
         testExpression("9999999999999999 + =", "2,e+16");
-        testExpression("999,999999999999 + ,000000000001 =", "1000");
-        testExpression("9999999999999999 + ,1 =", "9999999999999999");
-        testExpression("9999999999999999 + ,1 = = = =", "9999999999999999");
-        testExpression("9999999999999999 + ,1 = = = =", "9999999999999999");
-        //testExpression("9999999999999999 + ,1 = = = = =", "1,e+16", "");
+        testExpression("999,999999999999 + ,000000000001 =", "1 000");
+        testExpression("9999999999999999 + ,1 =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 + ,1 = = = =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 + ,1 = = = =", "9 999 999 999 999 999");
     }
 
     @Test
@@ -77,24 +76,23 @@ public class CalculatorViewTest {
         testExpression("10 - 2 =", "8");
         testExpression("10 - 2 -", "8");
         testExpression("2 - 0 -", "2");
-        //testExpression("0 - 45 =", "-45");
+        testExpression("0 - 45 =", "-45");
         testExpression("18 - 5 = =", "8");
         testExpression("18 - 5 = = = = =", "-7");
         testExpression(",04 - 1,96 - - -", "-1,92");
+        //testExpression("1000 - 0.00000000001 =", "999,99999999999");
 
         testExpression("0,00000000000001 - 0,00000000000001 =", "0");
         testExpression("0,00000000000001 - 0,00000000000001 negate =", "0,00000000000002");
-        //testExpression("0,00000000000001 - 0,00000000000002 =", "-0,00000000000001");
-        //testExpression("0.00000000000001 - 0.00000000000002 negate =", "0.00000000000003");
+        testExpression("0,00000000000001 - 0,00000000000002 =", "-0,00000000000001");
+        testExpression("0,00000000000001 - 0,00000000000002 negate =", "0,00000000000003");
 
         testExpression("9999999999999999 - 9999999999999999 =", "0");
         testExpression("9999999999999999 - 9999999999999998 =", "1");
         testExpression("9999999999999998 - 9999999999999999 =", "-1");
         testExpression("9999999999999999 - 9999999999999999 negate =", "2,e+16");
         testExpression("9999999999999999 - 1 negate =", "1,e+16");
-        testExpression("9999999999999999 - 1 negate - 1 =", "9999999999999999");
-
-        //testExpression("1000 - 0.00000000001 =", "999.99999999999");
+        testExpression("9999999999999999 - 1 negate - 1 =", "9 999 999 999 999 999");
     }
 
     @Test
@@ -107,19 +105,19 @@ public class CalculatorViewTest {
         testExpression("1 / 1 =", "1");
         testExpression("3 / 1 =", "3");
         testExpression("0,00000000000001 / 1 =", "0,00000000000001");
-        testExpression("9999999999999999 / 1 =", "9999999999999999");
+        testExpression("9999999999999999 / 1 =", "9 999 999 999 999 999");
 
         testExpression("0,00000000000002 / 2 =", "0,00000000000001");
-        //testExpression("0,00000000000001 / 2 =", "0,000000000000005");
-        //testExpression("0,00000000000001 / 10 =", "0,000000000000001");
+        testExpression("0,00000000000001 / 2 =", "0,000000000000005");
+        testExpression("0,00000000000001 / 10 =", "0,000000000000001");
         testExpression("0,00000000000001 / 3 =", "3,333333333333333e-15");
         testExpression("0,00000000000001 / 0,00000000000001 =", "1");
         testExpression("0,00000000000001 / 0,00000000000002 =", "0,5");
         testExpression("0,00000000000002 / 0,00000000000001 =", "2");
         testExpression("0,00000000000001 / 9999999999999999 =", "1,e-30");
 
-        testExpression("9999999999999999 / 2 =", "5000000000000000");
-        testExpression("9999999999999999 / 9 =", "1111111111111111");
+        testExpression("9999999999999999 / 2 =", "5 000 000 000 000 000");
+        testExpression("9999999999999999 / 9 =", "1 111 111 111 111 111");
         testExpression("9999999999999999 / 7 =", "1,428571428571428e+15");
         testExpression("9999999999999999 / 0,1 =", "9,999999999999999e+16");
         testExpression("9999999999999999 / 0,00000000000001 =", "9,999999999999999e+29");
@@ -177,23 +175,23 @@ public class CalculatorViewTest {
         testExpression("2 negate * 1 =", "-2");
         testExpression("2,25 * 1 =", "2,25");
         testExpression("2,25 negate * 1 =", "-2,25");
-        testExpression("9999999999999999 * 1 =","9999999999999999");
-        //testExpression("9999999999999999 negate * 1 =", "-9999999999999999");
+        testExpression("9999999999999999 * 1 =","9 999 999 999 999 999");
+        testExpression("9999999999999999 negate * 1 =", "-9 999 999 999 999 999");
         testExpression("0,00000000000001 * 1 =", "0,00000000000001");
-        //testExpression("0,00000000000001 negate * 1 =", "-0,00000000000001");
-        //testExpression("9999999999999999 * 1 negate =", "-9999999999999999");
-        //testExpression("9999999999999999 * 1 negate =", "9999999999999999");
-        //testExpression("0,00000000000001 * 1 negate =", "-0,00000000000001");
-        //testExpression("0,00000000000001 negate * 1 negate =", "0,00000000000001");
+        testExpression("0,00000000000001 negate * 1 =", "-0,00000000000001");
+        testExpression("9999999999999999 * 1 negate =", "-9 999 999 999 999 999");
+        testExpression("9999999999999999 negate * 1 negate =", "9 999 999 999 999 999");
+        testExpression("0,00000000000001 * 1 negate =", "-0,00000000000001");
+        testExpression("0,00000000000001 negate * 1 negate =", "0,00000000000001");
 
-        testExpression("12345679 * 9 =", "111111111");
-        //testExpression("12345679 * 9 negate =", "-111111111");
+        testExpression("12345679 * 9 =", "111 111 111");
+        testExpression("12345679 * 9 negate =", "-111 111 111");
         testExpression("20 * 0,5 =", "10");
-        //testExpression("20 * 0,5 negate =", "-10");
+        testExpression("20 * 0,5 negate =", "-10");
         testExpression("9999999999999999 * 9999999999999999 =", "9,999999999999998e+31");
         testExpression("9999999999999999 * 9999999999999999 negate =", "-9,999999999999998e+31");
         testExpression("0,00000000000001 * 0,00000000000001 =", "1,e-28");
-        testExpression("0,00000000000001 * 0,00000000000001 negate =", "-1e-28");
+        testExpression("0,00000000000001 * 0,00000000000001 negate =", "-1,e-28");
 
         testExpression("5 * =", "25");
         testExpression("5 * = =", "125");
@@ -209,17 +207,17 @@ public class CalculatorViewTest {
         testExpression("1 negate negate", "1");
         testExpression("5 negate 8", "-58");
 
-        //testExpression("9999999999999999 negate =", "-9999999999999999");
-        testExpression("9999999999999999 negate negate =", "9999999999999999");
-        //testExpression("0,00000000000001 negate =", "-0,00000000000001");
-        //testExpression("0.00000000000001 negate negate =" ,"0,00000000000001");
+        testExpression("9999999999999999 negate =", "-9 999 999 999 999 999");
+        testExpression("9999999999999999 negate negate =", "9 999 999 999 999 999");
+        testExpression("0,00000000000001 negate =", "-0,00000000000001");
+        testExpression("0,00000000000001 negate negate =" ,"0,00000000000001");
 
         testExpression("5 + 0 negate =", "5");
         testExpression("1 + 1 negate =", "0");
         testExpression("1 - 1 negate =", "2");
         testExpression("0,1 + 0,1 negate =", "0");
         testExpression("0,1 - 0,1 negate =", "0,2");
-        //testExpression("1 + 9999999999999999 negate =", "-9999999999999998");
+        testExpression("1 + 9999999999999999 negate =", "-9 999 999 999 999 998");
         testExpression("1 + - 9999999999999999 negate =", "1,e+16");
         testExpression("1 + 0,00000000000001 negate =", "0,99999999999999");
         testExpression("1 - 0,00000000000001 negate =", "1,00000000000001");
@@ -236,23 +234,23 @@ public class CalculatorViewTest {
         testExpression("0 + 1 1/ =", "1");
         testExpression("0 + 1 negate 1/=", "-11");
         testExpression("0 + 2 1/ =", "0,5");
-        //testExpression("0 + 2 negate 1/ =", "-0,5");
+        testExpression("0 + 2 negate 1/ =", "-0,5");
         testExpression("0 + 0,1 1/ =", "10");
-        //testExpression("0 + 0,1 negate 1/ =", "-10");
+        testExpression("0 + 0,1 negate 1/ =", "-10");
         testExpression("1 + 2 1/ =", "1,5");
         testExpression("5 + 10 1/ 1/ =", "15");
         testExpression("5 + 10 1/ 1/ 1/ =", "5,1");
 
-        testExpression("0 + 9999999999999999 1/ =", "1,e-16");
-        testExpression("0 + 9999999999999999 negate 1/ =", "-1e-16");
-        //testExpression("0 + 9999999999999999 1/ 1/ =", "9999999999999999");
-        testExpression("0 + 0,00000000000001 1/ =", "100000000000000");
-        //testExpression("0 + 0,00000000000001 negate 1/ =", "-100000000000000");
-        testExpression("0 + 0,00000000000001 1/ 1/ =", "0,00000000000001");
+        testExpression("9999999999999999 1/", "1,e-16");
+        testExpression("9999999999999999 negate 1/", "-1,e-16");
+        testExpression("0,00000000000001 1/", "100 000 000 000 000");
+        testExpression("0,00000000000001 negate 1/", "-100 000 000 000 000");
+        testExpression("0,00000000000001 1/ 1/", "0,00000000000001");
+
         testExpression("5 1/","0,2", "1/(5)");
-        //testExpression("5 1/ 1/", "5", "1/(1/(5))");
+        testExpression("5 1/ 1/", "5", "1/(1/(5))");
         testExpression("1 + 5 1/","0,2", "1 + 1/(5)");
-        //testExpression("1 + 5 1/ 1/","5", "1 + 1/(1/(5))");
+        testExpression("1 + 5 1/ 1/","5", "1 + 1/(1/(5))");
     }
 
     @Test
@@ -287,36 +285,32 @@ public class CalculatorViewTest {
         testExpression("0,00006561 sqrt sqrt sqrt =", "0,3");
 
         testExpression("0,00000000000001 sqrt =", "0,0000001");
-        //testExpression("0,00000000000001 sqrt sqrt =", "0,000316227766017");
-
-        //testExpression("9999999999999999 sqrt =", "100000000");
-        //testExpression("9999999999999999 sqrt sqrt =", "10000");
         testExpression("9999999999999999 sqrt sqrt sqrt sqrt sqrt =", "3,162277660168379");
 
         testExpression("100 sqrt", "10", "√(100)");
         testExpression("5 + 9 sqrt", "3", "5 + √(9)");
-        //testExpression("81 sqrt sqrt", "3", "√(√(81))");
-        //testExpression("5 + 81 sqrt sqrt", "3", "5 + √(√(81))");
+        testExpression("81 sqrt sqrt", "3", "√(√(81))");
+        testExpression("5 + 81 sqrt sqrt", "3", "5 + √(√(81))");
         testExpression("9 sqrt =","3", "");
-        //testExpression("9 sqrt + 1","1", "√(9) +");
+        testExpression("9 sqrt + 1","1", "√(9) +");
     }
 
     @Test
     public void sqrtErrorTest() throws Exception{
         testExpression("1 negate sqrt", "Invalid input", "√(negate(1))");
         testExpression("100 negate sqrt", "Invalid input", "√(negate(100))");
-        testExpression("0,09 negate sqrt", "Invalid input", "√(negate(0.090)");
-        testExpression("3 - 8 = sqrt","Invalid input", "√(negate(5))");
+        testExpression("0,09 negate sqrt", "Invalid input", "√(negate(0,09))");
+        testExpression("3 - 8 = sqrt","Invalid input", "√(-5)");
         testExpression("9999999999999999 negate sqrt", "Invalid input", "√(negate(9999999999999999))");
-        testExpression("0.00000000000001 negate sqrt", "Invalid input", "√(negate(0.00000000000001))");
+        testExpression("0,00000000000001 negate sqrt", "Invalid input", "√(negate(0,00000000000001))");
     }
 
     @Test
     public void percentTest() throws Exception {
         testExpression("100 + 10 %", "10");
         testExpression("98 - 34 %", "33,32");
-        testExpression("9870 * 120 %", "11844");
-        testExpression("12365 / 99 %", "12241,35");
+        testExpression("9870 * 120 %", "11 844");
+        testExpression("12365 / 99 %", "12 241,35");
 
         testExpression("100 + 0 % =", "100");
         testExpression("100 + 1 % =", "101");
@@ -329,15 +323,15 @@ public class CalculatorViewTest {
         testExpression("100 / 20 % =", "5");
         testExpression("100 + 500 % =", "600");
 
-        //testExpression("100 negate + 10 % =", "-110");
-        testExpression("100 negate * 10 % =", "1000");
+        testExpression("100 negate + 10 % =", "-110");
+        testExpression("100 negate * 10 % =", "1 000");
 
         testExpression("0,1 + 100 % =", "0,2");
         testExpression("0,1 - 100 % =", "0");
         testExpression("0,1 + 20 % =", "0,12");
 
         testExpression("9999999999999999 + 9999999999999999 % =", "1,00000000000001e+30");
-        testExpression("9999999999999999 + 0 % =", "9999999999999999");
+        testExpression("9999999999999999 + 0 % =", "9 999 999 999 999 999");
         testExpression("9999999999999999 * 9999999999999999 % =", "9,999999999999997e+45");
         testExpression("9999999999999999 - 9999999999999999 % =", "-9,999999999999898e+29");
         testExpression("9999999999999999 + 0,00000000000001 % =", "1,e+16");
@@ -346,7 +340,7 @@ public class CalculatorViewTest {
         testExpression("0,00000000000001 - 1 % =", "9,9e-15");
         testExpression("0,00000000000001 - 100 % =", "0");
         testExpression("0,00000000000001 + 100 % =", "0,00000000000002");
-        //testExpression("0,00000000000001 + 9999999999999999 % =", "1");
+        //testExpression("0,00000000000001 + 9999999999999999 % =", "0,10000000000001");
         testExpression("0,00000000000001 + 0,00000000000001 % =", "1,e-14");
 
         testExpression("0 + 1 % =", "0");
@@ -363,7 +357,6 @@ public class CalculatorViewTest {
         testExpression("200 + 10 % % =", "240");
         testExpression("200 + 10 % % % =", "280");
 
-        //history screen assertion
         testExpression("50 + 2 %", "1", "50 + 1");
         testExpression("200 + 10 % %", "40", "200 + 40");
         testExpression("20 %", "0", "");
@@ -371,9 +364,30 @@ public class CalculatorViewTest {
 
     @Test
     public void backspaceTest() throws Exception {
-        testExpression("12689,88 back", "12689,8");
+        testExpression("back", "0");
+        testExpression("negate back", "0");
+        testExpression("1 back", "0");
+        testExpression("45 back back", "0");
+
+        testExpression("12689,88 back", "12 689,8");
         testExpression("980,98 back back", "980,");
         testExpression("673,12 back back back", "673");
+        testExpression("34, back", "34");
+
+        testExpression("2 negate back", "0");
+        testExpression("23 negate back", "-2");
+        testExpression("843,44 negate back", "-843,4");
+        testExpression("36,6 negate back back back back", "0");
+
+        testExpression("99 - back back", "99");
+        testExpression("2 + back", "2");
+        testExpression("885,6 negate * back back back", "-885,6");
+        testExpression("45 - 40 = back", "5");
+
+        testExpression("100 + 10 % back", "10");
+        testExpression("81 sqrt back", "9");
+        testExpression("4 negate sqr back back back", "16");
+        testExpression("10 1/ back back", "0,1");
     }
 
     @Test
@@ -381,8 +395,8 @@ public class CalculatorViewTest {
         testExpression("10 / 3 * 3 =", "10");
         testExpression("2 / 3 * 3 =", "2");
         testExpression("1 / 3 * 3 =", "1");
-        testExpression("9999999999999999 + 1 - 1 =", "9999999999999999");
-        testExpression("87599 sqr + = =", "23020754403");
+        testExpression("9999999999999999 + 1 - 1 =", "9 999 999 999 999 999");
+        testExpression("87599 sqr + = =", "23 020 754 403");
 
         testExpression("5 + 9 - 1 =", "13");
         testExpression("5 - 9 + 5 - 2 =", "-1");
@@ -393,7 +407,7 @@ public class CalculatorViewTest {
         testExpression("3 + 4 - 5 / 2 * 8 =", "8");
 
         testExpression("0,00000000000001 + 0,00000000000001 / 0,00000000000001 =", "2");
-        //testExpression("9999999999999999 + 5 - 4 / 10 =", "1000000000000000");
+        testExpression("9999999999999999 + 5 - 4 / 10 =", "1 000 000 000 000 000");
         testExpression("9999999999999999 + 9999999999999999 / 9999999999999999 =", "2");
 
         testExpression("9 sqrt + 5 =", "8");
@@ -409,8 +423,8 @@ public class CalculatorViewTest {
     public void memoryTest() throws Exception {
         testExpression("10 MS C MR", "10");
         testExpression("965 M+ + 123 MR", "965");
-        testExpression("3765 M+ 78 M+ MR", "3843");
-        testExpression("4723399 M- 2377 M- MR", "-4725776");
+        testExpression("3765 M+ 78 M+ MR", "3 843");
+        testExpression("4723399 M- 2377 M- MR", "-4 725 776");
     }
 
     @Test
@@ -445,7 +459,7 @@ public class CalculatorViewTest {
         testExpression("1 + 9999999999999999 + 1 + C", "0", "");
 
         testExpression("15 + 3555 C 5", "5", "");
-        testExpression("1 + 9999999999999999 C 76543","76543", "");
+        testExpression("1 + 9999999999999999 C 76543","76 543", "");
         testExpression("1 + 0,00000000000001 C 0,5", "0,5", "");
         testExpression("1 + 9999999999999999 + 1 + C 1,5", "1,5", "");
     }

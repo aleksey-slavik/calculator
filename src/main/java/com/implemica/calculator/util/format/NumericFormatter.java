@@ -20,7 +20,7 @@ public class NumericFormatter {
 
     private static final BigDecimal DELTA = new BigDecimal("1E-" + (NUMERIC_FIELD_SIZE - 2));
 
-    private static final int MAX_SCALE = 29;
+    private static final int MAX_SCALE = 20;
 
     private static final String SCIENCE_ERROR = "E0";
 
@@ -70,12 +70,15 @@ public class NumericFormatter {
 
         if (result.contains(EXPONENT)) {
             int index = result.indexOf(EXPONENT);
-            if (index == 1) {
+
+            if (index == 1 || index == 2) {
                 result = result.replace(EXPONENT, DOT + EXPONENT);
             }
+
             if (!result.contains(EXPONENT_NEGATIVE)) {
                 result = result.replace(EXPONENT, EXPONENT_POSITIVE);
             }
+
             result = result.toLowerCase();
         }
 

@@ -552,6 +552,7 @@ public class Controller implements Initializable{
         } else {
             setNumericFieldNumber(calculator.percent(getNumericFieldNumber()));
             String value = getNumericFieldText();
+
             if (isLastNumber) {
                 String history = getHistoryFieldText();
                 int begin = history.lastIndexOf(SEPARATOR);
@@ -578,6 +579,7 @@ public class Controller implements Initializable{
 
         setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
         isUnaryResult = true;
+
     }
 
     private void processSqr() {
@@ -587,6 +589,7 @@ public class Controller implements Initializable{
             setHistoryFieldText(history.surround(SQR_TEXT, value));
         } else if (isUnaryResult) {
             history.surround(SQR_TEXT);
+            setHistoryFieldText(history.getHistory());
         } else {
             appendHistoryFieldText(SEPARATOR + history.surround(SQR_TEXT, value));
         }
@@ -608,6 +611,7 @@ public class Controller implements Initializable{
             setHistoryFieldText(history.surround(SQRT_TEXT, value));
         } else if (isUnaryResult) {
             history.surround(SQRT_TEXT);
+            setHistoryFieldText(history.getHistory());
         } else {
             appendHistoryFieldText(SEPARATOR + history.surround(SQRT_TEXT, value));
         }
@@ -623,9 +627,14 @@ public class Controller implements Initializable{
             normalStatement();
         }
 
-        String value = getNumericFieldText().replace(" ", "");
+        if (isLastNumber) {
+            return;
+        }
 
-        if (value.length() < 2) {
+        String value = getNumericFieldText().replace(" ", "");
+        int minLength = value.contains("-") ? 3 : 2;
+
+        if (value.length() < minLength) {
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         } else {
             setNumericFieldText(value.substring(0, value.length() - 1));
@@ -639,13 +648,14 @@ public class Controller implements Initializable{
             setHistoryFieldText(history.surround(INVERSE_TEXT, value));
         } else if (isUnaryResult){
             history.surround(INVERSE_TEXT);
+            setHistoryFieldText(history.getHistory());
         } else {
             appendHistoryFieldText(SEPARATOR + history.surround(INVERSE_TEXT, value));
         }
 
         setNumericFieldNumber(calculator.inverse(getNumericFieldNumber()));
-        isLastNumber = true;
         isUnaryResult = true;
+        isLastNumber = true;
     }
 
     private String getNumericFieldText() {
@@ -654,7 +664,11 @@ public class Controller implements Initializable{
     }
 
     private void setNumericFieldText(String value) {
-        value = NumericFormatter.format(value);
+        if (!isLockedScreen) {
+            value = value.replace(DOT, COMMA);
+            value = NumericFormatter.format(value);
+        }
+
         numericField.setText(value);
     }
 
@@ -664,8 +678,8 @@ public class Controller implements Initializable{
     }
 
     private void setNumericFieldNumber(BigDecimal number) {
-        //number = number.stripTrailingZeros();
-        if (number.toPlainString().replace(COMMA, "").replace("-", "").replace(" ", "").length() < NUMERIC_FIELD_SIZE) {
+        number = number.stripTrailingZeros();
+        if (number.toPlainString().replace(DOT, "").replace("-", "").replace(" ", "").length() <= NUMERIC_FIELD_SIZE) {
             setNumericFieldText(number.toPlainString());
         } else {
             number = NumericFormatter.round(number);
@@ -689,6 +703,7 @@ public class Controller implements Initializable{
             left.setVisible(false);
             right.setVisible(false);
             historyField.setText(value);
+            history.setHistory(value);
             historyPos = history.getHistory().length();
         }
     }
@@ -791,16 +806,16 @@ public class Controller implements Initializable{
     }
 
     private void normalStatement() {
-        setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
-        setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
         disableButtons(false);
         disableMemoryButtons(isMemoryLocked);
         calculator.resetOperator();
         history.clearHistory();
+        setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
+        setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
     }
 
     private void errorStatement(String error) {
-        setNumericFieldText(error);
         disableButtons(true);
+        setNumericFieldText(error);
     }
 }

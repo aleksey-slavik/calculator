@@ -43,7 +43,11 @@ public class Calculator {
 
     public void changeOperator(BigDecimal value, Operator operator) {
         isNextOperator = false;
-        left = value;
+
+        if (left.equals(BigDecimal.ZERO)) {
+            left = value;
+        }
+
         this.operator = operator;
     }
 
@@ -127,7 +131,7 @@ public class Calculator {
     private BigDecimal multiply() throws OverflowException {
         BigDecimal res = left.multiply(right);
 
-        if (Math.abs(res.scale()) >= MAX_SCALE) {
+        if (Math.abs(res.scale()) > MAX_SCALE) {
             throw new OverflowException("Scale of result of multiply is bigger than max scale value");
         }
 
