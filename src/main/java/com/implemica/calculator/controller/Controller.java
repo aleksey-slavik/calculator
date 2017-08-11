@@ -579,7 +579,6 @@ public class Controller implements Initializable{
 
         setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
         isUnaryResult = true;
-
     }
 
     private void processSqr() {

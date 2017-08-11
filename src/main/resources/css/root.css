@@ -55,8 +55,7 @@
 
 .numeric {
     -fx-font-family: "Arial Unicode MS";
-    -fx-font-weight: 900;
-    -fx-font-size: 30pt;
+    -fx-font-size: 35pt;
 }
 
 .history {

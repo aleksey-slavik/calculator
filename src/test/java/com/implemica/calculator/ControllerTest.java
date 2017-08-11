@@ -53,10 +53,8 @@ public class ControllerTest {
         testExpression("32 negate + 32 =", "0");
         testExpression("+ 100 negate =", "-100");
         testExpression("1 + = = = = = = = =", "9");
-        //testExpression("16 + 3 negate = = = = = = = ", "-5", "");
         testExpression("+ 5 = = = = = = = = = =", "50");
         testExpression("+ 5 negate =", "-5");
-        //testExpression("+ 5 negate = = = = =", "-25", "");
         testExpression("0,5 + 12 +", "12,5");
         testExpression("12345,6789 + 98765,4321 =", "111 111,111");
         testExpression("9999999999999999 + 1 =", "1,e+16");
@@ -80,7 +78,7 @@ public class ControllerTest {
         testExpression("18 - 5 = =", "8");
         testExpression("18 - 5 = = = = =", "-7");
         testExpression(",04 - 1,96 - - -", "-1,92");
-        //testExpression("1000 - 0.00000000001 =", "999,99999999999");
+        testExpression("1000 - 0,00000000001 =", "999,99999999999");
 
         testExpression("0,00000000000001 - 0,00000000000001 =", "0");
         testExpression("0,00000000000001 - 0,00000000000001 negate =", "0,00000000000002");
@@ -340,7 +338,6 @@ public class ControllerTest {
         testExpression("0,00000000000001 - 1 % =", "9,9e-15");
         testExpression("0,00000000000001 - 100 % =", "0");
         testExpression("0,00000000000001 + 100 % =", "0,00000000000002");
-        //testExpression("0,00000000000001 + 9999999999999999 % =", "0,10000000000001");
         testExpression("0,00000000000001 + 0,00000000000001 % =", "1,e-14");
 
         testExpression("0 + 1 % =", "0");
