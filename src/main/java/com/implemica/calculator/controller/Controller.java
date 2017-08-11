@@ -288,6 +288,7 @@ public class Controller implements Initializable{
                 setNumericFieldNumber(calculator.calculateEqualsResult(getNumericFieldNumber()));
             } else {
                 setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
+                history.clearHistory();
                 setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             }
             isResult = true;
@@ -304,7 +305,7 @@ public class Controller implements Initializable{
 
     @FXML
     private void buttonCommaClick() {
-        if (!getNumericFieldText().contains(COMMA)) {
+        if (!getNumericFieldText().contains(COMMA) && !checkSize()) {
             appendNumericFieldText(COMMA);
         }
 
@@ -570,6 +571,7 @@ public class Controller implements Initializable{
             setHistoryFieldText(history.surround(NEGATE_TEXT, value));
         } else if (isUnaryResult) {
             history.surround(NEGATE_TEXT);
+            setHistoryFieldText(history.getHistory());
         } else {
             appendHistoryFieldText(SEPARATOR + history.surround(NEGATE_TEXT, value));
         }
@@ -648,25 +650,23 @@ public class Controller implements Initializable{
 
     private String getNumericFieldText() {
 
-        return numericField.getText();
+        return numericField.getText().replace(" ", "");
     }
 
     private void setNumericFieldText(String value) {
-
+        value = NumericFormatter.format(value);
         numericField.setText(value);
     }
 
     private BigDecimal getNumericFieldNumber() {
-        String value = getNumericFieldText();
-        value = value.replace(COMMA, DOT);
+        String value = getNumericFieldText().replace(" ", "").replace(COMMA, DOT);
         return new BigDecimal(value);
-
     }
 
     private void setNumericFieldNumber(BigDecimal number) {
-        number = number.stripTrailingZeros();
-        if (!checkSize()) {
-            setNumericFieldText(NumericFormatter.format(number));
+        //number = number.stripTrailingZeros();
+        if (number.toPlainString().replace(COMMA, "").replace("-", "").replace(" ", "").length() < NUMERIC_FIELD_SIZE) {
+            setNumericFieldText(number.toPlainString());
         } else {
             number = NumericFormatter.round(number);
             setNumericFieldText(NumericFormatter.format(number));
@@ -684,7 +684,7 @@ public class Controller implements Initializable{
             right.setVisible(false);
             history.setHistory(value);
             historyPos = history.getHistory().length();
-            historyField.setText(value.substring(value.length() - getLabelSize()));
+            historyField.setText(history.getHistory().substring(value.length() - getLabelSize()));
         } else {
             left.setVisible(false);
             right.setVisible(false);

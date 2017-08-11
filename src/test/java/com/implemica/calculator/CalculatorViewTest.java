@@ -189,7 +189,7 @@ public class CalculatorViewTest {
         testExpression("12345679 * 9 =", "111111111");
         //testExpression("12345679 * 9 negate =", "-111111111");
         testExpression("20 * 0,5 =", "10");
-        //testExpression("20 * 0.5 negate =", "-10");
+        //testExpression("20 * 0,5 negate =", "-10");
         testExpression("9999999999999999 * 9999999999999999 =", "9,999999999999998e+31");
         testExpression("9999999999999999 * 9999999999999999 negate =", "-9,999999999999998e+31");
         testExpression("0,00000000000001 * 0,00000000000001 =", "1,e-28");

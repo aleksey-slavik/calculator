@@ -3,7 +3,6 @@ package com.implemica.calculator.util.format;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -122,5 +121,32 @@ public class NumericFormatter {
 
         BigDecimal near = number.setScale(0, BigDecimal.ROUND_HALF_UP);
         return number.compareTo(near) == 0;
+    }
+
+    public static String format(String value) {
+        value = value.replace(" ", "");
+        int index = value.indexOf(COMMA);
+        String integer = "";
+        String fractional = "";
+
+        if (index == -1) {
+            integer = value;
+            index = value.length();
+        } else {
+            integer = value.substring(0, index);
+            fractional = value.substring(index);
+        }
+
+        int stop = integer.contains("-") ? 4 : 3;
+        StringBuilder builder = new StringBuilder("");
+
+        while (index > stop){
+            builder.insert(0, " " + integer.substring(index - 3, index));
+            index -= 3;
+        }
+
+        builder.insert(0, integer.substring(0, index));
+        builder.append(fractional);
+        return builder.toString();
     }
 }
