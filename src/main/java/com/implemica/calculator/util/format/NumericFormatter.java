@@ -129,7 +129,7 @@ public class NumericFormatter {
     public static String format(String value) {
         value = value.replace(" ", "");
         int index = value.indexOf(COMMA);
-        String integer = "";
+        String integer;
         String fractional = "";
 
         if (index == -1) {
