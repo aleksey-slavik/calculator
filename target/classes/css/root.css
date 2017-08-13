@@ -6,7 +6,7 @@
     -fx-padding: 5 5 5 5;
     -fx-background-radius: 0;
     -fx-background-color: #fafafa;
-    -fx-font-family: "Frutiger Neue LT W1G Medium";
+    -fx-font-family: "Frutiger Neue LT W1G Book";
     -fx-font-size: 16pt;
 }
 
@@ -34,11 +34,27 @@
     -fx-background-color: #c1c1c1;
 }
 
+.negate {
+    -fx-padding: 5 5 5 5;
+    -fx-background-radius: 0;
+    -fx-background-color: #f0f0f0;
+    -fx-font-family: "Footlight MT Light";
+    -fx-font-size: 16pt;
+}
+
+.negate:hover {
+    -fx-background-color: #d1d1d1;
+}
+
+.negate:armed {
+    -fx-background-color: #c1c1c1;
+}
+
 .operators_blue {
     -fx-padding: 5 5 5 5;
     -fx-background-radius: 0;
     -fx-background-color: #f0f0f0;
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: "HelveticaNeue-UltraLight";
     -fx-font-size: 16pt;
 }
 
@@ -53,24 +69,21 @@
 }
 
 .numeric {
-    -fx-font-family: "Frutiger LT Std 65 Bold";
+    -fx-font-family: "Frutiger Neue LT W1G Book";
     -fx-font-size: 35pt;
 }
 
 .history {
     -fx-font-family: "Arial Unicode MS";
-    -fx-font-weight: 100;
     -fx-text-fill: #626062;
     -fx-font-size: 11pt;
 }
 
 .title {
-    -fx-font-family: "Segoe UI";
     -fx-font-size: 18pt;
 }
 
 .memory {
-    -fx-font-family: "Segoe UI";
     -fx-font-weight: bold;
     -fx-font-size: 9pt;
     -fx-padding: 5 5 5 5;
@@ -104,8 +117,7 @@
     -fx-padding: 5 5 5 5;
     -fx-background-radius: 0;
     -fx-background-color: #f5f5f5;
-    -fx-font-family: "Arial Unicode MS";
-    -fx-font-size: 8pt;
+    -fx-font-size: 12pt;
 }
 
 .controls:hover {
@@ -113,6 +125,22 @@
 }
 
 .controls:armed {
+    -fx-background-color: #c1c1c1;
+}
+
+.backspace {
+    -fx-padding: 5 5 5 5;
+    -fx-background-radius: 0;
+    -fx-background-color: #f5f5f5;
+    -fx-font-family: "Arial Unicode MS";
+    -fx-font-size: 16pt;
+}
+
+.backspace:hover {
+    -fx-background-color: #d1d1d1;
+}
+
+.backspace:armed {
     -fx-background-color: #c1c1c1;
 }
 
@@ -167,7 +195,6 @@
 .list-cell {
     -fx-padding: 5 5 5 50;
     -fx-background-color: transparent;
-    -fx-font-family: "Segoe IU";
     -fx-font-size: 12pt;
     -fx-pref-height: 50;
 }

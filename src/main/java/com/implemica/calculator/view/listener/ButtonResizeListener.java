@@ -74,6 +74,7 @@ public class ButtonResizeListener implements InvalidationListener{
         binary.add("#subtract");
         binary.add("#divide");
         binary.add("#multiply");
+        binary.add("#backspace");
 
         unary.add("#negate");
         unary.add("#percent");
@@ -83,7 +84,7 @@ public class ButtonResizeListener implements InvalidationListener{
 
         clear.add("#clear");
         clear.add("#clear_expr");
-        clear.add("#backspace");
+        //clear.add("#backspace");
     }
 
     @Override
