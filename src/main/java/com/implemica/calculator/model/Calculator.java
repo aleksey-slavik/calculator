@@ -77,7 +77,10 @@ public class Calculator {
     }
 
     public BigDecimal calculateEqualsResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        left = value;
+        if (left.equals(BigDecimal.ZERO)) {
+            left = value;
+        }
+
         left = calculate();
         return left;
     }
