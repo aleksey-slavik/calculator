@@ -32,7 +32,7 @@ public class NavigatorListener implements EventHandler<ActionEvent> {
         if (navigator.getTranslateX() != 0) {
             openMenu.play();
         } else {
-            closeMenu.setToX(-(navigator.getWidth()));
+            closeMenu.setToX(-260);
             closeMenu.play();
         }
     }
