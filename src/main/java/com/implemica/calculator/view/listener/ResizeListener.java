@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class ResizeListener implements EventHandler<MouseEvent> {
 
-    private static final double BORDER = 5;
+    private static final double BORDER = 2;
 
     private static final double MIN_WIDTH = 320;
 
