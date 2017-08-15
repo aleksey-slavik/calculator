@@ -1,10 +1,15 @@
 package com.implemica.calculator;
 
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
+
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.util.concurrent.CountDownLatch;
 
 import static org.junit.Assert.*;
 
@@ -36,5 +41,23 @@ public class ViewTest {
     }
 
     private void moveTest(int x, int y) {
+        controller.click("#title");
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        Platform.runLater(() -> {
+            try {
+                Robot robot = new Robot();
+                robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                robot.mouseMove(x, y);
+            } catch (Exception ignored) {
+                //
+            }
+            countDownLatch.countDown();
+        });
+        try {
+            countDownLatch.await();
+        } catch (Exception e) {
+            //
+        }
+        controller.sleep(500);
     }
 }

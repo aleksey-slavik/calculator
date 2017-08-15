@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/screenshot1502706597742.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path=".idea/" />
+    <ignored path="C:\Users\Joker\Documents\GitHub\calculator\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,17 +16,66 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
-  <component name="FavoritesManager">
-    <favorites_list name="calculator" />
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CalculatorView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java">
+      <file leaf-file-name="NumericFormatter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1972">
-              <caret line="131" column="53" lean-forward="false" selection-start-line="131" selection-start-column="53" selection-end-line="131" selection-end-column="53" />
+            <state relative-caret-position="2142">
+              <caret line="131" column="22" lean-forward="false" selection-start-line="131" selection-start-column="22" selection-end-line="131" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2867#2868#0" expanded="false" />
+                <element signature="e#2924#2925#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="10914">
+              <caret line="661" column="52" lean-forward="false" selection-start-line="661" selection-start-column="52" selection-end-line="661" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <marker date="1502521202188" expanded="true" signature="23549:23557" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="root.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" column="177" lean-forward="false" selection-start-line="33" selection-start-column="177" selection-end-line="33" selection-end-column="177" />
               <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="root.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/css/root.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2982">
+              <caret line="48" column="7" lean-forward="false" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-187">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,8 +83,51 @@
       <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="78" column="136" lean-forward="false" selection-start-line="78" selection-start-column="136" selection-end-line="78" selection-end-column="136" />
+            <state relative-caret-position="2482">
+              <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1373#1374#0" expanded="false" />
+                <element signature="e#1404#1405#0" expanded="false" />
+                <element signature="e#1439#1440#0" expanded="false" />
+                <element signature="e#1480#1481#0" expanded="false" />
+                <marker date="1502774195176" expanded="true" signature="2406:2895" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="2951:3180" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="3241:3480" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="3541:3779" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="3626:3779" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="3867:4304" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="4354:4475" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="4523:4534" ph=" { " />
+                <marker date="1502774195176" expanded="true" signature="4556:4562" ph=" }" />
+                <marker date="1502774195176" expanded="true" signature="4639:4887" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="4958:5184" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="5258:5596" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="5625:5722" ph="{...}" />
+                <marker date="1502774195176" expanded="true" signature="5715:5722" ph="{...}" />
+                <marker date="1502774195176" expanded="false" signature="5752:5763" ph=" { " />
+                <marker date="1502774195176" expanded="false" signature="5787:5793" ph=" }" />
+                <marker date="1502774195176" expanded="false" signature="5824:5835" ph=" { " />
+                <marker date="1502774195176" expanded="false" signature="5860:5866" ph=" }" />
+                <marker date="1502774195176" expanded="false" signature="5913:5924" ph=" { " />
+                <marker date="1502774195176" expanded="false" signature="5939:5945" ph=" }" />
+                <marker date="1502774195176" expanded="false" signature="5990:6001" ph=" { " />
+                <marker date="1502774195176" expanded="false" signature="6028:6034" ph=" }" />
+                <marker date="1502774195176" expanded="false" signature="6084:6095" ph=" { " />
+                <marker date="1502774195176" expanded="false" signature="6127:6133" ph=" }" />
+                <marker date="1502774195176" expanded="false" signature="6171:6182" ph=" { " />
+                <marker date="1502774195176" expanded="false" signature="6196:6202" ph=" }" />
+                <marker date="1502774195176" expanded="true" signature="6280:6973" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CalculatorView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -45,67 +139,6 @@
             <state relative-caret-position="255">
               <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="root.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="53" column="193" lean-forward="true" selection-start-line="53" selection-start-column="193" selection-end-line="53" selection-end-column="194" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="679" column="45" lean-forward="true" selection-start-line="679" selection-start-column="45" selection-end-line="679" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#initialize#0;class#Controller#0" expanded="false" />
-                <element signature="method#buttonDigitClick#0;class#Controller#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NumericFormatter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="59" column="97" lean-forward="false" selection-start-line="59" selection-start-column="97" selection-end-line="59" selection-end-column="97" />
-              <folding>
-                <marker date="1502724760637" expanded="true" signature="4640:4647" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="root.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/css/root.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="195" column="24" lean-forward="false" selection-start-line="195" selection-start-column="24" selection-end-line="195" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControllerTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-158">
-              <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -134,27 +167,28 @@
         <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/enums/Operator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ExitListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ExpandListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ResizeListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/MoveWindowListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/adapter/MenuAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/HistoryResizeListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/HideListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/NavigatorListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ExitListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/CalculatorView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/HideListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ExpandListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NavigatorListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ResizeListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Manager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/History.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/CalculatorController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/fxml/calculator.fxml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/css/root.css" />
-        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" />
+        <option value="$PROJECT_DIR$/src/main/resources/css/root.css" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
       </list>
     </option>
   </component>
@@ -168,8 +202,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -186,6 +220,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -217,6 +252,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -376,7 +415,75 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="listener" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enums" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -442,41 +549,13 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calculator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calculator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calculator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calculator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com.implemica.calculator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/bin/git.exe" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
     <UpdatedFiles>
@@ -493,13 +572,10 @@
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
           <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/css/root.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/root.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/classes/com/implemica/calculator/util/format/NumericFormatter.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/classes/css/root.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/classes/fxml/root.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/classes/com/implemica/calculator/model/Calculator.class</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -514,6 +590,11 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/images/about_.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/images/icon-09-512.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/images/icon_.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/images/icon__.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/images/menu_.png</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -607,7 +688,59 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.divideTest">
+  <component name="RunManager" selected="JUnit.ViewTest">
+    <configuration default="false" name="CalculatorTest.sqrTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.implemica.calculator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="calculator" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.implemica.calculator" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.CalculatorTest" />
+      <option name="METHOD_NAME" value="sqrTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="CalculatorViewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.implemica.calculator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="calculator" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.implemica.calculator" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.CalculatorViewTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
     <configuration default="false" name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -628,7 +761,7 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="ControllerTest.testDigits" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="CalculatorViewTest.testDigits" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.implemica.calculator.*" />
@@ -639,7 +772,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.CalculatorViewTest" />
       <option name="METHOD_NAME" value="testDigits" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -654,7 +787,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="ControllerTest.scientificTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ViewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.implemica.calculator.*" />
@@ -665,61 +798,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
-      <option name="METHOD_NAME" value="scientificTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="ControllerTest.plusTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.implemica.calculator.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="calculator" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
-      <option name="METHOD_NAME" value="plusTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="ControllerTest.divideTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.implemica.calculator.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="calculator" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
-      <option name="METHOD_NAME" value="divideTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ViewTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -937,19 +1018,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.Launcher" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ControllerTest.testDigits" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ControllerTest.scientificTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ControllerTest.plusTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ControllerTest.divideTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.CalculatorTest.sqrTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.CalculatorViewTest" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Launcher" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.CalculatorViewTest.testDigits" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ViewTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ControllerTest.divideTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ControllerTest.plusTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ControllerTest.scientificTest" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Launcher" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ControllerTest.testDigits" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ViewTest" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Launcher" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.CalculatorViewTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.CalculatorViewTest.testDigits" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CalculatorTest.sqrTest" />
       </list>
     </recent_temporary>
   </component>
@@ -981,201 +1062,133 @@
       <option name="project" value="LOCAL" />
       <updated>1502122874848</updated>
     </task>
-    <task id="LOCAL-00003" summary="add resize listener">
-      <created>1502122894391</created>
+    <task id="LOCAL-00003" summary="resize fix">
+      <created>1502166231139</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1502122894391</updated>
+      <updated>1502166231139</updated>
     </task>
-    <task id="LOCAL-00004" summary="change view logic">
-      <created>1502189602907</created>
+    <task id="LOCAL-00004" summary="add controls">
+      <created>1502169306529</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1502189602907</updated>
+      <updated>1502169306529</updated>
     </task>
-    <task id="LOCAL-00005" summary="change view logic">
-      <created>1502190022307</created>
+    <task id="LOCAL-00005" summary="add new color scheme">
+      <created>1502523528166</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1502190022307</updated>
+      <updated>1502523528166</updated>
     </task>
-    <task id="LOCAL-00006" summary="change test logic">
-      <created>1502208217913</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1502208217913</updated>
-    </task>
-    <task id="LOCAL-00007" summary="change test logic">
-      <created>1502208511007</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1502208511007</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fix button resize">
-      <created>1502268621448</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1502268621448</updated>
-    </task>
-    <task id="LOCAL-00009" summary="add numeric field resize">
-      <created>1502273947679</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1502273947679</updated>
-    </task>
-    <task id="LOCAL-00010" summary="add numeric field resize">
-      <created>1502273958218</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1502273958218</updated>
-    </task>
-    <task id="LOCAL-00011" summary="fix history field">
-      <created>1502291568892</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1502291568892</updated>
-    </task>
-    <task id="LOCAL-00012" summary="fix controller">
-      <created>1502296709669</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1502296709669</updated>
-    </task>
-    <task id="LOCAL-00013" summary="test view fix">
-      <created>1502382138843</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1502382138843</updated>
-    </task>
-    <task id="LOCAL-00014" summary="fix controller test">
-      <created>1502459727162</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1502459727162</updated>
-    </task>
-    <task id="LOCAL-00015" summary="fix controller test">
-      <created>1502459791058</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1502459791059</updated>
-    </task>
-    <task id="LOCAL-00016" summary="fix history">
-      <created>1502469139231</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1502469139231</updated>
-    </task>
-    <task id="LOCAL-00017" summary="fix history">
-      <created>1502471831388</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1502471831388</updated>
-    </task>
-    <task id="LOCAL-00018" summary="test fix">
-      <created>1502726047508</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1502726047508</updated>
-    </task>
-    <task id="LOCAL-00019" summary="test fix">
-      <created>1502726059206</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1502726059206</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ControllerTest_divideTest - 2017.08.14 at 18h 50m 10s.xml">
-      <configuration name="ControllerTest.divideTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 02m 03s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_plusTest - 2017.08.14 at 18h 36m 47s.xml">
-      <configuration name="ControllerTest.plusTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 02m 20s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 17h 31m 06s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 24m 46s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 17h 32m 33s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 25m 48s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 17h 34m 03s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 25m 52s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 17h 49m 55s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 37m 29s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 17h 58m 58s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 41m 24s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 17h 59m 34s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 41m 34s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 18h 31m 47s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 41m 54s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_scientificTest - 2017.08.14 at 18h 32m 26s.xml">
-      <configuration name="ControllerTest.scientificTest" configurationId="JUnit" />
+    <history-entry file="ViewTest - 2017.08.15 at 09h 42m 09s.xml">
+      <configuration name="ViewTest" configurationId="JUnit" />
     </history-entry>
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25899744" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25578406" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26545843" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26279318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -1184,21 +1197,14 @@
     <MESSAGE value="enum fix" />
     <MESSAGE value="add resize window" />
     <MESSAGE value="add resize listener" />
-    <MESSAGE value="change view logic" />
-    <MESSAGE value="change test logic" />
-    <MESSAGE value="fix button resize" />
-    <MESSAGE value="add numeric field resize" />
-    <MESSAGE value="fix history field" />
-    <MESSAGE value="fix controller" />
-    <MESSAGE value="test view fix" />
-    <MESSAGE value="fix controller test" />
-    <MESSAGE value="fix history" />
-    <MESSAGE value="test fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="test fix" />
+    <MESSAGE value="resize fix" />
+    <MESSAGE value="add controls" />
+    <MESSAGE value="add new color scheme" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new color scheme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1207,92 +1213,174 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/History.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="122" column="23" lean-forward="false" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/css/root.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="128" column="23" lean-forward="false" selection-start-line="128" selection-start-column="23" selection-end-line="128" selection-end-column="23" />
+        <state relative-caret-position="221">
+          <caret line="13" column="241" lean-forward="false" selection-start-line="13" selection-start-column="140" selection-end-line="13" selection-end-column="241" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/enums/Operator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="21" column="37" lean-forward="false" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="43" column="23" lean-forward="false" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#488#645#0" expanded="false" />
-            <element signature="e#644#645#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1373#1374#0" expanded="false" />
+            <element signature="e#1404#1405#0" expanded="false" />
+            <element signature="e#1439#1440#0" expanded="false" />
+            <element signature="e#1480#1481#0" expanded="false" />
+            <marker date="1502774195176" expanded="true" signature="2406:2895" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="2951:3180" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3241:3480" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3541:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3626:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3867:4304" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4354:4475" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4523:4534" ph=" { " />
+            <marker date="1502774195176" expanded="true" signature="4556:4562" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="4639:4887" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4958:5184" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5258:5596" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5625:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5715:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="false" signature="5752:5763" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5787:5793" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5824:5835" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5860:5866" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5913:5924" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5939:5945" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5990:6001" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6028:6034" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6084:6095" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6127:6133" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6171:6182" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6196:6202" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="6280:6973" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14382">
-          <caret line="846" column="68" lean-forward="false" selection-start-line="846" selection-start-column="68" selection-end-line="846" selection-end-column="68" />
+        <state relative-caret-position="17850">
+          <caret line="1088" column="1" lean-forward="false" selection-start-line="1088" selection-start-column="1" selection-end-line="1088" selection-end-column="1" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonDigitClick#0;class#Controller#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <marker date="1502521202188" expanded="true" signature="23549:23557" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="113" column="24" lean-forward="false" selection-start-line="113" selection-start-column="24" selection-end-line="113" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="1411">
+          <caret line="86" column="5" lean-forward="false" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2867#2868#0" expanded="false" />
+            <element signature="e#2924#2925#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="241" lean-forward="false" selection-start-line="13" selection-start-column="140" selection-end-line="13" selection-end-column="241" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/enums/Operator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="124" column="36" lean-forward="false" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="289">
+          <caret line="21" column="37" lean-forward="false" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="97" column="9" lean-forward="false" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="629">
+          <caret line="43" column="23" lean-forward="false" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#488#645#0" expanded="false" />
-            <element signature="e#644#645#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1373#1374#0" expanded="false" />
+            <element signature="e#1404#1405#0" expanded="false" />
+            <element signature="e#1439#1440#0" expanded="false" />
+            <element signature="e#1480#1481#0" expanded="false" />
+            <marker date="1502774195176" expanded="true" signature="2406:2895" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="2951:3180" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3241:3480" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3541:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3626:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3867:4304" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4354:4475" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4523:4534" ph=" { " />
+            <marker date="1502774195176" expanded="true" signature="4556:4562" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="4639:4887" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4958:5184" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5258:5596" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5625:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5715:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="false" signature="5752:5763" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5787:5793" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5824:5835" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5860:5866" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5913:5924" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5939:5945" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5990:6001" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6028:6034" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6084:6095" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6127:6133" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6171:6182" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6196:6202" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="6280:6973" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18054">
-          <caret line="1062" column="34" lean-forward="true" selection-start-line="1062" selection-start-column="34" selection-end-line="1062" selection-end-column="34" />
+        <state relative-caret-position="17561">
+          <caret line="1033" column="0" lean-forward="true" selection-start-line="1033" selection-start-column="0" selection-end-line="1033" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonDigitClick#0;class#Controller#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <marker date="1502521202188" expanded="true" signature="23549:23557" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1302,226 +1390,289 @@
         <state relative-caret-position="1462">
           <caret line="86" column="5" lean-forward="false" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
           <folding>
-            <marker date="1502724760637" expanded="true" signature="4640:4647" ph="{...}" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2867#2868#0" expanded="false" />
+            <element signature="e#2924#2925#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="126" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="126" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/enums/Operator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="289">
           <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="76" column="10" lean-forward="false" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
+        <state relative-caret-position="629">
           <caret line="43" column="23" lean-forward="false" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1373#1374#0" expanded="false" />
+            <element signature="e#1404#1405#0" expanded="false" />
+            <element signature="e#1439#1440#0" expanded="false" />
+            <element signature="e#1480#1481#0" expanded="false" />
+            <marker date="1502774195176" expanded="true" signature="2406:2895" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="2951:3180" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3241:3480" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3541:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3626:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3867:4304" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4354:4475" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4523:4534" ph=" { " />
+            <marker date="1502774195176" expanded="true" signature="4556:4562" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="4639:4887" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4958:5184" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5258:5596" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5625:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5715:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="false" signature="5752:5763" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5787:5793" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5824:5835" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5860:5866" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5913:5924" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5939:5945" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5990:6001" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6028:6034" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6084:6095" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6127:6133" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6171:6182" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6196:6202" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="6280:6973" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="221">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ResizeListener.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/image/Image.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorTest.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/javafx-src.zip!/javafx/scene/Scene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/image/Image.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="705" column="0" lean-forward="false" selection-start-line="705" selection-start-column="0" selection-end-line="705" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ResizeListener.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/ListView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="388" column="22" lean-forward="false" selection-start-line="388" selection-start-column="22" selection-end-line="388" selection-end-column="22" />
+        <state relative-caret-position="193">
+          <caret line="4466" column="22" lean-forward="false" selection-start-line="4466" selection-start-column="22" selection-end-line="4466" selection-end-column="22" />
           <folding>
-            <element signature="e#17232#17233#0" expanded="false" />
-            <element signature="e#17274#17275#0" expanded="false" />
+            <element signature="e#169626#169627#0" expanded="false" />
+            <element signature="e#169675#169676#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/adapter/MenuAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/Labeled.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="305" column="25" lean-forward="false" selection-start-line="305" selection-start-column="25" selection-end-line="305" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ExitListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ResizeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/HideListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ExpandListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NavigatorListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/MoveWindowListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/UIChanger.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/HistoryResizeListener.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/beans/InvalidationListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ResizeListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2225">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Manager.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/History.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="134" column="38" lean-forward="false" selection-start-line="134" selection-start-column="38" selection-end-line="134" selection-end-column="38" />
+        <state relative-caret-position="119">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/calculator.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/CalculatorController.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java">
+    <entry file="file://D:/temp/Calculator-master/Calculator-master/src/main/java/org/pepsik/controller/UIChanger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="42" column="53" lean-forward="false" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
+        <state relative-caret-position="-1995">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java">
+    <entry file="file://D:/temp/Calculator-master/Calculator-master/src/main/java/org/pepsik/controller/CalculatorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="26" column="56" lean-forward="false" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
-          <folding />
+        <state relative-caret-position="181">
+          <caret line="490" column="43" lean-forward="true" selection-start-line="490" selection-start-column="43" selection-end-line="490" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/enums/Operator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1766">
-          <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+        <state relative-caret-position="425">
+          <caret line="50" column="15" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="50" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/event/EventHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="44" column="9" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+        <state relative-caret-position="119">
+          <caret line="7" column="7" lean-forward="false" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/text/DecimalFormat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="244">
+          <caret line="383" column="30" lean-forward="false" selection-start-line="383" selection-start-column="17" selection-end-line="383" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="41" lean-forward="false" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/CalculatorViewTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2142">
+          <caret line="131" column="22" lean-forward="false" selection-start-line="131" selection-start-column="22" selection-end-line="131" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="false" />
+            <element signature="e#2867#2868#0" expanded="false" />
+            <element signature="e#2924#2925#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/screenshot1502702322030.png">
-      <provider selected="true" editor-type-id="images">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10914">
+          <caret line="661" column="52" lean-forward="false" selection-start-line="661" selection-start-column="52" selection-end-line="661" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <marker date="1502521202188" expanded="true" signature="23549:23557" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NavigatorListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="26" column="55" lean-forward="false" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1504#1505#0" expanded="false" />
+            <element signature="e#1538#1539#0" expanded="false" />
+            <element signature="e#3655#3656#0" expanded="false" />
+            <element signature="e#3710#3711#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2482">
+          <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1373#1374#0" expanded="false" />
+            <element signature="e#1404#1405#0" expanded="false" />
+            <element signature="e#1439#1440#0" expanded="false" />
+            <element signature="e#1480#1481#0" expanded="false" />
+            <marker date="1502774195176" expanded="true" signature="2406:2895" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="2951:3180" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3241:3480" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3541:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3626:3779" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="3867:4304" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4354:4475" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4523:4534" ph=" { " />
+            <marker date="1502774195176" expanded="true" signature="4556:4562" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="4639:4887" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="4958:5184" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5258:5596" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5625:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="true" signature="5715:5722" ph="{...}" />
+            <marker date="1502774195176" expanded="false" signature="5752:5763" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5787:5793" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5824:5835" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5860:5866" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5913:5924" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="5939:5945" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="5990:6001" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6028:6034" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6084:6095" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6127:6133" ph=" }" />
+            <marker date="1502774195176" expanded="false" signature="6171:6182" ph=" { " />
+            <marker date="1502774195176" expanded="false" signature="6196:6202" ph=" }" />
+            <marker date="1502774195176" expanded="true" signature="6280:6973" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="177" lean-forward="false" selection-start-line="33" selection-start-column="177" selection-end-line="33" selection-end-column="177" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/screenshot1502702451936.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/css/root.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2982">
+          <caret line="48" column="7" lean-forward="false" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1972">
-          <caret line="131" column="53" lean-forward="false" selection-start-line="131" selection-start-column="53" selection-end-line="131" selection-end-column="53" />
+        <state relative-caret-position="521">
+          <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="30" column="9" lean-forward="true" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#472#629#0" expanded="true" />
-            <element signature="e#628#629#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1533,59 +1684,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="78" column="136" lean-forward="false" selection-start-line="78" selection-start-column="136" selection-end-line="78" selection-end-column="136" />
+        <state relative-caret-position="130">
+          <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/root.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="53" column="193" lean-forward="true" selection-start-line="53" selection-start-column="193" selection-end-line="53" selection-end-column="194" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="679" column="45" lean-forward="true" selection-start-line="679" selection-start-column="45" selection-end-line="679" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
-            <element signature="method#buttonDigitClick#0;class#Controller#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/format/NumericFormatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="59" column="97" lean-forward="false" selection-start-line="59" selection-start-column="97" selection-end-line="59" selection-end-column="97" />
-          <folding>
-            <marker date="1502724760637" expanded="true" signature="4640:4647" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/css/root.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="195" column="24" lean-forward="false" selection-start-line="195" selection-start-column="24" selection-end-line="195" selection-end-column="24" />
+        <state relative-caret-position="68">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-158">
-          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
