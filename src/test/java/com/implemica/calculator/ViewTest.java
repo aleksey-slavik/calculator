@@ -12,6 +12,8 @@ import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.testfx.api.FxRobot;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -109,6 +111,9 @@ public class ViewTest {
 
     @Test
     public void fontResizeTest() {
+        fontResizeTest(0,16);
+        fontResizeTest(10,16);
+        fontResizeTest(100,20);
     }
 
     @Test
@@ -225,5 +230,28 @@ public class ViewTest {
         }
 
         return height;
+    }
+
+    private void fontResizeTest(int dy, int font) {
+        resizeTest(0, dy, "S");
+        for (Button button : digits()) {
+            assertEquals("-fx-font-size: " + font + "pt;", button.getStyle());
+        }
+    }
+
+    private ArrayList<Button> digits() {
+        ArrayList<Button> list = new ArrayList<>();
+        list.add(GuiTest.find("#one"));
+        list.add(GuiTest.find("#two"));
+        list.add(GuiTest.find("#three"));
+        list.add(GuiTest.find("#four"));
+        list.add(GuiTest.find("#five"));
+        list.add(GuiTest.find("#six"));
+        list.add(GuiTest.find("#seven"));
+        list.add(GuiTest.find("#eight"));
+        list.add(GuiTest.find("#nine"));
+        list.add(GuiTest.find("#zero"));
+        list.add(GuiTest.find("#comma"));
+        return list;
     }
 }

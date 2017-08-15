@@ -479,6 +479,7 @@ public class ControllerTest {
     @Test
     public void moseClickTest() throws Exception {
         testMouseClick("32 - 4 =" ,"28", "");
+        testMouseClick("1234 + 4321 -", "5 555", "1234 + 4321 -");
     }
 
     private void testExpression(String expression, String expected) throws Exception{
