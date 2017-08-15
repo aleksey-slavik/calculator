@@ -1,6 +1,7 @@
 package com.implemica.calculator;
 
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import org.junit.BeforeClass;
@@ -475,16 +476,32 @@ public class ControllerTest {
         testExpression("1 + 9999999999999999 + 1 + C 1,5", "1,5", "");
     }
 
+    @Test
+    public void moseClickTest() throws Exception {
+        testMouseClick("32 - 4 =" ,"28", "");
+    }
+
     private void testExpression(String expression, String expected) throws Exception{
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
 
         for (String item : expression.split(" ")) {
-            pushButton(item);
+            pushButton(item, false);
         }
 
         Label numericDisplay = GuiTest.find("#numericField");
         String actualValue = numericDisplay.getText();
+        assertEquals(expected, actualValue);
+
+        controller.push(KeyCode.ESCAPE);
+        controller.push(KeyCode.CONTROL, KeyCode.L);
+
+        for (String item : expression.split(" ")) {
+            pushButton(item, true);
+        }
+
+        numericDisplay = GuiTest.find("#numericField");
+        actualValue = numericDisplay.getText();
         assertEquals(expected, actualValue);
     }
 
@@ -495,25 +512,43 @@ public class ControllerTest {
         assertEquals(history, actualValue);
     }
 
-    private void pushButton(String item) {
+    private void testMouseClick(String expression, String numeric, String history) throws Exception {
+        controller.push(KeyCode.ESCAPE);
+        controller.push(KeyCode.CONTROL, KeyCode.L);
+
+        for (String item : expression.split(" ")) {
+            clickButton(item);
+        }
+
+        Label numericDisplay = GuiTest.find("#numericField");
+        String actualValue = numericDisplay.getText();
+        assertEquals(numeric, actualValue);
+
+        Label historyDisplay = GuiTest.find("#historyField");
+        actualValue = historyDisplay.getText();
+        assertEquals(history, actualValue);
+
+    }
+
+    private void pushButton(String item, boolean alternative) {
         switch (item) {
             case "=":
-                controller.push(KeyCode.EQUALS);
+                controller.push(alternative ? KeyCode.EQUALS : KeyCode.ENTER);
                 break;
             case "back":
                 controller.push(KeyCode.BACK_SPACE);
                 break;
             case "+":
-                controller.push(KeyCode.ADD);
+                controller.push(alternative ? KeyCode.ADD : KeyCode.SHIFT, KeyCode.EQUALS);
                 break;
             case "-":
-                controller.push(KeyCode.SUBTRACT);
+                controller.push(alternative ? KeyCode.SUBTRACT : KeyCode.MINUS);
                 break;
             case "/":
-                controller.push(KeyCode.DIVIDE);
+                controller.push(alternative ? KeyCode.DIVIDE : KeyCode.SLASH);
                 break;
             case "*":
-                controller.push(KeyCode.MULTIPLY);
+                controller.push(alternative ? KeyCode.MULTIPLY : KeyCode.SHIFT, KeyCode.DIGIT8);
                 break;
             case "negate":
                 controller.push(KeyCode.F9);
@@ -552,48 +587,152 @@ public class ControllerTest {
                 controller.push(KeyCode.CONTROL, KeyCode.Q);
                 break;
             default:
-                pushDigitButtons(item);
+                pushDigitButtons(item, alternative);
                 break;
         }
     }
 
-    private void pushDigitButtons(String number) {
+    private void pushDigitButtons(String number, boolean alternative) {
         char[] digits = number.toCharArray();
 
         for (char item : digits){
             switch (item) {
                 case '0':
-                    controller.push(KeyCode.DIGIT0);
+                    controller.push(alternative ? KeyCode.DIGIT0 : KeyCode.NUMPAD0);
                     break;
                 case '1':
-                    controller.push(KeyCode.DIGIT1);
+                    controller.push(alternative ? KeyCode.DIGIT1 : KeyCode.NUMPAD1);
                     break;
                 case '2':
-                    controller.push(KeyCode.DIGIT2);
+                    controller.push(alternative ? KeyCode.DIGIT2 : KeyCode.NUMPAD2);
                     break;
                 case '3':
-                    controller.push(KeyCode.DIGIT3);
+                    controller.push(alternative ? KeyCode.DIGIT3 : KeyCode.NUMPAD3);
                     break;
                 case '4':
-                    controller.push(KeyCode.DIGIT4);
+                    controller.push(alternative ? KeyCode.DIGIT4 : KeyCode.NUMPAD4);
                     break;
                 case '5':
-                    controller.push(KeyCode.DIGIT5);
+                    controller.push(alternative ? KeyCode.DIGIT5 : KeyCode.NUMPAD5);
                     break;
                 case '6':
-                    controller.push(KeyCode.DIGIT6);
+                    controller.push(alternative ? KeyCode.DIGIT6 : KeyCode.NUMPAD6);
                     break;
                 case '7':
-                    controller.push(KeyCode.DIGIT7);
+                    controller.push(alternative ? KeyCode.DIGIT7 : KeyCode.NUMPAD7);
                     break;
                 case '8':
-                    controller.push(KeyCode.DIGIT8);
+                    controller.push(alternative ? KeyCode.DIGIT8 : KeyCode.NUMPAD8);
                     break;
                 case '9':
-                    controller.push(KeyCode.DIGIT9);
+                    controller.push(alternative ? KeyCode.DIGIT9 : KeyCode.NUMPAD9);
                     break;
                 case ',':
                     controller.push(KeyCode.COMMA);
+                    break;
+            }
+        }
+    }
+
+    private void clickButton(String item) {
+        switch (item) {
+            case "=":
+                controller.click((Button) GuiTest.find("#equals"));
+                break;
+            case "back":
+                controller.click((Button) GuiTest.find("#backspace"));
+                break;
+            case "+":
+                controller.click((Button) GuiTest.find("#add"));
+                break;
+            case "-":
+                controller.click((Button) GuiTest.find("#subtract"));
+                break;
+            case "/":
+                controller.click((Button) GuiTest.find("#divide"));
+                break;
+            case "*":
+                controller.click((Button) GuiTest.find("#multiply"));
+                break;
+            case "negate":
+                controller.click((Button) GuiTest.find("#negate"));
+                break;
+            case "1/":
+                controller.click((Button) GuiTest.find("#inverse"));
+                break;
+            case "CE":
+                controller.click((Button) GuiTest.find("#clear_expr"));
+                break;
+            case "C":
+                controller.click((Button) GuiTest.find("#clear"));
+                break;
+            case "sqr":
+                controller.click((Button) GuiTest.find("#sqr"));
+                break;
+            case "sqrt":
+                controller.click((Button) GuiTest.find("#sqrt"));
+                break;
+            case "%":
+                controller.click((Button) GuiTest.find("#percent"));
+                break;
+            case "MS":
+                controller.click((Button) GuiTest.find("#memory_store"));
+                break;
+            case "MR":
+                controller.click((Button) GuiTest.find("#memory_recall"));
+                break;
+            case "MC":
+                controller.click((Button) GuiTest.find("#memory_clear"));
+                break;
+            case "M+":
+                controller.click((Button) GuiTest.find("#memory_add"));
+                break;
+            case "M-":
+                controller.click((Button) GuiTest.find("#memory_minus"));
+                break;
+            default:
+                clickDigitButtons(item);
+                break;
+        }
+    }
+
+    private void clickDigitButtons(String number) {
+        char[] digits = number.toCharArray();
+
+        for (char item : digits){
+            switch (item) {
+                case '0':
+                    controller.click((Button) GuiTest.find("#zero"));
+                    break;
+                case '1':
+                    controller.click((Button) GuiTest.find("#one"));
+                    break;
+                case '2':
+                    controller.click((Button) GuiTest.find("#two"));
+                    break;
+                case '3':
+                    controller.click((Button) GuiTest.find("#three"));
+                    break;
+                case '4':
+                    controller.click((Button) GuiTest.find("#four"));
+                    break;
+                case '5':
+                    controller.click((Button) GuiTest.find("#five"));
+                    break;
+                case '6':
+                    controller.click((Button) GuiTest.find("#six"));
+                    break;
+                case '7':
+                    controller.click((Button) GuiTest.find("#seven"));
+                    break;
+                case '8':
+                    controller.click((Button) GuiTest.find("#eight"));
+                    break;
+                case '9':
+                    controller.click((Button) GuiTest.find("#nine"));
+                    break;
+                case ',':
+                    controller.click((Button) GuiTest.find("#comma"));
                     break;
             }
         }

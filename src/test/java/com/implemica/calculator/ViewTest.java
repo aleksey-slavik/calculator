@@ -44,7 +44,7 @@ public class ViewTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         root = GuiTest.find("#root");
     }
 
@@ -88,13 +88,23 @@ public class ViewTest {
     @Test
     public void hideTest() throws Throwable {
         Button hide = GuiTest.find("#hide");
-        System.out.println(root.isManaged());
         robot.clickOn(hide);
         assertEquals(true, root.isManaged());
     }
 
     @Test
     public void menuTest() {
+        Button menuShow = GuiTest.find("#menuShow");
+        AnchorPane menu = GuiTest.find("#navigator");
+
+        robot.clickOn(menuShow);
+        controller.sleep(350);
+        assertEquals(0, menu.getTranslateX(), 0.1);
+
+        Button menuClose = GuiTest.find("#menuClose");
+        robot.clickOn(menuClose);
+        controller.sleep(350);
+        assertEquals(-250, menu.getTranslateX(), 0.1);
     }
 
     @Test
