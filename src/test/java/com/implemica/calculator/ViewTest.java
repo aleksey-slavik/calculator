@@ -62,7 +62,7 @@ public class ViewTest {
     public void resizeTest() {
         resizeTest(50, 0, "E");
         resizeTest(-50, 0, "W");
-        //resizeTest(0, -50, "N");
+        resizeTest(0, -50, "N");
         resizeTest(0, 50, "S");
         resizeTest(50, 50, "SE");
         resizeTest(-50, 50, "SW");
@@ -106,7 +106,7 @@ public class ViewTest {
         Button menuClose = GuiTest.find("#menuClose");
         robot.clickOn(menuClose);
         controller.sleep(350);
-        assertEquals(-250, menu.getTranslateX(), 0.1);
+        assertEquals(-260, menu.getTranslateX(), 0.1);
     }
 
     @Test
@@ -235,7 +235,6 @@ public class ViewTest {
     private void fontResizeTest(int dy, int font) {
         resizeTest(0, dy, "S");
         for (Button button : digits()) {
-            System.out.println(button.getFont().getSize());
             assertEquals(font, button.getFont().getSize(), 0.1);
         }
     }

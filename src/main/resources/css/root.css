@@ -1,5 +1,8 @@
 .background {
     -fx-background-color: #e6e6e6;
+    -fx-border-color: #1883d7;
+    -fx-border-width: 1;
+    -fx-padding: 2;
 }
 
 .digits {
