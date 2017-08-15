@@ -42,7 +42,7 @@ public class History {
     /**
      * Get current history value
      *
-     * @return  history value
+     * @return history value
      */
     public String getHistory() {
         return history;
@@ -51,7 +51,7 @@ public class History {
     /**
      * Setup history value
      *
-     * @param text  new history value
+     * @param text new history value
      */
     public void setHistory(String text) {
         history = text;
@@ -60,7 +60,7 @@ public class History {
     /**
      * Append value to current history
      *
-     * @param text  append value
+     * @param text append value
      */
     public void appendHistory(String text) {
         history += text;
@@ -71,16 +71,16 @@ public class History {
      *
      * @param func  given function
      * @param value given value
-     * @return      surrounded value using given function
+     * @return surrounded value using given function
      */
-    public String surround(String func, String value){
+    public String surround(String func, String value) {
         return func + LEFT_BRACKET + value + RIGHT_BRACKET;
     }
 
     /**
      * Surround last element of history using given function
      *
-     * @param func  given function
+     * @param func given function
      */
     public void surround(String func) {
         if (history.contains(SPACE)) {
@@ -93,7 +93,7 @@ public class History {
     /**
      * Return last element of history
      *
-     * @return  last element of history
+     * @return last element of history
      */
     private String getLastElement() {
         int start = history.lastIndexOf(SPACE) + 1;
@@ -103,7 +103,7 @@ public class History {
     /**
      * Replacement of the last element of history using given expression
      *
-     * @param text  expression
+     * @param text expression
      */
     private void replace(String text) {
         int lastSpace = history.lastIndexOf(SPACE);

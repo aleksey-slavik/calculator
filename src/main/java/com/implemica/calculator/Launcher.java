@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  *
  * @author Slavik Aleksey V.
  */
-public class Launcher extends Application{
+public class Launcher extends Application {
 
     private CalculatorView view = new CalculatorView();
 

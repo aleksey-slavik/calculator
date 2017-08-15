@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  *
  * @author Slavik Aleksey V.
  */
-public class ResizeListener implements EventHandler<MouseEvent>{
+public class ResizeListener implements EventHandler<MouseEvent> {
 
     private static final double BORDER = 5;
 

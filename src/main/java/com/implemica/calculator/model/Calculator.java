@@ -221,23 +221,21 @@ public class Calculator {
         return memory;
     }
 
-    private static BigDecimal sqrt(BigDecimal number, BigDecimal guess)
-    {
+    private static BigDecimal sqrt(BigDecimal number, BigDecimal guess) {
         BigDecimal two = BigDecimal.valueOf(2);
         BigDecimal result = BigDecimal.ZERO;
         BigDecimal flipA = result;
         BigDecimal flipB = result;
         boolean first = true;
-        while( result.compareTo(guess) != 0 )
-        {
-            if(!first)
+        while (result.compareTo(guess) != 0) {
+            if (!first)
                 guess = result;
             else
-                first=false;
+                first = false;
 
             result = number.divide(guess, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).add(guess).divide(two, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
             // handle flip flops
-            if(result.equals(flipB))
+            if (result.equals(flipB))
                 return flipA;
 
             flipB = flipA;

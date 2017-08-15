@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
  *
  * @author Slavik Aleksey V.
  */
-public class NumericResizeListener implements InvalidationListener{
+public class NumericResizeListener implements InvalidationListener {
 
     private static final int FONT_BIG = 35;
 

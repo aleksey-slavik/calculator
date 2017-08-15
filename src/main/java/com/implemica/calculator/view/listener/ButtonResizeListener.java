@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Slavik Aleksey V.
  */
-public class ButtonResizeListener implements InvalidationListener{
+public class ButtonResizeListener implements InvalidationListener {
 
     private static final int DIGIT_BIG_FONT_SIZE = 24;
 

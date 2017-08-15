@@ -12,7 +12,7 @@ import javafx.util.Duration;
  *
  * @author Slavik Aleksey V.
  */
-public class NavigatorListener implements EventHandler<ActionEvent>{
+public class NavigatorListener implements EventHandler<ActionEvent> {
 
     private static final String MENU_PANE_SELECTOR = "#navigator";
 

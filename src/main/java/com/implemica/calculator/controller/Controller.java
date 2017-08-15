@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
  *
  * @author Slavik Aleksey V.
  */
-public class Controller implements Initializable{
+public class Controller implements Initializable {
 
     /**
      * Default value of numeric field
@@ -217,13 +217,13 @@ public class Controller implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        disabled = new Button[] {
+        disabled = new Button[]{
                 divide, multiply, subtract, add, comma, negate,
                 memory_store, memory_recall, memory_minus, memory_add, memory_clear,
                 percent, sqrt, sqr, inverse
         };
 
-        disabledMemory = new Button[] {memory_clear, memory_recall};
+        disabledMemory = new Button[]{memory_clear, memory_recall};
 
         disableMemoryButtons(true);
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
@@ -256,7 +256,7 @@ public class Controller implements Initializable{
             return;
         }
 
-        String digit = ((Button)event.getSource()).getText();
+        String digit = ((Button) event.getSource()).getText();
 
         if (getNumericFieldText().equals(DEFAULT_NUMERIC_FIELD_VALUE) || isLastNumber) {
             setNumericFieldText(digit);
@@ -319,7 +319,7 @@ public class Controller implements Initializable{
     @FXML
     private void operatorEventClick(ActionEvent event) {
 
-        String id = ((Button)event.getSource()).getId();
+        String id = ((Button) event.getSource()).getId();
         Operator button = Operator.searchById(id);
 
         try {
@@ -645,7 +645,7 @@ public class Controller implements Initializable{
 
         if (getHistoryFieldText().isEmpty()) {
             setHistoryFieldText(history.surround(INVERSE_TEXT, value));
-        } else if (isUnaryResult){
+        } else if (isUnaryResult) {
             history.surround(INVERSE_TEXT);
             setHistoryFieldText(history.getHistory());
         } else {

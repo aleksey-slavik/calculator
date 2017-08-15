@@ -50,8 +50,9 @@ public class NumericFormatter {
 
     /**
      * Correcting presentation of given number
-     * @param value     given value
-     * @return          correct representation of given value
+     *
+     * @param value given value
+     * @return correct representation of given value
      */
     public static String format(BigDecimal value) {
         value = round(value);
@@ -95,8 +96,9 @@ public class NumericFormatter {
 
     /**
      * Rounding for given number
-     * @param number    given number
-     * @return          rounded number
+     *
+     * @param number given number
+     * @return rounded number
      */
     public static BigDecimal round(BigDecimal number) {
         if (isIntegerNumber(number) || number.compareTo(MIN) < 0) {
@@ -114,8 +116,9 @@ public class NumericFormatter {
 
     /**
      * Check contains only integer digits for given number
-     * @param number    given number
-     * @return          true, if given number is integer, false for otherwise
+     *
+     * @param number given number
+     * @return true, if given number is integer, false for otherwise
      */
     private static boolean isIntegerNumber(BigDecimal number) {
         if (number.scale() <= 0) {
@@ -143,7 +146,7 @@ public class NumericFormatter {
         int stop = integer.contains("-") ? 4 : 3;
         StringBuilder builder = new StringBuilder("");
 
-        while (index > stop){
+        while (index > stop) {
             builder.insert(0, " " + integer.substring(index - 3, index));
             index -= 3;
         }

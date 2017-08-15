@@ -1,9 +1,11 @@
 package com.implemica.calculator;
 
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Window;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
@@ -25,6 +27,7 @@ public class ViewTest {
     private static final int MAX_WINDOW_HEIGHT = 900;
 
     private FxRobot robot = new FxRobot();
+    private AnchorPane root;
     private static GuiTest controller;
 
     @BeforeClass
@@ -40,50 +43,79 @@ public class ViewTest {
         Thread.sleep(3000);
     }
 
+    @Before
+    public void setUp() {
+        root = GuiTest.find("#root");
+    }
+
     @Test
     public void moveTest() {
-        moveTest(100,100);
-        moveTest(-200,-200);
-        moveTest(500,0);
+        moveTest(100, 100);
+        moveTest(-200, -200);
+        moveTest(500, 0);
         moveTest(0, 300);
     }
 
     @Test
     public void resizeTest() {
-        resizeTest(50,0, "E");
-        resizeTest(-50,0, "W");
+        resizeTest(50, 0, "E");
+        resizeTest(-50, 0, "W");
         //resizeTest(0, -50, "N");
         resizeTest(0, 50, "S");
-        resizeTest(50,50,"SE");
-        resizeTest(-50,50,"SW");
+        resizeTest(50, 50, "SE");
+        resizeTest(-50, 50, "SW");
     }
 
     @Test
-    public void exitTest() {}
+    public void exitTest() {
+    }
 
     @Test
-    public void expandTest() {}
+    public void expandTest() {
+        Button expand = GuiTest.find("#expand");
+        double beforeWidth = expand.getScene().getWidth();
+        double beforeHeight = expand.getScene().getHeight();
+
+        robot.clickOn(expand);
+        assertEquals(MAX_WINDOW_WIDTH, root.getWidth(), 0.1);
+        assertEquals(MAX_WINDOW_HEIGHT, root.getHeight(), 0.1);
+
+        robot.clickOn(expand);
+        assertEquals(beforeWidth, root.getWidth(), 0.1);
+        assertEquals(beforeHeight, root.getHeight(), 0.1);
+    }
 
     @Test
-    public void hideTest() {}
+    public void hideTest() throws Throwable {
+        Button hide = GuiTest.find("#hide");
+        System.out.println(root.isManaged());
+        robot.clickOn(hide);
+        assertEquals(true, root.isManaged());
+    }
 
     @Test
-    public void menuTest() {}
+    public void menuTest() {
+    }
 
     @Test
-    public void fontResizeTest() {}
+    public void fontResizeTest() {
+    }
 
     @Test
-    public void numericFontResizeTest() {}
+    public void numericFontResizeTest() {
+    }
 
     @Test
-    public void disableButtonsTest() {}
+    public void disableButtonsTest() {
+    }
 
     @Test
-    public void disableMemoryButtonsTest() {}
+    public void disableMemoryButtonsTest() {
+    }
 
     @Test
-    public void historyOverflowTest() {}
+    public void historyOverflowTest() {
+    }
 
     private void moveTest(int x, int y) {
         AnchorPane title = GuiTest.find("#title");
@@ -99,7 +131,7 @@ public class ViewTest {
     }
 
     private void resizeTest(int x, int y, String direction) {
-        AnchorPane root = GuiTest.find("#root");
+        //AnchorPane root = GuiTest.find("#root");
         Window window = root.getScene().getWindow();
         double beforeWidth = window.getWidth();
         double beforeHeight = window.getHeight();

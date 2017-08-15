@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  *
  * @author Slavik Aleksey V.
  */
-public class MoveWindowListener implements EventHandler<MouseEvent>{
+public class MoveWindowListener implements EventHandler<MouseEvent> {
 
     private double xPos;
 

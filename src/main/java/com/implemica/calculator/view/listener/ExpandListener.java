@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  *
  * @author Slavik Aleksey V.
  */
-public class ExpandListener implements EventHandler<ActionEvent>{
+public class ExpandListener implements EventHandler<ActionEvent> {
 
     private Stage stage;
 
