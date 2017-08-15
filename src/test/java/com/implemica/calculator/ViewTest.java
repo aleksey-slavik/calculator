@@ -1,15 +1,14 @@
 package com.implemica.calculator;
 
-import javafx.application.Platform;
 import javafx.scene.Parent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
-
-import java.awt.*;
-import java.awt.event.InputEvent;
-import java.util.concurrent.CountDownLatch;
+import org.testfx.api.FxRobot;
 
 import static org.junit.Assert.*;
 
@@ -20,10 +19,16 @@ import static org.junit.Assert.*;
  */
 public class ViewTest {
 
+    private static final int MIN_WINDOW_WIDTH = 320;
+    private static final int MIN_WINDOW_HEIGHT = 500;
+    private static final int MAX_WINDOW_WIDTH = 1600;
+    private static final int MAX_WINDOW_HEIGHT = 900;
+
+    private FxRobot robot = new FxRobot();
     private static GuiTest controller;
 
     @BeforeClass
-    public static void init() {
+    public static void init() throws InterruptedException {
         FXTestUtils.launchApp(Launcher.class);
         controller = new GuiTest() {
             @Override
@@ -31,33 +36,152 @@ public class ViewTest {
                 return stage.getScene().getRoot();
             }
         };
+
+        Thread.sleep(3000);
     }
 
     @Test
     public void moveTest() {
         moveTest(100,100);
-        moveTest(200,200);
-        moveTest(500,500);
+        moveTest(-200,-200);
+        moveTest(500,0);
+        moveTest(0, 300);
     }
 
+    @Test
+    public void resizeTest() {
+        resizeTest(50,0, "E");
+        resizeTest(-50,0, "W");
+        //resizeTest(0, -50, "N");
+        resizeTest(0, 50, "S");
+        resizeTest(50,50,"SE");
+        resizeTest(-50,50,"SW");
+    }
+
+    @Test
+    public void exitTest() {}
+
+    @Test
+    public void expandTest() {}
+
+    @Test
+    public void hideTest() {}
+
+    @Test
+    public void menuTest() {}
+
+    @Test
+    public void fontResizeTest() {}
+
+    @Test
+    public void numericFontResizeTest() {}
+
+    @Test
+    public void disableButtonsTest() {}
+
+    @Test
+    public void disableMemoryButtonsTest() {}
+
+    @Test
+    public void historyOverflowTest() {}
+
     private void moveTest(int x, int y) {
-        controller.click("#title");
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        Platform.runLater(() -> {
-            try {
-                Robot robot = new Robot();
-                robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-                robot.mouseMove(x, y);
-            } catch (Exception ignored) {
-                //
-            }
-            countDownLatch.countDown();
-        });
-        try {
-            countDownLatch.await();
-        } catch (Exception e) {
-            //
+        AnchorPane title = GuiTest.find("#title");
+        Window window = title.getScene().getWindow();
+        double beforeX = window.getX();
+        double beforeY = window.getY();
+        robot.drag(title, MouseButton.PRIMARY);
+        robot.moveBy(x, y);
+        double afterX = window.getX();
+        double afterY = window.getY();
+        assertEquals(beforeX + x, afterX, 0.1);
+        assertEquals(beforeY + y, afterY, 0.1);
+    }
+
+    private void resizeTest(int x, int y, String direction) {
+        AnchorPane root = GuiTest.find("#root");
+        Window window = root.getScene().getWindow();
+        double beforeWidth = window.getWidth();
+        double beforeHeight = window.getHeight();
+        double expectedWidth = window.getWidth();
+        double expectedHeight = window.getHeight();
+
+        switch (direction) {
+            case "E":
+                robot.drag(window.getX() + beforeWidth - 1, window.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedWidth = checkWidth(beforeWidth + x);
+                break;
+            case "W":
+                robot.drag(window.getX() + 1, window.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedWidth = checkWidth(beforeWidth - x - 1);
+                break;
+            case "N":
+                robot.drag(window.getX() + Math.random() * beforeWidth, window.getY() + 1, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedHeight = checkHeight(beforeHeight - y - 1);
+                break;
+            case "S":
+                robot.drag(window.getX() + Math.random() * beforeWidth, window.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedHeight = checkHeight(beforeHeight + y);
+                break;
+            case "NE":
+                robot.drag(window.getX() + beforeWidth - 1, window.getY() + 1, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedWidth = checkWidth(beforeWidth + x);
+                expectedHeight = checkHeight(beforeHeight - y - 1);
+                break;
+            case "SE":
+                robot.drag(window.getX() + beforeWidth - 1, window.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedWidth = checkWidth(beforeWidth + x);
+                expectedHeight = checkHeight(beforeHeight + y);
+                break;
+            case "SW":
+                robot.drag(window.getX() + 1, window.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedWidth = checkWidth(beforeWidth - x - 1);
+                expectedHeight = checkHeight(beforeHeight + y);
+                break;
+            case "NW":
+                robot.drag(window.getX() + 1, window.getY() + 1, MouseButton.PRIMARY);
+                robot.moveBy(x, y);
+                robot.drop();
+                expectedWidth = checkWidth(beforeWidth - x - 1);
+                expectedHeight = checkHeight(beforeHeight - y - 1);
+                break;
         }
-        controller.sleep(500);
+
+        assertEquals(expectedWidth, window.getWidth(), 0.1);
+        assertEquals(expectedHeight, window.getHeight(), 0.1);
+    }
+
+    private double checkWidth(double width) {
+        if (width < MIN_WINDOW_WIDTH) {
+            width = MIN_WINDOW_WIDTH;
+        } else if (width > MAX_WINDOW_WIDTH) {
+            width = MAX_WINDOW_WIDTH;
+        }
+
+        return width;
+    }
+
+    private double checkHeight(double height) {
+        if (height < MIN_WINDOW_HEIGHT) {
+            height = MIN_WINDOW_HEIGHT;
+        } else if (height > MAX_WINDOW_HEIGHT) {
+            height = MAX_WINDOW_HEIGHT;
+        }
+
+        return height;
     }
 }
