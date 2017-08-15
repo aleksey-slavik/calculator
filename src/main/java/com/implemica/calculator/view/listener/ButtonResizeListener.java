@@ -124,6 +124,6 @@ public class ButtonResizeListener implements InvalidationListener {
     }
 
     private String getFontString(int size) {
-        return "-fx-font-size: " + size + "pt;";
+        return "-fx-font-size: " + size + "px;";
     }
 }

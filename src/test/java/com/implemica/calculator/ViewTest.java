@@ -235,7 +235,8 @@ public class ViewTest {
     private void fontResizeTest(int dy, int font) {
         resizeTest(0, dy, "S");
         for (Button button : digits()) {
-            assertEquals("-fx-font-size: " + font + "pt;", button.getStyle());
+            System.out.println(button.getFont().getSize());
+            assertEquals(font, button.getFont().getSize(), 0.1);
         }
     }
 

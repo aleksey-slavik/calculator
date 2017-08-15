@@ -7,7 +7,7 @@
     -fx-background-radius: 0;
     -fx-background-color: #fafafa;
     -fx-font-family: "Frutiger Neue LT W1G Book";
-    -fx-font-size: 16pt;
+    -fx-font-size: 16px;
 }
 
 .digits:hover {
