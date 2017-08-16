@@ -264,7 +264,7 @@ public class ModelTest {
     }
 
     /**
-     * Check add some value to memory using buttons MS, M+ and M-
+     * Check add some value to memory using button MS, M+ and M-
      * @param value
      * @param expected
      */

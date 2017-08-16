@@ -18,46 +18,102 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * View
+ * Create view of calculator
  *
  * @author Slavik Aleksey V.
  */
 public class CalculatorView {
 
+    /**
+     * Path to fxml file
+     */
     private static final String ROOT_PATH = "/fxml/root.fxml";
 
+    /**
+     * Path to style file
+     */
     private static final String STYLE_PATH = "/css/root.css";
 
+    /**
+     * Path to app icon
+     */
     private static final String APP_ICON_PATH = "/images/icon.png";
 
+    /**
+     * Path to history icon
+     */
     private static final String HISTORY_ICON_PATH = "/images/history.png";
 
+    /**
+     * Path to menu icon
+     */
     private static final String MENU_ICON_PATH = "/images/menu.png";
 
+    /**
+     * Path to about icon
+     */
     private static final String ABOUT_ICON_PATH = "/images/about.png";
 
+    /**
+     * Calculator title
+     */
     private static final String TITLE = "Calculator";
 
+    /**
+     * Id of exit button
+     */
     private static final String EXIT_SELECTOR = "#exit";
 
+    /**
+     * Id of expand button
+     */
     private static final String EXPAND_SELECTOR = "#expand";
 
+    /**
+     * Id of hide button
+     */
     private static final String HIDE_SELECTOR = "#hide";
 
+    /**
+     * Id of menu button in main pane
+     */
     private static final String MENU_OPEN_SELECTOR = "#menuShow";
 
+    /**
+     * Id of menu button in menu pane
+     */
     private static final String MENU_CLOSE_SELECTOR = "#menuClose";
 
+    /**
+     * Id of history button
+     */
     private static final String HISTORY_SELECTOR = "#historyShow";
 
+    /**
+     * Id of about button in menu pane
+     */
     private static final String ABOUT_SELECTOR = "#about";
 
+    /**
+     * Id of title pane
+     */
     private static final String TITLE_SELECTOR = "#title";
 
+    /**
+     * If of list in menu pane
+     */
     private static final String LIST_SELECTOR = "#listView";
 
+    /**
+     * Id of numeric display
+     */
     private static final String NUMERIC_FIELD_SELECTOR = "#numericField";
 
+    /**
+     * Setup view scheme and main view listeners
+     *
+     * @param primaryStage  window stage
+     */
     public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         Parent root = loader.load(getClass().getResourceAsStream(ROOT_PATH));

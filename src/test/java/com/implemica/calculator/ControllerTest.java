@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class ControllerTest {
@@ -28,6 +30,7 @@ public class ControllerTest {
 
     @Test
     public void testDigits() throws Exception {
+        testExpression(",", "0,");
         testExpression("0", "0");
         testExpression("1", "1");
         testExpression("2", "2");
@@ -40,10 +43,12 @@ public class ControllerTest {
         testExpression("9", "9");
         testExpression("1234567890", "1 234 567 890");
         testExpression("1234567890123456", "1 234 567 890 123 456");
+        testExpression("1234567890123456,", "1 234 567 890 123 456");
         testExpression("1234567890123456 negate", "-1 234 567 890 123 456");
         testExpression("1234567890,123456", "1 234 567 890,123456");
         testExpression("1234567890,123456 negate", "-1 234 567 890,123456");
         testExpression("12345678901234567890", "1 234 567 890 123 456");
+        testExpression("12345678901234567890 negate", "-1 234 567 890 123 456");
     }
 
     @Test
@@ -55,7 +60,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void plusTest() throws Exception {
+    public void addTest() throws Exception {
         testExpression("2 + 2 =", "4", "");
         testExpression("2 + 2 +", "4", "2 + 2 +");
         testExpression("2 + 2 + + + +", "4", "2 + 2 +");
@@ -149,6 +154,7 @@ public class ControllerTest {
     @Test
     public void divideErrorTest() throws Exception{
         testExpression("0 / 0 =", "Result is undefined");
+        disableButtonTest(true);
         testExpression("21328 / 0 =", "Cannot divide by zero");
         testExpression("3 / 0 =","Cannot divide by zero");
         testExpression("9999999999999999 / 0 =","Cannot divide by zero");
@@ -274,7 +280,7 @@ public class ControllerTest {
         testExpression("1 sqr", "1");
         testExpression("1 negate sqr", "1");
         testExpression("1 sqr sqr sqr", "1");
-        testExpression("9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
+        testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
     }
 
     @Test
@@ -431,6 +437,7 @@ public class ControllerTest {
     @Test
     public void memoryTest() throws Exception {
         testExpression("10 MS C MR", "10");
+        disableMemoryButtonTest(false);
         testExpression("965 M+ + 123 MR", "965");
         testExpression("3765 M+ 78 M+ MR", "3 843");
         testExpression("4723399 M- 2377 M- MR", "-4 725 776");
@@ -482,6 +489,19 @@ public class ControllerTest {
         testMouseClick("1234 + 4321 -", "5 555", "1234 + 4321 -");
     }
 
+    @Test
+    public void alternativeButtonsTest() throws Exception {
+        testAlternativeButtons("32 - 4 =", "28");
+        testAlternativeButtons("1234 + 4321 =", "5 555");
+    }
+
+    @Test
+    public void historyOverflowTest() throws Exception {
+        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 +", "3,e+16", "99999999999 + 9999999999999999 +");
+        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 + <", "3,e+16", "9999999999999999 + 99999999999999");
+        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 + < >", "3,e+16", "999999999999 + 9999999999999999 +");
+    }
+
     private void testExpression(String expression, String expected) throws Exception{
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
@@ -493,7 +513,9 @@ public class ControllerTest {
         Label numericDisplay = GuiTest.find("#numericField");
         String actualValue = numericDisplay.getText();
         assertEquals(expected, actualValue);
+    }
 
+    private void testAlternativeButtons(String expression, String expected) throws Exception{
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
 
@@ -501,8 +523,8 @@ public class ControllerTest {
             pushButton(item, true);
         }
 
-        numericDisplay = GuiTest.find("#numericField");
-        actualValue = numericDisplay.getText();
+        Label numericDisplay = GuiTest.find("#numericField");
+        String actualValue = numericDisplay.getText();
         assertEquals(expected, actualValue);
     }
 
@@ -531,6 +553,18 @@ public class ControllerTest {
 
     }
 
+    private void disableButtonTest(boolean disable) {
+        for (Button button : disabled()) {
+            assertEquals(disable, button.isDisable());
+        }
+    }
+
+    private void disableMemoryButtonTest(boolean disable) {
+        for (Button button : disabledMemory()) {
+            assertEquals(disable, button.isDisable());
+        }
+    }
+
     private void pushButton(String item, boolean alternative) {
         switch (item) {
             case "=":
@@ -540,7 +574,11 @@ public class ControllerTest {
                 controller.push(KeyCode.BACK_SPACE);
                 break;
             case "+":
-                controller.push(alternative ? KeyCode.ADD : KeyCode.SHIFT, KeyCode.EQUALS);
+                if (alternative) {
+                    controller.push(KeyCode.ADD);
+                } else {
+                    controller.push(KeyCode.SHIFT, KeyCode.EQUALS);
+                }
                 break;
             case "-":
                 controller.push(alternative ? KeyCode.SUBTRACT : KeyCode.MINUS);
@@ -549,7 +587,11 @@ public class ControllerTest {
                 controller.push(alternative ? KeyCode.DIVIDE : KeyCode.SLASH);
                 break;
             case "*":
-                controller.push(alternative ? KeyCode.MULTIPLY : KeyCode.SHIFT, KeyCode.DIGIT8);
+                if (alternative) {
+                    controller.push(KeyCode.MULTIPLY);
+                } else {
+                    controller.push(KeyCode.SHIFT, KeyCode.DIGIT8);
+                }
                 break;
             case "negate":
                 controller.push(KeyCode.F9);
@@ -586,6 +628,12 @@ public class ControllerTest {
                 break;
             case "M-":
                 controller.push(KeyCode.CONTROL, KeyCode.Q);
+                break;
+            case "<":
+                controller.click((Button) GuiTest.find("#left"));
+                break;
+            case ">":
+                controller.click((Button) GuiTest.find("#right"));
                 break;
             default:
                 pushDigitButtons(item, alternative);
@@ -737,5 +785,32 @@ public class ControllerTest {
                     break;
             }
         }
+    }
+
+    private ArrayList<Button> disabled() {
+        ArrayList<Button> disabled = new ArrayList<>();
+        disabled.add(GuiTest.find("#divide"));
+        disabled.add(GuiTest.find("#multiply"));
+        disabled.add(GuiTest.find("#subtract"));
+        disabled.add(GuiTest.find("#add"));
+        disabled.add(GuiTest.find("#comma"));
+        disabled.add(GuiTest.find("#negate"));
+        disabled.add(GuiTest.find("#memory_store"));
+        disabled.add(GuiTest.find("#memory_recall"));
+        disabled.add(GuiTest.find("#memory_minus"));
+        disabled.add(GuiTest.find("#memory_add"));
+        disabled.add(GuiTest.find("#memory_clear"));
+        disabled.add(GuiTest.find("#percent"));
+        disabled.add(GuiTest.find("#sqrt"));
+        disabled.add(GuiTest.find("#sqr"));
+        disabled.add(GuiTest.find("#inverse"));
+        return disabled;
+    }
+
+    private ArrayList<Button> disabledMemory() {
+        ArrayList<Button> disabled = new ArrayList<>();
+        disabled.add(GuiTest.find("#memory_recall"));
+        disabled.add(GuiTest.find("#memory_clear"));
+        return disabled;
     }
 }

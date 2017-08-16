@@ -11,10 +11,19 @@ import javafx.stage.Stage;
  */
 public class MoveWindowListener implements EventHandler<MouseEvent> {
 
+    /**
+     * X value of current window position
+     */
     private double xPos;
 
+    /**
+     * Y value of current window position
+     */
     private double yPos;
 
+    /**
+     * Main window stage
+     */
     private Stage stage;
 
     public MoveWindowListener(Stage stage) {

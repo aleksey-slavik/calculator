@@ -8,54 +8,118 @@ import javafx.scene.control.Button;
 import java.util.ArrayList;
 
 /**
- * Resize font of buttons during window resize
+ * Resize font of button during window resize
  *
  * @author Slavik Aleksey V.
  */
 public class ButtonResizeListener implements InvalidationListener {
 
+    /**
+     * Big font size of digits group
+     */
     private static final int DIGIT_BIG_FONT_SIZE = 24;
 
+    /**
+     * Medium font size of digits group
+     */
     private static final int DIGIT_MEDIUM_FONT_SIZE = 20;
 
+    /**
+     * Small font size of digits group
+     */
     private static final int DIGIT_SMALL_FONT_SIZE = 16;
 
+    /**
+     * Big font size of binary group
+     */
     private static final int BINARY_BIG_FONT_SIZE = 24;
 
+    /**
+     * Medium font size of binary group
+     */
     private static final int BINARY_MEDIUM_FONT_SIZE = 20;
 
+    /**
+     * Small font size of binary group
+     */
     private static final int BINARY_SMALL_FONT_SIZE = 16;
 
+    /**
+     * Big font size of unary group
+     */
     private static final int UNARY_BIG_FONT_SIZE = 20;
 
+    /**
+     * Medium font size of unary group
+     */
     private static final int UNARY_MEDIUM_FONT_SIZE = 17;
 
-    private static final int UNARY_SMALL_FONT_SIZE = 14;
+    /**
+     * Small font size of unary group
+     */
+    private static final int UNARY_SMALL_FONT_SIZE = 16;
 
+    /**
+     * Big font size of clear group
+     */
     private static final int CLEAR_BIG_FONT_SIZE = 24;
 
+    /**
+     * Medium font size of clear group
+     */
     private static final int CLEAR_MEDIUM_FONT_SIZE = 20;
 
+    /**
+     * Small font size of clear group
+     */
     private static final int CLEAR_SMALL_FONT_SIZE = 12;
 
+    /**
+     * Value of height of window.
+     * If current window height bigger than given value font size of button are changed to big size.
+     * If current window height less than given value font size of button are changed to medium size.
+     */
     private static final double BIG_HEIGHT = 700;
 
+    /**
+     * Value of height of window.
+     * If current window height bigger than given value font size of button are changed to medium size.
+     * If current window height less than given value font size of button are changed to small size.
+     */
     private static final double MEDIUM_HEIGHT = 600;
 
+    /**
+     * Digit group of buttons
+     */
     private static ArrayList<String> digits = new ArrayList<>();
 
+    /**
+     * Binary group of buttons
+     */
     private static ArrayList<String> binary = new ArrayList<>();
 
+    /**
+     * Unary group of buttons
+     */
     private static ArrayList<String> unary = new ArrayList<>();
 
+    /**
+     * Clear group of buttons
+     */
     private static ArrayList<String> clear = new ArrayList<>();
 
+    /**
+     * Scene of window
+     */
     private Scene scene;
 
     public ButtonResizeListener(Scene scene) {
         this.scene = scene;
     }
 
+    /*
+     * Add buttons to groups
+     */
     static {
         digits.add("#zero");
         digits.add("#one");
@@ -84,12 +148,10 @@ public class ButtonResizeListener implements InvalidationListener {
 
         clear.add("#clear");
         clear.add("#clear_expr");
-        //clear.add("#backspace");
     }
 
     @Override
     public void invalidated(Observable observable) {
-        //double width = scene.getWidth();
         double height = scene.getHeight();
 
         if (height > BIG_HEIGHT) {
@@ -101,6 +163,14 @@ public class ButtonResizeListener implements InvalidationListener {
         }
     }
 
+    /**
+     * Change font size for all groups
+     *
+     * @param digitSize     size of digit group buttons
+     * @param binarySize    size of binary group buttons
+     * @param unarySize     size of unary group buttons
+     * @param clearSize     size of clear group buttons
+     */
     private void resize(int digitSize, int binarySize, int unarySize, int clearSize) {
         for (String id : digits) {
             Button bt = (Button) scene.lookup(id);
@@ -123,6 +193,12 @@ public class ButtonResizeListener implements InvalidationListener {
         }
     }
 
+    /**
+     * Create style string with given font size
+     *
+     * @param size  font size
+     * @return      style with new font size
+     */
     private String getFontString(int size) {
         return "-fx-font-size: " + size + "px;";
     }

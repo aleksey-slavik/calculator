@@ -5,12 +5,15 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Launcher
+ * Launcher of calculator application
  *
  * @author Slavik Aleksey V.
  */
 public class Launcher extends Application {
 
+    /**
+     * Window view
+     */
     private CalculatorView view = new CalculatorView();
 
     @Override
@@ -19,6 +22,7 @@ public class Launcher extends Application {
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
 }

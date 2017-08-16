@@ -5,12 +5,15 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 /**
- * Expand
+ * Expand application
  *
  * @author Slavik Aleksey V.
  */
 public class ExpandListener implements EventHandler<ActionEvent> {
 
+    /**
+     * Main stage of window
+     */
     private Stage stage;
 
     public ExpandListener(Stage stage) {

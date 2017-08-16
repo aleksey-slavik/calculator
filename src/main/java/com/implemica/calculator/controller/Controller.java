@@ -697,7 +697,7 @@ public class Controller implements Initializable {
             right.setVisible(false);
             history.setHistory(value);
             historyPos = history.getHistory().length();
-            historyField.setText(history.getHistory().substring(value.length() - getLabelSize()));
+            historyField.setText(history.getHistory().substring(value.length() - getLabelSize() + 1));
         } else {
             left.setVisible(false);
             right.setVisible(false);

@@ -7,36 +7,65 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * Resize
+ * Resize window
  *
  * @author Slavik Aleksey V.
  */
 public class ResizeListener implements EventHandler<MouseEvent> {
 
+    /**
+     * Border width
+     */
     private static final double BORDER = 2;
 
+    /**
+     * Minimal window width
+     */
     private static final double MIN_WIDTH = 320;
 
+    /**
+     * Minimal window height
+     */
     private static final double MIN_HEIGHT = 500;
 
+    /**
+     * Offset of X coordinate
+     */
     private double dx;
 
+    /**
+     * Offset of Y coordinate
+     */
     private double dy;
 
-    private double deltaX;
-
-    private double deltaY;
-
+    /**
+     *
+     */
     private boolean isMoveH;
 
+    /**
+     *
+     */
     private boolean isMoveV;
 
+    /**
+     *
+     */
     private boolean isResizeH;
 
+    /**
+     *
+     */
     private boolean isResizeV;
 
+    /**
+     * Main window scene
+     */
     private Scene scene;
 
+    /**
+     * Main window stage
+     */
     private Stage stage;
 
     public ResizeListener(Stage stage, Scene scene) {
@@ -61,6 +90,11 @@ public class ResizeListener implements EventHandler<MouseEvent> {
         }
     }
 
+    /**
+     * Change cursor type and setup flags for further processing
+     *
+     * @param event     mouse event
+     */
     private void changeCursor(MouseEvent event) {
         if (event.getX() < BORDER && event.getY() < BORDER) {
             scene.setCursor(Cursor.NW_RESIZE);
@@ -107,7 +141,14 @@ public class ResizeListener implements EventHandler<MouseEvent> {
         }
     }
 
+    /**
+     * Change width of window
+     *
+     * @param event     mouse event
+     */
     private void changeWidth(MouseEvent event) {
+        double deltaX;
+
         if (stage.getWidth() <= MIN_WIDTH) {
             if (isMoveH) {
                 deltaX = stage.getX() - event.getScreenX();
@@ -131,7 +172,13 @@ public class ResizeListener implements EventHandler<MouseEvent> {
         }
     }
 
+    /**
+     * Change height of window
+     * @param event     mouse event
+     */
     private void changeHeight(MouseEvent event) {
+        double deltaY;
+
         if (stage.getHeight() <= MIN_HEIGHT) {
             if (isMoveV) {
                 deltaY = stage.getY() - event.getScreenY();

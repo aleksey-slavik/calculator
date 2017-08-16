@@ -5,12 +5,15 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 /**
- * Exit
+ * Exit from application
  *
  * @author Slavik Aleksey V.
  */
 public class ExitListener implements EventHandler<ActionEvent> {
 
+    /**
+     * Window stage
+     */
     private Stage stage;
 
     public ExitListener(Stage stage) {

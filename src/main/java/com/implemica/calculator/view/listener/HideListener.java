@@ -5,12 +5,15 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 /**
- * Hide
+ * Hide application
  *
  * @author Slavik Aleksey V.
  */
 public class HideListener implements EventHandler<ActionEvent> {
 
+    /**
+     * Main window stage
+     */
     private Stage stage;
 
     public HideListener(Stage stage) {
