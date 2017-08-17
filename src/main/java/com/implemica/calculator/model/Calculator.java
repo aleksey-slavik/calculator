@@ -9,12 +9,16 @@ import com.implemica.calculator.util.exception.ZeroDivideException;
 import java.math.BigDecimal;
 
 /**
- * Model
+ * Calculator operations.
+ * Consist main calculator operations such as add, subtract, multiply, divide, negate, percent, inverse, sqr, sqrt and equals
  *
  * @author Slavik Aleksey V.
  */
 public class Calculator {
 
+    /**
+     * BigDecimal representation of 100
+     */
     private static final BigDecimal HUNDRED = BigDecimal.valueOf(100);
 
     /**
@@ -28,12 +32,19 @@ public class Calculator {
      */
     private static final int MAX_SCALE = 10000;
 
+    /**
+     * Left operand of equation
+     */
     private BigDecimal left = BigDecimal.ZERO;
 
+    /**
+     * Right operand of equation
+     */
     private BigDecimal right = BigDecimal.ZERO;
 
-    private BigDecimal memory = BigDecimal.ZERO;
-
+    /**
+     * Operation of equation
+     */
     private Operator operator = Operator.EMPTY;
 
     /**
@@ -157,7 +168,7 @@ public class Calculator {
     public BigDecimal sqr(BigDecimal value) throws OverflowException {
         BigDecimal res = value.pow(2);
 
-        if (Math.abs(res.scale()) >= MAX_SCALE) {
+        if (Math.abs(res.scale()) > MAX_SCALE) {
             throw new OverflowException("Scale of result of sqr is bigger than max scale value");
         }
 
@@ -185,31 +196,6 @@ public class Calculator {
     public void clearEntry() {
 
         right = BigDecimal.ZERO;
-    }
-
-    public void memoryClear() {
-
-        memory = BigDecimal.ZERO;
-    }
-
-    public void memoryStore(BigDecimal value) {
-
-        memory = value;
-    }
-
-    public void memoryAdd(BigDecimal value) {
-
-        memory = memory.add(value);
-    }
-
-    public void memorySubtract(BigDecimal value) {
-
-        memory = memory.subtract(value);
-    }
-
-    public BigDecimal memoryRecall() {
-
-        return memory;
     }
 
     private static BigDecimal sqrt(BigDecimal number, BigDecimal guess) {

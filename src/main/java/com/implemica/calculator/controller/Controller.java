@@ -2,6 +2,7 @@ package com.implemica.calculator.controller;
 
 import com.implemica.calculator.model.Calculator;
 import com.implemica.calculator.model.History;
+import com.implemica.calculator.model.Memory;
 import com.implemica.calculator.util.enums.Operator;
 import com.implemica.calculator.util.exception.OverflowException;
 import com.implemica.calculator.util.exception.SquareRootException;
@@ -110,6 +111,8 @@ public class Controller implements Initializable {
     private Calculator calculator = new Calculator();
 
     private History history = new History();
+
+    private Memory memory = new Memory();
 
     @FXML
     private Label numericField;
@@ -719,11 +722,11 @@ public class Controller implements Initializable {
 
     private void processMemoryClear() {
         disableMemoryButtons(true);
-        calculator.memoryClear();
+        memory.memoryClear();
     }
 
     private void processMemoryRecall() {
-        setNumericFieldNumber(calculator.memoryRecall());
+        setNumericFieldNumber(memory.memoryRecall());
         isLastNumber = true;
     }
 
@@ -732,7 +735,7 @@ public class Controller implements Initializable {
             disableMemoryButtons(false);
         }
 
-        calculator.memoryAdd(getNumericFieldNumber());
+        memory.memoryAdd(getNumericFieldNumber());
         isLastNumber = true;
     }
 
@@ -741,7 +744,7 @@ public class Controller implements Initializable {
             disableMemoryButtons(false);
         }
 
-        calculator.memorySubtract(getNumericFieldNumber());
+        memory.memorySubtract(getNumericFieldNumber());
         isLastNumber = true;
     }
 
@@ -750,7 +753,7 @@ public class Controller implements Initializable {
             disableMemoryButtons(false);
         }
 
-        calculator.memoryStore(getNumericFieldNumber());
+        memory.memoryStore(getNumericFieldNumber());
         isLastNumber = true;
     }
 

@@ -1,5 +1,6 @@
 package com.implemica.calculator;
 
+import com.implemica.calculator.model.Memory;
 import com.implemica.calculator.util.enums.Operator;
 import com.implemica.calculator.util.exception.SquareRootException;
 import com.implemica.calculator.util.exception.OverflowException;
@@ -271,48 +272,48 @@ public class ModelTest {
      * @param expected
      */
     private void memoryStoreTest(String value, String expected) {
-        Calculator calculator = new Calculator();
+        Memory memory = new Memory();
         BigDecimal expectedValue = new BigDecimal(expected);
         BigDecimal pushValue = new BigDecimal(value);
-        calculator.memoryStore(pushValue);
-        assertEquals(expectedValue, calculator.memoryRecall());
+        memory.memoryStore(pushValue);
+        assertEquals(expectedValue, memory.memoryRecall());
 
-        calculator = new Calculator();
-        calculator.memoryAdd(pushValue);
-        assertEquals(expectedValue, calculator.memoryRecall());
+        memory = new Memory();
+        memory.memoryAdd(pushValue);
+        assertEquals(expectedValue, memory.memoryRecall());
 
-        calculator = new Calculator();
+        memory = new Memory();
         expectedValue = expectedValue.negate();
-        calculator.memorySubtract(pushValue);
-        assertEquals(expectedValue, calculator.memoryRecall());
+        memory.memorySubtract(pushValue);
+        assertEquals(expectedValue, memory.memoryRecall());
     }
 
-    private void memoryAddTest(String memory, String value, String expected) {
-        Calculator calculator = new Calculator();
-        BigDecimal memoryValue = new BigDecimal(memory);
+    private void memoryAddTest(String current, String value, String expected) {
+        Memory memory = new Memory();
+        BigDecimal memoryValue = new BigDecimal(current);
         BigDecimal pushValue = new BigDecimal(value);
         BigDecimal expectedValue = new BigDecimal(expected);
-        calculator.memoryStore(memoryValue);
-        calculator.memoryAdd(pushValue);
-        assertEquals(expectedValue, calculator.memoryRecall());
+        memory.memoryStore(memoryValue);
+        memory.memoryAdd(pushValue);
+        assertEquals(expectedValue, memory.memoryRecall());
     }
 
-    private void memorySubtractTest(String memory, String value, String expected) {
-        Calculator calculator = new Calculator();
-        BigDecimal memoryValue = new BigDecimal(memory);
+    private void memorySubtractTest(String current, String value, String expected) {
+        Memory memory = new Memory();
+        BigDecimal memoryValue = new BigDecimal(current);
         BigDecimal pushValue = new BigDecimal(value);
         BigDecimal expectedValue = new BigDecimal(expected);
-        calculator.memoryStore(memoryValue);
-        calculator.memorySubtract(pushValue);
-        assertEquals(expectedValue, calculator.memoryRecall());
+        memory.memoryStore(memoryValue);
+        memory.memorySubtract(pushValue);
+        assertEquals(expectedValue, memory.memoryRecall());
     }
 
-    private void memoryClearTest(String memory) {
-        Calculator calculator = new Calculator();
-        BigDecimal memoryValue = new BigDecimal(memory);
-        calculator.memoryStore(memoryValue);
-        calculator.memoryClear();
-        assertEquals(BigDecimal.ZERO, calculator.memoryRecall());
+    private void memoryClearTest(String current) {
+        Memory memory = new Memory();
+        BigDecimal memoryValue = new BigDecimal(current);
+        memory.memoryStore(memoryValue);
+        memory.memoryClear();
+        assertEquals(BigDecimal.ZERO, memory.memoryRecall());
     }
 
     private BigDecimal convert(String value) {
