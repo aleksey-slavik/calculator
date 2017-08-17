@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.testfx.api.FxRobot;
+import org.testfx.util.WaitForAsyncUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -64,26 +65,19 @@ public class ViewTest {
 
     @BeforeClass
     public static void initJFX() throws InterruptedException {
-        Object sync = new Object();
         new JFXPanel();
-        synchronized (sync) {
-            Platform.runLater(() -> {
-                synchronized (sync) {
-                    stage = new Stage();
-                    try {
-                        new Launcher().start(stage);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        Platform.runLater(() -> {
+            stage = new Stage();
+            try {
+                new Launcher().start(stage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                    Scene scene = stage.getScene();
-                    numericField = (Label) scene.lookup("#numericField");
-                    sync.notify();
-                }
-            });
-
-            sync.wait();
-        }
+            Scene scene = stage.getScene();
+            numericField = (Label) scene.lookup("#numericField");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
     }
 
     @AfterClass
@@ -173,9 +167,9 @@ public class ViewTest {
      */
     @Test
     public void fontResizeTest() {
-        fontResizeTest(0,16, 16, 14,12);
-        fontResizeTest(10,16,16, 14 ,12);
-        fontResizeTest(110,20, 20 ,17,20);
+        fontResizeTest(0, 16, 16, 14, 12);
+        fontResizeTest(10, 16, 16, 14, 12);
+        fontResizeTest(110, 20, 20, 17, 20);
     }
 
     /**
@@ -190,18 +184,17 @@ public class ViewTest {
     /**
      * Move window and check position of window
      *
-     * @param x     offset of X coordinate
-     * @param y     offset of Y coordinate
+     * @param x offset of X coordinate
+     * @param y offset of Y coordinate
      */
     private void moveTest(int x, int y) {
         AnchorPane title = GuiTest.find("#title");
-        Window window = title.getScene().getWindow();
-        double beforeX = window.getX();
-        double beforeY = window.getY();
+        double beforeX = stage.getX();
+        double beforeY = stage.getY();
         robot.drag(title, MouseButton.PRIMARY);
         robot.moveBy(x, y);
-        double afterX = window.getX();
-        double afterY = window.getY();
+        double afterX = stage.getX();
+        double afterY = stage.getY();
         assertEquals(beforeX + x, afterX, 0.1);
         assertEquals(beforeY + y, afterY, 0.1);
     }
@@ -211,9 +204,9 @@ public class ViewTest {
      * Position NE, SE, SW, NW mean that resize started from corresponding corner of window.
      * Position E, W, N, S mean that resize started from random point in corresponding side of window.
      *
-     * @param x     offset of X coordinate
-     * @param y     offset of Y coordinate
-     * @param pos   resize position
+     * @param x   offset of X coordinate
+     * @param y   offset of Y coordinate
+     * @param pos resize position
      */
     private void resizeTest(int x, int y, String pos) {
         double beforeWidth = stage.getWidth();
@@ -286,8 +279,8 @@ public class ViewTest {
      * Return correct value of width.
      * Correct value is between MIN_WINDOW_WIDTH and MAX_WINDOW_WIDTH
      *
-     * @param width     given width
-     * @return          correct width
+     * @param width given width
+     * @return correct width
      */
     private double checkWidth(double width) {
         if (width < MIN_WINDOW_WIDTH) {
@@ -303,8 +296,8 @@ public class ViewTest {
      * Return correct value of height.
      * Correct value is between MIN_WINDOW_HEIGHT and MAX_WINDOW_HEIGHT
      *
-     * @param height    given height
-     * @return          correct height
+     * @param height given height
+     * @return correct height
      */
     private double checkHeight(double height) {
         if (height < MIN_WINDOW_HEIGHT) {
@@ -319,18 +312,18 @@ public class ViewTest {
     /**
      * Check font size of groups of buttons during resize window
      *
-     * @param dy            offset of Y coordinate
-     * @param digitsFont    font size of digit group
-     * @param binaryFont    font size of binary group
-     * @param unaryFont     font size of unary group
-     * @param clearFont     font size of clear group
+     * @param dy         offset of Y coordinate
+     * @param digitsFont font size of digit group
+     * @param binaryFont font size of binary group
+     * @param unaryFont  font size of unary group
+     * @param clearFont  font size of clear group
      */
     private void fontResizeTest(int dy, int digitsFont, int binaryFont, int unaryFont, int clearFont) {
         resizeTest(0, dy, "S");
         for (Button button : digits()) {
             assertEquals(digitsFont, button.getFont().getSize(), 0.1);
         }
-        for (Button  button : binaries()) {
+        for (Button button : binaries()) {
             assertEquals(binaryFont, button.getFont().getSize(), 0.1);
         }
         for (Button button : unaries()) {
@@ -357,7 +350,7 @@ public class ViewTest {
         return list;
     }
 
-    private ArrayList<Button>  binaries() {
+    private ArrayList<Button> binaries() {
         ArrayList<Button> list = new ArrayList<>();
         list.add(GuiTest.find("#equals"));
         list.add(GuiTest.find("#add"));
@@ -402,8 +395,8 @@ public class ViewTest {
      * Check font size of numeric field depending on the count of chars in field.
      * Append string value to numeric field and check font size.
      *
-     * @param value     given numeric value
-     * @param font      font size
+     * @param value given numeric value
+     * @param font  font size
      */
     private void numericFontResizeTest(String value, int font) {
         numericField.setText(value);

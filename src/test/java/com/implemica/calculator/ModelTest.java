@@ -51,7 +51,7 @@ public class ModelTest {
 
     @Test
     public void percentTest() {
-        //percentTest("1000", Operator.PLUS, "10", "100");
+        percentTest("1000", Operator.ADD, "10", "100");
         percentTest("100", Operator.ADD, "1", "1");
     }
 
@@ -191,7 +191,8 @@ public class ModelTest {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
         BigDecimal actualValue = calculator.negate(new BigDecimal(actual));
-        assertEquals(expectedValue, actualValue);
+        assertEquals(true, expectedValue.compareTo(actualValue) == 0);
+        //assertEquals(expectedValue, actualValue);
     }
 
     private void sqrTest(String actual, String expected) throws OverflowException {
@@ -260,7 +261,8 @@ public class ModelTest {
         BigDecimal rightValue = new BigDecimal(right);
         BigDecimal expectedValue = new BigDecimal(expected);
         calculator.changeOperator(leftValue, operator);
-        assertEquals(expectedValue, calculator.percent(rightValue));
+        assertEquals(true, expectedValue.compareTo(calculator.percent(rightValue)) == 0);
+        //assertEquals(expectedValue, calculator.percent(rightValue));
     }
 
     /**

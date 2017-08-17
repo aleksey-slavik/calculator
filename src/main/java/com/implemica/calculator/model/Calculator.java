@@ -94,51 +94,34 @@ public class Calculator {
 
         if (operator == Operator.ADD) {
             res = add();
-        }
-
-        if (operator == Operator.SUBTRACT) {
+        } else if (operator == Operator.SUBTRACT) {
             res = subtract();
-        }
-
-        if (operator == Operator.MULTIPLY) {
+        } else if (operator == Operator.MULTIPLY) {
             res = multiply();
-        }
-
-        if (operator == Operator.DIVIDE) {
+        } else if (operator == Operator.DIVIDE) {
             res = divide();
         }
 
-        return res;
-    }
-
-    private BigDecimal add() throws OverflowException {
-        BigDecimal res = left.add(right);
-
-        if (Math.abs(res.scale()) >= MAX_SCALE) {
-            throw new OverflowException("Scale of result of add is bigger than max scale value");
-        }
-
-        return res;
-    }
-
-    private BigDecimal subtract() throws OverflowException {
-        BigDecimal res = left.subtract(right);
-
-        if (Math.abs(res.scale()) >= MAX_SCALE) {
-            throw new OverflowException("Scale of result of subtract is bigger than max scale value");
-        }
-
-        return res;
-    }
-
-    private BigDecimal multiply() throws OverflowException {
-        BigDecimal res = left.multiply(right);
-
         if (Math.abs(res.scale()) > MAX_SCALE) {
-            throw new OverflowException("Scale of result of multiply is bigger than max scale value");
+            throw new OverflowException("Scale of result is bigger than max scale value");
         }
 
         return res;
+    }
+
+    private BigDecimal add() {
+
+        return left.add(right);
+    }
+
+    private BigDecimal subtract() {
+
+        return left.subtract(right);
+    }
+
+    private BigDecimal multiply() {
+
+        return left.multiply(right);
     }
 
     private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
@@ -154,10 +137,12 @@ public class Calculator {
     }
 
     public BigDecimal percent(BigDecimal value) {
+
         return left.multiply(value.divide(HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP)).stripTrailingZeros();
     }
 
     public BigDecimal negate(BigDecimal value) {
+
         return value.negate();
     }
 
@@ -198,26 +183,32 @@ public class Calculator {
     }
 
     public void clearEntry() {
+
         right = BigDecimal.ZERO;
     }
 
     public void memoryClear() {
+
         memory = BigDecimal.ZERO;
     }
 
     public void memoryStore(BigDecimal value) {
+
         memory = value;
     }
 
     public void memoryAdd(BigDecimal value) {
+
         memory = memory.add(value);
     }
 
     public void memorySubtract(BigDecimal value) {
+
         memory = memory.subtract(value);
     }
 
     public BigDecimal memoryRecall() {
+
         return memory;
     }
 

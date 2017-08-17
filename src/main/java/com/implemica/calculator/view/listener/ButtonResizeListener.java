@@ -27,7 +27,7 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Small font size of digits group
      */
-    private static final int DIGIT_SMALL_FONT_SIZE = 16;
+    private static final int DIGIT_SMALL_FONT_SIZE = 23;
 
     /**
      * Big font size of binary group
@@ -42,7 +42,7 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Small font size of binary group
      */
-    private static final int BINARY_SMALL_FONT_SIZE = 16;
+    private static final int BINARY_SMALL_FONT_SIZE = 20;
 
     /**
      * Big font size of unary group
@@ -72,7 +72,7 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Small font size of clear group
      */
-    private static final int CLEAR_SMALL_FONT_SIZE = 12;
+    private static final int CLEAR_SMALL_FONT_SIZE = 16;
 
     /**
      * Value of height of window.
