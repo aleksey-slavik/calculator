@@ -1,4 +1,4 @@
-package com.implemica.calculator.util.exception;
+package com.implemica.calculator.model.exception;
 
 /**
  * OverflowException

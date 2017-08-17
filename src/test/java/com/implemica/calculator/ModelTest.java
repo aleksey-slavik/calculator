@@ -1,11 +1,11 @@
 package com.implemica.calculator;
 
 import com.implemica.calculator.model.Memory;
-import com.implemica.calculator.util.enums.Operator;
-import com.implemica.calculator.util.exception.SquareRootException;
-import com.implemica.calculator.util.exception.OverflowException;
-import com.implemica.calculator.util.exception.ZeroByZeroDivideException;
-import com.implemica.calculator.util.exception.ZeroDivideException;
+import com.implemica.calculator.model.Operator;
+import com.implemica.calculator.model.exception.SquareRootException;
+import com.implemica.calculator.model.exception.OverflowException;
+import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
+import com.implemica.calculator.model.exception.ZeroDivideException;
 import com.implemica.calculator.model.Calculator;
 import org.junit.Test;
 

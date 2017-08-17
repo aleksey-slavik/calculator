@@ -3,12 +3,13 @@ package com.implemica.calculator.controller;
 import com.implemica.calculator.model.Calculator;
 import com.implemica.calculator.model.History;
 import com.implemica.calculator.model.Memory;
-import com.implemica.calculator.util.enums.Operator;
-import com.implemica.calculator.util.exception.OverflowException;
-import com.implemica.calculator.util.exception.SquareRootException;
-import com.implemica.calculator.util.exception.ZeroByZeroDivideException;
-import com.implemica.calculator.util.exception.ZeroDivideException;
+import com.implemica.calculator.model.Operator;
+import com.implemica.calculator.model.exception.OverflowException;
+import com.implemica.calculator.model.exception.SquareRootException;
+import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
+import com.implemica.calculator.model.exception.ZeroDivideException;
 import com.implemica.calculator.util.format.NumericFormatter;
+import com.implemica.calculator.view.enums.CalculatorButton;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,14 +67,6 @@ public class Controller implements Initializable {
     private static final String COMMA = ",";
 
     private static final String ZERO_WITH_COMMA = "0,";
-
-    private static final String ADD_TEXT = "+";
-
-    private static final String MINUS_TEXT = "-";
-
-    private static final String MULTIPLY_TEXT = "×";
-
-    private static final String DIVIDE_TEXT = "÷";
 
     private static final String SQR_TEXT = "sqr";
 
@@ -320,79 +313,8 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void operatorEventClick(ActionEvent event) {
-
-        String id = ((Button) event.getSource()).getId();
-        Operator button = Operator.searchById(id);
-
-        try {
-            switch (button) {
-                case ADD:
-                    processBinaryOperator(Operator.ADD, ADD_TEXT);
-                    break;
-                case SUBTRACT:
-                    processBinaryOperator(Operator.SUBTRACT, MINUS_TEXT);
-                    break;
-                case MULTIPLY:
-                    processBinaryOperator(Operator.MULTIPLY, MULTIPLY_TEXT);
-                    break;
-                case DIVIDE:
-                    processBinaryOperator(Operator.DIVIDE, DIVIDE_TEXT);
-                    break;
-                case NEGATE:
-                    processNegate();
-                    break;
-                case SQRT:
-                    processSqrt();
-                    break;
-                case SQR:
-                    processSqr();
-                    break;
-                case INVERSE:
-                    processInverse();
-                    break;
-                case PERCENT:
-                    processPercent();
-                    break;
-                case BACK:
-                    processBackspace();
-                    break;
-                case C:
-                    processClearAll();
-                    break;
-                case CE:
-                    processClearExpr();
-                    break;
-                case MC:
-                    processMemoryClear();
-                    break;
-                case MR:
-                    processMemoryRecall();
-                    break;
-                case M_PLUS:
-                    processMemoryAdd();
-                    break;
-                case M_MINUS:
-                    processMemoryMinus();
-                    break;
-                case MS:
-                    processMemoryStore();
-                    break;
-            }
-        } catch (ZeroByZeroDivideException e) {
-            errorStatement(MESSAGE_ZERO_DIVIDE_BY_ZERO);
-        } catch (ZeroDivideException e) {
-            errorStatement(MESSAGE_DIVIDE_BY_ZERO);
-        } catch (OverflowException e) {
-            errorStatement(MESSAGE_OVERFLOW);
-        } catch (SquareRootException e) {
-            errorStatement(MESSAGE_INVALID_INPUT);
-        }
-    }
-
-    @FXML
     private void operatorKeyClick(KeyEvent event) {
-        Operator button = Operator.searchButtonByEvent(event);
+        CalculatorButton button = CalculatorButton.searchButtonByEvent(event);
 
         if (button != null) {
             switch (button) {
@@ -520,36 +442,31 @@ public class Controller implements Initializable {
         }
     }
 
-    private void processBinaryOperator(Operator operator, String sign) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        String value = getNumericFieldText();
+    @FXML
+    private void binaryOperatorClick(ActionEvent event) {
+        String id = ((Button) event.getSource()).getId();
 
-        if (isSequence) {
-            if (isLastNumber) {
-                history.replaceLastSign(operator.getText());
-                setHistoryFieldText(history.getHistory());
-                calculator.changeOperator(getNumericFieldNumber(), operator);
-            } else {
-                appendHistoryFieldText(SEPARATOR + value + SEPARATOR + sign);
-                setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
-                calculator.changeOperator(getNumericFieldNumber(), operator);
+        try {
+            if (id.equals(CalculatorButton.ADD.getId())) {
+                processBinaryOperator(Operator.ADD);
+            } else if (id.equals(CalculatorButton.SUBTRACT.getId())) {
+                processBinaryOperator(Operator.SUBTRACT);
+            } else if (id.equals(CalculatorButton.DIVIDE.getId())) {
+                processBinaryOperator(Operator.DIVIDE);
+            } else if (id.equals(CalculatorButton.MULTIPLY.getId())) {
+                processBinaryOperator(Operator.MULTIPLY);
             }
-        } else {
-            calculator.changeOperator(getNumericFieldNumber(), operator);
-            if (isUnaryResult) {
-                appendHistoryFieldText(SEPARATOR + sign);
-            } else {
-                history.setHistory(value + SEPARATOR + sign);
-                setHistoryFieldText(value + SEPARATOR + sign);
-            }
+        } catch (ZeroByZeroDivideException e) {
+            errorStatement(MESSAGE_ZERO_DIVIDE_BY_ZERO);
+        } catch (ZeroDivideException e) {
+            errorStatement(MESSAGE_DIVIDE_BY_ZERO);
+        } catch (OverflowException e) {
+            errorStatement(MESSAGE_OVERFLOW);
         }
-
-        isSequence = true;
-        isLastNumber = true;
-        isResult = false;
-        isUnaryResult = false;
     }
 
-    private void processPercent() {
+    @FXML
+    private void percentClick() {
         if (!isSequence) {
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         } else {
@@ -568,7 +485,8 @@ public class Controller implements Initializable {
         isLastNumber = true;
     }
 
-    private void processNegate() {
+    @FXML
+    private void negateClick() {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
@@ -584,7 +502,8 @@ public class Controller implements Initializable {
         isUnaryResult = true;
     }
 
-    private void processSqr() {
+    @FXML
+    private void sqrClick() {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
@@ -606,7 +525,8 @@ public class Controller implements Initializable {
         isLastNumber = true;
     }
 
-    private void processSqrt() throws SquareRootException {
+    @FXML
+    private void sqrtClick() {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
@@ -618,13 +538,18 @@ public class Controller implements Initializable {
             appendHistoryFieldText(SEPARATOR + history.surround(SQRT_TEXT, value));
         }
 
-        setNumericFieldNumber(calculator.sqrt(getNumericFieldNumber()));
+        try {
+            setNumericFieldNumber(calculator.sqrt(getNumericFieldNumber()));
+        } catch (SquareRootException e) {
+            errorStatement(MESSAGE_INVALID_INPUT);
+        }
 
         isUnaryResult = true;
         isLastNumber = true;
     }
 
-    private void processBackspace() {
+    @FXML
+    private void backspaceClick() {
         if (isLockedScreen) {
             normalStatement();
         }
@@ -643,7 +568,8 @@ public class Controller implements Initializable {
         }
     }
 
-    private void processInverse() throws ZeroDivideException {
+    @FXML
+    private void inverseClick() {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
@@ -655,9 +581,105 @@ public class Controller implements Initializable {
             appendHistoryFieldText(SEPARATOR + history.surround(INVERSE_TEXT, value));
         }
 
-        setNumericFieldNumber(calculator.inverse(getNumericFieldNumber()));
+        try {
+            setNumericFieldNumber(calculator.inverse(getNumericFieldNumber()));
+        } catch (ZeroDivideException e) {
+            errorStatement(MESSAGE_DIVIDE_BY_ZERO);
+        }
+
         isUnaryResult = true;
         isLastNumber = true;
+    }
+
+    @FXML
+    private void memoryClearClick() {
+        disableMemoryButtons(true);
+        memory.memoryClear();
+    }
+
+    @FXML
+    private void memoryRecallClick() {
+        setNumericFieldNumber(memory.memoryRecall());
+        isLastNumber = true;
+    }
+
+    @FXML
+    private void memoryAddClick() {
+        if (isMemoryLocked) {
+            disableMemoryButtons(false);
+        }
+
+        memory.memoryAdd(getNumericFieldNumber());
+        isLastNumber = true;
+    }
+
+    @FXML
+    private void memorySubtractClick() {
+        if (isMemoryLocked) {
+            disableMemoryButtons(false);
+        }
+
+        memory.memorySubtract(getNumericFieldNumber());
+        isLastNumber = true;
+    }
+
+    @FXML
+    private void memoryStoreClick() {
+        if (isMemoryLocked) {
+            disableMemoryButtons(false);
+        }
+
+        memory.memoryStore(getNumericFieldNumber());
+        isLastNumber = true;
+    }
+
+    @FXML
+    private void clearClick() {
+        isLastNumber = false;
+        isResult = false;
+        isUnaryResult = false;
+        isSequence = false;
+        normalStatement();
+        calculator.clearAll();
+    }
+
+    @FXML
+    private void clearEntryClick() {
+        if (isLockedScreen) {
+            normalStatement();
+        } else {
+            setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
+            calculator.clearEntry();
+        }
+    }
+
+    private void processBinaryOperator(Operator operator) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
+        String value = getNumericFieldText();
+
+        if (isSequence) {
+            if (isLastNumber) {
+                history.replaceLastSign(operator.getText());
+                setHistoryFieldText(history.getHistory());
+                calculator.changeOperator(getNumericFieldNumber(), operator);
+            } else {
+                appendHistoryFieldText(SEPARATOR + value + SEPARATOR + operator.getText());
+                setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
+                calculator.changeOperator(getNumericFieldNumber(), operator);
+            }
+        } else {
+            calculator.changeOperator(getNumericFieldNumber(), operator);
+            if (isUnaryResult) {
+                appendHistoryFieldText(SEPARATOR + operator.getText());
+            } else {
+                history.setHistory(value + SEPARATOR + operator.getText());
+                setHistoryFieldText(value + SEPARATOR + operator.getText());
+            }
+        }
+
+        isSequence = true;
+        isLastNumber = true;
+        isResult = false;
+        isUnaryResult = false;
     }
 
     private String getNumericFieldText() {
@@ -718,61 +740,6 @@ public class Controller implements Initializable {
     private void appendHistoryFieldText(String value) {
         history.appendHistory(value);
         setHistoryFieldText(history.getHistory());
-    }
-
-    private void processMemoryClear() {
-        disableMemoryButtons(true);
-        memory.memoryClear();
-    }
-
-    private void processMemoryRecall() {
-        setNumericFieldNumber(memory.memoryRecall());
-        isLastNumber = true;
-    }
-
-    private void processMemoryAdd() {
-        if (isMemoryLocked) {
-            disableMemoryButtons(false);
-        }
-
-        memory.memoryAdd(getNumericFieldNumber());
-        isLastNumber = true;
-    }
-
-    private void processMemoryMinus() {
-        if (isMemoryLocked) {
-            disableMemoryButtons(false);
-        }
-
-        memory.memorySubtract(getNumericFieldNumber());
-        isLastNumber = true;
-    }
-
-    private void processMemoryStore() {
-        if (isMemoryLocked) {
-            disableMemoryButtons(false);
-        }
-
-        memory.memoryStore(getNumericFieldNumber());
-        isLastNumber = true;
-    }
-
-    private void processClearAll() {
-        isLastNumber = false;
-        isResult = false;
-        isUnaryResult = false;
-        isSequence = false;
-        normalStatement();
-        calculator.clearAll();
-    }
-
-    private void processClearExpr() {
-        if (isLockedScreen) {
-            normalStatement();
-        } else {
-            setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
-            calculator.clearEntry();
-        }
     }
 
     private void clickOnButton(Button button) {
