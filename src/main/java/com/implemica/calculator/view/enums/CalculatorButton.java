@@ -13,41 +13,40 @@ import java.util.HashMap;
  */
 public enum CalculatorButton {
 
-    EMPTY,
-    ZERO("zero"),
-    ONE("one"),
-    TWO("two"),
-    THREE("three"),
-    FOUR("four"),
-    FIVE("five"),
-    SIX("six"),
-    SEVEN("seven"),
-    EIGHT("eight"),
-    NINE("nine"),
-    COMMA("comma"),
-    NEGATE("negate"),
-    EQUALS("equals"),
-    ADD("add"),
-    SUBTRACT("subtract"),
-    DIVIDE("divide"),
-    MULTIPLY("multiply"),
-    INVERSE("inverse"),
-    SQR("sqr"),
-    SQRT("sqrt"),
-    PERCENT("percent"),
-    C("clear"),
-    CE("clear_expr"),
-    BACK("backspace"),
-    MC("memory_clear"),
-    MR("memory_recall"),
-    M_MINUS("memory_minus"),
-    M_PLUS("memory_add"),
-    MS("memory_store"),
-    MENU_OPEN("menuOpen"),
-    MENU_CLOSE("menuClose"),
-    HIDE("hide"),
-    EXPAND("expand"),
-    CLOSE("exit");
+    ZERO("#zero"),
+    ONE("#one"),
+    TWO("#two"),
+    THREE("#three"),
+    FOUR("#four"),
+    FIVE("#five"),
+    SIX("#six"),
+    SEVEN("#seven"),
+    EIGHT("#eight"),
+    NINE("#nine"),
+    COMMA("#comma"),
+    NEGATE("#negate"),
+    EQUALS("#equals"),
+    ADD("#add"),
+    SUBTRACT("#subtract"),
+    DIVIDE("#divide"),
+    MULTIPLY("#multiply"),
+    INVERSE("#inverse"),
+    SQR("#sqr"),
+    SQRT("#sqrt"),
+    PERCENT("#percent"),
+    C("#clear"),
+    CE("#clear_expr"),
+    BACK("#backspace"),
+    MC("#memory_clear"),
+    MR("#memory_recall"),
+    M_MINUS("#memory_minus"),
+    M_PLUS("#memory_add"),
+    MS("#memory_store"),
+    MENU_OPEN("#menuOpen"),
+    MENU_CLOSE("#menuClose"),
+    HIDE("#hide"),
+    EXPAND("#expand"),
+    CLOSE("#exit");
 
     private String id;
     private static HashMap<KeyCodeCombination, CalculatorButton> keys = new HashMap<>();
@@ -107,18 +106,12 @@ public enum CalculatorButton {
         keys.put(new KeyCodeCombination(KeyCode.M, KeyCodeCombination.CONTROL_DOWN), MS);
     }
 
-    public String getId() {
+    public String getFXId() {
         return id;
     }
 
-    public static CalculatorButton searchById(String id) {
-        for (CalculatorButton item : values()) {
-            if (item.getId().equals(id)) {
-                return item;
-            }
-        }
-
-        throw new IllegalStateException("Can't find button with id " + id);
+    public String getId() {
+        return id.substring(1);
     }
 
     public static CalculatorButton searchButtonByEvent(KeyEvent event) {

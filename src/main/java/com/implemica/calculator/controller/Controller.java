@@ -14,6 +14,7 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
@@ -114,43 +115,10 @@ public class Controller implements Initializable {
     private Label historyField;
 
     @FXML
-    private Button zero;
-
-    @FXML
-    private Button one;
-
-    @FXML
-    private Button two;
-
-    @FXML
-    private Button three;
-
-    @FXML
-    private Button four;
-
-    @FXML
-    private Button five;
-
-    @FXML
-    private Button six;
-
-    @FXML
-    private Button seven;
-
-    @FXML
-    private Button eight;
-
-    @FXML
-    private Button nine;
-
-    @FXML
     private Button negate;
 
     @FXML
     private Button comma;
-
-    @FXML
-    private Button equals;
 
     @FXML
     private Button add;
@@ -175,15 +143,6 @@ public class Controller implements Initializable {
 
     @FXML
     private Button percent;
-
-    @FXML
-    private Button backspace;
-
-    @FXML
-    private Button clear;
-
-    @FXML
-    private Button clear_expr;
 
     @FXML
     private Button memory_clear;
@@ -315,97 +274,10 @@ public class Controller implements Initializable {
     @FXML
     private void operatorKeyClick(KeyEvent event) {
         CalculatorButton button = CalculatorButton.searchButtonByEvent(event);
+        Parent parent = (Parent) event.getSource();
 
         if (button != null) {
-            switch (button) {
-                case ZERO:
-                    clickOnButton(zero);
-                    break;
-                case ONE:
-                    clickOnButton(one);
-                    break;
-                case TWO:
-                    clickOnButton(two);
-                    break;
-                case THREE:
-                    clickOnButton(three);
-                    break;
-                case FOUR:
-                    clickOnButton(four);
-                    break;
-                case FIVE:
-                    clickOnButton(five);
-                    break;
-                case SIX:
-                    clickOnButton(six);
-                    break;
-                case SEVEN:
-                    clickOnButton(seven);
-                    break;
-                case EIGHT:
-                    clickOnButton(eight);
-                    break;
-                case NINE:
-                    clickOnButton(nine);
-                    break;
-                case COMMA:
-                    clickOnButton(comma);
-                    break;
-                case EQUALS:
-                    clickOnButton(equals);
-                    break;
-                case BACK:
-                    clickOnButton(backspace);
-                    break;
-                case ADD:
-                    clickOnButton(add);
-                    break;
-                case SUBTRACT:
-                    clickOnButton(subtract);
-                    break;
-                case DIVIDE:
-                    clickOnButton(divide);
-                    break;
-                case MULTIPLY:
-                    clickOnButton(multiply);
-                    break;
-                case NEGATE:
-                    clickOnButton(negate);
-                    break;
-                case INVERSE:
-                    clickOnButton(inverse);
-                    break;
-                case CE:
-                    clickOnButton(clear_expr);
-                    break;
-                case C:
-                    clickOnButton(clear);
-                    break;
-                case SQR:
-                    clickOnButton(sqr);
-                    break;
-                case SQRT:
-                    clickOnButton(sqrt);
-                    break;
-                case PERCENT:
-                    clickOnButton(percent);
-                    break;
-                case MR:
-                    clickOnButton(memory_recall);
-                    break;
-                case MS:
-                    clickOnButton(memory_store);
-                    break;
-                case MC:
-                    clickOnButton(memory_clear);
-                    break;
-                case M_PLUS:
-                    clickOnButton(memory_add);
-                    break;
-                case M_MINUS:
-                    clickOnButton(memory_minus);
-                    break;
-            }
+            clickOnButton((Button) parent.lookup(button.getFXId()));
         }
     }
 
