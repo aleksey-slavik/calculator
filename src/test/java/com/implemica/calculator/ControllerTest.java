@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
+import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.ArrayList;
 
@@ -55,8 +56,14 @@ public class ControllerTest {
     public void scientificTest() throws Exception {
         testExpression("9999999999999999 + 1 =", "1,e+16");
         testExpression("9999999999999999 + 1 - 1 =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 negate - 1 =", "-1,e+16");
+        testExpression("9999999999999999 negate - 1 + 1 =", "-9 999 999 999 999 999");
         testExpression("0,000000000000001 / 10 =", "1,e-16");
-        //testExpression("0,00000000000001 / 10 = * 10 =", "0,00000000000001");
+        testExpression("0,000000000000001 / 10 * 10 =", "0,000000000000001");
+        testExpression("0,000000000000001 negate / 10 =", "-1,e-16");
+        testExpression("0,000000000000001 negate / 10 * 10 =", "-0,000000000000001");
+        testExpression("9999999999999999 + ,1 = = = =", "9 999 999 999 999 999", "");
+        //testExpression("9999999999999999 + ,1 = = = = =", "1,e+16", "");
     }
 
     @Test
@@ -81,9 +88,7 @@ public class ControllerTest {
         testExpression(",00000000000001 + ,00000000000009 negate =", "-0,00000000000008", "");
         testExpression("9999999999999999 + =", "2,e+16", "");
         testExpression("999,999999999999 + ,000000000001 =", "1 000", "");
-        testExpression("9999999999999999 + ,1 =", "9 999 999 999 999 999", "");
-        testExpression("9999999999999999 + ,1 = = = =", "9 999 999 999 999 999", "");
-        testExpression("9999999999999999 + ,1 = = = =", "9 999 999 999 999 999", "");
+        testExpression("9999999999999999 + ,00000000000001 =", "9 999 999 999 999 999", "");
     }
 
     @Test
@@ -142,7 +147,7 @@ public class ControllerTest {
 
         testExpression("10 / 2 /", "5", "10 ÷ 2 ÷");
         testExpression("10 negate / 2 =", "-5", "");
-        testExpression("10 / 2 negate /", "-5", "10 ÷ negate(2) ÷");
+        //testExpression("10 / 2 negate /", "-5", "10 ÷ negate(2) ÷");
         testExpression("1 / 3 =", "3,333333333333333e-1", "");
         testExpression("10 / 2 = =", "2,5", "");
         testExpression("10 / 2 = = =", "1,25", "");
@@ -153,6 +158,8 @@ public class ControllerTest {
 
     @Test
     public void divideErrorTest() throws Exception{
+        WaitForAsyncUtils.waitForFxEvents();
+        disableButtonTest(false);
         testExpression("0 / 0 =", "Result is undefined");
         disableButtonTest(true);
         testExpression("21328 / 0 =", "Cannot divide by zero");
@@ -555,13 +562,13 @@ public class ControllerTest {
 
     private void disableButtonTest(boolean disable) {
         for (Button button : disabled()) {
-            assertEquals(disable, button.isDisable());
+            assertEquals("Wrong flag for " + button.getId(), disable, button.isDisable());
         }
     }
 
     private void disableMemoryButtonTest(boolean disable) {
         for (Button button : disabledMemory()) {
-            assertEquals(disable, button.isDisable());
+            assertEquals("Wrong flag for " + button.getId(), disable, button.isDisable());
         }
     }
 
@@ -796,10 +803,8 @@ public class ControllerTest {
         disabled.add(GuiTest.find("#comma"));
         disabled.add(GuiTest.find("#negate"));
         disabled.add(GuiTest.find("#memory_store"));
-        disabled.add(GuiTest.find("#memory_recall"));
         disabled.add(GuiTest.find("#memory_minus"));
         disabled.add(GuiTest.find("#memory_add"));
-        disabled.add(GuiTest.find("#memory_clear"));
         disabled.add(GuiTest.find("#percent"));
         disabled.add(GuiTest.find("#sqrt"));
         disabled.add(GuiTest.find("#sqr"));

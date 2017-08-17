@@ -23,7 +23,7 @@ public class Calculator {
     /**
      * divide operation scale
      */
-    private static final int DIVIDE_SCALE = 10000;
+    private static final int DIVIDE_SCALE = 5000;
 
     /**
      * maximum scale of calculator.
@@ -112,7 +112,7 @@ public class Calculator {
             res = divide();
         }
 
-        if (Math.abs(res.scale()) > MAX_SCALE) {
+        if (Math.abs(res.scale()) >= MAX_SCALE) {
             throw new OverflowException("Scale of result is bigger than max scale value");
         }
 
@@ -121,17 +121,17 @@ public class Calculator {
 
     private BigDecimal add() {
 
-        return left.add(right);
+        return left.add(right).stripTrailingZeros();
     }
 
     private BigDecimal subtract() {
 
-        return left.subtract(right);
+        return left.subtract(right).stripTrailingZeros();
     }
 
     private BigDecimal multiply() {
 
-        return left.multiply(right);
+        return left.multiply(right).stripTrailingZeros();
     }
 
     private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
@@ -167,7 +167,7 @@ public class Calculator {
     public BigDecimal sqr(BigDecimal value) throws OverflowException {
         BigDecimal res = value.pow(2);
 
-        if (Math.abs(res.scale()) > MAX_SCALE) {
+        if (Math.abs(res.scale()) >= MAX_SCALE) {
             throw new OverflowException("Scale of result of sqr is bigger than max scale value");
         }
 

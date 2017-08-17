@@ -27,12 +27,24 @@ public class ModelTest {
         binaryTest("1.39", Operator.ADD, "0.98766", "2.37766");
         binaryTest("-0.1", Operator.ADD, "5987.999", "5987.899");
         binaryTest("-2133.9", Operator.ADD, "-8799.38833", "-10933.28833");
+        binaryTest("-9999999999999999", Operator.ADD, "-1", "-10000000000000000");
         binaryTest("9999999999999999", Operator.ADD, "1", "10000000000000000");
     }
 
     @Test
     public void subtractTest() throws Exception {
         binaryTest("1", Operator.SUBTRACT, "1", "0");
+        binaryTest("1", Operator.SUBTRACT, "-1", "2");
+        binaryTest("-1", Operator.SUBTRACT, "1", "-2");
+        binaryTest("23", Operator.SUBTRACT, "23", "0");
+        binaryTest("-776", Operator.SUBTRACT, "500", "-1276");
+        binaryTest("1961", Operator.SUBTRACT, "-49", "2010");
+        binaryTest("0.1", Operator.SUBTRACT, "0.1", "0");
+        binaryTest("0.0000000000000001", Operator.SUBTRACT, "0.0000000000000001", "0");
+        binaryTest("0.0000000000000001", Operator.SUBTRACT, "-0.0000000000000001", "0.0000000000000002");
+        binaryTest("-0.0000000000000001", Operator.SUBTRACT, "0.0000000000000001", "-0.0000000000000002");
+        binaryTest("-0.0000000000000001", Operator.SUBTRACT, "-0.0000000000000001", "0");
+        binaryTest("9999999999999999", Operator.SUBTRACT, "9999999999999999", "0");
     }
 
     @Test
@@ -236,7 +248,7 @@ public class ModelTest {
         BigDecimal rightValue = new BigDecimal(right);
         BigDecimal expectedValue = new BigDecimal(expected);
         calculator.changeOperator(leftValue, operator);
-        assertEquals(expectedValue, calculator.calculateResult(rightValue));
+        assertEquals(true, expectedValue.compareTo(calculator.calculateResult(rightValue)) == 0);
     }
 
     private void binaryFail(String left, Operator operator, String right) {

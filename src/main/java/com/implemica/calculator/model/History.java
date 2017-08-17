@@ -30,14 +30,7 @@ public class History {
     /**
      * History value
      */
-    private String history;
-
-    /**
-     * Default constructor with initialization history value
-     */
-    public History() {
-        history = DEFAULT_VALUE;
-    }
+    private String history = DEFAULT_VALUE;
 
     /**
      * Get current history value
@@ -69,24 +62,25 @@ public class History {
     /**
      * Surround given value using given function
      *
-     * @param func  given function
-     * @param value given value
+     * @param operator  given function
+     * @param value     given value
      * @return surrounded value using given function
      */
-    public String surround(String func, String value) {
-        return func + LEFT_BRACKET + value + RIGHT_BRACKET;
+    public String surround(Operator operator, String value) {
+
+        return operator.getText() + LEFT_BRACKET + value + RIGHT_BRACKET;
     }
 
     /**
      * Surround last element of history using given function
      *
-     * @param func given function
+     * @param operator given function
      */
-    public void surround(String func) {
+    public void surround(Operator operator) {
         if (history.contains(SPACE)) {
-            replace(SPACE + surround(func, getLastElement()));
+            replace(SPACE + surround(operator, getLastElement()));
         } else {
-            replace(surround(func, getLastElement()));
+            replace(surround(operator, getLastElement()));
         }
     }
 
@@ -118,10 +112,10 @@ public class History {
     /**
      * Replacement of the last sign history
      *
-     * @param sign new sign
+     * @param operator new sign
      */
-    public void replaceLastSign(String sign) {
-        replace(SPACE + sign);
+    public void replaceLastSign(Operator operator) {
+        replace(SPACE + operator.getText());
     }
 
     /**

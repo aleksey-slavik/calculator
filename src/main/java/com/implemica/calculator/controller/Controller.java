@@ -8,7 +8,6 @@ import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
 import com.implemica.calculator.model.exception.ZeroDivideException;
-import com.implemica.calculator.util.format.NumericFormatter;
 import com.implemica.calculator.view.enums.CalculatorButton;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -68,14 +67,6 @@ public class Controller implements Initializable {
     private static final String COMMA = ",";
 
     private static final String ZERO_WITH_COMMA = "0,";
-
-    private static final String SQR_TEXT = "sqr";
-
-    private static final String SQRT_TEXT = "√";
-
-    private static final String NEGATE_TEXT = "negate";
-
-    private static final String INVERSE_TEXT = "1/";
 
     private static final String SEPARATOR = " ";
 
@@ -362,12 +353,12 @@ public class Controller implements Initializable {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(NEGATE_TEXT, value));
+            setHistoryFieldText(history.surround(Operator.NEGATE, value));
         } else if (isUnaryResult) {
-            history.surround(NEGATE_TEXT);
+            history.surround(Operator.NEGATE);
             setHistoryFieldText(history.getHistory());
         } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(NEGATE_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(Operator.NEGATE, value));
         }
 
         setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
@@ -379,12 +370,12 @@ public class Controller implements Initializable {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(SQR_TEXT, value));
+            setHistoryFieldText(history.surround(Operator.SQR, value));
         } else if (isUnaryResult) {
-            history.surround(SQR_TEXT);
+            history.surround(Operator.SQR);
             setHistoryFieldText(history.getHistory());
         } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(SQR_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(Operator.SQR, value));
         }
 
         try {
@@ -402,12 +393,12 @@ public class Controller implements Initializable {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(SQRT_TEXT, value));
+            setHistoryFieldText(history.surround(Operator.SQRT, value));
         } else if (isUnaryResult) {
-            history.surround(SQRT_TEXT);
+            history.surround(Operator.SQRT);
             setHistoryFieldText(history.getHistory());
         } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(SQRT_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(Operator.SQRT, value));
         }
 
         try {
@@ -445,12 +436,12 @@ public class Controller implements Initializable {
         String value = getNumericFieldText();
 
         if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(INVERSE_TEXT, value));
+            setHistoryFieldText(history.surround(Operator.INVERSE, value));
         } else if (isUnaryResult) {
-            history.surround(INVERSE_TEXT);
+            history.surround(Operator.INVERSE);
             setHistoryFieldText(history.getHistory());
         } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(INVERSE_TEXT, value));
+            appendHistoryFieldText(SEPARATOR + history.surround(Operator.INVERSE, value));
         }
 
         try {
@@ -530,7 +521,7 @@ public class Controller implements Initializable {
 
         if (isSequence) {
             if (isLastNumber) {
-                history.replaceLastSign(operator.getText());
+                history.replaceLastSign(operator);
                 setHistoryFieldText(history.getHistory());
                 calculator.changeOperator(getNumericFieldNumber(), operator);
             } else {

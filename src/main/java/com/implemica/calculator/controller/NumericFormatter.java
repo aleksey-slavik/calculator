@@ -1,4 +1,4 @@
-package com.implemica.calculator.util.format;
+package com.implemica.calculator.controller;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
