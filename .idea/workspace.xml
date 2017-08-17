@@ -2,27 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Operator.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/enums/Operator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/util/enums/Operator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/util/exception/OverflowException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/util/exception/SquareRootException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/util/exception/ZeroByZeroDivideException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/util/exception/ZeroDivideException.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller$1.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/model/Calculator.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/model/Calculator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/root.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/root.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/exception/OverflowException.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/exception/OverflowException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/exception/SquareRootException.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/exception/SquareRootException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/exception/ZeroByZeroDivideException.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/exception/ZeroByZeroDivideException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/util/exception/ZeroDivideException.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/exception/ZeroDivideException.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -1140,7 +1124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502961511474</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="controller refactoring">
+      <created>1502966886870</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1502966886870</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1241,7 +1232,8 @@
     <MESSAGE value="fix font resize test" />
     <MESSAGE value="refactoring tests" />
     <MESSAGE value="add memory to model" />
-    <option name="LAST_COMMIT_MESSAGE" value="add memory to model" />
+    <MESSAGE value="controller refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="controller refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
