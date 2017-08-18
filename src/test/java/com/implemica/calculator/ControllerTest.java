@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
-import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.ArrayList;
 
@@ -31,7 +30,6 @@ public class ControllerTest {
 
     @Test
     public void testDigits() throws Exception {
-        testExpression(",", "0,");
         testExpression("0", "0");
         testExpression("1", "1");
         testExpression("2", "2");
@@ -42,11 +40,24 @@ public class ControllerTest {
         testExpression("7", "7");
         testExpression("8", "8");
         testExpression("9", "9");
+
+        testExpression(",", "0,");
+        testExpression("1,,", "1,");
+        testExpression("1,,00", "1,00");
+        testExpression("1,0,11", "1,011");
+        testExpression("0000000000000001,", "1,");
+        testExpression("0000000000000000000001,", "1,");
+
+        testExpression("01","1");
+        testExpression("00234", "234");
+        testExpression("00100","100");
+        testExpression("000001024", "1 024");
+        testExpression("1234567890123456", "1 234 567 890 123 456");
+
         testExpression("1234567890", "1 234 567 890");
         testExpression("1234567890123456", "1 234 567 890 123 456");
-        testExpression("1234567890123456,", "1 234 567 890 123 456");
         testExpression("1234567890123456 negate", "-1 234 567 890 123 456");
-        testExpression("1234567890,123456", "1 234 567 890,123456");
+             testExpression("1234567890,123456", "1 234 567 890,123456");
         testExpression("1234567890,123456 negate", "-1 234 567 890,123456");
         testExpression("12345678901234567890", "1 234 567 890 123 456");
         testExpression("12345678901234567890 negate", "-1 234 567 890 123 456");
@@ -56,14 +67,15 @@ public class ControllerTest {
     public void scientificTest() throws Exception {
         testExpression("9999999999999999 + 1 =", "1,e+16");
         testExpression("9999999999999999 + 1 - 1 =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 + 0,000000000000001 =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 - 0,000000000000001 =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 / 0,1 =", "9,999999999999999e+16");
         testExpression("9999999999999999 negate - 1 =", "-1,e+16");
         testExpression("9999999999999999 negate - 1 + 1 =", "-9 999 999 999 999 999");
         testExpression("0,000000000000001 / 10 =", "1,e-16");
         testExpression("0,000000000000001 / 10 * 10 =", "0,000000000000001");
         testExpression("0,000000000000001 negate / 10 =", "-1,e-16");
         testExpression("0,000000000000001 negate / 10 * 10 =", "-0,000000000000001");
-        testExpression("9999999999999999 + ,1 = = = =", "9 999 999 999 999 999", "");
-        //testExpression("9999999999999999 + ,1 = = = = =", "1,e+16", "");
     }
 
     @Test
@@ -73,9 +85,9 @@ public class ControllerTest {
         testExpression("2 + 2 + + + +", "4", "2 + 2 +");
         testExpression("2 + + + +", "2", "2 +");
         testExpression("2 + 2 negate =", "0", "");
-        testExpression("12 negate + 11 +", "-1", "negate(12) + 11 +");
+        testExpression("12 negate + 11 +", "-1", "-12 + 11 +");
         testExpression("32 negate + 32 =", "0", "");
-        testExpression("+ 100 negate", "-100", "0 + negate(100)");
+        testExpression("+ 100 negate", "-100", "0 +");
         testExpression("1 + = = = = = = = =", "9", "");
         testExpression("+ 5 = = = = = = = = = =", "50", "");
         testExpression("+ 5 negate =", "-5", "");
@@ -93,6 +105,9 @@ public class ControllerTest {
 
     @Test
     public void minusTest() throws Exception {
+        testExpression("0 - 0 =", "0", "");
+        testExpression("10 - 10 negate -", "20", "10 - -10 -");
+        testExpression("10 negate - 10 -", "-20", "-10 - 10 -");
         testExpression("10 - 2 =", "8", "");
         testExpression("10 - 2 -", "8", "10 - 2 -");
         testExpression("2 - 0 -", "2", "2 - 0 -");
@@ -101,12 +116,10 @@ public class ControllerTest {
         testExpression("18 - 5 = = = = =", "-7", "");
         testExpression(",04 - 1,96 - - -", "-1,92", "0,04 - 1,96 -");
         testExpression("1000 - 0,00000000001 =", "999,99999999999", "");
-
         testExpression("0,00000000000001 - 0,00000000000001 =", "0", "");
         testExpression("0,00000000000001 - 0,00000000000001 negate =", "0,00000000000002", "");
         testExpression("0,00000000000001 - 0,00000000000002 =", "-0,00000000000001", "");
         testExpression("0,00000000000001 - 0,00000000000002 negate =", "0,00000000000003", "");
-
         testExpression("9999999999999999 - 9999999999999999 =", "0", "");
         testExpression("9999999999999999 - 9999999999999998 =", "1", "");
         testExpression("9999999999999998 - 9999999999999999 =", "-1", "");
@@ -147,7 +160,7 @@ public class ControllerTest {
 
         testExpression("10 / 2 /", "5", "10 ÷ 2 ÷");
         testExpression("10 negate / 2 =", "-5", "");
-        //testExpression("10 / 2 negate /", "-5", "10 ÷ negate(2) ÷");
+        testExpression("10 / 2 negate /", "-5", "10 ÷ -2 ÷");
         testExpression("1 / 3 =", "3,333333333333333e-1", "");
         testExpression("10 / 2 = =", "2,5", "");
         testExpression("10 / 2 = = =", "1,25", "");
@@ -158,17 +171,14 @@ public class ControllerTest {
 
     @Test
     public void divideErrorTest() throws Exception{
-        WaitForAsyncUtils.waitForFxEvents();
-        disableButtonTest(false);
-        testExpression("0 / 0 =", "Result is undefined");
-        disableButtonTest(true);
-        testExpression("21328 / 0 =", "Cannot divide by zero");
-        testExpression("3 / 0 =","Cannot divide by zero");
-        testExpression("9999999999999999 / 0 =","Cannot divide by zero");
-        testExpression("0,00000000000001 / 0 =","Cannot divide by zero");
-        testExpression("3 negate / 0 =","Cannot divide by zero");
-        testExpression("9999999999999999 negate / 0 =","Cannot divide by zero");
-        testExpression("0,00000000000001 negate / 0 =","Cannot divide by zero");
+        testErrorExpression("0 / 0 =", "Result is undefined", "0 ÷");
+        testErrorExpression("21328 / 0 =", "Cannot divide by zero", "21328 ÷");
+        testErrorExpression("3 / 0 =","Cannot divide by zero", "3 ÷");
+        testErrorExpression("9999999999999999 / 0 =","Cannot divide by zero", "9999999999999999 ÷");
+        testErrorExpression("0,00000000000001 / 0 =","Cannot divide by zero", "0,00000000000001 ÷");
+        testErrorExpression("3 negate / 0 =","Cannot divide by zero", "-3 ÷");
+        testErrorExpression("9999999999999999 negate / 0 =","Cannot divide by zero", "-9999999999999999 ÷");
+        testErrorExpression("0,00000000000001 negate / 0 =","Cannot divide by zero", "-0,00000000000001 ÷");
     }
 
     @Test
@@ -278,16 +288,40 @@ public class ControllerTest {
 
     @Test
     public void inverseErrorTest() throws Exception{
-        testExpression("0 1/", "Cannot divide by zero", "1/(0)");
-        testExpression("1 + 0 1/", "Cannot divide by zero", "1 + 1/(0)");
+        testErrorExpression("0 1/", "Cannot divide by zero", "1/(0)");
+        testErrorExpression("1 + 0 1/", "Cannot divide by zero", "1 + 1/(0)");
+        testErrorExpression("0,00000000000001 + 0 1/", "Cannot divide by zero", "0,00000000000001 + 1/(0)");
+        testErrorExpression("9999999999999999 + 0 1/", "Cannot divide by zero", "9999999999999999 + 1/(0)");
+        testErrorExpression("2 - 2 = 1/", "Cannot divide by zero", "1/(0)");
+        testErrorExpression("24 + 24 negate = 1/", "Cannot divide by zero", "1/(0)");
     }
 
     @Test
     public void sqrTest() throws Exception {
-        testExpression("1 sqr", "1");
-        testExpression("1 negate sqr", "1");
-        testExpression("1 sqr sqr sqr", "1");
-        testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
+        testExpression("sqr","0","sqr(0)");
+        testExpression("sqr sqr","0","sqr(sqr(0))");
+        testExpression("sqr sqr sqr","0","sqr(sqr(sqr(0)))");
+
+        testExpression("0 sqr", "0", "sqr(0)");
+        testExpression("0 sqr sqr", "0","sqr(sqr(0))");
+        testExpression("0 sqr sqr sqr", "0","sqr(sqr(sqr(0)))");
+
+        testExpression("1 sqr", "1", "sqr(1)");
+        testExpression("1 negate sqr", "1", "sqr(-1)");
+        testExpression("1 sqr sqr sqr", "1", "sqr(sqr(sqr(1)))");
+
+        testExpression("10 sqr", "100", "sqr(10)");
+        testExpression("10 sqr sqr", "10 000", "sqr(sqr(10))");
+        testExpression("10 sqr sqr sqr", "100 000 000", "sqr(sqr(sqr(10)))");
+
+        testExpression("2 negate sqr", "4", "sqr(-2)");
+        testExpression("5 negate negate sqr", "25", "sqr(5)");
+        testExpression("125 negate sqr sqr", "244 140 625", "sqr(sqr(-125))");
+
+        testExpression("0,000000000000001 sqr", "1,e-30","sqr(0,000000000000001)");
+        testExpression("0,000000000000001 negate sqr sqr", "1,e-60","sqr(sqr(-0,000000000000001))");
+        testExpression("9999999999999999 sqr", "9,999999999999998e+31","sqr(9999999999999999)");
+        testExpression("9999999999999999 negate sqr sqr sqr sqr", "9,999999999999984e+255","qr(sqr(sqr(-9999999999999999))))");
     }
 
     @Test
@@ -320,12 +354,12 @@ public class ControllerTest {
 
     @Test
     public void sqrtErrorTest() throws Exception{
-        testExpression("1 negate sqrt", "Invalid input", "√(negate(1))");
-        testExpression("100 negate sqrt", "Invalid input", "√(negate(100))");
-        testExpression("0,09 negate sqrt", "Invalid input", "√(negate(0,09))");
+        testExpression("1 negate sqrt", "Invalid input", "√(-1)");
+        testExpression("100 negate sqrt", "Invalid input", "√(-100)");
+        testExpression("0,09 negate sqrt", "Invalid input", "√(-0,09)");
         testExpression("3 - 8 = sqrt","Invalid input", "√(-5)");
-        testExpression("9999999999999999 negate sqrt", "Invalid input", "√(negate(9999999999999999))");
-        testExpression("0,00000000000001 negate sqrt", "Invalid input", "√(negate(0,00000000000001))");
+        testExpression("9999999999999999 negate sqrt", "Invalid input", "√(-9999999999999999)");
+        testExpression("0,00000000000001 negate sqrt", "Invalid input", "√(-0,00000000000001)");
     }
 
     @Test
@@ -442,15 +476,51 @@ public class ControllerTest {
     }
 
     @Test
+    public void overflowTest() throws Exception{
+        //testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
+        ////
+        // +testExpression("1 / 9999999999999999 = = = = = = = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
+        //testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 100; i++) {
+            sb.append(" + =");
+        }
+
+        //check add overflow
+        testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = =" + sb.toString(), "Overflow");
+    }
+
+    @Test
     public void memoryTest() throws Exception {
-        testExpression("10 MS C MR", "10");
-        disableMemoryButtonTest(false);
-        testExpression("965 M+ + 123 MR", "965");
-        testExpression("3765 M+ 78 M+ MR", "3 843");
-        testExpression("4723399 M- 2377 M- MR", "-4 725 776");
-        testExpression("98 M- C MR", "-98");
-        testExpression("98 negate M- C MR", "98");
-        testExpression("98 M- C 98 M+ C MR", "0");
+        testMemoryExpression("10 MS C MR", "10");
+        testMemoryExpression(", MS C MR", "0");
+        testMemoryExpression("0,000000000000001 MS C MR", "0,000000000000001");
+        testMemoryExpression("9999999999999999 MS C MR", "9 999 999 999 999 999");
+        testMemoryExpression("9999999999999999 + 1 = MS C MR", "1,e+16");
+        testMemoryExpression("0,000000000000001 / 10 = MS C MR", "1,e-16");
+
+        testMemoryExpression("965 M+ + 123 MR", "965");
+        testMemoryExpression("50 M+ M+ M+ MR", "150");
+        testMemoryExpression("23 M+ negate M+ MR", "0");
+        testMemoryExpression("67 negate M+ negate M+ MR", "0");
+        testMemoryExpression(",000000000000001 M+ sqr sqr MR", "0,000000000000001");
+        testMemoryExpression("9999999999999999 negate M+ 1/ MR", "-9 999 999 999 999 999");
+
+        testMemoryExpression("4723399 M- 2377 M- MR", "-4 725 776");
+        testMemoryExpression("98 M- C MR", "-98");
+        testMemoryExpression("98 negate M- C MR", "98");
+        testMemoryExpression("125 M- M- M- M- MR", "-500");
+        testMemoryExpression(",000000000000001 negate M- * 85 MR", "0,000000000000001");
+        testMemoryExpression("9999999999999999 M- sqrt + 67 MR", "-9 999 999 999 999 999");
+
+        testMemoryExpression("98 M- 98 M+ MR", "0");
+        testMemoryExpression("9999999999999999 M+ M- M+ M- MR", "0");
+        testMemoryExpression(",000000000000001 negate M- M+ M- M+ M- M+ MR", "0");
+        testMemoryExpression("9999999999999999 sqr M+ C MR sqrt", "9 999 999 999 999 999");
+        testMemoryExpression(",000000000000001 1/ M+ C MR 1/", "0,000000000000001");
+        testMemoryExpression("10 M- / 3 * 3 = M+ MR", "0");
+        testMemoryExpression("1234 M+ - 234 = M- MR", "234");
     }
 
     @Test
@@ -491,15 +561,26 @@ public class ControllerTest {
     }
 
     @Test
-    public void moseClickTest() throws Exception {
-        testMouseClick("32 - 4 =" ,"28", "");
-        testMouseClick("1234 + 4321 -", "5 555", "1234 + 4321 -");
-    }
+    public void mouseClickAndAlternativeTest() throws Exception {
+        testAlternativeClick("32 - 4 =" ,"28", "");
+        testAlternativeClick("1234 + 4321 -", "5 555", "1234 + 4321 -");
+        testAlternativeClick("8,905 * 345 *", "3 072,225", "8,905 × 345 ×");
+        testAlternativeClick("6555 / 30 /", "218,5", "6555 ÷ 30 ÷");
 
-    @Test
-    public void alternativeButtonsTest() throws Exception {
-        testAlternativeButtons("32 - 4 =", "28");
-        testAlternativeButtons("1234 + 4321 =", "5 555");
+        testAlternativeClick("12345 back back", "123", "");
+        testAlternativeClick("78 - 985 - 66 C", "0", "");
+        testAlternativeClick("78 - 985 - 66 CE", "0", "78 - 985 -");
+
+        testAlternativeClick("1000 + 55 %", "550", "1000 + 550");
+        testAlternativeClick("81 sqrt sqrt", "3", "√(√(81))");
+        testAlternativeClick("2 sqr sqr sqr", "256", "sqr(sqr(sqr(2)))");
+        testAlternativeClick("777 negate negate negate", "-777", "");
+        testAlternativeClick("100 1/ 1/ 1/", "0,01", "1/(1/(1/(100)))");
+
+        testAlternativeClick("91 MS + 12345 MR", "91", "91 +");
+        testAlternativeClick("48 negate M+ negate M+ MR", "0", "");
+        testAlternativeClick("654,78 M- C MR", "-654,78", "");
+        testAlternativeClick("653 MS C MC", "0", "");
     }
 
     @Test
@@ -507,11 +588,12 @@ public class ControllerTest {
         testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 +", "3,e+16", "99999999999 + 9999999999999999 +");
         testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 + <", "3,e+16", "9999999999999999 + 99999999999999");
         testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 + < >", "3,e+16", "999999999999 + 9999999999999999 +");
+        testExpression("123 negate + 889 - 7643 / 2357 * sqr <","8,512926497930231","-123 + 889 - 7643 ÷ 2357 × sqr(-2");
     }
 
     private void testExpression(String expression, String expected) throws Exception{
         controller.push(KeyCode.ESCAPE);
-        controller.push(KeyCode.CONTROL, KeyCode.L);
+        //controller.push(KeyCode.CONTROL, KeyCode.L);
 
         for (String item : expression.split(" ")) {
             pushButton(item, false);
@@ -522,7 +604,12 @@ public class ControllerTest {
         assertEquals(expected, actualValue);
     }
 
-    private void testAlternativeButtons(String expression, String expected) throws Exception{
+    private void testAlternativeClick(String expression, String numeric, String history) throws Exception {
+        testAlternativeButtons(expression, numeric, history);
+        testMouseClick(expression, numeric, history);
+    }
+
+    private void testAlternativeButtons(String expression, String expected, String history) throws Exception{
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
 
@@ -533,6 +620,10 @@ public class ControllerTest {
         Label numericDisplay = GuiTest.find("#numericField");
         String actualValue = numericDisplay.getText();
         assertEquals(expected, actualValue);
+
+        Label historyDisplay = GuiTest.find("#historyField");
+        actualValue = historyDisplay.getText();
+        assertEquals(history, actualValue);
     }
 
     private void testExpression(String expression, String numeric, String history) throws Exception {
@@ -562,12 +653,6 @@ public class ControllerTest {
 
     private void disableButtonTest(boolean disable) {
         for (Button button : disabled()) {
-            assertEquals("Wrong flag for " + button.getId(), disable, button.isDisable());
-        }
-    }
-
-    private void disableMemoryButtonTest(boolean disable) {
-        for (Button button : disabledMemory()) {
             assertEquals("Wrong flag for " + button.getId(), disable, button.isDisable());
         }
     }
@@ -812,10 +897,15 @@ public class ControllerTest {
         return disabled;
     }
 
-    private ArrayList<Button> disabledMemory() {
-        ArrayList<Button> disabled = new ArrayList<>();
-        disabled.add(GuiTest.find("#memory_recall"));
-        disabled.add(GuiTest.find("#memory_clear"));
-        return disabled;
+    private void testErrorExpression(String expression, String numeric, String history) throws Exception {
+        controller.push(KeyCode.ESCAPE);
+        disableButtonTest(false);
+        testExpression(expression, numeric, history);
+        disableButtonTest(true);
+    }
+
+    private void testMemoryExpression(String expression, String expected) throws Exception{
+        controller.push(KeyCode.CONTROL, KeyCode.L);
+        testExpression(expression, expected);
     }
 }

@@ -350,7 +350,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void negateClick() {
-        String value = getNumericFieldText();
+        //String value = getNumericFieldText();
 
         if(isUnaryResult) {
             history.surround(Operator.NEGATE);
