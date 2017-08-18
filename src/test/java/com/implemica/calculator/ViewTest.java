@@ -80,11 +80,6 @@ public class ViewTest {
         WaitForAsyncUtils.waitForFxEvents();
     }
 
-    @AfterClass
-    public static void closeJFX() throws InterruptedException {
-        Platform.exit();
-    }
-
     /**
      * Moving window tests
      */
@@ -376,19 +371,6 @@ public class ViewTest {
         ArrayList<Button> list = new ArrayList<>();
         list.add(GuiTest.find("#clear"));
         list.add(GuiTest.find("#clear_expr"));
-        return list;
-    }
-
-    private ArrayList<Button> other() {
-        ArrayList<Button> list = new ArrayList<>();
-        list.add(GuiTest.find("#exit"));
-        list.add(GuiTest.find("#expaand"));
-        list.add(GuiTest.find("#hide"));
-        list.add(GuiTest.find("#memory_clear"));
-        list.add(GuiTest.find("#memory_recall"));
-        list.add(GuiTest.find("#memory_add"));
-        list.add(GuiTest.find("#memory_minus"));
-        list.add(GuiTest.find("#memory_store"));
         return list;
     }
 

@@ -477,18 +477,10 @@ public class ControllerTest {
 
     @Test
     public void overflowTest() throws Exception{
-        //testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
-        ////
-        // +testExpression("1 / 9999999999999999 = = = = = = = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
-        //testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
+        testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
+        //testExpression("1 / 9999999999999999 = = = = = = = = = = = = = = = = = MS / MR = = = = = = =  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
+        //testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 100; i++) {
-            sb.append(" + =");
-        }
-
-        //check add overflow
-        testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = =" + sb.toString(), "Overflow");
     }
 
     @Test
