@@ -25,14 +25,14 @@ public class NumericResizeListener implements InvalidationListener {
     /**
      * Value of small font size fir numeric field
      */
-    private static final int FONT_SMALL = 18;
+    private static final int FONT_SMALL = 17;
 
     /**
      * Count of chars.
      * If current count of chars in numeric field bigger than given value font size of field are changed to big font.
      * If current count of chars in numeric field less than given value font size of field are changed to medium font.
      */
-    private static final int BIG_FONT_COUNT = 12;
+    private static final int BIG_FONT_COUNT = 11;
 
     /**
      * Count of chars.
@@ -60,6 +60,14 @@ public class NumericResizeListener implements InvalidationListener {
         Label field = (Label) scene.lookup(FIELD_SELECTOR);
         int length = field.getText().length();
 
+        int size = FONT_BIG;
+        if (length > BIG_FONT_COUNT) {
+            size = FONT_BIG * BIG_FONT_COUNT / length;
+        }
+        field.setStyle(getFontString(size));
+
+
+        /*
         if (length < BIG_FONT_COUNT) {
             field.setStyle(getFontString(FONT_BIG));
         } else if (length < MEDIUM_FONT_COUNT) {
@@ -67,6 +75,7 @@ public class NumericResizeListener implements InvalidationListener {
         } else {
             field.setStyle(getFontString(FONT_SMALL));
         }
+        */
     }
 
     /**

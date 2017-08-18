@@ -8,9 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.testfx.api.FxRobot;
@@ -135,6 +135,7 @@ public class ViewTest {
     /**
      * Hide application test
      */
+    @Ignore
     @Test
     public void hideTest() {
         Button hide = GuiTest.find("#hide");
