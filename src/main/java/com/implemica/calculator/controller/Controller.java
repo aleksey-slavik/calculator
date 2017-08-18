@@ -352,6 +352,11 @@ public class Controller implements Initializable {
     private void negateClick() {
         String value = getNumericFieldText();
 
+        if(isUnaryResult) {
+            history.surround(Operator.NEGATE);
+            setHistoryFieldText(history.getHistory());
+        }
+        /*
         if (getHistoryFieldText().isEmpty()) {
             setHistoryFieldText(history.surround(Operator.NEGATE, value));
         } else if (isUnaryResult) {
@@ -360,9 +365,10 @@ public class Controller implements Initializable {
         } else {
             appendHistoryFieldText(SEPARATOR + history.surround(Operator.NEGATE, value));
         }
+        */
 
         setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
-        isUnaryResult = true;
+        //isUnaryResult = true;
     }
 
     @FXML
