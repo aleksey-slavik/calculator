@@ -1,8 +1,7 @@
 package com.implemica.calculator.controller;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -32,8 +31,7 @@ public class Formatter {
     private static final BigDecimal CRITERIA = new BigDecimal("0.001");
 
     public static String display(BigDecimal number) {
-
-       return formatMathView(number.toString());
+        return formatMathView(number.toPlainString());
     }
 
     public static String display(String number) {
@@ -75,49 +73,43 @@ public class Formatter {
             return false;
         }
 
-        if (!value.contains(",") && value.startsWith("-")) {
-            return value.length() <= PLAIN_LENGTH;
-        }
-
-        if (value.contains(",") && !value.startsWith("-")) {
-            return value.length() <= PLAIN_WITH_SEPARATOR_LENGTH;
-        }
-
-        if (!value.contains(",") && value.startsWith("-")) {
-            return value.length() <= NEGATE_PLAIN_LENGTH;
-        }
-
-        if (value.startsWith("0,")) {
+        if (value.startsWith("0.") && !value.startsWith("-")) {
             return value.length() <= PLAIN_WITH_ZERO_AND_SEPARATOR_LENGTH;
         }
 
-        return value.contains(",") && value.startsWith("-") && value.length() <= NEGATE_PLAIN_WITH_SEPARATOR_LENGTH;
+        if (!value.contains(".") && !value.startsWith("-")) {
+            return value.length() <= PLAIN_LENGTH;
+        }
+
+        if (value.contains(".") && !value.startsWith("-")) {
+            return value.length() <= PLAIN_WITH_SEPARATOR_LENGTH;
+        }
+
+        if (!value.contains(".") && value.startsWith("-")) {
+            return value.length() <= NEGATE_PLAIN_LENGTH;
+        }
+
+        return value.contains(".") && value.startsWith("-") && value.length() <= NEGATE_PLAIN_WITH_SEPARATOR_LENGTH;
     }
 
     private static boolean isEngineeringValue(BigDecimal number) {
         if (number.abs().compareTo(MIN_PLAIN_VALUE) < 0 || number.abs().compareTo(MAX_PLAIN_VALUE) > 0) {
-            return true;
+            return number.setScale(0, BigDecimal.ROUND_HALF_UP).toString().length() != MAX_PLAIN_SCALE;
         }
 
         String value = number.toPlainString();
-
-        return number.abs().compareTo(CRITERIA) < 0 && number.stripTrailingZeros().scale() > MAX_PLAIN_SCALE || checkLength(value);
-
+        return number.stripTrailingZeros().scale() > MAX_PLAIN_SCALE || !checkLength(value);
     }
 
     private static String formatMathView(String numberStr) {
         BigDecimal number = new BigDecimal(numberStr);
 
-        if (numberStr.contains(".") && !numberStr.toLowerCase().contains("e") && numberStr.length() == PLAIN_WITH_SEPARATOR_LENGTH) {
-            int fractionDigitsCount = number.scale();
-            BigDecimal fractionalPart = number.remainder(BigDecimal.ONE);
-            BigDecimal correlation = new BigDecimal("1.e-" + fractionDigitsCount).multiply(new BigDecimal(5));
-            if (fractionalPart.compareTo(correlation) < 0) {
-                number = number.setScale(fractionDigitsCount - 1, BigDecimal.ROUND_HALF_UP);
-            }
+        if (number.compareTo(BigDecimal.ZERO) == 0) {
+            return "0";
         }
 
         String stringValue;
+
         if (isEngineeringValue(number)) {
             stringValue = formatEngineeringView(number);
         } else {
@@ -143,6 +135,10 @@ public class Formatter {
 
         if (format.contains("e") && !format.contains("e-")) {
             format = format.replace("e", "e+");
+        }
+
+        if (format.contains("e+0")) {
+            format = format.replace("e+0","");
         }
 
         return format;

@@ -183,7 +183,7 @@ public class Calculator {
             return BigDecimal.ZERO;
         }
 
-        return sqrt(value, BigDecimal.ONE);
+        return sqrtD(value);
     }
 
     public void clearAll() {
@@ -218,5 +218,10 @@ public class Calculator {
             flipA = result;
         }
         return result;
+    }
+
+    public static BigDecimal sqrtD(BigDecimal value) {
+        BigDecimal x = new BigDecimal(Math.sqrt(value.doubleValue()));
+        return x.add(new BigDecimal(value.subtract(x.multiply(x)).doubleValue() / (x.doubleValue() * 2.0)));
     }
 }

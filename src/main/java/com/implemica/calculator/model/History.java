@@ -80,7 +80,7 @@ public class History {
      */
     public void surround(Operator operator) {
         if (history.contains(SPACE)) {
-            replace(SPACE + surround(operator, getLastElement()));
+            replace(surround(operator, getLastElement()));
         } else {
             replace(surround(operator, getLastElement()));
         }
@@ -102,7 +102,7 @@ public class History {
      * @param text expression
      */
     private void replace(String text) {
-        int lastSpace = history.lastIndexOf(SPACE);
+        int lastSpace = history.lastIndexOf(SPACE) + 1;
 
         if (lastSpace == -1) {
             lastSpace = 0;
@@ -117,7 +117,7 @@ public class History {
      * @param operator new sign
      */
     public void replaceLastSign(Operator operator) {
-        replace(SPACE + operator.getText());
+        replace(operator.getText());
     }
 
     /**
@@ -125,5 +125,9 @@ public class History {
      */
     public void clearHistory() {
         setHistory(DEFAULT_VALUE);
+    }
+
+    public boolean isEmpty() {
+        return history.equals(DEFAULT_VALUE);
     }
 }

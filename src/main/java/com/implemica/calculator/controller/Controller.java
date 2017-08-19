@@ -351,7 +351,7 @@ public class Controller implements Initializable {
     @FXML
     private void negateClick() {
 
-        if(isUnaryResult) {
+        if (isUnaryResult) {
             history.surround(Operator.NEGATE);
             setHistoryFieldText(history.getHistory());
         }
@@ -363,7 +363,10 @@ public class Controller implements Initializable {
     private void sqrClick() {
         String value = getNumericFieldText().replace(" ", "");
 
-        if (isUnaryResult) {
+        if (history.isEmpty()) {
+            history.setHistory(history.surround(Operator.SQR, value));
+            setHistoryFieldText(history.getHistory());
+        } else if (isUnaryResult) {
             history.surround(Operator.SQR);
             setHistoryFieldText(history.getHistory());
         } else {
@@ -385,13 +388,16 @@ public class Controller implements Initializable {
     private void sqrtClick() {
         String value = getNumericFieldText().replace(" ", "");
 
-       if (isUnaryResult) {
+        if (history.isEmpty()) {
+            history.setHistory(history.surround(Operator.SQRT, value));
+            setHistoryFieldText(history.getHistory());
+        } else if (isUnaryResult) {
             history.surround(Operator.SQRT);
             setHistoryFieldText(history.getHistory());
-       } else {
+        } else {
             history.appendHistory(SEPARATOR + history.surround(Operator.SQRT, value));
-           setHistoryFieldText(history.getHistory());
-       }
+            setHistoryFieldText(history.getHistory());
+        }
 
         try {
             setNumericFieldNumber(calculator.sqrt(getNumericFieldNumber()));
@@ -427,7 +433,10 @@ public class Controller implements Initializable {
     private void inverseClick() {
         String value = getNumericFieldText().replace(" ", "");
 
-        if (isUnaryResult) {
+        if (history.isEmpty()) {
+            history.setHistory(history.surround(Operator.INVERSE, value));
+            setHistoryFieldText(history.getHistory());
+        } else if (isUnaryResult) {
             history.surround(Operator.INVERSE);
             setHistoryFieldText(history.getHistory());
         } else {
@@ -558,7 +567,7 @@ public class Controller implements Initializable {
 
     private void setNumericFieldNumber(BigDecimal number) {
 
-        setNumericFieldText(Formatter.display(number));
+        numericField.setText(Formatter.display(number));
     }
 
     private String getHistoryFieldText() {
@@ -620,8 +629,12 @@ public class Controller implements Initializable {
     }
 
     private boolean checkSize() {
-
-        return getNumericFieldText().replace(COMMA, "").replace("-", "").replace(" ", "").length() >= NUMERIC_FIELD_SIZE;
+        String str = getNumericFieldText().replace(COMMA, "").replace("-", "").replace(" ", "");
+        if (str.startsWith("0")) {
+            return str.length() >= NUMERIC_FIELD_SIZE + 1;
+        } else {
+            return str.length() >= NUMERIC_FIELD_SIZE;
+        }
     }
 
     private void normalStatement() {
