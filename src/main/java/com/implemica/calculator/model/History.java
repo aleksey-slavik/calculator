@@ -47,6 +47,7 @@ public class History {
      * @param text new history value
      */
     public void setHistory(String text) {
+
         history = text;
     }
 
@@ -56,6 +57,7 @@ public class History {
      * @param text append value
      */
     public void appendHistory(String text) {
+
         history += text;
     }
 
@@ -123,12 +125,5 @@ public class History {
      */
     public void clearHistory() {
         setHistory(DEFAULT_VALUE);
-    }
-
-    /**
-     * Return true if history is empty
-     */
-    public boolean isEmpty() {
-        return history.equals(DEFAULT_VALUE);
     }
 }

@@ -350,38 +350,25 @@ public class Controller implements Initializable {
 
     @FXML
     private void negateClick() {
-        //String value = getNumericFieldText();
 
         if(isUnaryResult) {
             history.surround(Operator.NEGATE);
             setHistoryFieldText(history.getHistory());
         }
-        /*
-        if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(Operator.NEGATE, value));
-        } else if (isUnaryResult) {
-            history.surround(Operator.NEGATE);
-            setHistoryFieldText(history.getHistory());
-        } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(Operator.NEGATE, value));
-        }
-        */
 
         setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
-        //isUnaryResult = true;
     }
 
     @FXML
     private void sqrClick() {
-        String value = getNumericFieldText();
+        String value = getNumericFieldText().replace(" ", "");
 
-        if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(Operator.SQR, value));
-        } else if (isUnaryResult) {
+        if (isUnaryResult) {
             history.surround(Operator.SQR);
             setHistoryFieldText(history.getHistory());
         } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(Operator.SQR, value));
+            history.appendHistory(SEPARATOR + history.surround(Operator.SQR, value));
+            setHistoryFieldText(history.getHistory());
         }
 
         try {
@@ -396,16 +383,15 @@ public class Controller implements Initializable {
 
     @FXML
     private void sqrtClick() {
-        String value = getNumericFieldText();
+        String value = getNumericFieldText().replace(" ", "");
 
-        if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(Operator.SQRT, value));
-        } else if (isUnaryResult) {
+       if (isUnaryResult) {
             history.surround(Operator.SQRT);
             setHistoryFieldText(history.getHistory());
-        } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(Operator.SQRT, value));
-        }
+       } else {
+            history.appendHistory(SEPARATOR + history.surround(Operator.SQRT, value));
+           setHistoryFieldText(history.getHistory());
+       }
 
         try {
             setNumericFieldNumber(calculator.sqrt(getNumericFieldNumber()));
@@ -439,15 +425,14 @@ public class Controller implements Initializable {
 
     @FXML
     private void inverseClick() {
-        String value = getNumericFieldText();
+        String value = getNumericFieldText().replace(" ", "");
 
-        if (getHistoryFieldText().isEmpty()) {
-            setHistoryFieldText(history.surround(Operator.INVERSE, value));
-        } else if (isUnaryResult) {
+        if (isUnaryResult) {
             history.surround(Operator.INVERSE);
             setHistoryFieldText(history.getHistory());
         } else {
-            appendHistoryFieldText(SEPARATOR + history.surround(Operator.INVERSE, value));
+            history.appendHistory(SEPARATOR + history.surround(Operator.INVERSE, value));
+            setHistoryFieldText(history.getHistory());
         }
 
         try {
@@ -523,7 +508,7 @@ public class Controller implements Initializable {
     }
 
     private void processBinaryOperator(Operator operator) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        String value = getNumericFieldText();
+        String value = getNumericFieldText().replace(" ", "");
 
         if (isSequence) {
             if (isLastNumber) {
@@ -531,14 +516,16 @@ public class Controller implements Initializable {
                 setHistoryFieldText(history.getHistory());
                 calculator.changeOperator(getNumericFieldNumber(), operator);
             } else {
-                appendHistoryFieldText(SEPARATOR + value + SEPARATOR + operator.getText());
+                history.appendHistory(SEPARATOR + value + SEPARATOR + operator.getText());
+                setHistoryFieldText(history.getHistory());
                 setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
                 calculator.changeOperator(getNumericFieldNumber(), operator);
             }
         } else {
             calculator.changeOperator(getNumericFieldNumber(), operator);
             if (isUnaryResult) {
-                appendHistoryFieldText(SEPARATOR + operator.getText());
+                history.appendHistory(SEPARATOR + operator.getText());
+                setHistoryFieldText(history.getHistory());
             } else {
                 history.setHistory(value + SEPARATOR + operator.getText());
                 setHistoryFieldText(value + SEPARATOR + operator.getText());
@@ -553,13 +540,12 @@ public class Controller implements Initializable {
 
     private String getNumericFieldText() {
 
-        return numericField.getText().replace(" ", "");
+        return numericField.getText();
     }
 
     private void setNumericFieldText(String value) {
         if (!isLockedScreen) {
-            value = value.replace(DOT, COMMA);
-            value = NumericFormatter.format(value);
+            value = Formatter.display(value);
         }
 
         numericField.setText(value);
@@ -571,13 +557,8 @@ public class Controller implements Initializable {
     }
 
     private void setNumericFieldNumber(BigDecimal number) {
-        number = number.stripTrailingZeros();
-        if (number.toPlainString().replace(DOT, "").replace("-", "").replace(" ", "").length() <= NUMERIC_FIELD_SIZE) {
-            setNumericFieldText(number.toPlainString());
-        } else {
-            number = NumericFormatter.round(number);
-            setNumericFieldText(NumericFormatter.format(number));
-        }
+
+        setNumericFieldText(Formatter.display(number));
     }
 
     private String getHistoryFieldText() {

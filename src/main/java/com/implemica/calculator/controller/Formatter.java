@@ -1,12 +1,18 @@
 package com.implemica.calculator.controller;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * reaCted by Joker on 19.08.2017.
+ * Number formatter.
+ *
+ * @author Slavik Aleksey V.
  */
 public class Formatter {
 
@@ -26,10 +32,25 @@ public class Formatter {
     private static final BigDecimal CRITERIA = new BigDecimal("0.001");
 
     public static String display(BigDecimal number) {
+
        return formatMathView(number.toString());
     }
 
     public static String display(String number) {
+        Pattern commaReg = Pattern.compile("(,$)");
+        Matcher commaMatch = commaReg.matcher(number);
+
+        if (commaMatch.find()) {
+            return number;
+        }
+
+        Pattern commaWithZerosReg = Pattern.compile("(,0*$)");
+        Matcher commaWithZerosMatch = commaWithZerosReg.matcher(number);
+
+        if (commaWithZerosMatch.find()) {
+            return number;
+        }
+
         String currStr = number.replaceAll(" ", "").replace(",", ".");
         BigDecimal currNum = new BigDecimal(currStr);
         int scale = 0;
@@ -40,7 +61,7 @@ public class Formatter {
 
         if (currStr.contains(".")) {
             if (currStr.toLowerCase().contains("e")) {
-                scale = new BigDecimal(number).scale();
+                scale = new BigDecimal(currStr).scale();
             } else {
                 scale = currStr.length() - currStr.indexOf(".") - 1;
             }
@@ -100,7 +121,7 @@ public class Formatter {
         if (isEngineeringValue(number)) {
             stringValue = formatEngineeringView(number);
         } else {
-            stringValue = formatWithRounding(number);
+            stringValue = formatPlainView(number);
         }
         return stringValue;
     }
@@ -127,7 +148,7 @@ public class Formatter {
         return format;
     }
 
-    private static String formatWithRounding(BigDecimal number) {
+    private static String formatPlainView(BigDecimal number) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
         symbols.setGroupingSeparator(GROUPING_SEPARATOR);
@@ -147,25 +168,9 @@ public class Formatter {
             return NEGATE_PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".") - 1;
         } else if (number.startsWith("-")) {
             return NEGATE_PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".") - 2;
-        } else if (number.startsWith("0,")) {
+        } else if (number.startsWith("0.")) {
             return PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".");
         }
         return PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".") - 1;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(display("757585758885,098798798871"));
-        System.out.println(display("345678.09090"));
-        System.out.println(display("9999999999999999"));
-        System.out.println(display("10000000000000000"));
-        System.out.println(display("99999999999999999"));
-        System.out.println(display("0.0000000000000001"));
-        System.out.println(display("0.00000000000000001"));
-
-        System.out.println(display(new BigDecimal("9999999999999999")));
-        System.out.println(display(new BigDecimal("10000000000000000")));
-        System.out.println(display(new BigDecimal("0.0000000000000001")));
-        System.out.println(display(new BigDecimal("0.00000000000000001")));
-        System.out.println(display(new BigDecimal("12345.6789e+23")));
     }
 }
