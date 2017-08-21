@@ -218,14 +218,20 @@ public class Controller implements Initializable {
             normalStatement();
         }
 
+        /*
         if (isUnaryResult && !isSequence) {
+            System.out.println("1");
             calculator.clearEntry();
             setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             isUnaryResult = false;
             return;
         }
+        */
 
         if (calculator.getOperator().equals(Operator.EMPTY)) {
+            history.clearHistory();
+            setHistoryFieldText(history.getHistory());
+            isUnaryResult = false;
             return;
         }
 
