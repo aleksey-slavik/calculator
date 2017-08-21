@@ -57,7 +57,6 @@ public class History {
      * @param text append value
      */
     public void appendHistory(String text) {
-
         history += text;
     }
 

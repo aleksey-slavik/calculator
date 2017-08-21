@@ -23,7 +23,7 @@ public class Calculator {
     /**
      * divide operation scale
      */
-    private static final int DIVIDE_SCALE = 5000;
+    private static final int DIVIDE_SCALE = 11000;
 
     /**
      * maximum scale of calculator.

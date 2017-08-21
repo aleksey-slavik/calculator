@@ -75,23 +75,26 @@ public class Controller implements Initializable {
      */
     private int historyPos;
 
-    private boolean isLastNumber;
+    private boolean canChange;
 
-    private boolean isResult;
+    /**
+     * true if can calculate intermediate result
+     */
+    private boolean canCalculateResult;
 
     /**
      * for calculateSqr, calculateSqrt, calculateNegate and calculateInverse
      */
-    private boolean isUnaryResult;
+    private boolean isPreviousUnary;
 
     /**
      * if error is happens
      */
-    private boolean isLockedScreen;
+    private boolean isError;
 
     private boolean isSequence;
 
-    private boolean isMemoryLocked = true;
+    private boolean isMemoryAvailable = true;
 
     private Calculator calculator = new Calculator();
 
@@ -194,19 +197,19 @@ public class Controller implements Initializable {
 
     @FXML
     private void buttonDigitClick(ActionEvent event) {
-        if (isLockedScreen) {
+        if (isError) {
             normalStatement();
         }
 
-        if (checkSize() && !isLastNumber) {
+        if (checkSize() && !canChange) {
             return;
         }
 
         String digit = ((Button) event.getSource()).getText();
 
-        if (getNumericFieldText().equals(DEFAULT_NUMERIC_FIELD_VALUE) || isLastNumber) {
+        if (getNumericFieldText().equals(DEFAULT_NUMERIC_FIELD_VALUE) || canChange) {
             setNumericFieldText(digit);
-            isLastNumber = false;
+            canChange = false;
         } else {
             appendNumericFieldText(digit);
         }
@@ -214,38 +217,28 @@ public class Controller implements Initializable {
 
     @FXML
     private void buttonEqualsClick() {
-        if (isLockedScreen) {
+        if (isError) {
             normalStatement();
         }
-
-        /*
-        if (isUnaryResult && !isSequence) {
-            System.out.println("1");
-            calculator.clearEntry();
-            setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
-            isUnaryResult = false;
-            return;
-        }
-        */
 
         if (calculator.getOperator().equals(Operator.EMPTY)) {
             history.clearHistory();
             setHistoryFieldText(history.getHistory());
-            isUnaryResult = false;
+            isPreviousUnary = false;
             return;
         }
 
         try {
-            if (isResult) {
+            if (canCalculateResult) {
                 setNumericFieldNumber(calculator.calculateEqualsResult(getNumericFieldNumber()));
             } else {
                 setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
                 history.clearHistory();
                 setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             }
-            isResult = true;
+            canCalculateResult = true;
             isSequence = false;
-            isLastNumber = true;
+            canChange = true;
         } catch (ZeroDivideException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         } catch (OverflowException e) {
@@ -261,9 +254,9 @@ public class Controller implements Initializable {
             appendNumericFieldText(COMMA);
         }
 
-        if (isLastNumber || isResult) {
-            isLastNumber = false;
-            isResult = false;
+        if (canChange || canCalculateResult) {
+            canChange = false;
+            canCalculateResult = false;
             setNumericFieldText(ZERO_WITH_COMMA);
         }
     }
@@ -342,7 +335,7 @@ public class Controller implements Initializable {
             setNumericFieldNumber(calculator.percent(getNumericFieldNumber()));
             String value = getNumericFieldText();
 
-            if (isLastNumber) {
+            if (canChange) {
                 String history = getHistoryFieldText();
                 int begin = history.lastIndexOf(SEPARATOR);
                 setHistoryFieldText(history.substring(0, begin) + SEPARATOR + value);
@@ -351,13 +344,13 @@ public class Controller implements Initializable {
             }
         }
 
-        isLastNumber = true;
+        canChange = true;
     }
 
     @FXML
     private void negateClick() {
 
-        if (isUnaryResult) {
+        if (isPreviousUnary) {
             history.surround(Operator.NEGATE);
             setHistoryFieldText(history.getHistory());
         }
@@ -372,7 +365,7 @@ public class Controller implements Initializable {
         if (history.isEmpty()) {
             history.setHistory(history.surround(Operator.SQR, value));
             setHistoryFieldText(history.getHistory());
-        } else if (isUnaryResult) {
+        } else if (isPreviousUnary) {
             history.surround(Operator.SQR);
             setHistoryFieldText(history.getHistory());
         } else {
@@ -386,8 +379,8 @@ public class Controller implements Initializable {
             errorStatement(MESSAGE_OVERFLOW);
         }
 
-        isUnaryResult = true;
-        isLastNumber = true;
+        isPreviousUnary = true;
+        canChange = true;
     }
 
     @FXML
@@ -397,7 +390,7 @@ public class Controller implements Initializable {
         if (history.isEmpty()) {
             history.setHistory(history.surround(Operator.SQRT, value));
             setHistoryFieldText(history.getHistory());
-        } else if (isUnaryResult) {
+        } else if (isPreviousUnary) {
             history.surround(Operator.SQRT);
             setHistoryFieldText(history.getHistory());
         } else {
@@ -411,17 +404,17 @@ public class Controller implements Initializable {
             errorStatement(MESSAGE_INVALID_INPUT);
         }
 
-        isUnaryResult = true;
-        isLastNumber = true;
+        isPreviousUnary = true;
+        canChange = true;
     }
 
     @FXML
     private void backspaceClick() {
-        if (isLockedScreen) {
+        if (isError) {
             normalStatement();
         }
 
-        if (isLastNumber) {
+        if (canChange) {
             return;
         }
 
@@ -442,7 +435,7 @@ public class Controller implements Initializable {
         if (history.isEmpty()) {
             history.setHistory(history.surround(Operator.INVERSE, value));
             setHistoryFieldText(history.getHistory());
-        } else if (isUnaryResult) {
+        } else if (isPreviousUnary) {
             history.surround(Operator.INVERSE);
             setHistoryFieldText(history.getHistory());
         } else {
@@ -456,8 +449,8 @@ public class Controller implements Initializable {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         }
 
-        isUnaryResult = true;
-        isLastNumber = true;
+        isPreviousUnary = true;
+        canChange = true;
     }
 
     @FXML
@@ -469,44 +462,44 @@ public class Controller implements Initializable {
     @FXML
     private void memoryRecallClick() {
         setNumericFieldNumber(memory.memoryRecall());
-        isLastNumber = true;
+        //canChange = true;
     }
 
     @FXML
     private void memoryAddClick() {
-        if (isMemoryLocked) {
+        if (isMemoryAvailable) {
             disableMemoryButtons(false);
         }
 
         memory.memoryAdd(getNumericFieldNumber());
-        isLastNumber = true;
+        canChange = true;
     }
 
     @FXML
     private void memorySubtractClick() {
-        if (isMemoryLocked) {
+        if (isMemoryAvailable) {
             disableMemoryButtons(false);
         }
 
         memory.memorySubtract(getNumericFieldNumber());
-        isLastNumber = true;
+        canChange = true;
     }
 
     @FXML
     private void memoryStoreClick() {
-        if (isMemoryLocked) {
+        if (isMemoryAvailable) {
             disableMemoryButtons(false);
         }
 
         memory.memoryStore(getNumericFieldNumber());
-        isLastNumber = true;
+        canChange = true;
     }
 
     @FXML
     private void clearClick() {
-        isLastNumber = false;
-        isResult = false;
-        isUnaryResult = false;
+        canChange = false;
+        canCalculateResult = false;
+        isPreviousUnary = false;
         isSequence = false;
         normalStatement();
         calculator.clearAll();
@@ -514,7 +507,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void clearEntryClick() {
-        if (isLockedScreen) {
+        if (isError) {
             normalStatement();
         } else {
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
@@ -526,7 +519,12 @@ public class Controller implements Initializable {
         String value = getNumericFieldText().replace(" ", "");
 
         if (isSequence) {
-            if (isLastNumber) {
+            if (isPreviousUnary) {
+                history.appendHistory(SEPARATOR + operator.getText());
+                setHistoryFieldText(history.getHistory());
+                setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
+                calculator.changeOperator(getNumericFieldNumber(), operator);
+            } else if (canChange) {
                 history.replaceLastSign(operator);
                 setHistoryFieldText(history.getHistory());
                 calculator.changeOperator(getNumericFieldNumber(), operator);
@@ -538,7 +536,7 @@ public class Controller implements Initializable {
             }
         } else {
             calculator.changeOperator(getNumericFieldNumber(), operator);
-            if (isUnaryResult) {
+            if (isPreviousUnary) {
                 history.appendHistory(SEPARATOR + operator.getText());
                 setHistoryFieldText(history.getHistory());
             } else {
@@ -548,9 +546,9 @@ public class Controller implements Initializable {
         }
 
         isSequence = true;
-        isLastNumber = true;
-        isResult = false;
-        isUnaryResult = false;
+        canChange = true;
+        canCalculateResult = false;
+        isPreviousUnary = false;
     }
 
     private String getNumericFieldText() {
@@ -559,7 +557,7 @@ public class Controller implements Initializable {
     }
 
     private void setNumericFieldText(String value) {
-        if (!isLockedScreen) {
+        if (!isError) {
             value = Formatter.display(value);
         }
 
@@ -616,14 +614,14 @@ public class Controller implements Initializable {
     }
 
     private void disableButtons(boolean disable) {
-        isLockedScreen = disable;
+        isError = disable;
         for (Button item : disabled) {
             item.setDisable(disable);
         }
     }
 
     private void disableMemoryButtons(boolean disable) {
-        isMemoryLocked = disable;
+        isMemoryAvailable = disable;
         for (Button item : disabledMemory) {
             item.setDisable(disable);
         }
@@ -645,7 +643,7 @@ public class Controller implements Initializable {
 
     private void normalStatement() {
         disableButtons(false);
-        disableMemoryButtons(isMemoryLocked);
+        disableMemoryButtons(isMemoryAvailable);
         calculator.resetOperator();
         history.clearHistory();
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
