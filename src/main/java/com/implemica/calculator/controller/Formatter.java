@@ -1,7 +1,6 @@
 package com.implemica.calculator.controller;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -16,15 +15,18 @@ import java.util.regex.Pattern;
 public class Formatter {
 
     private static final int MAX_PLAIN_SCALE = 16;
-    private static final int PLAIN_LENGTH = 16;
     private static final int PLAIN_WITH_SEPARATOR_LENGTH = 17;
-    private static final int NEGATE_PLAIN_LENGTH = 17;
-    private static final int PLAIN_WITH_ZERO_AND_SEPARATOR_LENGTH = 18;
     private static final int NEGATE_PLAIN_WITH_SEPARATOR_LENGTH = 19;
     private static final char GROUPING_SEPARATOR = ' ';
     private static final char DECIMAL_SEPARATOR = ',';
     private static final BigDecimal MAX_PLAIN_VALUE = new BigDecimal("9999999999999999");
     private static final BigDecimal MIN_PLAIN_VALUE = new BigDecimal("0.0000000000000001");
+    private static final String DOT = ".";
+    private static final String COMMA = ",";
+    private static final String EMPTY = "";
+    private static final String SPACE = " ";
+    private static final String COMMA_PATTERN = "(,$)";
+    private static final String COMMA_WITH_ZERO_PATTERN = "(,[0-9]*0$)";
     /**
      * Criteria for switch to engineering mode
      */
@@ -35,21 +37,21 @@ public class Formatter {
     }
 
     public static String display(String number) {
-        Pattern commaReg = Pattern.compile("(,$)");
+        Pattern commaReg = Pattern.compile(COMMA_PATTERN);
         Matcher commaMatch = commaReg.matcher(number);
 
         if (commaMatch.find()) {
             return number;
         }
 
-        Pattern commaWithZerosReg = Pattern.compile("(,0*$)");
+        Pattern commaWithZerosReg = Pattern.compile(COMMA_WITH_ZERO_PATTERN);
         Matcher commaWithZerosMatch = commaWithZerosReg.matcher(number);
 
         if (commaWithZerosMatch.find()) {
             return number;
         }
 
-        String currStr = number.replaceAll(" ", "").replace(",", ".");
+        String currStr = number.replaceAll(SPACE, EMPTY).replace(COMMA, DOT);
         BigDecimal currNum = new BigDecimal(currStr);
         int scale = 0;
 
@@ -68,39 +70,6 @@ public class Formatter {
         return display(currNum.setScale(scale, BigDecimal.ROUND_HALF_UP));
     }
 
-    private static boolean checkLength(String value) {
-        if (value == null || value.isEmpty()) {
-            return false;
-        }
-
-        if (value.startsWith("0.") && !value.startsWith("-")) {
-            return value.length() <= PLAIN_WITH_ZERO_AND_SEPARATOR_LENGTH;
-        }
-
-        if (!value.contains(".") && !value.startsWith("-")) {
-            return value.length() <= PLAIN_LENGTH;
-        }
-
-        if (value.contains(".") && !value.startsWith("-")) {
-            return value.length() <= PLAIN_WITH_SEPARATOR_LENGTH;
-        }
-
-        if (!value.contains(".") && value.startsWith("-")) {
-            return value.length() <= NEGATE_PLAIN_LENGTH;
-        }
-
-        return value.contains(".") && value.startsWith("-") && value.length() <= NEGATE_PLAIN_WITH_SEPARATOR_LENGTH;
-    }
-
-    private static boolean isEngineeringValue(BigDecimal number) {
-        if (number.abs().compareTo(MIN_PLAIN_VALUE) < 0 || number.abs().compareTo(MAX_PLAIN_VALUE) > 0) {
-            return number.setScale(0, BigDecimal.ROUND_HALF_UP).toString().length() != MAX_PLAIN_SCALE;
-        }
-
-        String value = number.toPlainString();
-        return number.stripTrailingZeros().scale() > MAX_PLAIN_SCALE || !checkLength(value);
-    }
-
     private static String formatMathView(String numberStr) {
         BigDecimal number = new BigDecimal(numberStr);
 
@@ -110,11 +79,24 @@ public class Formatter {
 
         String stringValue;
 
+        BigDecimal plain = new BigDecimal(formatPlainView(number).replace(" ", "").replace(",","."));
+
+        if (plain.abs().compareTo(MIN_PLAIN_VALUE) < 0 || plain.abs().compareTo(MAX_PLAIN_VALUE) > 0) {
+            stringValue = formatEngineeringView(number);
+        } else if (Math.abs(number.stripTrailingZeros().scale() - number.stripTrailingZeros().precision()) > MAX_PLAIN_SCALE) {
+            stringValue = formatEngineeringView(number);
+        } else {
+            stringValue = formatPlainView(number);
+        }
+
+        /*
         if (isEngineeringValue(number)) {
             stringValue = formatEngineeringView(number);
         } else {
             stringValue = formatPlainView(number);
         }
+        */
+
         return stringValue;
     }
 
@@ -123,10 +105,10 @@ public class Formatter {
         symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
         symbols.setGroupingSeparator(GROUPING_SEPARATOR);
 
-        DecimalFormat format = new DecimalFormat("0.###############E0");
-        format.setRoundingMode(RoundingMode.HALF_UP);
-        format.setDecimalFormatSymbols(symbols);
-        String formattedNumber = format.format(number).toLowerCase();
+        DecimalFormat df = new DecimalFormat("0.###############E0");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        df.setDecimalFormatSymbols(symbols);
+        String formattedNumber = df.format(number).toLowerCase();
         return checkEngineeringView(formattedNumber);
     }
 
@@ -168,5 +150,10 @@ public class Formatter {
             return PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".");
         }
         return PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".") - 1;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(display("9.9999999999999999999999999999999"));
     }
 }

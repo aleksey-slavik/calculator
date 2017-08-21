@@ -112,7 +112,7 @@ public class Calculator {
             res = divide();
         }
 
-        if (Math.abs(res.scale()) >= MAX_SCALE) {
+        if (Math.abs(res.scale() - res.precision()) >= MAX_SCALE) {
             throw new OverflowException("Scale of result is bigger than max scale value");
         }
 
@@ -183,7 +183,7 @@ public class Calculator {
             return BigDecimal.ZERO;
         }
 
-        return sqrtD(value);
+        return sqrt(value, BigDecimal.ONE);
     }
 
     public void clearAll() {
@@ -218,10 +218,5 @@ public class Calculator {
             flipA = result;
         }
         return result;
-    }
-
-    public static BigDecimal sqrtD(BigDecimal value) {
-        BigDecimal x = new BigDecimal(Math.sqrt(value.doubleValue()));
-        return x.add(new BigDecimal(value.subtract(x.multiply(x)).doubleValue() / (x.doubleValue() * 2.0)));
     }
 }

@@ -8,9 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import org.testfx.api.FxRobot;
@@ -62,6 +60,7 @@ public class ViewTest {
      * Numeric field label
      */
     private static Label numericField;
+    private static AnchorPane menuPane;
 
     @BeforeClass
     public static void initJFX() throws InterruptedException {
@@ -76,9 +75,11 @@ public class ViewTest {
 
             Scene scene = stage.getScene();
             numericField = (Label) scene.lookup("#numericField");
+            menuPane = (AnchorPane) scene.lookup("#navigator");
         });
         WaitForAsyncUtils.waitForFxEvents();
     }
+
 
     /**
      * Moving window tests
@@ -105,14 +106,6 @@ public class ViewTest {
     }
 
     /**
-     * Close application test
-     */
-    @Test
-    public void exitTest() {
-        //todo
-    }
-
-    /**
      * Expand application test
      */
     @Test
@@ -130,14 +123,15 @@ public class ViewTest {
     /**
      * Hide application test
      */
-    @Ignore
     @Test
     public void hideTest() {
         Button hide = GuiTest.find("#hide");
         assertEquals(false, stage.isIconified());
         robot.clickOn(hide);
         assertEquals(true, stage.isIconified());
-        //stage.setIconified(false);
+        Platform.runLater(() -> stage.setIconified(false));
+        WaitForAsyncUtils.waitForFxEvents();
+        assertEquals(false, stage.isIconified());
     }
 
     /**
@@ -146,16 +140,14 @@ public class ViewTest {
     @Test
     public void menuTest() throws Exception {
         Button menuShow = GuiTest.find("#menuShow");
-
         robot.clickOn(menuShow);
         Thread.sleep(350);
-        AnchorPane menu = GuiTest.find("#navigator");
-        assertEquals(0, menu.getTranslateX(), 0.1);
+        assertEquals(0, menuPane.getTranslateX(), 0.1);
 
         Button menuClose = GuiTest.find("#menuClose");
         robot.clickOn(menuClose);
         Thread.sleep(350);
-        assertEquals(-260, menu.getTranslateX(), 0.1);
+        assertEquals(-260, menuPane.getTranslateX(), 0.1);
     }
 
     /**

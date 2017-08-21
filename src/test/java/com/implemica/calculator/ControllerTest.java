@@ -139,20 +139,18 @@ public class ControllerTest {
 
         testExpression("1 / 1 /", "1", "1 ÷ 1 ÷");
         testExpression("3 / 1 =", "3", "");
-        testExpression("0,00000000000001 / 1 /", "0,00000000000001", "0,00000000000001 ÷ 1 ÷");
+        testExpression(",0000000000000001 / 1 /", "0,0000000000000001", "0,0000000000000001 ÷ 1 ÷");
         testExpression("9999999999999999 / 1 =", "9 999 999 999 999 999", "");
 
-        testExpression("0,00000000000002 / 2 /", "0,00000000000001", "0,00000000000002 ÷ 2 ÷");
-        testExpression("0,00000000000001 / 2 =", "0,000000000000005", "");
-        testExpression("0,00000000000001 / 10 +", "0,000000000000001", "0,00000000000001 ÷ 10 +");
-        testExpression("0,00000000000001 / 3 =", "3,333333333333333e-15", "");
-        testExpression("0,00000000000001 / 0,00000000000001 =", "1", "");
-        testExpression("0,00000000000001 / 0,00000000000002 =", "0,5", "");
-        testExpression("0,00000000000002 / 0,00000000000001 -", "2", "00000000002 ÷ 0,00000000000001 -");
-        testExpression("0,00000000000001 / 9999999999999999 =", "1e-30", "");
+        testExpression(",0000000000000001 / 10 +", "1e-17", "0,0000000000000001 ÷ 10 +");
+        testExpression(",0000000000000001 / 3 =", "3,333333333333333e-17", "");
+        testExpression(",0000000000000001 / ,0000000000000001 =", "1", "");
+        testExpression(",0000000000000001 / ,0000000000000002 =", "0,5", "");
+        testExpression(",0000000000000002 / ,0000000000000001 -", "2", "000000002 ÷ 0,0000000000000001 -");
+        testExpression(",0000000000000001 / 9999999999999999 =", "1e-32", "");
 
         testExpression("9999999999999999 / 9 =", "1 111 111 111 111 111", "");
-        testExpression("9999999999999999 / 7 -", "1,428571428571428e+15", "9999999999999999 ÷ 7 -");
+        testExpression("9999999999999999 / 7 -", "1 428 571 428 571 428", "9999999999999999 ÷ 7 -");
         testExpression("9999999999999999 / 0,1 =", "9,999999999999999e+16", "");
         testExpression("9999999999999999 / 0,00000000000001 =", "9,999999999999999e+29", "");
         testExpression("9999999999999999 / 9999999999999999 /", "1", "99999999999 ÷ 9999999999999999 ÷");
@@ -162,7 +160,7 @@ public class ControllerTest {
         testExpression("10 / 2 /", "5", "10 ÷ 2 ÷");
         testExpression("10 negate / 2 =", "-5", "");
         testExpression("10 / 2 negate /", "-5", "10 ÷ -2 ÷");
-        testExpression("1 / 3 =", "3,333333333333333e-1", "");
+        testExpression("1 / 3 =", "0,3333333333333333", "");
         testExpression("10 / 2 = =", "2,5", "");
         testExpression("10 / 2 = = =", "1,25", "");
 
@@ -275,8 +273,8 @@ public class ControllerTest {
         testExpression("5 + 10 1/ 1/ =", "15");
         testExpression("5 + 10 1/ 1/ 1/ =", "5,1");
 
-        testExpression("9999999999999999 1/", "1e-16");
-        testExpression("9999999999999999 negate 1/", "-1e-16");
+        testExpression("9999999999999999 1/", "0,0000000000000001");
+        testExpression("9999999999999999 negate 1/", "-0,0000000000000001");
         testExpression("0,00000000000001 1/", "100 000 000 000 000");
         testExpression("0,00000000000001 negate 1/", "-100 000 000 000 000");
         testExpression("0,00000000000001 1/ 1/", "0,00000000000001");
@@ -319,8 +317,8 @@ public class ControllerTest {
         testExpression("5 negate negate sqr", "25", "sqr(5)");
         testExpression("125 negate sqr sqr", "244 140 625", "sqr(sqr(-125))");
 
-        testExpression("0,000000000000001 sqr", "1e-30","sqr(0,000000000000001)");
-        testExpression("0,000000000000001 negate sqr sqr", "1e-60","sqr(sqr(-0,000000000000001))");
+        testExpression("0,0000000000000001 sqr", "1e-32","sqr(0,0000000000000001)");
+        testExpression("0,0000000000000001 negate sqr sqr", "1e-64","sqr(sqr(-0,0000000000000001))");
         testExpression("9999999999999999 sqr", "9,999999999999998e+31","sqr(9999999999999999)");
         testExpression("9999999999999999 negate sqr sqr sqr sqr", "9,999999999999984e+255","qr(sqr(sqr(-9999999999999999))))");
     }
@@ -394,11 +392,11 @@ public class ControllerTest {
         testExpression("9999999999999999 - 9999999999999999 % =", "-9,999999999999898e+29");
         testExpression("9999999999999999 + 0,00000000000001 % =", "1e+16");
 
-        testExpression("0,00000000000001 + 1 % =", "0,00000000000001");
-        testExpression("0,00000000000001 - 1 % =", "9,9e-15");
-        testExpression("0,00000000000001 - 100 % =", "0");
-        testExpression("0,00000000000001 + 100 % =", "0,00000000000002");
-        testExpression("0,00000000000001 + 0,00000000000001 % =", "1e-14");
+        testExpression(",0000000000000001 + 1 % =", "0,0000000000000001");
+        testExpression(",0000000000000001 - 1 % =", "0,0000000000000001");
+        testExpression(",0000000000000001 - 100 % =", "0");
+        testExpression(",0000000000000001 + 100 % =", "0,0000000000000002");
+        testExpression(",0000000000000001 + ,0000000000000001 % =", "0,0000000000000001");
 
         testExpression("0 + 1 % =", "0");
         testExpression("0 + 10 % =", "0");
@@ -479,8 +477,8 @@ public class ControllerTest {
     @Test
     public void overflowTest() throws Exception{
         testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
-        //testExpression("1 / 9999999999999999 = = = = = = = = = = = = = = = = = MS / MR = = = = = = =  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
-        //testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
+        testExpression("1 / 9999999999999999 = = = = = = = = = = = = = = = = = MS / MR = = = = = = =  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
+        testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
 
     }
 
@@ -490,8 +488,8 @@ public class ControllerTest {
         testMemoryExpression(", MS C MR", "0");
         testMemoryExpression("0,000000000000001 MS C MR", "0,000000000000001");
         testMemoryExpression("9999999999999999 MS C MR", "9 999 999 999 999 999");
-        testMemoryExpression("9999999999999999 + 1 = MS C MR", "1,e+16");
-        testMemoryExpression("0,000000000000001 / 10 = MS C MR", "1,e-16");
+        testMemoryExpression("9999999999999999 + 1 = MS C MR", "1e+16");
+        testMemoryExpression(",0000000000000001 / 10 = MS C MR", "1e-17");
 
         testMemoryExpression("965 M+ + 123 MR", "965");
         testMemoryExpression("50 M+ M+ M+ MR", "150");
