@@ -462,7 +462,7 @@ public class Controller implements Initializable {
     @FXML
     private void memoryRecallClick() {
         setNumericFieldNumber(memory.memoryRecall());
-        //canChange = true;
+        canChange = false;
     }
 
     @FXML
@@ -472,7 +472,7 @@ public class Controller implements Initializable {
         }
 
         memory.memoryAdd(getNumericFieldNumber());
-        canChange = true;
+        canChange = false;
     }
 
     @FXML
@@ -482,7 +482,7 @@ public class Controller implements Initializable {
         }
 
         memory.memorySubtract(getNumericFieldNumber());
-        canChange = true;
+        canChange = false;
     }
 
     @FXML
@@ -492,7 +492,7 @@ public class Controller implements Initializable {
         }
 
         memory.memoryStore(getNumericFieldNumber());
-        canChange = true;
+        canChange = false;
     }
 
     @FXML

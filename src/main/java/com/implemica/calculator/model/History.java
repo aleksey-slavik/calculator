@@ -57,7 +57,7 @@ public class History {
      * @param text append value
      */
     public void appendHistory(String text) {
-        history += text;
+        history += SPACE + text;
     }
 
     /**
@@ -78,11 +78,8 @@ public class History {
      * @param operator given function
      */
     public void surround(Operator operator) {
-        if (history.contains(SPACE)) {
-            replace(surround(operator, getLastElement()));
-        } else {
-            replace(surround(operator, getLastElement()));
-        }
+
+        replace(surround(operator, getLastElement()));
     }
 
     /**
@@ -100,7 +97,7 @@ public class History {
      *
      * @param text expression
      */
-    private void replace(String text) {
+    public void replace(String text) {
         int lastSpace = history.lastIndexOf(SPACE) + 1;
 
         if (lastSpace == -1) {
