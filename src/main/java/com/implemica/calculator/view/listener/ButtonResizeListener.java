@@ -17,12 +17,12 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Big font size of digits group
      */
-    private static final int DIGIT_BIG_FONT_SIZE = 24;
+    private static final int DIGIT_BIG_FONT_SIZE = 33;
 
     /**
      * Medium font size of digits group
      */
-    private static final int DIGIT_MEDIUM_FONT_SIZE = 20;
+    private static final int DIGIT_MEDIUM_FONT_SIZE = 28;
 
     /**
      * Small font size of digits group
@@ -32,47 +32,32 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Big font size of binary group
      */
-    private static final int BINARY_BIG_FONT_SIZE = 24;
+    private static final int BINARY_BIG_FONT_SIZE = 30;
 
     /**
      * Medium font size of binary group
      */
-    private static final int BINARY_MEDIUM_FONT_SIZE = 20;
+    private static final int BINARY_MEDIUM_FONT_SIZE = 26;
 
     /**
      * Small font size of binary group
      */
-    private static final int BINARY_SMALL_FONT_SIZE = 20;
+    private static final int BINARY_SMALL_FONT_SIZE = 22;
 
     /**
      * Big font size of unary group
      */
-    private static final int UNARY_BIG_FONT_SIZE = 20;
+    private static final int UNARY_BIG_FONT_SIZE = 24;
 
     /**
      * Medium font size of unary group
      */
-    private static final int UNARY_MEDIUM_FONT_SIZE = 17;
+    private static final int UNARY_MEDIUM_FONT_SIZE = 20;
 
     /**
      * Small font size of unary group
      */
     private static final int UNARY_SMALL_FONT_SIZE = 16;
-
-    /**
-     * Big font size of clear group
-     */
-    private static final int CLEAR_BIG_FONT_SIZE = 24;
-
-    /**
-     * Medium font size of clear group
-     */
-    private static final int CLEAR_MEDIUM_FONT_SIZE = 20;
-
-    /**
-     * Small font size of clear group
-     */
-    private static final int CLEAR_SMALL_FONT_SIZE = 16;
 
     /**
      * Value of height of window.
@@ -102,11 +87,6 @@ public class ButtonResizeListener implements InvalidationListener {
      * Unary group of buttons
      */
     private static ArrayList<String> unary = new ArrayList<>();
-
-    /**
-     * Clear group of buttons
-     */
-    private static ArrayList<String> clear = new ArrayList<>();
 
     /**
      * Scene of window
@@ -145,9 +125,8 @@ public class ButtonResizeListener implements InvalidationListener {
         unary.add("#sqr");
         unary.add("#sqrt");
         unary.add("#inverse");
-
-        clear.add("#clear");
-        clear.add("#clear_expr");
+        unary.add("#clear");
+        unary.add("#clear_expr");
     }
 
     @Override
@@ -155,11 +134,11 @@ public class ButtonResizeListener implements InvalidationListener {
         double height = scene.getHeight();
 
         if (height > BIG_HEIGHT) {
-            resize(DIGIT_BIG_FONT_SIZE, BINARY_BIG_FONT_SIZE, UNARY_BIG_FONT_SIZE, CLEAR_BIG_FONT_SIZE);
+            resize(DIGIT_BIG_FONT_SIZE, BINARY_BIG_FONT_SIZE, UNARY_BIG_FONT_SIZE);
         } else if (height > MEDIUM_HEIGHT) {
-            resize(DIGIT_MEDIUM_FONT_SIZE, BINARY_MEDIUM_FONT_SIZE, UNARY_MEDIUM_FONT_SIZE, CLEAR_MEDIUM_FONT_SIZE);
+            resize(DIGIT_MEDIUM_FONT_SIZE, BINARY_MEDIUM_FONT_SIZE, UNARY_MEDIUM_FONT_SIZE);
         } else {
-            resize(DIGIT_SMALL_FONT_SIZE, BINARY_SMALL_FONT_SIZE, UNARY_SMALL_FONT_SIZE, CLEAR_SMALL_FONT_SIZE);
+            resize(DIGIT_SMALL_FONT_SIZE, BINARY_SMALL_FONT_SIZE, UNARY_SMALL_FONT_SIZE);
         }
     }
 
@@ -169,9 +148,8 @@ public class ButtonResizeListener implements InvalidationListener {
      * @param digitSize     size of digit group buttons
      * @param binarySize    size of binary group buttons
      * @param unarySize     size of unary group buttons
-     * @param clearSize     size of clear group buttons
      */
-    private void resize(int digitSize, int binarySize, int unarySize, int clearSize) {
+    private void resize(int digitSize, int binarySize, int unarySize) {
         for (String id : digits) {
             Button bt = (Button) scene.lookup(id);
             bt.setStyle(getFontString(digitSize));
@@ -185,11 +163,6 @@ public class ButtonResizeListener implements InvalidationListener {
         for (String id : unary) {
             Button bt = (Button) scene.lookup(id);
             bt.setStyle(getFontString(unarySize));
-        }
-
-        for (String id : clear) {
-            Button bt = (Button) scene.lookup(id);
-            bt.setStyle(getFontString(clearSize));
         }
     }
 

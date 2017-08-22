@@ -534,18 +534,18 @@ public class ControllerTest {
         testExpression("38,88 / 66 CE 12 - 98,92 + 44 back *", "-91,68", "38,88 ÷ 12 - 98,92 + 4 ×");
 
         testExpression("75 MS C 888 - 45 + MR -", "918", "888 - 45 + 75 -");
-        testExpression("925,77 * 99999 sqr M+ * 99999 M- MR + 98765 sqr sqr -", "9,266752199568381e+22", " + sqr(sqr(98765)) -");
-        testExpression("987654321 sqr sqr M+ M+ C 98 back * MR =", "1,712743695476513e+37", "");
-        testExpression("56 MS 98 + 35,77 MR M+ M- M- =","154","");
-        testExpression("81 M+ sqrt - 99 * 22 negate - M+ M+ MR","4041","√(81) - 99 × -22");
-        testExpression("225 sqr M- sqr + 66 / 8 M+ MR","-50617","sqr(sqr(225)) + 66 ÷");
+        testExpression("925,77 * 99999 sqr M+ * 99999 M- MR + 98765 sqr sqr -", "9,266752199568381e+22", "× 9999700002 + sqr(sqr(98765)) -");
+        testExpression("987654321 sqr sqr M+ M+ C 98 back * MR =", "1,712743695476512e+37", "");
+        testExpression("56 MS C 98 + 35,77 MR M+ M- M- =","154","");
+        testExpression("81 M+ sqrt - 99 * 22 negate - M+ M+ MR","4 041","√(81) - 99 × -22 -");
+        testExpression("225 sqr M- sqr + 66 / 8 M+ MR","-50 617","sqr(sqr(225)) + 66 ÷");
 
         testExpression(",000000000000001 + ,000000000000001 / ,000000000000001 =", "2");
         testExpression("9999999999999999 + 5 - 4 / 10 =", "1 000 000 000 000 000");
         testExpression("9999999999999999 + 9999999999999999 / 9999999999999999 =", "2");
         testExpression("9999999999999999 * sqr MS + 9876543210 + MR =","9,999999999999998e+47");
-        testExpression(",000000000000001 sqrt / 800 sqr =","1,5625e-14");
-        testExpression(",000000000000001 * = / 99999999999999 + 34","1,e-48");
+        testExpression(",000000000000001 sqrt / 800 sqr =","0,0000000000000494");
+        testExpression(",000000000000001 * = / 99999999999999 + 34","34");
     }
 
     @Test
@@ -583,14 +583,14 @@ public class ControllerTest {
         testMemoryExpression(",000000000000001 M+ sqr sqr MR", "0,000000000000001");
         testMemoryExpression("9999999999999999 negate M+ 1/ MR", "-9 999 999 999 999 999");
 
-        testMemoryExpression("4723399 M- 2377 M- MR", "-4 725 776");
+        testMemoryExpression("4723399 M- C 2377 M- MR", "-4 725 776");
         testMemoryExpression("98 M- C MR", "-98");
         testMemoryExpression("98 negate M- C MR", "98");
         testMemoryExpression("125 M- M- M- M- MR", "-500");
         testMemoryExpression(",000000000000001 negate M- * 85 MR", "0,000000000000001");
         testMemoryExpression("9999999999999999 M- sqrt + 67 MR", "-9 999 999 999 999 999");
 
-        testMemoryExpression("98 M- 98 M+ MR", "0");
+        testMemoryExpression("98 M- C 98 M+ MR", "0");
         testMemoryExpression("9999999999999999 M+ M- M+ M- MR", "0");
         testMemoryExpression(",000000000000001 negate M- M+ M- M+ M- M+ MR", "0");
         testMemoryExpression("9999999999999999 sqr M+ C MR sqrt", "9 999 999 999 999 999");
@@ -661,14 +661,22 @@ public class ControllerTest {
 
     @Test
     public void historyOverflowTest() throws Exception {
-        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 +", "3e+16", "99999999999 + 9999999999999999 +");
-        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 + <", "3e+16", "9999999999999999 + 99999999999999");
-        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 + < >", "3e+16", "999999999999 + 9999999999999999 +");
         testExpression("123 negate + 889 - 7643 / 2357 * sqr <", "8,512926497930231", "-123 + 889 - 7643 ÷ 2357 × sqr(-2");
+        testExpression("87,999 sqrt + 65 sqr sqr - 89,0076 + ,0011 1/ - 849 * 382999 + < > < >","6 836 764 042 139,976", "076 + 1/(0,0011) - 849 × 382999 +");
+        testExpression("14374,99 * 65438,01 - 34 1/ 1/ 1/ sqr + 88 < -","940 670 827,3690349",",01 - sqr(1/(1/(1/(34)))) + 88 -");
+
+        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 +", "3e+16", "99999999999 + 9999999999999999 +");
+        testExpression("9999999999999999 * 9999999999999999 * 9999999999999999 + <", "9,999999999999997e+47", "9999999999999999 × 99999999999999");
+        testExpression("9999999999999999 / 9999999999999999 - 9999999999999999 + < >", "-9 999 999 999 999 998", "999999999999 - 9999999999999999 +");
+
+        testExpression(",0000000000000001 + ,0000000000000001 - ,0000000000000001 + < > < > < >", "0,0000000000000001", "0000000001 - 0,0000000000000001 +");
+        testExpression(",0000000000000001 * ,0000000000000001 + ,0000000000000001 / <", "0,0000000000000001", "0,0000000000000001 × 0,0000000000");
+        testExpression(",0000000000000001 sqr - ,0000000000000001 sqrt * ,0000000000000001 1/ + < > < > <", "-100 000 000", "00000000000001) - √(0,00000000000");
     }
 
     private void testExpression(String expression, String expected) throws Exception {
         controller.push(KeyCode.ESCAPE);
+        controller.push(KeyCode.CONTROL, KeyCode.L);
 
         for (String item : expression.split(" ")) {
             pushButton(item, false);

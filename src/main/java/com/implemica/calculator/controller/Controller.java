@@ -333,14 +333,14 @@ public class Controller implements Initializable {
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         } else {
             setNumericFieldNumber(calculator.percent(getNumericFieldNumber()));
-            String value = getNumericFieldText();
+            String value = getNumericFieldText().replace(" ", "");
 
             if (canChange) {
-                String history = getHistoryFieldText();
-                int begin = history.lastIndexOf(SEPARATOR);
-                setHistoryFieldText(history.substring(0, begin) + SEPARATOR + value);
+                history.replace(value);
+                setHistoryFieldText(history.getHistory());
             } else {
-                appendHistoryFieldText(SEPARATOR + value);
+                history.appendHistory(value);
+                setHistoryFieldText(history.getHistory());
             }
         }
 
@@ -369,7 +369,7 @@ public class Controller implements Initializable {
             history.surround(Operator.SQR);
             setHistoryFieldText(history.getHistory());
         } else {
-            history.appendHistory(SEPARATOR + history.surround(Operator.SQR, value));
+            history.appendHistory(history.surround(Operator.SQR, value));
             setHistoryFieldText(history.getHistory());
         }
 
@@ -394,7 +394,7 @@ public class Controller implements Initializable {
             history.surround(Operator.SQRT);
             setHistoryFieldText(history.getHistory());
         } else {
-            history.appendHistory(SEPARATOR + history.surround(Operator.SQRT, value));
+            history.appendHistory(history.surround(Operator.SQRT, value));
             setHistoryFieldText(history.getHistory());
         }
 
@@ -439,7 +439,7 @@ public class Controller implements Initializable {
             history.surround(Operator.INVERSE);
             setHistoryFieldText(history.getHistory());
         } else {
-            history.appendHistory(SEPARATOR + history.surround(Operator.INVERSE, value));
+            history.appendHistory(history.surround(Operator.INVERSE, value));
             setHistoryFieldText(history.getHistory());
         }
 
@@ -520,7 +520,7 @@ public class Controller implements Initializable {
 
         if (isSequence) {
             if (isPreviousUnary) {
-                history.appendHistory(SEPARATOR + operator.getText());
+                history.appendHistory(operator.getText());
                 setHistoryFieldText(history.getHistory());
                 setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
                 calculator.changeOperator(getNumericFieldNumber(), operator);
@@ -529,7 +529,7 @@ public class Controller implements Initializable {
                 setHistoryFieldText(history.getHistory());
                 calculator.changeOperator(getNumericFieldNumber(), operator);
             } else {
-                history.appendHistory(SEPARATOR + value + SEPARATOR + operator.getText());
+                history.appendHistory(value + SEPARATOR + operator.getText());
                 setHistoryFieldText(history.getHistory());
                 setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
                 calculator.changeOperator(getNumericFieldNumber(), operator);
@@ -537,7 +537,7 @@ public class Controller implements Initializable {
         } else {
             calculator.changeOperator(getNumericFieldNumber(), operator);
             if (isPreviousUnary) {
-                history.appendHistory(SEPARATOR + operator.getText());
+                history.appendHistory(operator.getText());
                 setHistoryFieldText(history.getHistory());
             } else {
                 history.setHistory(value + SEPARATOR + operator.getText());
@@ -574,11 +574,6 @@ public class Controller implements Initializable {
         numericField.setText(Formatter.display(number));
     }
 
-    private String getHistoryFieldText() {
-
-        return historyField.getText();
-    }
-
     private void setHistoryFieldText(String value) {
         if (value.length() > getLabelSize()) {
             left.setVisible(true);
@@ -598,11 +593,6 @@ public class Controller implements Initializable {
     private void appendNumericFieldText(String value) {
 
         setNumericFieldText(getNumericFieldText() + value);
-    }
-
-    private void appendHistoryFieldText(String value) {
-        history.appendHistory(value);
-        setHistoryFieldText(history.getHistory());
     }
 
     private void clickOnButton(Button button) {

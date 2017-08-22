@@ -2,6 +2,7 @@ package com.implemica.calculator;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -90,6 +91,9 @@ public class ViewTest {
         moveTest(-200, -200);
         moveTest(500, 0);
         moveTest(0, 300);
+        moveTest(120, 300);
+        moveTest(-1500, 0);
+        moveTest(534, -1000);
     }
 
     /**
@@ -97,12 +101,107 @@ public class ViewTest {
      */
     @Test
     public void resizeTest() {
-        resizeTest(50, 0, "E");
-        resizeTest(-50, 0, "W");
-        resizeTest(0, -50, "N");
-        resizeTest(0, 50, "S");
-        resizeTest(50, 50, "SE");
-        resizeTest(-50, 50, "SW");
+        resizeTest(0, 0, "E", 23, 22, 16);
+        resizeTest(100, 0, "E", 23, 22, 16);
+        resizeTest(0, 50, "E", 23, 22, 16);
+        resizeTest(-123, 0, "E", 23, 22, 16);
+        resizeTest(0, -65, "E", 23, 22, 16);
+        resizeTest(943, 827, "E", 23, 22, 16);
+        resizeTest(0, 1062, "E", 23, 22, 16);
+        resizeTest(1000, 0, "E", 23, 22, 16);
+        resizeTest(-1020, -3000, "E", 23, 22, 16);
+        resizeTest(0, -2345, "E", 23, 22, 16);
+        resizeTest(-9876, 0, "E", 23, 22, 16);
+        resizeTest(-1765, 1399, "E", 23, 22, 16);
+        resizeTest(999, -986, "E", 23, 22, 16);
+
+        resizeTest(0, 0, "W", 23, 22, 16);
+        resizeTest(-50, 0, "W", 23, 22, 16);
+        resizeTest(0, 89, "W", 23, 22, 16);
+        resizeTest(0, -152, "W", 23, 22, 16);
+        resizeTest(58, 0, "W", 23, 22, 16);
+        resizeTest(1043, 1027, "W", 23, 22, 16);
+        resizeTest(0, 962, "W", 23, 22, 16);
+        resizeTest(980, 0, "W", 23, 22, 16);
+        resizeTest(-1024, -1321, "W", 23, 22, 16);
+        resizeTest(0, -5432, "W", 23, 22, 16);
+        resizeTest(-8888, 0, "W", 23, 22, 16);
+        resizeTest(-1111, 1399, "W", 23, 22, 16);
+        resizeTest(777, -666, "W", 23, 22, 16);
+
+        resizeTest(0, 0, "N", 23, 22, 16);
+        resizeTest(0, 52, "N", 23, 22, 16);
+        resizeTest(65, 0, "N", 23, 22, 16);
+        resizeTest(-10, 48, "N", 23, 22, 16);
+        resizeTest(-1740, 0, "N", 23, 22, 16);
+        resizeTest(-2111, 3399, "N", 23, 22, 16);
+        resizeTest(1777, -1666, "N", 28, 26, 20);
+        resizeTest(1243, 1327, "N", 23, 22, 16);
+        resizeTest(0, 1962, "N", 23, 22, 16);
+        resizeTest(2980, 0, "N", 23, 22, 16);
+        resizeTest(-1924, -2321, "N", 28, 26, 20);
+        resizeTest(0, -2432, "N", 28, 26, 20);
+
+        resizeTest(0, 0, "S", 23, 22, 16);
+        resizeTest(0, 101, "S", 28, 26, 20);
+        resizeTest(10, 201, "S", 33, 30, 24);
+        resizeTest(124, 200, "S", 28, 26, 20);
+        resizeTest(0, 1962, "S", 33, 30, 24);
+        resizeTest(2980, 0, "S", 23, 22, 16);
+        resizeTest(-1924, -2321, "S", 23, 22, 16);
+        resizeTest(0, -2432, "S", 23, 22, 16);
+        resizeTest(-1320, 0, "S", 23, 22, 16);
+        resizeTest(-2121, 1399, "S", 33, 30, 24);
+        resizeTest(1777, -1446, "S", 23, 22, 16);
+        resizeTest(1443, 1321, "S", 33, 30, 24);
+
+        resizeTest(0, 0, "SE", 23, 22, 16);
+        resizeTest(50, 50, "SE", 23, 22, 16);
+        resizeTest(145, 199, "SE", 28, 26, 20);
+        resizeTest(-250, 22, "SE", 23, 22, 16);
+        resizeTest(1280, 0, "SE", 23, 22, 16);
+        resizeTest(-3924, -1321, "SE", 23, 22, 16);
+        resizeTest(1123, -1555, "SE", 23, 22, 16);
+        resizeTest(1763, 1848, "SE", 33, 30, 24);
+        resizeTest(0, -2974, "SE", 23, 22, 16);
+        resizeTest(-1769, 0, "SE", 23, 22, 16);
+        resizeTest(-1121, 1654, "SE", 33, 30, 24);
+
+        resizeTest(0, 0, "SW", 23, 22, 16);
+        resizeTest(-50, 50, "SW", 23, 22, 16);
+        resizeTest(99, -87, "SW", 23, 22, 16);
+        resizeTest(155, 120, "SW", 28, 26, 20);
+        resizeTest(1763, 0, "SW", 23, 22, 16);
+        resizeTest(-1993, 0, "SW", 23, 22, 16);
+        resizeTest(-1762, 1621, "SW", 33, 30, 24);
+        resizeTest(-2723, -1893, "SW", 23, 22, 16);
+        resizeTest(1636, -1828, "SW", 23, 22, 16);
+        resizeTest(2762, 1992, "SW", 33, 30, 24);
+        resizeTest(0, -1904, "SW", 23, 22, 16);
+
+        resizeTest(0, 0, "NE", 23, 22, 16);
+        resizeTest(140, -122, "NE", 28, 26, 20);
+        resizeTest(200, 199, "NE", 23, 22, 16);
+        resizeTest(-98, 176, "NE", 23, 22, 16);
+        resizeTest(2733, 0, "NE", 23, 22, 16);
+        resizeTest(2873, 1873, "NE", 23, 22, 16);
+        resizeTest(0, -8754, "NE", 28, 26, 20);
+        resizeTest(-8363, 0, "NE", 23, 22, 16);
+        resizeTest(-5261, 6271, "NE", 23, 22, 16);
+        resizeTest(-6172, -3182, "NE", 28, 26, 20);
+        resizeTest(7641, -1932, "NE", 28, 26, 20);
+
+        resizeTest(0, 0, "NW", 23, 22, 16);
+        resizeTest(177, 78, "NW", 23, 22, 16);
+        resizeTest(155, -61, "NW", 23, 22, 16);
+        resizeTest(127, 182, "NW", 23, 22, 16);
+        resizeTest(2733, 0, "NW", 23, 22, 16);
+        resizeTest(0, -8754, "NW", 28, 26, 20);
+        resizeTest(-6172, -3182, "NW", 28, 26, 20);
+        resizeTest(7641, -1932, "NW", 28, 26, 20);
+        resizeTest(2873, 1873, "NW", 23, 22, 16);
+        resizeTest(-8363, 0, "NW", 23, 22, 16);
+        resizeTest(-5261, 6271, "NW", 23, 22, 16);
     }
 
     /**
@@ -151,16 +250,6 @@ public class ViewTest {
     }
 
     /**
-     * Check font size of buttons during resize window
-     */
-    @Test
-    public void fontResizeTest() {
-        fontResizeTest(0, 16, 16, 14, 12);
-        fontResizeTest(10, 16, 16, 14, 12);
-        fontResizeTest(110, 20, 20, 17, 20);
-    }
-
-    /**
      * Check font size of numeric field depending on the count of chars in field
      */
     @Test
@@ -172,19 +261,19 @@ public class ViewTest {
     /**
      * Move window and check position of window
      *
-     * @param x offset of X coordinate
-     * @param y offset of Y coordinate
+     * @param dx offset of X coordinate
+     * @param dy offset of Y coordinate
      */
-    private void moveTest(int x, int y) {
+    private void moveTest(int dx, int dy) {
         AnchorPane title = GuiTest.find("#title");
         double beforeX = stage.getX();
         double beforeY = stage.getY();
         robot.drag(title, MouseButton.PRIMARY);
-        robot.moveBy(x, y);
+        robot.moveBy(dx, dy);
         double afterX = stage.getX();
         double afterY = stage.getY();
-        assertEquals(beforeX + x, afterX, 0.1);
-        assertEquals(beforeY + y, afterY, 0.1);
+        assertEquals(beforeX + dx, afterX, 0.1);
+        assertEquals(beforeY + dy, afterY, 0.1);
     }
 
     /**
@@ -192,75 +281,78 @@ public class ViewTest {
      * Position NE, SE, SW, NW mean that resize started from corresponding corner of window.
      * Position E, W, N, S mean that resize started from random point in corresponding side of window.
      *
-     * @param x   offset of X coordinate
-     * @param y   offset of Y coordinate
+     * @param dx  offset of X coordinate
+     * @param dy  offset of Y coordinate
      * @param pos resize position
      */
-    private void resizeTest(int x, int y, String pos) {
+    private void resizeTest(int dx, int dy, String pos, int digitsFont, int binaryFont, int unaryFont) {
+        returnNormalState();
         double beforeWidth = stage.getWidth();
         double beforeHeight = stage.getHeight();
+        double beforeX = stage.getX();
+        double beforeY = stage.getY();
         double expectedWidth = stage.getWidth();
         double expectedHeight = stage.getHeight();
 
         switch (pos) {
             case "E":
                 robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedWidth = checkWidth(beforeWidth + x);
+                expectedWidth = checkWidth(beforeWidth + dx, beforeWidth, beforeX);
                 break;
             case "W":
                 robot.drag(stage.getX() + 1, stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedWidth = checkWidth(beforeWidth - x - 1);
+                WaitForAsyncUtils.waitForFxEvents();
+                expectedWidth = checkWidth(beforeWidth - dx - 1, beforeWidth, beforeX);
                 break;
             case "N":
                 robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY() + 1, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedHeight = checkHeight(beforeHeight - y - 1);
+                expectedHeight = checkHeight(beforeHeight - dy - 1, beforeHeight, beforeY);
                 break;
             case "S":
                 robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedHeight = checkHeight(beforeHeight + y);
+                expectedHeight = checkHeight(beforeHeight + dy, beforeHeight, beforeY);
                 break;
             case "NE":
                 robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + 1, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedWidth = checkWidth(beforeWidth + x);
-                expectedHeight = checkHeight(beforeHeight - y - 1);
+                expectedWidth = checkWidth(beforeWidth + dx, beforeWidth, beforeX);
+                expectedHeight = checkHeight(beforeHeight - dy - 1, beforeHeight, beforeY);
                 break;
             case "SE":
                 robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedWidth = checkWidth(beforeWidth + x);
-                expectedHeight = checkHeight(beforeHeight + y);
+                expectedWidth = checkWidth(beforeWidth + dx, beforeWidth, beforeX);
+                expectedHeight = checkHeight(beforeHeight + dy, beforeHeight, beforeY);
                 break;
             case "SW":
                 robot.drag(stage.getX() + 1, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedWidth = checkWidth(beforeWidth - x - 1);
-                expectedHeight = checkHeight(beforeHeight + y);
+                expectedWidth = checkWidth(beforeWidth - dx - 1, beforeWidth, beforeX);
+                expectedHeight = checkHeight(beforeHeight + dy, beforeHeight, beforeY);
                 break;
             case "NW":
                 robot.drag(stage.getX() + 1, stage.getY() + 1, MouseButton.PRIMARY);
-                robot.moveBy(x, y);
+                robot.moveBy(dx, dy);
                 robot.drop();
-                expectedWidth = checkWidth(beforeWidth - x - 1);
-                expectedHeight = checkHeight(beforeHeight - y - 1);
+                expectedWidth = checkWidth(beforeWidth - dx - 1, beforeWidth, beforeX);
+                expectedHeight = checkHeight(beforeHeight - dy - 1, beforeHeight, beforeY);
                 break;
         }
 
         assertEquals(expectedWidth, stage.getWidth(), 0.1);
         assertEquals(expectedHeight, stage.getHeight(), 0.1);
-        stage.setHeight(MIN_WINDOW_HEIGHT);
-        stage.setWidth(MIN_WINDOW_WIDTH);
+        fontResizeTest(digitsFont, binaryFont, unaryFont);
     }
 
     /**
@@ -270,11 +362,13 @@ public class ViewTest {
      * @param width given width
      * @return correct width
      */
-    private double checkWidth(double width) {
+    private double checkWidth(double width, double beforeWidth, double beforeX) {
         if (width < MIN_WINDOW_WIDTH) {
             width = MIN_WINDOW_WIDTH;
-        } else if (width > MAX_WINDOW_WIDTH) {
-            width = MAX_WINDOW_WIDTH;
+        } else if (stage.getX() == 0 && beforeWidth + beforeX < width) {
+            width = beforeWidth + beforeX;
+        } else if (stage.getX() + width > MAX_WINDOW_WIDTH) {
+            width = MAX_WINDOW_WIDTH - stage.getX();
         }
 
         return width;
@@ -287,11 +381,13 @@ public class ViewTest {
      * @param height given height
      * @return correct height
      */
-    private double checkHeight(double height) {
+    private double checkHeight(double height, double beforeHeight, double beforeY) {
         if (height < MIN_WINDOW_HEIGHT) {
             height = MIN_WINDOW_HEIGHT;
-        } else if (height > MAX_WINDOW_HEIGHT) {
-            height = MAX_WINDOW_HEIGHT;
+        } else if (stage.getY() == 0 && beforeHeight + beforeY < height) {
+            height = beforeHeight + beforeY;
+        } else if (stage.getY() + height > MAX_WINDOW_HEIGHT) {
+            height = MAX_WINDOW_HEIGHT - stage.getY();
         }
 
         return height;
@@ -300,14 +396,12 @@ public class ViewTest {
     /**
      * Check font size of groups of buttons during resize window
      *
-     * @param dy         offset of Y coordinate
      * @param digitsFont font size of digit group
      * @param binaryFont font size of binary group
      * @param unaryFont  font size of unary group
-     * @param clearFont  font size of clear group
      */
-    private void fontResizeTest(int dy, int digitsFont, int binaryFont, int unaryFont, int clearFont) {
-        resizeTest(0, dy, "S");
+    private void fontResizeTest(int digitsFont, int binaryFont, int unaryFont) {
+        WaitForAsyncUtils.waitForFxEvents();
         for (Button button : digits()) {
             assertEquals(digitsFont, button.getFont().getSize(), 0.1);
         }
@@ -316,9 +410,6 @@ public class ViewTest {
         }
         for (Button button : unaries()) {
             assertEquals(unaryFont, button.getFont().getSize(), 0.1);
-        }
-        for (Button button : clear()) {
-            assertEquals(clearFont, button.getFont().getSize(), 0.1);
         }
     }
 
@@ -356,11 +447,6 @@ public class ViewTest {
         list.add(GuiTest.find("#sqr"));
         list.add(GuiTest.find("#sqrt"));
         list.add(GuiTest.find("#inverse"));
-        return list;
-    }
-
-    private ArrayList<Button> clear() {
-        ArrayList<Button> list = new ArrayList<>();
         list.add(GuiTest.find("#clear"));
         list.add(GuiTest.find("#clear_expr"));
         return list;
@@ -376,5 +462,13 @@ public class ViewTest {
     private void numericFontResizeTest(String value, int font) {
         numericField.setText(value);
         assertEquals(font, numericField.getFont().getSize(), 0.1);
+    }
+
+    private void returnNormalState() {
+        WaitForAsyncUtils.waitForFxEvents();
+        stage.setHeight(MIN_WINDOW_HEIGHT);
+        stage.setWidth(MIN_WINDOW_WIDTH);
+        stage.setX(500);
+        stage.setY(150);
     }
 }
