@@ -265,15 +265,29 @@ public class ViewTest {
      * @param dy offset of Y coordinate
      */
     private void moveTest(int dx, int dy) {
-        AnchorPane title = GuiTest.find("#title");
         double beforeX = stage.getX();
         double beforeY = stage.getY();
-        robot.drag(title, MouseButton.PRIMARY);
+        double offsetX = Math.random() * 180 + 2;
+        double offsetY = Math.random() * 32 + 2;
+
+        robot.drag(new Point2D(beforeX + offsetX, beforeY + offsetY), MouseButton.PRIMARY);
         robot.moveBy(dx, dy);
+        WaitForAsyncUtils.waitForFxEvents();
+
         double afterX = stage.getX();
         double afterY = stage.getY();
-        assertEquals(beforeX + dx, afterX, 0.1);
-        assertEquals(beforeY + dy, afterY, 0.1);
+
+        double expectedX = beforeX + dx - offsetX;
+        double expectedY = beforeY + dy - offsetX;
+        if (expectedX < 0) {
+            expectedX = dx - beforeX;
+        } else if (expectedX > MAX_WINDOW_WIDTH) {
+        }
+        if (expectedY < 0) {
+            expectedY = dy - beforeY;
+        }
+        assertEquals(expectedX, afterX, 0.1);
+        assertEquals(expectedY, afterY, 0.1);
     }
 
     /**

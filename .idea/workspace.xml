@@ -7,11 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -99,9 +95,10 @@
       <file leaf-file-name="ViewTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="250" column="0" lean-forward="true" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
+            <state relative-caret-position="233">
+              <caret line="269" column="38" lean-forward="false" selection-start-line="269" selection-start-column="25" selection-end-line="269" selection-end-column="38" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#initJFX#0;class#ViewTest#0" expanded="false" />
                 <element signature="method#resizeTest#0;class#ViewTest#0" expanded="false" />
                 <element signature="method#digits#0;class#ViewTest#0" expanded="false" />
@@ -1165,16 +1162,17 @@
       <option name="project" value="LOCAL" />
       <updated>1503332590083</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="add view tests">
+      <created>1503416879391</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1503416879391</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ViewTest_moveTest - 2017.08.22 at 17h 49m 32s.xml">
-      <configuration name="ViewTest.moveTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ViewTest_moveTest - 2017.08.22 at 18h 15m 05s.xml">
-      <configuration name="ViewTest.moveTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ViewTest_moveTest - 2017.08.22 at 18h 30m 25s.xml">
       <configuration name="ViewTest.moveTest" configurationId="JUnit" />
     </history-entry>
@@ -1197,6 +1195,12 @@
       <configuration name="ViewTest.moveTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ViewTest_moveTest - 2017.08.22 at 18h 46m 01s.xml">
+      <configuration name="ViewTest.moveTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ViewTest_moveTest - 2017.08.22 at 18h 51m 37s.xml">
+      <configuration name="ViewTest.moveTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ViewTest_moveTest - 2017.08.22 at 18h 54m 52s.xml">
       <configuration name="ViewTest.moveTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -1270,7 +1274,8 @@
     <MESSAGE value="format refactoring" />
     <MESSAGE value="controller refactoring" />
     <MESSAGE value="add new tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new tests" />
+    <MESSAGE value="add view tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="add view tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1601,9 +1606,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="250" column="0" lean-forward="true" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
+        <state relative-caret-position="233">
+          <caret line="269" column="38" lean-forward="false" selection-start-line="269" selection-start-column="25" selection-end-line="269" selection-end-column="38" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#initJFX#0;class#ViewTest#0" expanded="false" />
             <element signature="method#resizeTest#0;class#ViewTest#0" expanded="false" />
             <element signature="method#digits#0;class#ViewTest#0" expanded="false" />
