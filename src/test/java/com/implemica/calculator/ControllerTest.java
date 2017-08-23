@@ -367,7 +367,7 @@ public class ControllerTest {
         testExpression("1 sqrt", "1");
         testExpression("2 sqrt", "1,414213562373095");
         testExpression("4 sqrt", "2");
-        testExpression("1 0 0 sqrt", "10");
+        testExpression("100 sqrt", "10");
 
         testExpression("9 sqrt =", "3");
         testExpression("81 sqrt sqrt =", "3");

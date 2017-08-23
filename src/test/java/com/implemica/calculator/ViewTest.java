@@ -90,12 +90,12 @@ public class ViewTest {
     @Test
     public void moveTest() {
         moveTest(100, 100);
-        moveTest(274, 882);
+        moveTest(274, 482);
         moveTest(530, 0);
         moveTest(0, 387);
         moveTest(123, 298);
         moveTest(1530, 457);
-        moveTest(534, 741);
+        moveTest(534, 341);
 
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
