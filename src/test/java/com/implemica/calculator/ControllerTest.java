@@ -13,6 +13,11 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests work of calculator controller
+ *
+ * @author Slavik Aleksey V.
+ */
 public class ControllerTest {
 
     private static GuiTest controller;
@@ -28,8 +33,12 @@ public class ControllerTest {
         };
     }
 
+    /**
+     * Check valid input in numeric field.
+     */
     @Test
     public void testDigits() throws Exception {
+        //one digit
         testExpression("0", "0", "");
         testExpression("1", "1", "");
         testExpression("2", "2", "");
@@ -40,31 +49,34 @@ public class ControllerTest {
         testExpression("7", "7", "");
         testExpression("8", "8", "");
         testExpression("9", "9", "");
-
+        //comma
         testExpression(",", "0,", "");
         testExpression("1,,", "1,", "");
         testExpression("1,,00", "1,00", "");
         testExpression("1,0,11", "1,011", "");
         testExpression("0000000000000001,", "1,", "");
         testExpression("0000000000000000000001,", "1,", "");
-
+        //begin with zeros
         testExpression("01", "1", "");
         testExpression("00234", "234", "");
         testExpression("00100", "100", "");
         testExpression("000001024", "1 024", "");
-        testExpression("1234567890123456", "1 234 567 890 123 456", "");
-
+        //check numeric field overflow
         testExpression("8589657657", "8 589 657 657", "");
+        testExpression("4980009809,93024", "4 980 009 809,93024", "");
         testExpression("1874383290974918", "1 874 383 290 974 918", "");
         testExpression("9866764576557657 negate", "-9 866 764 576 557 657", "");
-        testExpression("4980009809,93024", "4 980 009 809,93024", "");
         testExpression("8398663054,46785 negate", "-8 398 663 054,46785", "");
         testExpression("927364827648237688886", "9 273 648 276 482 376", "");
         testExpression("980432987659269750670945760987 negate", "-9 804 329 876 592 697", "");
     }
 
+    /**
+     * Check valid transition to engineering form and back
+     */
     @Test
-    public void scientificTest() throws Exception {
+    public void engineeringTest() throws Exception {
+        //positive power
         testExpression("9999999999999999 + 1 =", "1e+16");
         testExpression("9999999999999999 + 1 - 1 =", "9 999 999 999 999 999");
         testExpression("9999999999999999 negate - 1 =", "-1e+16");
@@ -73,116 +85,147 @@ public class ControllerTest {
         testExpression("9999999999999999 + ,1 = = = = =", "1e+16");
         testExpression("9999999999999999 + ,4999999999999999 =", "9 999 999 999 999 999");
         testExpression("9999999999999999 + ,4999999999999999 + ,000000000000001 =", "1e+16");
-
+        //negative power
         testExpression("0,0000000000000001 / 10 =", "1e-17");
         testExpression("0,0000000000000001 / 10 * 10 =", "0,0000000000000001");
         testExpression("0,0000000000000001 negate / 10 =", "-1e-17");
         testExpression("0,0000000000000001 negate / 10 * 10 =", "-0,0000000000000001");
     }
 
+    /**
+     * Check correct work of add operation
+     */
     @Test
     public void addTest() throws Exception {
-        testExpression("12 negate + 11 +", "-1", "-12 + 11 +");
-        testExpression("+ 100 negate", "-100", "0 +");
+        //simple
+        testExpression("+", "0", "0 +");
+        testExpression("+ 2", "2", "0 +");
         testExpression("+ 5 negate =", "-5", "");
-        testExpression("0,5 + 12 +", "12,5", "0,5 + 12 +");
         testExpression("2 + 2 =", "4", "");
         testExpression("2 + 2 +", "4", "2 + 2 +");
+        testExpression("12 negate + 11 +", "-1", "-12 + 11 +");
+        testExpression("+ 100 negate", "-100", "0 +");
+        testExpression("0,5 + 12 +", "12,5", "0,5 + 12 +");
+        //several add
         testExpression("2 + 2 + + + +", "4", "2 + 2 +");
-        testExpression("2 + + + +", "2", "2 +");
-
+        testExpression("55 + + + +", "55", "55 +");
+        //add with zero
         testExpression("0 + 0 +", "0", "0 + 0 +");
         testExpression("+ 0 =", "0", "");
         testExpression("78 + 0 +", "78", "78 + 0 +");
         testExpression("93,4 negate + 0 +", "-93,4", "-93,4 + 0 +");
         testExpression("0 + ,5 =", "0,5", "");
         testExpression("0 + 9481 negate +", "-9 481", "0 + -9481 +");
-
+        //add opposite numbers
         testExpression("2 + 2 negate =", "0", "");
         testExpression("2 negate + 2 +", "0", "-2 + 2 +");
         testExpression("32 negate + 32 =", "0", "");
         testExpression(",00001 + ,00001 negate +", "0", "0,00001 + -0,00001 +");
         testExpression("36,6 negate + 36,6 negate +", "-73,2", "-36,6 + -36,6 +");
-
+        //several equals
         testExpression("15 + 5 = =", "25", "");
         testExpression("36 + 4 = = = = = =", "60", "");
         testExpression("1 + = = = = = = = =", "9", "");
         testExpression("+ 5 = = = = = = = = = =", "50", "");
         testExpression("1 + = = = = = + 1 negate = = = = =", "1", "");
         testExpression(",1 negate + = = = + ,1 = = = =", "0", "");
-
+        //add with lowest possible
         testExpression(",0000000000000001 + ,0000000000000001 =", "0,0000000000000002", "");
         testExpression(",0000000000000001 + ,0000000000000001 negate =", "0", "");
         testExpression(",0000000000000001 + ,0000000000000009 =", "0,000000000000001", "");
         testExpression(",0000000000000001 + ,0000000000000009 negate =", "-0,0000000000000008", "");
-
+        //add with highest possible
         testExpression("9999999999999999 + 1 =", "1e+16", "");
         testExpression("9999999999999999 + =", "2e+16", "");
         testExpression("999,999999999999 + ,000000000001 =", "1 000", "");
         testExpression("9999999999999999 + ,00000000000001 =", "9 999 999 999 999 999", "");
     }
 
+    /**
+     * Check correct work of subtract operation
+     */
     @Test
-    public void minusTest() throws Exception {
+    public void subtractTest() throws Exception {
+        //simple
+        testExpression("-", "0", "0 -");
         testExpression("1 - =", "0", "");
         testExpression("10 - 2 =", "8", "");
         testExpression("10 - 2 -", "8", "10 - 2 -");
         testExpression("- 5 -", "-5", "0 - 5 -");
         testExpression("1000 - 0,00000000001 =", "999,99999999999", "");
         testExpression("12345,6789 - 98765,4321 negate =", "111 111,111", "");
+        //several subtracts
         testExpression("23 - - - - - -", "23", "23 -");
         testExpression("74 negate - - - -", "-74", "-74 -");
         testExpression(",04 - 1,96 - - -", "-1,92", "0,04 - 1,96 -");
-
+        //subtract with zero
         testExpression("0 - 0 =", "0", "");
         testExpression("- 0 -", "0", "0 - 0 -");
         testExpression("1 - 0 -", "1", "1 - 0 -");
         testExpression("36,6 negate - 0 -", "-36,6", "-36,6 - 0 -");
         testExpression("0 - 97 -", "-97", "0 - 97 -");
         testExpression("0 - 5392,783 negate -", "5 392,783", "0 - -5392,783 -");
-
+        //subtract same numbers
         testExpression("108 - 108 =", "0", "");
+        testExpression("0,001 - 0,001 =", "0","");
+        testExpression("34 negate - 34 negate =", "0", "");
+        //subtract opposite numbers
         testExpression("234 - 234 negate -", "468", "234 - -234 -");
         testExpression("98,7 negate - 98,7 -", "-197,4", "-98,7 - 98,7 -");
         testExpression("528,99712 negate - 528,99712 negate =", "0", "");
-
+        //several equals
         testExpression("18 - 5 = =", "8", "");
         testExpression("18 - 5 = = = = =", "-7", "");
         testExpression("1 - = = = = = = = =", "-7", "");
         testExpression("- 5 = = = = = = = = = =", "-50", "");
         testExpression("1 + = = = = = + 1 negate = = = = =", "1", "");
         testExpression(",1 negate + = = = + ,1 = = = =", "0", "");
-
+        //subtract with lowest possible
         testExpression("0,00000000000001 - 0,00000000000001 =", "0", "");
         testExpression("0,00000000000001 - 0,00000000000001 negate =", "0,00000000000002", "");
         testExpression("0,00000000000001 - 0,00000000000002 =", "-0,00000000000001", "");
         testExpression("0,00000000000001 - 0,00000000000002 negate =", "0,00000000000003", "");
-
+        //subtract with highest possible
         testExpression("9999999999999999 - 9999999999999999 =", "0", "");
         testExpression("9999999999999999 - 9999999999999998 =", "1", "");
         testExpression("9999999999999998 - 9999999999999999 =", "-1", "");
         testExpression("9999999999999999 - 9999999999999999 negate =", "2e+16", "");
     }
 
+    /**
+     * Check correct work of divide operation
+     */
     @Test
     public void divideTest() throws Exception {
+        //simple
+        testExpression("/","0","0 ÷");
+        testExpression("10 / 2 /", "5", "10 ÷ 2 ÷");
+        testExpression("10 negate / 2 =", "-5", "");
+        testExpression("10 / 2 negate /", "-5", "10 ÷ -2 ÷");
+        testExpression("1 / 3 =", "0,3333333333333333", "");
+        testExpression("10 / 2 = =", "2,5", "");
+        testExpression("10 / 2 = = =", "1,25", "");
+        //divide with zero
         testExpression("0 / 3 -", "0", "0 ÷ 3 -");
         testExpression("0 / 1 =", "0", "");
         testExpression("0 / 0,00000000000001 /", "0", "0 ÷ 0,00000000000001 ÷");
         testExpression("0 / 9999999999999999 =", "0", "");
-
+        //divide with one
         testExpression("1 / 1 /", "1", "1 ÷ 1 ÷");
         testExpression("3 / 1 =", "3", "");
         testExpression(",0000000000000001 / 1 /", "0,0000000000000001", "0,0000000000000001 ÷ 1 ÷");
         testExpression("9999999999999999 / 1 =", "9 999 999 999 999 999", "");
-
+        //divide of reverse numbers
+        //several equals
+        //several divide
+        //divide with lower possible
         testExpression(",0000000000000001 / 10 +", "1e-17", "0,0000000000000001 ÷ 10 +");
         testExpression(",0000000000000001 / 3 =", "3,333333333333333e-17", "");
         testExpression(",0000000000000001 / ,0000000000000001 =", "1", "");
         testExpression(",0000000000000001 / ,0000000000000002 =", "0,5", "");
         testExpression(",0000000000000002 / ,0000000000000001 -", "2", "000000002 ÷ 0,0000000000000001 -");
         testExpression(",0000000000000001 / 9999999999999999 =", "1e-32", "");
-
+        //divide with higher possible
         testExpression("9999999999999999 / 9 =", "1 111 111 111 111 111", "");
         testExpression("9999999999999999 / 7 -", "1 428 571 428 571 428", "9999999999999999 ÷ 7 -");
         testExpression("9999999999999999 / 0,1 =", "9,999999999999999e+16", "");
@@ -190,18 +233,11 @@ public class ControllerTest {
         testExpression("9999999999999999 / 9999999999999999 /", "1", "99999999999 ÷ 9999999999999999 ÷");
         testExpression("9999999999999999 / 8888888888888888 +", "1,125", "99999999999 ÷ 8888888888888888 +");
         testExpression("9999999999999999 negate / 8888888888888888 =", "-1,125", "");
-
-        testExpression("10 / 2 /", "5", "10 ÷ 2 ÷");
-        testExpression("10 negate / 2 =", "-5", "");
-        testExpression("10 / 2 negate /", "-5", "10 ÷ -2 ÷");
-        testExpression("1 / 3 =", "0,3333333333333333", "");
-        testExpression("10 / 2 = =", "2,5", "");
-        testExpression("10 / 2 = = =", "1,25", "");
-
-        testExpression("10 / 5 / 2 /", "1", "10 ÷ 5 ÷ 2 ÷");
-        testExpression("15 / 6 / 8 / 0,4 /", "0,78125", "15 ÷ 6 ÷ 8 ÷ 0,4 ÷");
     }
 
+    /**
+     * Check correct work of divide operation with errors
+     */
     @Test
     public void divideErrorTest() throws Exception {
         testErrorExpression("0 / 0 =", "Result is undefined", "0 ÷");
@@ -214,70 +250,70 @@ public class ControllerTest {
         testErrorExpression("0,00000000000001 negate / 0 =", "Cannot divide by zero", "-0,00000000000001 ÷");
     }
 
+    /**
+     * Check correct work of multiply operation
+     */
     @Test
-    public void multiplyTest() throws Exception {
+    public void multiplyTest() throws Exception {//todo add history
+        //simple
+        testExpression("*", "0");
         testExpression("1 * 1 =", "1");
         testExpression("0 * 1 =", "0");
         testExpression(",0001 * 10000 =", "1");
-
+        testExpression("12345679 * 9 =", "111 111 111");
+        testExpression("12345679 * 9 negate =", "-111 111 111");
+        testExpression("20 * 0,5 =", "10");
+        testExpression("20 * 0,5 negate =", "-10");
+        //with zero
         testExpression("0 * 0 =", "0");
         testExpression("0 * 1 =", "0");
         testExpression("0 * 1 negate =", "0");
         testExpression("* 0 =", "0");
-        testExpression("* 1 =", "0");
         testExpression("* 5 =", "0");
-        testExpression("* 9999999999999999 =", "0");
-        testExpression("* 0,00000000000001 =", "0");
         testExpression("5 * 0 =", "0");
         testExpression("5 negate * 0 =", "0");
-        testExpression("5 * 0 negate =", "0");
-        testExpression("9999999999999999 * 0 =", "0");
-        testExpression("0 * 9999999999999999 =", "0");
-        testExpression("0,00000000000001 * 0 =", "0");
-        testExpression("0 * 0,00000000000001 =", "0");
-
+        //with one
+        testExpression("* 1 =", "0");
         testExpression("1 * 1 =", "1");
         testExpression("2 * 1 =", "2");
         testExpression("2 negate * 1 =", "-2");
         testExpression("2,25 * 1 =", "2,25");
         testExpression("2,25 negate * 1 =", "-2,25");
-        testExpression("9999999999999999 * 1 =", "9 999 999 999 999 999");
-        testExpression("9999999999999999 negate * 1 =", "-9 999 999 999 999 999");
-        testExpression("0,00000000000001 * 1 =", "0,00000000000001");
-        testExpression("0,00000000000001 negate * 1 =", "-0,00000000000001");
-        testExpression("9999999999999999 * 1 negate =", "-9 999 999 999 999 999");
-        testExpression("9999999999999999 negate * 1 negate =", "9 999 999 999 999 999");
-        testExpression("0,00000000000001 * 1 negate =", "-0,00000000000001");
-        testExpression("0,00000000000001 negate * 1 negate =", "0,00000000000001");
-
-        testExpression("12345679 * 9 =", "111 111 111");
-        testExpression("12345679 * 9 negate =", "-111 111 111");
-        testExpression("20 * 0,5 =", "10");
-        testExpression("20 * 0,5 negate =", "-10");
-        testExpression("9999999999999999 * 9999999999999999 =", "9,999999999999998e+31");
-        testExpression("9999999999999999 * 9999999999999999 negate =", "-9,999999999999998e+31");
-        testExpression("0,00000000000001 * 0,00000000000001 =", "1e-28");
-        testExpression("0,00000000000001 * 0,00000000000001 negate =", "-1e-28");
-
+        //several multiply
+        //several equals
         testExpression("5 * =", "25");
         testExpression("5 * = =", "125");
         testExpression("3 * = * =", "81");
         testExpression("0,1 * = * 10 =", "0,1");
         testExpression("3 * = = =", "81");
+        //with highest possible
+        testExpression("9999999999999999 * 9999999999999999 =", "9,999999999999998e+31");
+        testExpression("9999999999999999 * 9999999999999999 negate =", "-9,999999999999998e+31");
+        //with lowest possible
+        testExpression("0,00000000000001 * 0,00000000000001 =", "1e-28");
+        testExpression("0,00000000000001 * 0,00000000000001 negate =", "-1e-28");
     }
 
+    /**
+     * Check correct work of negate operation
+     */
     @Test
     public void negateTest() throws Exception {
+        //simple
+        testExpression("negate", "0");
         testExpression("0 negate", "0");
         testExpression("1 negate", "-1");
         testExpression("1 negate negate", "1");
         testExpression("5 negate 8", "-58");
-
+        //several negate
+        testExpression("3 negate negate =", "3");
+        testExpression("2 negate negate negate =", "-2");
+        //with lowest and highest possible
         testExpression("9999999999999999 negate =", "-9 999 999 999 999 999");
         testExpression("9999999999999999 negate negate =", "9 999 999 999 999 999");
         testExpression("0,00000000000001 negate =", "-0,00000000000001");
         testExpression("0,00000000000001 negate negate =", "0,00000000000001");
-
+        //with other operations
         testExpression("5 + 0 negate =", "5");
         testExpression("1 + 1 negate =", "0");
         testExpression("1 - 1 negate =", "2");
@@ -289,38 +325,44 @@ public class ControllerTest {
         testExpression("1 - 0,00000000000001 negate =", "1,00000000000001");
         testExpression("3 + 5 negate =", "-2");
         testExpression("3 - 5 negate =", "8");
-
-        testExpression("3 negate negate =", "3");
-        testExpression("2 negate negate negate =", "-2");
     }
 
+    /**
+     * Check correct work of inverse operation
+     */
     @Test
-    public void inverseTest() throws Exception {
+    public void inverseTest() throws Exception {//todo history
+        //simple
         testExpression("1 1/", "1");
-        testExpression("0 + 1 1/ =", "1");
-        testExpression("0 + 1 negate 1/=", "-11");
-        testExpression("0 + 2 1/ =", "0,5");
-        testExpression("0 + 2 negate 1/ =", "-0,5");
-        testExpression("0 + 0,1 1/ =", "10");
-        testExpression("0 + 0,1 negate 1/ =", "-10");
-        testExpression("1 + 2 1/ =", "1,5");
-        testExpression("5 + 10 1/ 1/ =", "15");
-        testExpression("5 + 10 1/ 1/ 1/ =", "5,1");
-
+        testExpression("1 negate 1/", "-11");
+        testExpression("2 1/", "0,5");
+        testExpression("2 negate 1/", "-0,5");
+        testExpression("0,1 1/", "10");
+        testExpression("0,1 negate 1/", "-10");
+        testExpression("2 1/", "1,5");
+        testExpression("10 1/ 1/", "15");
+        testExpression("10 1/ 1/ 1/", "5,1");
+        //several inverse
+        //several equals
+        //with lowest and highest possible
         testExpression("9999999999999999 1/", "0,0000000000000001");
         testExpression("9999999999999999 negate 1/", "-0,0000000000000001");
         testExpression("0,00000000000001 1/", "100 000 000 000 000");
         testExpression("0,00000000000001 negate 1/", "-100 000 000 000 000");
         testExpression("0,00000000000001 1/ 1/", "0,00000000000001");
-
+        //with other operations
         testExpression("5 1/", "0,2", "1/(5)");
         testExpression("5 1/ 1/", "5", "1/(1/(5))");
         testExpression("1 + 5 1/", "0,2", "1 + 1/(5)");
         testExpression("1 + 5 1/ 1/", "5", "1 + 1/(1/(5))");
     }
 
+    /**
+     * Check correct work of inverse operation with errors
+     */
     @Test
     public void inverseErrorTest() throws Exception {
+        testErrorExpression("1/", "Cannot divide by zero", "1/(0)");
         testErrorExpression("0 1/", "Cannot divide by zero", "1/(0)");
         testErrorExpression("1 + 0 1/", "Cannot divide by zero", "1 + 1/(0)");
         testErrorExpression("0,00000000000001 + 0 1/", "Cannot divide by zero", "0,00000000000001 + 1/(0)");
@@ -329,58 +371,68 @@ public class ControllerTest {
         testErrorExpression("24 + 24 negate = 1/", "Cannot divide by zero", "1/(0)");
     }
 
+    /**
+     * Check correct work of squaring operation
+     */
     @Test
     public void sqrTest() throws Exception {
+        //simple
         testExpression("sqr", "0", "sqr(0)");
         testExpression("sqr sqr", "0", "sqr(sqr(0))");
         testExpression("sqr sqr sqr", "0", "sqr(sqr(sqr(0)))");
-
+        //with zero
         testExpression("0 sqr", "0", "sqr(0)");
         testExpression("0 sqr sqr", "0", "sqr(sqr(0))");
         testExpression("0 sqr sqr sqr", "0", "sqr(sqr(sqr(0)))");
-
+        //with one
         testExpression("1 sqr", "1", "sqr(1)");
         testExpression("1 negate sqr", "1", "sqr(-1)");
         testExpression("1 sqr sqr sqr", "1", "sqr(sqr(sqr(1)))");
-
+        //several sqr
         testExpression("10 sqr", "100", "sqr(10)");
         testExpression("10 sqr sqr", "10 000", "sqr(sqr(10))");
         testExpression("10 sqr sqr sqr", "100 000 000", "sqr(sqr(sqr(10)))");
-
+        //several equals
+        //with negative numbers
         testExpression("2 negate sqr", "4", "sqr(-2)");
         testExpression("5 negate negate sqr", "25", "sqr(5)");
         testExpression("125 negate sqr sqr", "244 140 625", "sqr(sqr(-125))");
-
+        //with lowest and highest numbers
         testExpression("0,0000000000000001 sqr", "1e-32", "sqr(0,0000000000000001)");
         testExpression("0,0000000000000001 negate sqr sqr", "1e-64", "sqr(sqr(-0,0000000000000001))");
         testExpression("9999999999999999 sqr", "9,999999999999998e+31", "sqr(9999999999999999)");
         testExpression("9999999999999999 negate sqr sqr sqr sqr", "9,999999999999984e+255", "qr(sqr(sqr(-9999999999999999))))");
     }
 
+    /**
+     * Check correct work of square root operation
+     */
     @Test
     public void sqrtTest() throws Exception {
+        //simple
         testExpression("sqrt", "0", "√(0)");
         testExpression("sqrt sqrt", "0", "√(√(0))");
         testExpression("sqrt sqrt sqrt", "0", "√(√(√(0)))");
-
         testExpression("0 sqrt", "0");
         testExpression("1 sqrt", "1");
         testExpression("2 sqrt", "1,414213562373095");
         testExpression("4 sqrt", "2");
         testExpression("100 sqrt", "10");
-
+        //with zero
+        //with one
+        //several sqrt
         testExpression("9 sqrt =", "3");
         testExpression("81 sqrt sqrt =", "3");
         testExpression("6561 sqrt sqrt sqrt =", "3");
         testExpression("9 sqrt + 81 sqrt =", "12");
-
         testExpression("0,09 sqrt =", "0,3");
         testExpression("0,0081 sqrt sqrt =", "0,3");
         testExpression("0,00006561 sqrt sqrt sqrt =", "0,3");
-
+        //several equals
+        //with lowest and highest possible
         testExpression("0,00000000000001 sqrt =", "0,0000001");
         testExpression("9999999999999999 sqrt sqrt sqrt sqrt sqrt =", "3,162277660168379");
-
+        //with other operations
         testExpression("100 sqrt", "10", "√(100)");
         testExpression("5 + 9 sqrt", "3", "5 + √(9)");
         testExpression("81 sqrt sqrt", "3", "√(√(81))");
@@ -389,6 +441,9 @@ public class ControllerTest {
         testExpression("9 sqrt + 1", "1", "√(9) +");
     }
 
+    /**
+     * Check correct work of square root operation for negative numbers
+     */
     @Test
     public void sqrtErrorTest() throws Exception {
         testExpression("1 negate sqrt", "Invalid input", "√(-1)");
@@ -399,65 +454,69 @@ public class ControllerTest {
         testExpression("0,00000000000001 negate sqrt", "Invalid input", "√(-0,00000000000001)");
     }
 
+    /**
+     * Check correct work of percent operation
+     */
     @Test
-    public void percentTest() throws Exception {
+    public void percentTest() throws Exception {//todo add history
+        //simple
+        testExpression("%", "0");
+        testExpression("20 % =", "0");
         testExpression("100 + 10 %", "10");
         testExpression("98 - 34 %", "33,32");
         testExpression("9870 * 120 %", "11 844");
         testExpression("12365 / 99 %", "12 241,35");
-
-        testExpression("100 + 0 % =", "100");
-        testExpression("100 + 1 % =", "101");
-        testExpression("100 + 1 negate % =", "99");
-        testExpression("100 - 1 % =", "99");
-        testExpression("100 + 0,1 % =", "100,1");
+        //with zero
+        testExpression("0 % =", "0");
+        testExpression("0 + 1 % =", "0");
+        testExpression("0 + 10 % =", "0");
+        //with hundred
         testExpression("100 + 100 % =", "200");
         testExpression("100 - 100 % =", "0");
-        testExpression("100 * 2 % =", "200");
-        testExpression("100 / 20 % =", "5");
-        testExpression("100 + 500 % =", "600");
-
-        testExpression("100 negate + 10 % =", "-110");
-        testExpression("100 negate * 10 % =", "1 000");
-
         testExpression("0,1 + 100 % =", "0,2");
         testExpression("0,1 - 100 % =", "0");
-        testExpression("0,1 + 20 % =", "0,12");
-
+        //with highest possible
+        testExpression("0 + 9999999999999999 % =", "0");
+        testExpression("9999999999999999 % =", "0");
         testExpression("9999999999999999 + 9999999999999999 % =", "1,00000000000001e+30");
         testExpression("9999999999999999 + 0 % =", "9 999 999 999 999 999");
         testExpression("9999999999999999 * 9999999999999999 % =", "9,999999999999997e+45");
         testExpression("9999999999999999 - 9999999999999999 % =", "-9,999999999999898e+29");
         testExpression("9999999999999999 + 0,00000000000001 % =", "1e+16");
-
+        //with lowest possible
+        testExpression("0 + 0,00000000000001 % =", "0");
+        testExpression("0,00000000000001 % =", "0");
         testExpression(",0000000000000001 + 1 % =", "0,0000000000000001");
         testExpression(",0000000000000001 - 1 % =", "0,0000000000000001");
         testExpression(",0000000000000001 - 100 % =", "0");
         testExpression(",0000000000000001 + 100 % =", "0,0000000000000002");
         testExpression(",0000000000000001 + ,0000000000000001 % =", "0,0000000000000001");
-
-        testExpression("%", "0");
-        testExpression("0 + 1 % =", "0");
-        testExpression("0 + 10 % =", "0");
-        testExpression("0 + 9999999999999999 % =", "0");
-        testExpression("0 + 0,00000000000001 % =", "0");
-
-        testExpression("0 % =", "0");
-        testExpression("20 % =", "0");
-        testExpression("9999999999999999 % =", "0");
-        testExpression("0,00000000000001 % =", "0");
-
+        //with other operations
+        testExpression("100 + 0 % =", "100");
+        testExpression("100 + 1 % =", "101");
+        testExpression("100 + 1 negate % =", "99");
+        testExpression("100 - 1 % =", "99");
+        testExpression("100 + 0,1 % =", "100,1");
+        testExpression("100 * 2 % =", "200");
+        testExpression("100 / 20 % =", "5");
+        testExpression("100 + 500 % =", "600");
+        testExpression("100 negate + 10 % =", "-110");
+        testExpression("100 negate * 10 % =", "1 000");
+        testExpression("0,1 + 20 % =", "0,12");
+        //several percent
         testExpression("100 + 10 % % % =", "110");
         testExpression("200 + 10 % % =", "240");
         testExpression("200 + 10 % % % =", "280");
-
-        testExpression("50 + 2 %", "1", "50 + 1");
-        testExpression("200 + 10 % %", "40", "200 + 40");
-        testExpression("20 %", "0", "");
+        //several equals
     }
 
+    /**
+     * Check correct work of backspace operation
+     */
     @Test
     public void backspaceTest() throws Exception {
+        //simple
+        testExpression("back","0");
         testExpression(", back", "0");
         testExpression(",1 back", "0,");
         testExpression(",1 negate back", "-0,");
@@ -489,6 +548,9 @@ public class ControllerTest {
         testExpression("10 1/ back back", "0,1");
     }
 
+    /**
+     * Check correct work for given expression with combination of different operations
+     */
     @Test
     public void combinationTest() throws Exception {
         testExpression("5 + 9 - 1 =", "13");
@@ -536,69 +598,82 @@ public class ControllerTest {
         testExpression("75 MS C 888 - 45 + MR -", "918", "888 - 45 + 75 -");
         testExpression("925,77 * 99999 sqr M+ * 99999 M- MR + 98765 sqr sqr -", "9,266752199568381e+22", "× 9999700002 + sqr(sqr(98765)) -");
         testExpression("987654321 sqr sqr M+ M+ C 98 back * MR =", "1,712743695476512e+37", "");
-        testExpression("56 MS C 98 + 35,77 MR M+ M- M- =","154","");
-        testExpression("81 M+ sqrt - 99 * 22 negate - M+ M+ MR","4 041","√(81) - 99 × -22 -");
-        testExpression("225 sqr M- sqr + 66 / 8 M+ MR","-50 617","sqr(sqr(225)) + 66 ÷");
+        testExpression("56 MS C 98 + 35,77 MR M+ M- M- =", "154", "");
+        testExpression("81 M+ sqrt - 99 * 22 negate - M+ M+ MR", "4 041", "√(81) - 99 × -22 -");
+        testExpression("225 sqr M- sqr + 66 / 8 M+ MR", "-50 617", "sqr(sqr(225)) + 66 ÷");
 
         testExpression(",000000000000001 + ,000000000000001 / ,000000000000001 =", "2");
         testExpression("9999999999999999 + 5 - 4 / 10 =", "1 000 000 000 000 000");
         testExpression("9999999999999999 + 9999999999999999 / 9999999999999999 =", "2");
-        testExpression("9999999999999999 * sqr MS + 9876543210 + MR =","9,999999999999998e+47");
-        testExpression(",000000000000001 sqrt / 800 sqr =","0,0000000000000494");
-        testExpression(",000000000000001 * = / 99999999999999 + 34","34");
+        testExpression("9999999999999999 * sqr MS + 9876543210 + MR =", "9,999999999999998e+47");
+        testExpression(",000000000000001 sqrt / 800 sqr =", "0,0000000000000494");
+        testExpression(",000000000000001 * = / 99999999999999 + 34", "34");
     }
 
+    /**
+     * Check correct work of operations, the scale of result of which is bigger than 10000
+     */
     @Test
     public void overflowTest() throws Exception {
+        //sqr
         testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
         testExpression("9999999999999999 negate sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
         testExpression(",0000000000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
         testExpression(",0000000000000001 negate sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
-
+        //divide
         testExpression("1 / 9999999999999999 = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
         testExpression("1 / 9999999999999999 negate = = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
         testExpression("1 / ,0000000000000001 = = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
         testExpression("1 / ,0000000000000001 negate = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
-
+        //multiply
         testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
         testExpression("9999999999999999 negate * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
         testExpression(",0000000000000001 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
         testExpression(",0000000000000001 negate * = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
-
     }
 
+    /**
+     * Check correct work of memory operations
+     */
     @Test
     public void memoryTest() throws Exception {
-        testMemoryExpression("10 MS C MR", "10");
-        testMemoryExpression(", MS C MR", "0");
-        testMemoryExpression("0,000000000000001 MS C MR", "0,000000000000001");
-        testMemoryExpression("9999999999999999 MS C MR", "9 999 999 999 999 999");
-        testMemoryExpression("9999999999999999 + 1 = MS C MR", "1e+16");
-        testMemoryExpression(",0000000000000001 / 10 = MS C MR", "1e-17");
+        //simple
+        //add
+        //subtract
+        //with other operations
+        testExpression("10 MS C MR", "10");
+        testExpression(", MS C MR", "0");
+        testExpression("0,000000000000001 MS C MR", "0,000000000000001");
+        testExpression("9999999999999999 MS C MR", "9 999 999 999 999 999");
+        testExpression("9999999999999999 + 1 = MS C MR", "1e+16");
+        testExpression(",0000000000000001 / 10 = MS C MR", "1e-17");
 
-        testMemoryExpression("965 M+ + 123 MR", "965");
-        testMemoryExpression("50 M+ M+ M+ MR", "150");
-        testMemoryExpression("23 M+ negate M+ MR", "0");
-        testMemoryExpression("67 negate M+ negate M+ MR", "0");
-        testMemoryExpression(",000000000000001 M+ sqr sqr MR", "0,000000000000001");
-        testMemoryExpression("9999999999999999 negate M+ 1/ MR", "-9 999 999 999 999 999");
+        testExpression("965 M+ + 123 MR", "965");
+        testExpression("50 M+ M+ M+ MR", "150");
+        testExpression("23 M+ negate M+ MR", "0");
+        testExpression("67 negate M+ negate M+ MR", "0");
+        testExpression(",000000000000001 M+ sqr sqr MR", "0,000000000000001");
+        testExpression("9999999999999999 negate M+ 1/ MR", "-9 999 999 999 999 999");
 
-        testMemoryExpression("4723399 M- C 2377 M- MR", "-4 725 776");
-        testMemoryExpression("98 M- C MR", "-98");
-        testMemoryExpression("98 negate M- C MR", "98");
-        testMemoryExpression("125 M- M- M- M- MR", "-500");
-        testMemoryExpression(",000000000000001 negate M- * 85 MR", "0,000000000000001");
-        testMemoryExpression("9999999999999999 M- sqrt + 67 MR", "-9 999 999 999 999 999");
+        testExpression("4723399 M- C 2377 M- MR", "-4 725 776");
+        testExpression("98 M- C MR", "-98");
+        testExpression("98 negate M- C MR", "98");
+        testExpression("125 M- M- M- M- MR", "-500");
+        testExpression(",000000000000001 negate M- * 85 MR", "0,000000000000001");
+        testExpression("9999999999999999 M- sqrt + 67 MR", "-9 999 999 999 999 999");
 
-        testMemoryExpression("98 M- C 98 M+ MR", "0");
-        testMemoryExpression("9999999999999999 M+ M- M+ M- MR", "0");
-        testMemoryExpression(",000000000000001 negate M- M+ M- M+ M- M+ MR", "0");
-        testMemoryExpression("9999999999999999 sqr M+ C MR sqrt", "9 999 999 999 999 999");
-        testMemoryExpression(",000000000000001 1/ M+ C MR 1/", "0,000000000000001");
-        testMemoryExpression("10 M- / 3 * 3 = M+ MR", "0");
-        testMemoryExpression("1234 M+ - 234 = M- MR", "234");
+        testExpression("98 M- C 98 M+ MR", "0");
+        testExpression("9999999999999999 M+ M- M+ M- MR", "0");
+        testExpression(",000000000000001 negate M- M+ M- M+ M- M+ MR", "0");
+        testExpression("9999999999999999 sqr M+ C MR sqrt", "9 999 999 999 999 999");
+        testExpression(",000000000000001 1/ M+ C MR 1/", "0,000000000000001");
+        testExpression("10 M- / 3 * 3 = M+ MR", "0");
+        testExpression("1234 M+ - 234 = M- MR", "234");
     }
 
+    /**
+     * Check correct work of clear entry operation
+     */
     @Test
     public void clearEntryTest() throws Exception {
         testExpression("5 CE", "0", "");
@@ -618,6 +693,9 @@ public class ControllerTest {
 
     }
 
+    /**
+     * Check correct work of clear operation
+     */
     @Test
     public void clearTest() throws Exception {
         testExpression("5 C", "0", "");
@@ -636,34 +714,42 @@ public class ControllerTest {
         testExpression("1 + 9999999999999999 + 1 + C 1,5", "1,5", "");
     }
 
+    /**
+     * Check correct work of alternative buttons and mouse click
+     */
     @Test
     public void mouseClickAndAlternativeTest() throws Exception {
+        //binary
         testAlternativeClick("32 - 4 =", "28", "");
         testAlternativeClick("1234 + 4321 -", "5 555", "1234 + 4321 -");
         testAlternativeClick("8,905 * 345 *", "3 072,225", "8,905 × 345 ×");
         testAlternativeClick("6555 / 30 /", "218,5", "6555 ÷ 30 ÷");
-
+        //clear
         testAlternativeClick("12345 back back", "123", "");
         testAlternativeClick("78 - 985 - 66 C", "0", "");
         testAlternativeClick("78 - 985 - 66 CE", "0", "78 - 985 -");
-
+        //unary
         testAlternativeClick("1000 + 55 %", "550", "1000 + 550");
         testAlternativeClick("81 sqrt sqrt", "3", "√(√(81))");
         testAlternativeClick("2 sqr sqr sqr", "256", "sqr(sqr(sqr(2)))");
         testAlternativeClick("777 negate negate negate", "-777", "");
         testAlternativeClick("100 1/ 1/ 1/", "0,01", "1/(1/(1/(100)))");
-
+        //memory
         testAlternativeClick("91 MS + 12345 MR", "91", "91 +");
         testAlternativeClick("48 negate M+ negate M+ MR", "0", "");
         testAlternativeClick("654,78 M- C MR", "-654,78", "");
         testAlternativeClick("653 MS C MC", "0", "");
     }
 
+    /**
+     * Check correct display of history field, when history length is bigger than length of history field
+     */
     @Test
     public void historyOverflowTest() throws Exception {
+        //simple
         testExpression("123 negate + 889 - 7643 / 2357 * sqr <", "8,512926497930231", "-123 + 889 - 7643 ÷ 2357 × sqr(-2");
-        testExpression("87,999 sqrt + 65 sqr sqr - 89,0076 + ,0011 1/ - 849 * 382999 + < > < >","6 836 764 042 139,976", "076 + 1/(0,0011) - 849 × 382999 +");
-        testExpression("14374,99 * 65438,01 - 34 1/ 1/ 1/ sqr + 88 < -","940 670 827,3690349",",01 - sqr(1/(1/(1/(34)))) + 88 -");
+        testExpression("87,999 sqrt + 65 sqr sqr - 89,0076 + ,0011 1/ - 849 * 382999 + < > < >", "6 836 764 042 139,976", "076 + 1/(0,0011) - 849 × 382999 +");
+        testExpression("14374,99 * 65438,01 - 34 1/ 1/ 1/ sqr + 88 < -", "940 670 827,3690349", ",01 - sqr(1/(1/(1/(34)))) + 88 -");
 
         testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 +", "3e+16", "99999999999 + 9999999999999999 +");
         testExpression("9999999999999999 * 9999999999999999 * 9999999999999999 + <", "9,999999999999997e+47", "9999999999999999 × 99999999999999");
@@ -674,6 +760,13 @@ public class ControllerTest {
         testExpression(",0000000000000001 sqr - ,0000000000000001 sqrt * ,0000000000000001 1/ + < > < > <", "-100 000 000", "00000000000001) - √(0,00000000000");
     }
 
+    /**
+     * Parsing given expression to commands array and push given commands.
+     * Check of result of pushing commands for numeric field
+     *
+     * @param expression given expression with commands
+     * @param expected   expected numeric field value
+     */
     private void testExpression(String expression, String expected) throws Exception {
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
@@ -687,12 +780,28 @@ public class ControllerTest {
         assertEquals(expected, actualValue);
     }
 
+    /**
+     * Parsing given expression for alternative buttons and mouse commands array and push given commands.
+     * Check of result of pushing commands for numeric and history fields
+     *
+     * @param expression given expression with commands
+     * @param numeric    expected numeric field value
+     * @param history    expected history field value
+     */
     private void testAlternativeClick(String expression, String numeric, String history) throws Exception {
         testAlternativeButtons(expression, numeric, history);
         testMouseClick(expression, numeric, history);
     }
 
-    private void testAlternativeButtons(String expression, String expected, String history) throws Exception {
+    /**
+     * Parsing given expression for alternative buttons commands array and push given commands.
+     * Check of result of pushing commands for numeric and history fields
+     *
+     * @param expression given expression with commands
+     * @param numeric    expected numeric field value
+     * @param history    expected history field value
+     */
+    private void testAlternativeButtons(String expression, String numeric, String history) throws Exception {
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
 
@@ -702,13 +811,21 @@ public class ControllerTest {
 
         Label numericDisplay = GuiTest.find("#numericField");
         String actualValue = numericDisplay.getText();
-        assertEquals(expected, actualValue);
+        assertEquals(numeric, actualValue);
 
         Label historyDisplay = GuiTest.find("#historyField");
         actualValue = historyDisplay.getText();
         assertEquals(history, actualValue);
     }
 
+    /**
+     * Parsing given expression to commands array and push given commands.
+     * Check of result of pushing commands for numeric and history fields
+     *
+     * @param expression given expression with commands
+     * @param numeric    expected numeric field value
+     * @param history    expected history field value
+     */
     private void testExpression(String expression, String numeric, String history) throws Exception {
         testExpression(expression, numeric);
         Label historyDisplay = GuiTest.find("#historyField");
@@ -716,6 +833,14 @@ public class ControllerTest {
         assertEquals(history, actualValue);
     }
 
+    /**
+     * Parsing given expression for mouse commands array and push given commands.
+     * Check of result of pushing commands for numeric and history fields
+     *
+     * @param expression given expression with commands
+     * @param numeric    expected numeric field value
+     * @param history    expected history field value
+     */
     private void testMouseClick(String expression, String numeric, String history) throws Exception {
         controller.push(KeyCode.ESCAPE);
         controller.push(KeyCode.CONTROL, KeyCode.L);
@@ -734,12 +859,24 @@ public class ControllerTest {
 
     }
 
+    /**
+     * Check is enable or disable all buttons in array
+     *
+     * @param disable true if buttons must be disable, false otherwise
+     */
     private void disableButtonTest(boolean disable) {
         for (Button button : disabled()) {
             assertEquals("Wrong flag for " + button.getId(), disable, button.isDisable());
         }
     }
 
+    /**
+     * Push button using item key.
+     * If alternative flag is true for push used alternative combinations of buttons if they exist
+     *
+     * @param item        button key
+     * @param alternative true if used alternative buttons combination, false otherwise
+     */
     private void pushButton(String item, boolean alternative) {
         switch (item) {
             case "=":
@@ -816,6 +953,13 @@ public class ControllerTest {
         }
     }
 
+    /**
+     * Push digits buttons using number key.
+     * If alternative flag is true for push used alternative combinations of buttons if they exist
+     *
+     * @param number      number key
+     * @param alternative true if used alternative buttons combination, false otherwise
+     */
     private void pushDigitButtons(String number, boolean alternative) {
         char[] digits = number.toCharArray();
 
@@ -858,6 +1002,11 @@ public class ControllerTest {
         }
     }
 
+    /**
+     * Push on buttons using mouse and button key
+     *
+     * @param item button key
+     */
     private void clickButton(String item) {
         switch (item) {
             case "=":
@@ -920,6 +1069,11 @@ public class ControllerTest {
         }
     }
 
+    /**
+     * Push digits buttons using mouse and number key
+     *
+     * @param number number key
+     */
     private void clickDigitButtons(String number) {
         char[] digits = number.toCharArray();
 
@@ -962,6 +1116,11 @@ public class ControllerTest {
         }
     }
 
+    /**
+     * Create list of buttons which are must be disabled when errors occur
+     *
+     * @return list of buttons
+     */
     private ArrayList<Button> disabled() {
         ArrayList<Button> disabled = new ArrayList<>();
         disabled.add(GuiTest.find("#divide"));
@@ -980,6 +1139,13 @@ public class ControllerTest {
         return disabled;
     }
 
+    /**
+     * Check numeric field, history field and buttons statement when error was occur
+     *
+     * @param expression given expression with commands
+     * @param numeric    expected numeric field value
+     * @param history    expected history field value
+     */
     private void testErrorExpression(String expression, String numeric, String history) throws Exception {
         controller.push(KeyCode.ESCAPE);
         disableButtonTest(false);
@@ -987,8 +1153,9 @@ public class ControllerTest {
         disableButtonTest(true);
     }
 
-    private void testMemoryExpression(String expression, String expected) throws Exception {
-        controller.push(KeyCode.CONTROL, KeyCode.L);
-        testExpression(expression, expected);
+    private void testExpression(String expression, String numeric, String history, int font) throws Exception {
+        testExpression(expression, numeric, history);
+        Label numericDisplay = GuiTest.find("#numericField");
+        assertEquals(font, numericDisplay.getFont().getSize(), 0.1);
     }
 }

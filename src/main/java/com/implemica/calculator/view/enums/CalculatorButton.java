@@ -7,7 +7,7 @@ import javafx.scene.input.KeyEvent;
 import java.util.HashMap;
 
 /**
- * Buttons
+ * Buttons of calculator with corresponding id and keycode combinations
  *
  * @author Slavik Aleksey V.
  */
@@ -50,9 +50,6 @@ public enum CalculatorButton {
 
     private String id;
     private static HashMap<KeyCodeCombination, CalculatorButton> keys = new HashMap<>();
-
-    CalculatorButton() {
-    }
 
     CalculatorButton(String id) {
 

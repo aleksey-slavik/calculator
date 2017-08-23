@@ -8,8 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,9 +31,10 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5814">
-              <caret line="371" column="34" lean-forward="false" selection-start-line="371" selection-start-column="34" selection-end-line="371" selection-end-column="34" />
+            <state relative-caret-position="257">
+              <caret line="638" column="55" lean-forward="false" selection-start-line="638" selection-start-column="28" selection-end-line="638" selection-end-column="55" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#initialize#0;class#Controller#0" expanded="false" />
                 <element signature="method#errorStatement#0;class#Controller#0" expanded="false" />
               </folding>
@@ -42,13 +45,9 @@
       <file leaf-file-name="Formatter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1955">
-              <caret line="122" column="46" lean-forward="false" selection-start-line="122" selection-start-column="46" selection-end-line="122" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1300#1301#0" expanded="false" />
-                <element signature="e#1361#1362#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="308">
+              <caret line="152" column="5" lean-forward="false" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -58,7 +57,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
               <caret line="25" column="46" lean-forward="false" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1615#1616#0" expanded="false" />
+                <element signature="e#1646#1647#0" expanded="false" />
+                <element signature="e#1681#1682#0" expanded="false" />
+                <element signature="e#1722#1723#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,23 +71,10 @@
       <file leaf-file-name="ControllerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="377" column="24" lean-forward="true" selection-start-line="377" selection-start-column="24" selection-end-line="377" selection-end-column="30" />
+            <state relative-caret-position="527">
+              <caret line="748" column="16" lean-forward="false" selection-start-line="748" selection-start-column="16" selection-end-line="748" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#testExpression#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#testAlternativeClick#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#testAlternativeButtons#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#testExpression#1;class#ControllerTest#0" expanded="false" />
-                <element signature="method#testMouseClick#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#disableButtonTest#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#pushButton#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#pushDigitButtons#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#clickButton#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#clickDigitButtons#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#disabled#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#testErrorExpression#0;class#ControllerTest#0" expanded="false" />
-                <element signature="method#testMemoryExpression#0;class#ControllerTest#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,21 +83,26 @@
       <file leaf-file-name="ViewTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1649">
-              <caret line="97" column="23" lean-forward="false" selection-start-line="97" selection-start-column="23" selection-end-line="97" selection-end-column="23" />
+            <state relative-caret-position="273">
+              <caret line="350" column="63" lean-forward="false" selection-start-line="350" selection-start-column="63" selection-end-line="350" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#moveTest#0;class#ViewTest#0" expanded="false" />
+                <element signature="method#resizeTest#0;class#ViewTest#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModelTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java">
+      <file leaf-file-name="NumericResizeListener.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5117">
-              <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-637">
+              <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+              <folding>
+                <element signature="e#2151#2152#0" expanded="true" />
+                <element signature="e#2206#2207#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,22 +153,22 @@
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/HideListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/MoveWindowListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NavigatorListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ResizeListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Memory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Operator.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/NumericFormatter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/History.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" />
       </list>
     </option>
   </component>
@@ -256,18 +253,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calculator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -406,6 +391,70 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="listener" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enums" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calculator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -551,8 +600,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Launcher">
-    <configuration default="false" name="ModelTest.memoryAddTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ControllerTest.divideTest">
+    <configuration default="false" name="ControllerTest.testDigits" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.implemica.calculator.*" />
@@ -563,8 +612,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ModelTest" />
-      <option name="METHOD_NAME" value="memoryAddTest" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
+      <option name="METHOD_NAME" value="testDigits" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -578,7 +627,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="ModelTest.memorySubtractTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ViewTest.numericFontResizeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.implemica.calculator.*" />
@@ -589,8 +638,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ModelTest" />
-      <option name="METHOD_NAME" value="memorySubtractTest" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ViewTest" />
+      <option name="METHOD_NAME" value="numericFontResizeTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -604,7 +653,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="ModelTest.memoryClearTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ControllerTest.addTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.implemica.calculator.*" />
@@ -615,8 +664,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ModelTest" />
-      <option name="METHOD_NAME" value="memoryClearTest" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
+      <option name="METHOD_NAME" value="addTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -630,7 +679,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="ModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ControllerTest.subtractTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.implemica.calculator.*" />
@@ -641,9 +690,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.implemica.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ModelTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
+      <option name="METHOD_NAME" value="subtractTest" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -656,24 +705,30 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ControllerTest.divideTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.implemica.calculator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.Launcher" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="calculator" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" value="com.implemica.calculator" />
+      <option name="MAIN_CLASS_NAME" value="com.implemica.calculator.ControllerTest" />
+      <option name="METHOD_NAME" value="divideTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="calculator" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
       <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -881,19 +936,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.ModelTest.memoryAddTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ModelTest.memorySubtractTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ModelTest.memoryClearTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ModelTest" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Launcher" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.ControllerTest.testDigits" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ViewTest.numericFontResizeTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ControllerTest.addTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ControllerTest.subtractTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ControllerTest.divideTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Launcher" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ModelTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ModelTest.memoryClearTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ModelTest.memorySubtractTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ModelTest.memoryAddTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ControllerTest.divideTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ControllerTest.subtractTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ControllerTest.addTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ViewTest.numericFontResizeTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ControllerTest.testDigits" />
       </list>
     </recent_temporary>
   </component>
@@ -1184,39 +1239,46 @@
       <option name="project" value="LOCAL" />
       <updated>1503417465822</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="add model tests">
+      <created>1503483284118</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1503483284118</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TestHistory">
+    <history-entry file="ControllerTest - 2017.08.23 at 13h 53m 25s.xml">
+      <configuration name="ControllerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ControllerTest_addTest - 2017.08.23 at 17h 13m 36s.xml">
+      <configuration name="ControllerTest.addTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ControllerTest_divideTest - 2017.08.23 at 17h 26m 08s.xml">
+      <configuration name="ControllerTest.divideTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ControllerTest_memoryTest - 2017.08.23 at 15h 27m 52s.xml">
+      <configuration name="ControllerTest.memoryTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ControllerTest_subtractTest - 2017.08.23 at 17h 20m 49s.xml">
+      <configuration name="ControllerTest.subtractTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ControllerTest_testDigits - 2017.08.23 at 16h 40m 21s.xml">
+      <configuration name="ControllerTest.testDigits" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ControllerTest_testDigits - 2017.08.23 at 16h 42m 03s.xml">
+      <configuration name="ControllerTest.testDigits" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="ModelTest - 2017.08.23 at 13h 05m 16s.xml">
       <configuration name="ModelTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ModelTest_memoryAddTest - 2017.08.23 at 13h 00m 42s.xml">
-      <configuration name="ModelTest.memoryAddTest" configurationId="JUnit" />
+    <history-entry file="ViewTest_numericFontResizeTest - 2017.08.23 at 16h 42m 53s.xml">
+      <configuration name="ViewTest.numericFontResizeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ModelTest_memoryAddTest - 2017.08.23 at 13h 00m 56s.xml">
-      <configuration name="ModelTest.memoryAddTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTest_memoryAddTest - 2017.08.23 at 13h 03m 51s.xml">
-      <configuration name="ModelTest.memoryAddTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTest_memoryAddTest - 2017.08.23 at 13h 04m 16s.xml">
-      <configuration name="ModelTest.memoryAddTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTest_memoryClearTest - 2017.08.23 at 13h 05m 07s.xml">
-      <configuration name="ModelTest.memoryClearTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTest_memoryStoreTest - 2017.08.23 at 12h 49m 15s.xml">
-      <configuration name="ModelTest.memoryStoreTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTest_memoryStoreTest - 2017.08.23 at 12h 49m 35s.xml">
-      <configuration name="ModelTest.memoryStoreTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTest_memoryStoreTest - 2017.08.23 at 12h 49m 51s.xml">
-      <configuration name="ModelTest.memoryStoreTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTest_memorySubtractTest - 2017.08.23 at 13h 04m 59s.xml">
-      <configuration name="ModelTest.memorySubtractTest" configurationId="JUnit" />
+    <history-entry file="ViewTest_numericFontResizeTest - 2017.08.23 at 16h 57m 41s.xml">
+      <configuration name="ViewTest.numericFontResizeTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -1265,7 +1327,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add resize window" />
     <MESSAGE value="add resize listener" />
     <MESSAGE value="change view logic" />
     <MESSAGE value="change test logic" />
@@ -1290,11 +1351,12 @@
     <MESSAGE value="add new tests" />
     <MESSAGE value="add view tests" />
     <MESSAGE value="fix move test" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix move test" />
+    <MESSAGE value="add model tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="add model tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="24" />
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1450,13 +1512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="76" column="7" lean-forward="false" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Memory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
@@ -1469,13 +1524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="33" column="42" lean-forward="true" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="113" column="31" lean-forward="false" selection-start-line="113" selection-start-column="31" selection-end-line="113" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1520,40 +1568,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="122" column="46" lean-forward="false" selection-start-line="122" selection-start-column="46" selection-end-line="122" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1300#1301#0" expanded="false" />
-            <element signature="e#1361#1362#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="25" column="46" lean-forward="false" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1613">
-          <caret line="59" column="56" lean-forward="false" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5814">
-          <caret line="371" column="34" lean-forward="false" selection-start-line="371" selection-start-column="34" selection-end-line="371" selection-end-column="34" />
           <folding>
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
-            <element signature="method#errorStatement#0;class#Controller#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1615#1616#0" expanded="false" />
+            <element signature="e#1646#1647#0" expanded="false" />
+            <element signature="e#1681#1682#0" expanded="false" />
+            <element signature="e#1722#1723#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1566,44 +1590,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="377" column="24" lean-forward="true" selection-start-line="377" selection-start-column="24" selection-end-line="377" selection-end-column="30" />
+        <state relative-caret-position="5117">
+          <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1368">
+          <caret line="59" column="56" lean-forward="false" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="49" column="4" lean-forward="false" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="152" column="5" lean-forward="false" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="638" column="55" lean-forward="false" selection-start-line="638" selection-start-column="28" selection-end-line="638" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#testExpression#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#testAlternativeClick#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#testAlternativeButtons#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#testExpression#1;class#ControllerTest#0" expanded="false" />
-            <element signature="method#testMouseClick#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#disableButtonTest#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#pushButton#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#pushDigitButtons#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#clickButton#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#clickDigitButtons#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#disabled#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#testErrorExpression#0;class#ControllerTest#0" expanded="false" />
-            <element signature="method#testMemoryExpression#0;class#ControllerTest#0" expanded="false" />
+            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+            <element signature="method#errorStatement#0;class#Controller#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="748" column="16" lean-forward="false" selection-start-line="748" selection-start-column="16" selection-end-line="748" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="97" column="23" lean-forward="false" selection-start-line="97" selection-start-column="23" selection-end-line="97" selection-end-column="23" />
+        <state relative-caret-position="273">
+          <caret line="350" column="63" lean-forward="false" selection-start-line="350" selection-start-column="63" selection-end-line="350" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#moveTest#0;class#ViewTest#0" expanded="false" />
+            <element signature="method#resizeTest#0;class#ViewTest#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ModelTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5117">
-          <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="-637">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding>
+            <element signature="e#2151#2152#0" expanded="true" />
+            <element signature="e#2206#2207#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

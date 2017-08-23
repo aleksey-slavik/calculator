@@ -4,7 +4,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.text.Font;
 
 /**
  * Change font size for numeric field value

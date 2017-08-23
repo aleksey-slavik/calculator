@@ -21,7 +21,7 @@ import java.util.Random;
 import static org.junit.Assert.*;
 
 /**
- * View events test
+ * View events test for calculator
  *
  * @author Slavik Aleksey V.
  */
@@ -61,8 +61,24 @@ public class ViewTest {
      * Numeric field label
      */
     private static Label numericField;
+
+    /**
+     * Title label
+     */
     private static Label title;
+
+    /**
+     * Pane of navigation menu
+     */
     private static AnchorPane menuPane;
+
+    /**
+     * Hide button
+     */
+    private static Button hide;
+    private static Button expand;
+    private static Button menuShow;
+    private static Button menuClose;
 
     @BeforeClass
     public static void initJFX() throws InterruptedException {
@@ -79,6 +95,10 @@ public class ViewTest {
             numericField = (Label) scene.lookup("#numericField");
             menuPane = (AnchorPane) scene.lookup("#navigator");
             title = (Label) scene.lookup("#title");
+            hide = (Button) scene.lookup("#hide");
+            expand = (Button) scene.lookup("#expand");
+            menuShow = (Button) scene.lookup("menuShow");
+            menuClose = (Button) scene.lookup("#menuClose");
         });
         WaitForAsyncUtils.waitForFxEvents();
     }
@@ -89,6 +109,7 @@ public class ViewTest {
      */
     @Test
     public void moveTest() {
+        //handle tests
         moveTest(100, 100);
         moveTest(274, 482);
         moveTest(530, 0);
@@ -96,7 +117,7 @@ public class ViewTest {
         moveTest(123, 298);
         moveTest(1530, 457);
         moveTest(534, 341);
-
+        //random tests
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             moveTest(random.nextInt(MAX_WINDOW_WIDTH - MIN_WINDOW_WIDTH) + MIN_WINDOW_WIDTH / 2,
@@ -109,6 +130,7 @@ public class ViewTest {
      */
     @Test
     public void resizeTest() {
+        //resize from left border of window
         resizeTest(0, 0, "E", 23, 22, 16);
         resizeTest(100, 0, "E", 23, 22, 16);
         resizeTest(0, 50, "E", 23, 22, 16);
@@ -123,6 +145,7 @@ public class ViewTest {
         resizeTest(-1765, 1399, "E", 23, 22, 16);
         resizeTest(999, -986, "E", 23, 22, 16);
 
+        //resize from right border of window
         resizeTest(0, 0, "W", 23, 22, 16);
         resizeTest(-50, 0, "W", 23, 22, 16);
         resizeTest(0, 89, "W", 23, 22, 16);
@@ -137,6 +160,7 @@ public class ViewTest {
         resizeTest(-1111, 1399, "W", 23, 22, 16);
         resizeTest(777, -666, "W", 23, 22, 16);
 
+        //resize from top border of window
         resizeTest(0, 0, "N", 23, 22, 16);
         resizeTest(0, 52, "N", 23, 22, 16);
         resizeTest(65, 0, "N", 23, 22, 16);
@@ -150,6 +174,7 @@ public class ViewTest {
         resizeTest(-1924, -2321, "N", 28, 26, 20);
         resizeTest(0, -2432, "N", 28, 26, 20);
 
+        //resize from bottom border of window
         resizeTest(0, 0, "S", 23, 22, 16);
         resizeTest(0, 101, "S", 28, 26, 20);
         resizeTest(10, 201, "S", 33, 30, 24);
@@ -163,6 +188,7 @@ public class ViewTest {
         resizeTest(1777, -1446, "S", 23, 22, 16);
         resizeTest(1443, 1321, "S", 33, 30, 24);
 
+        // resize from right bottom corner of window
         resizeTest(0, 0, "SE", 23, 22, 16);
         resizeTest(50, 50, "SE", 23, 22, 16);
         resizeTest(145, 199, "SE", 28, 26, 20);
@@ -175,6 +201,7 @@ public class ViewTest {
         resizeTest(-1769, 0, "SE", 23, 22, 16);
         resizeTest(-1121, 1654, "SE", 33, 30, 24);
 
+        //resize from left bottom corner of window
         resizeTest(0, 0, "SW", 23, 22, 16);
         resizeTest(-50, 50, "SW", 23, 22, 16);
         resizeTest(99, -87, "SW", 23, 22, 16);
@@ -187,6 +214,7 @@ public class ViewTest {
         resizeTest(2762, 1992, "SW", 33, 30, 24);
         resizeTest(0, -1904, "SW", 23, 22, 16);
 
+        //resize from right top corner of window
         resizeTest(0, 0, "NE", 23, 22, 16);
         resizeTest(140, -122, "NE", 28, 26, 20);
         resizeTest(200, 199, "NE", 23, 22, 16);
@@ -199,6 +227,7 @@ public class ViewTest {
         resizeTest(-6172, -3182, "NE", 28, 26, 20);
         resizeTest(7641, -1932, "NE", 28, 26, 20);
 
+        //resize from left top corner of window
         resizeTest(0, 0, "NW", 23, 22, 16);
         resizeTest(177, 78, "NW", 23, 22, 16);
         resizeTest(155, -61, "NW", 23, 22, 16);
@@ -217,12 +246,12 @@ public class ViewTest {
      */
     @Test
     public void expandTest() {
-        Button expand = GuiTest.find("#expand");
+        //check that stage is not maximized
         assertEquals(false, stage.isMaximized());
-
+        //click on expand button and check that stage is maximized
         robot.clickOn(expand);
         assertEquals(true, stage.isMaximized());
-
+        //click on expand button once more  and check that stage is not maximized
         robot.clickOn(expand);
         assertEquals(false, stage.isMaximized());
     }
@@ -232,10 +261,12 @@ public class ViewTest {
      */
     @Test
     public void hideTest() {
-        Button hide = GuiTest.find("#hide");
+        //check that stage is not iconified
         assertEquals(false, stage.isIconified());
+        //click on hide button and check that stage is iconified
         robot.clickOn(hide);
         assertEquals(true, stage.isIconified());
+        //return normal statement and check that stage is not iconified
         Platform.runLater(() -> stage.setIconified(false));
         WaitForAsyncUtils.waitForFxEvents();
         assertEquals(false, stage.isIconified());
@@ -246,12 +277,13 @@ public class ViewTest {
      */
     @Test
     public void menuTest() throws Exception {
-        Button menuShow = GuiTest.find("#menuShow");
+        //check than navigation menu is outside main pane
+        assertEquals(-260, menuPane.getTranslateX(), 0.1);
+        //click on open menu button, wait until it showed and check that menu is inside main pane
         robot.clickOn(menuShow);
         Thread.sleep(350);
         assertEquals(0, menuPane.getTranslateX(), 0.1);
-
-        Button menuClose = GuiTest.find("#menuClose");
+        //click on close menu button, wait until it closed and check that menu is outside main pane
         robot.clickOn(menuClose);
         Thread.sleep(350);
         assertEquals(-260, menuPane.getTranslateX(), 0.1);
@@ -316,14 +348,14 @@ public class ViewTest {
         robot.drag(title, MouseButton.PRIMARY);
 
         Point point = MouseInfo.getPointerInfo().getLocation();
-        double mouseX = Math.abs(stage.getX() - point.getX());
-        double mouseY = Math.abs(stage.getY() - point.getY());
+        double offsetX = Math.abs(stage.getX() - point.getX());
+        double offsetY = Math.abs(stage.getY() - point.getY());
 
         robot.moveTo(x, y);
         robot.drop();
 
-        assertEquals(x, stage.getX() + mouseX, 0.1);
-        assertEquals(y, stage.getY() + mouseY, 0.1);
+        assertEquals(x, stage.getX() + offsetX, 0.1);
+        assertEquals(y, stage.getY() + offsetY, 0.1);
     }
 
     /**
@@ -463,6 +495,11 @@ public class ViewTest {
         }
     }
 
+    /**
+     * Create list of digits buttons group
+     *
+     * @return      digits buttons group
+     */
     private ArrayList<Button> digits() {
         ArrayList<Button> list = new ArrayList<>();
         list.add(GuiTest.find("#one"));
@@ -479,6 +516,11 @@ public class ViewTest {
         return list;
     }
 
+    /**
+     * Create list of binary buttons group
+     *
+     * @return      binary buttons group
+     */
     private ArrayList<Button> binaries() {
         ArrayList<Button> list = new ArrayList<>();
         list.add(GuiTest.find("#equals"));
@@ -490,6 +532,11 @@ public class ViewTest {
         return list;
     }
 
+    /**
+     * Create list of unary buttons group
+     *
+     * @return      unary buttons group
+     */
     private ArrayList<Button> unaries() {
         ArrayList<Button> list = new ArrayList<>();
         list.add(GuiTest.find("#negate"));
@@ -515,6 +562,9 @@ public class ViewTest {
         assertEquals(font, numericField.getFont().getSize(), 0.1);
     }
 
+    /**
+     * Return standard statement of window
+     */
     private void returnNormalState() {
         WaitForAsyncUtils.waitForFxEvents();
         stage.setHeight(MIN_WINDOW_HEIGHT);

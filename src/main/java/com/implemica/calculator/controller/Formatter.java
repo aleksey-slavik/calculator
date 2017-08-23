@@ -151,9 +151,4 @@ public class Formatter {
         }
         return PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".") - 1;
     }
-
-    public static void main(String[] args) {
-
-        System.out.println(display("9.9999999999999999999999999999999"));
-    }
 }
