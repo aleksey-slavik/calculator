@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -38,8 +37,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#negateClick" styleClass="negate" text="±"
-                GridPane.rowIndex="8"/>
+                mnemonicParsing="false" onAction="#negateClick" styleClass="negate" text="±" GridPane.rowIndex="8"/>
         <Button fx:id="one" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
                 onAction="#buttonDigitClick" styleClass="digits" text="1" GridPane.rowIndex="7"/>
         <Button fx:id="zero" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
@@ -82,17 +80,16 @@
                 mnemonicParsing="false" onAction="#percentClick" styleClass="operators" text="\%"
                 GridPane.rowIndex="3"/>
         <Button fx:id="sqrt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#sqrtClick" styleClass="operators" text="√"
-                GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <Button fx:id="sqr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                onAction="#sqrClick" styleClass="operators" text="𝑥²" GridPane.columnIndex="2"
+                mnemonicParsing="false" onAction="#sqrtClick" styleClass="operators" text="√" GridPane.columnIndex="1"
                 GridPane.rowIndex="3"/>
+        <Button fx:id="sqr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                onAction="#sqrClick" styleClass="operators" text="𝑥²" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
         <Button fx:id="inverse" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                 mnemonicParsing="false" onAction="#inverseClick" styleClass="operators" text="¹⁄𝑥"
                 GridPane.columnIndex="3" GridPane.rowIndex="3"/>
         <Button fx:id="clear" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#clearClick" styleClass="controls" text="C"
-                GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                mnemonicParsing="false" onAction="#clearClick" styleClass="controls" text="C" GridPane.columnIndex="1"
+                GridPane.rowIndex="4"/>
         <Button fx:id="backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                 mnemonicParsing="false" onAction="#backspaceClick" styleClass="backspace" text="⌫"
                 GridPane.columnIndex="2" GridPane.rowIndex="4"/>
@@ -206,7 +203,7 @@
                 mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="big_button"
                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
     </AnchorPane>
-    <AnchorPane fx:id="title" prefHeight="32.0" styleClass="titlePane" AnchorPane.leftAnchor="0.0"
+    <AnchorPane prefHeight="32.0" styleClass="titlePane" AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Button fx:id="hide" maxHeight="30.0" maxWidth="50.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false"
                 prefHeight="30.0" prefWidth="50.0" styleClass="hide" text="−" AnchorPane.rightAnchor="100.0"
@@ -216,7 +213,12 @@
         <Button fx:id="expand" maxHeight="30.0" maxWidth="50.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false"
                 prefHeight="30.0" prefWidth="50.0" styleClass="hide" text="⬜" AnchorPane.rightAnchor="50.0"
                 AnchorPane.topAnchor="0.0"/>
-        <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" text="Calculator" AnchorPane.leftAnchor="15.0"/>
+        <Label fx:id="title" layoutX="20.0" layoutY="7.0" text="Calculator" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets left="15.0"/>
+            </padding>
+        </Label>
     </AnchorPane>
     <AnchorPane fx:id="navigator" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" styleClass="navigator"
                 translateX="-260.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

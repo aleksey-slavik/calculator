@@ -4,6 +4,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
 /**
  * Change font size for numeric field value
@@ -15,7 +16,7 @@ public class NumericResizeListener implements InvalidationListener {
     /**
      * Value of big font size for numeric field
      */
-    private static final int FONT_BIG = 35;
+    private static final int FONT_BIG = 47;
 
     /**
      * Value of medium font size for numeric field
@@ -65,17 +66,6 @@ public class NumericResizeListener implements InvalidationListener {
             size = FONT_BIG * BIG_FONT_COUNT / length;
         }
         field.setStyle(getFontString(size));
-
-
-        /*
-        if (length < BIG_FONT_COUNT) {
-            field.setStyle(getFontString(FONT_BIG));
-        } else if (length < MEDIUM_FONT_COUNT) {
-            field.setStyle(getFontString(FONT_MEDIUM));
-        } else {
-            field.setStyle(getFontString(FONT_SMALL));
-        }
-        */
     }
 
     /**
@@ -85,6 +75,6 @@ public class NumericResizeListener implements InvalidationListener {
      * @return      style with new font size
      */
     private String getFontString(int size) {
-        return "-fx-font-size: " + size + "pt;";
+        return "-fx-font-size: " + size + "px;";
     }
 }

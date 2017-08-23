@@ -146,7 +146,7 @@ public class CalculatorView {
         menuClose.setOnAction(navigatorListener);
 
         //add move listener
-        AnchorPane title = (AnchorPane) scene.lookup(TITLE_SELECTOR);
+        Label title = (Label) scene.lookup(TITLE_SELECTOR);
         MoveWindowListener moveWindowListener = new MoveWindowListener(primaryStage);
         title.setOnMousePressed(moveWindowListener);
         title.setOnMouseDragged(moveWindowListener);

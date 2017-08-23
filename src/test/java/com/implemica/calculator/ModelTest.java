@@ -23,7 +23,6 @@ public class ModelTest {
         binaryTest("0", Operator.ADD, "23", "23");
         binaryTest("-4", Operator.ADD, "0", "-4");
         binaryTest("-89", Operator.ADD, "89", "0");
-        binaryTest("462", Operator.ADD, "-462", "0");
         binaryTest("1.39", Operator.ADD, "0.98766", "2.37766");
         binaryTest("-0.1", Operator.ADD, "5987.999", "5987.899");
         binaryTest("-2133.9", Operator.ADD, "-8799.38833", "-10933.28833");
@@ -37,7 +36,6 @@ public class ModelTest {
         binaryTest("1", Operator.SUBTRACT, "-1", "2");
         binaryTest("-1", Operator.SUBTRACT, "1", "-2");
         binaryTest("23", Operator.SUBTRACT, "23", "0");
-        binaryTest("-776", Operator.SUBTRACT, "500", "-1276");
         binaryTest("1961", Operator.SUBTRACT, "-49", "2010");
         binaryTest("0.1", Operator.SUBTRACT, "0.1", "0");
         binaryTest("0.0000000000000001", Operator.SUBTRACT, "0.0000000000000001", "0");
@@ -70,62 +68,47 @@ public class ModelTest {
 
     @Test
     public void negateTest() {
-        negateTest("-1.717553345667322e+9607", "1.717553345667322e+9607");
-        negateTest("-2.832578077688434e+600", "2.832578077688434e+600");
-        negateTest("-3982", "3982");
         negateTest("-1", "1");
-        negateTest("-5.822235463734427e-9608", "5.822235463734427e-9608");
         negateTest("0", "0");
-        negateTest("5.822235463734427e-9608", "-5.822235463734427e-9608");
         negateTest("1", "-1");
         negateTest("23", "-23");
-        negateTest("8849", "-8849");
+        negateTest("-23", "23");
+        negateTest("-3982", "3982");
+        negateTest("8849", "-8849"); negateTest("-1.717553345667322e+9607", "1.717553345667322e+9607");
+        negateTest("-2.832578077688434e+600", "2.832578077688434e+600");
+        negateTest("-5.822235463734427e-9608", "5.822235463734427e-9608");
         negateTest("2.832578077688434e+600", "-2.832578077688434e+600");
         negateTest("1.717553345667322e+9607", "-1.717553345667322e+9607");
     }
 
     @Test
     public void sqrTest() throws OverflowException {
-        //sqrTest("-1.e+5000", "1.e+10000");
-        sqrTest("-4.716914975207485e+1265", "2.224928688333663e+2531");
         sqrTest("-22", "484");
         sqrTest("-1", "1");
         sqrTest("-3.e-19", "9.e-38");
         sqrTest("0", "0");
-        sqrTest("2.497384811270314e-4712", "6.236930895563662e-9424");
-        sqrTest("2.405529628524835e-74", "5.786572793710831e-148");
         sqrTest("1", "1");
         sqrTest("4", "16");
         sqrTest("87909.888", "7728148408.172544");
-        sqrTest("5.972427781873983e+19", "3.566989360970018e+39");
-        sqrTest("4.716914975207485e+1265", "2.224928688333663e+2531");
-        sqrTest("1.e+5000", "1.e+10000");
     }
 
     @Test
     public void sqrFail() {
-        sqrFailTest("-9.764584e+12345");
-        sqrFailTest("-8.876999e+10000");
+        sqrFailTest("-1.e+5000");
+        sqrFailTest("-1.e-5000");
         sqrFailTest("-2.38476e+7349");
-        sqrFailTest("-1.e+5001");
-        sqrFailTest("1.e+5001");
-        sqrFailTest("2.38476e+7349");
-        sqrFailTest("8.876999e+10000");
-        sqrFailTest("9.764584e+12345");
+        sqrFailTest("2.38476e-7349");
     }
 
     @Test
     public void sqrtTest() throws SquareRootException {
         sqrtTest("0", "0");
-        sqrtTest("1.935438063020253e-29", "4.399361388906637e-15");
         sqrtTest("1", "1");
-        sqrtTest("2", "1.414213562373095");
+        sqrtTest("9", "3");
         sqrtTest("4", "2");
         sqrtTest("100", "10");
         sqrtTest("10000", "100");
-        sqrtTest("5.809392023064086e+18", "2410268039.671954");
-        //sqrtTest("6.437652924183111e+2401", "8.0234985662011e+1200");
-        //sqrtTest("1.717553345667319e+9607", "4.144337517224338e+4803");
+
     }
 
     @Test
@@ -141,25 +124,16 @@ public class ModelTest {
     public void inverseTest() throws ZeroDivideException {
         inverseTest("1", "1");
         inverseTest("-25", "-0.04");
-        inverseTest("-0.04", "-25");
-        inverseTest("55.33", "0.01807337791433219");
-        inverseTest("0.01807337791433219","55.33");
-        inverseTest("-3.e-33", "-3.333333333333333e+32");
-        inverseTest("-3.333333333333333e+32", "-3.e-33");
-        inverseTest("4995", "2.002002002002002e-4");
-        inverseTest("2.002002002002002e-4", "4995");
-        inverseTest("1.482904830437566e+1694", "6.743521090998985e-1695");
-        inverseTest("6.743521090998985e-1695", "1.482904830437566e+1694");
-        inverseTest("7.170780012865725e+8470", "1.394548428770388e-8471");
-        inverseTest("1.394548428770388e-8471", "7.170780012865725e+8470");
-        inverseTest("-3.734365312567033e-4236", "-2.677831214409476e+4235");
-        inverseTest("-2.677831214409476e+4235", "-3.734365312567033e-4236");
+        inverseTest("-0.04","-25");
+        inverseTest("1000","0.001");
+        inverseTest("0.001","1000");
         inverseTest("1.e-9999", "1.e+9999");
         inverseTest("1.e+9999", "1.e-9999");
     }
 
     @Test
     public void inverseFail() {
+
         inverseFailTest("0");
     }
 
@@ -187,7 +161,7 @@ public class ModelTest {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
         BigDecimal actualValue = calculator.sqrt(new BigDecimal(value));
-        assertEquals(expectedValue, actualValue);
+        assertEquals("expected: " + expected + "\n actual: " + actualValue,true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void sqrtFailTest(String value) {
@@ -204,15 +178,14 @@ public class ModelTest {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
         BigDecimal actualValue = calculator.negate(new BigDecimal(actual));
-        assertEquals(true, expectedValue.compareTo(actualValue) == 0);
-        //assertEquals(expectedValue, actualValue);
+        assertEquals("expected: " + expected + "\n actual: " + actualValue,true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void sqrTest(String actual, String expected) throws OverflowException {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
         BigDecimal actualValue = calculator.sqr(new BigDecimal(actual));
-        assertEquals(expectedValue, actualValue);
+        assertEquals("expected: " + expected + "\n actual: " + actualValue,true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void sqrFailTest(String value) {
@@ -229,7 +202,7 @@ public class ModelTest {
         Calculator calculator = new Calculator();
         BigDecimal expectedValue = new BigDecimal(expected);
         BigDecimal actualValue = calculator.inverse(new BigDecimal(actual));
-        assertEquals(expectedValue, actualValue);
+        assertEquals("expected: " + expected + "\n actual: " + actualValue,true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void inverseFailTest(String value) {
@@ -248,7 +221,8 @@ public class ModelTest {
         BigDecimal rightValue = new BigDecimal(right);
         BigDecimal expectedValue = new BigDecimal(expected);
         calculator.changeOperator(leftValue, operator);
-        assertEquals(true, expectedValue.compareTo(calculator.calculateResult(rightValue)) == 0);
+        BigDecimal actualValue = calculator.calculateResult(rightValue);
+        assertEquals("expected: " + expected + "\n actual: " + actualValue,true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void binaryFail(String left, Operator operator, String right) {
@@ -259,11 +233,7 @@ public class ModelTest {
         try {
             calculator.calculateResult(rightValue);
             fail("Values " + left + " and " + right + " don't throw exceptions for " + operator);
-        } catch (ZeroByZeroDivideException e) {
-            //expected
-        } catch (OverflowException e) {
-            //expected
-        } catch (ZeroDivideException e) {
+        } catch (ZeroByZeroDivideException | ZeroDivideException | OverflowException e) {
             //expected
         }
     }
@@ -274,8 +244,8 @@ public class ModelTest {
         BigDecimal rightValue = new BigDecimal(right);
         BigDecimal expectedValue = new BigDecimal(expected);
         calculator.changeOperator(leftValue, operator);
-        assertEquals(true, expectedValue.compareTo(calculator.percent(rightValue)) == 0);
-        //assertEquals(expectedValue, calculator.percent(rightValue));
+        BigDecimal actualValue = calculator.percent(rightValue);
+        assertEquals("expected: " + expected + "\n actual: " + actualValue,true, expectedValue.compareTo(actualValue) == 0);
     }
 
     /**
@@ -326,9 +296,5 @@ public class ModelTest {
         memory.memoryStore(memoryValue);
         memory.memoryClear();
         assertEquals(BigDecimal.ZERO, memory.memoryRecall());
-    }
-
-    private BigDecimal convert(String value) {
-        return new BigDecimal(value);
     }
 }

@@ -2,7 +2,6 @@ package com.implemica.calculator;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +16,7 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -61,6 +61,7 @@ public class ViewTest {
      * Numeric field label
      */
     private static Label numericField;
+    private static Label title;
     private static AnchorPane menuPane;
 
     @BeforeClass
@@ -77,6 +78,7 @@ public class ViewTest {
             Scene scene = stage.getScene();
             numericField = (Label) scene.lookup("#numericField");
             menuPane = (AnchorPane) scene.lookup("#navigator");
+            title = (Label) scene.lookup("#title");
         });
         WaitForAsyncUtils.waitForFxEvents();
     }
@@ -88,12 +90,18 @@ public class ViewTest {
     @Test
     public void moveTest() {
         moveTest(100, 100);
-        moveTest(-200, -200);
-        moveTest(500, 0);
-        moveTest(0, 300);
-        moveTest(120, 300);
-        moveTest(-1500, 0);
-        moveTest(534, -1000);
+        moveTest(274, 882);
+        moveTest(530, 0);
+        moveTest(0, 387);
+        moveTest(123, 298);
+        moveTest(1530, 457);
+        moveTest(534, 741);
+
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            moveTest(random.nextInt(MAX_WINDOW_WIDTH - MIN_WINDOW_WIDTH) + MIN_WINDOW_WIDTH / 2,
+                     random.nextInt(MAX_WINDOW_HEIGHT - MIN_WINDOW_HEIGHT) + MIN_WINDOW_HEIGHT / 2);
+        }
     }
 
     /**
@@ -254,40 +262,68 @@ public class ViewTest {
      */
     @Test
     public void numericFontResizeTest() {
-        numericFontResizeTest("12345", 30);
-        numericFontResizeTest("-98", 30);
+        numericFontResizeTest("1", 47);
+        numericFontResizeTest("546", 47);
+        numericFontResizeTest("-5 826", 47);
+        numericFontResizeTest("12 345", 47);
+        numericFontResizeTest("432 567 622", 47);
+        numericFontResizeTest("285 759 234,", 43);
+        numericFontResizeTest("-989 999 999", 43);
+        numericFontResizeTest("3 423 987 423", 39);
+        numericFontResizeTest("5 673 567 567,1", 34);
+        numericFontResizeTest("-3 576 565,560745", 30);
+        numericFontResizeTest("-43 655 765 753,14", 28);
+        numericFontResizeTest("-99 991 989 999 999", 27);
+        numericFontResizeTest("-13 544 668,345235346", 24);
+        numericFontResizeTest("-9 827 409 827 459 809", 23);
+
+        numericFontResizeTest("0", 47);
+        numericFontResizeTest("0,1", 47);
+        numericFontResizeTest("-0,1", 47);
+        numericFontResizeTest("0,000001", 47);
+        numericFontResizeTest("4,97837288", 47);
+        numericFontResizeTest("2,8798798779", 43);
+        numericFontResizeTest("8,896798793209", 36);
+        numericFontResizeTest("3,2368767867647", 34);
+        numericFontResizeTest("5,83453276767633", 32);
+        numericFontResizeTest("1,998749879873477", 30);
+        numericFontResizeTest("0,0000000000000001", 28);
+
+        numericFontResizeTest("1,e+16", 47);
+        numericFontResizeTest("2,e-17", 47);
+        numericFontResizeTest("2,835987e+33", 43);
+        numericFontResizeTest("4,345870981e-100", 32);
+        numericFontResizeTest("7,9823988822e+223", 30);
+        numericFontResizeTest("6,34509898981e-5334", 27);
+        numericFontResizeTest("9,999999999999998e+31", 24);
+        numericFontResizeTest("6,8335479827987452e+111", 22);
+        numericFontResizeTest("9,4527984759283745e+1103", 21);
+        numericFontResizeTest("9,9999999999999999e+9999", 21);
+
+        numericFontResizeTest("Overflow", 47);
+        numericFontResizeTest("Invalid input", 39);
+        numericFontResizeTest("Result is undefined", 27);
+        numericFontResizeTest("Cannot divide by zero", 24);
     }
 
     /**
      * Move window and check position of window
      *
-     * @param dx offset of X coordinate
-     * @param dy offset of Y coordinate
+     * @param x new X coordinate of window
+     * @param y new Y coordinate of window
      */
-    private void moveTest(int dx, int dy) {
-        double beforeX = stage.getX();
-        double beforeY = stage.getY();
-        double offsetX = Math.random() * 180 + 2;
-        double offsetY = Math.random() * 32 + 2;
+    private void moveTest(int x, int y) {
+        robot.drag(title, MouseButton.PRIMARY);
 
-        robot.drag(new Point2D(beforeX + offsetX, beforeY + offsetY), MouseButton.PRIMARY);
-        robot.moveBy(dx, dy);
-        WaitForAsyncUtils.waitForFxEvents();
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        double mouseX = Math.abs(stage.getX() - point.getX());
+        double mouseY = Math.abs(stage.getY() - point.getY());
 
-        double afterX = stage.getX();
-        double afterY = stage.getY();
+        robot.moveTo(x, y);
+        robot.drop();
 
-        double expectedX = beforeX + dx - offsetX;
-        double expectedY = beforeY + dy - offsetX;
-        if (expectedX < 0) {
-            expectedX = dx - beforeX;
-        } else if (expectedX > MAX_WINDOW_WIDTH) {
-        }
-        if (expectedY < 0) {
-            expectedY = dy - beforeY;
-        }
-        assertEquals(expectedX, afterX, 0.1);
-        assertEquals(expectedY, afterY, 0.1);
+        assertEquals(x, stage.getX() + mouseX, 0.1);
+        assertEquals(y, stage.getY() + mouseY, 0.1);
     }
 
     /**
@@ -474,7 +510,8 @@ public class ViewTest {
      * @param font  font size
      */
     private void numericFontResizeTest(String value, int font) {
-        numericField.setText(value);
+        Platform.runLater(() -> numericField.setText(value));
+        WaitForAsyncUtils.waitForFxEvents();
         assertEquals(font, numericField.getFont().getSize(), 0.1);
     }
 
