@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  *
  * @author Slavik Aleksey V.
  */
-public class ControllerTest {
+public class ControllerTest {//todo font size for all testcases
 
     private static GuiTest controller;
 
@@ -90,6 +90,10 @@ public class ControllerTest {
         testExpression("0,0000000000000001 / 10 * 10 =", "0,0000000000000001");
         testExpression("0,0000000000000001 negate / 10 =", "-1e-17");
         testExpression("0,0000000000000001 negate / 10 * 10 =", "-0,0000000000000001");
+        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 - MR = = = = =", "0,0000000000000001");
+        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 - MR = = = = = =", "4e-17");
+        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 negate + MR = = = = =", "-0,0000000000000001");
+        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 negate + MR = = = = = =", "-4e-17");
     }
 
     /**
@@ -103,12 +107,14 @@ public class ControllerTest {
         testExpression("+ 5 negate =", "-5", "");
         testExpression("2 + 2 =", "4", "");
         testExpression("2 + 2 +", "4", "2 + 2 +");
-        testExpression("12 negate + 11 +", "-1", "-12 + 11 +");
-        testExpression("+ 100 negate", "-100", "0 +");
         testExpression("0,5 + 12 +", "12,5", "0,5 + 12 +");
         //several add
+        testExpression("+ + +", "0", "0 +");
         testExpression("2 + 2 + + + +", "4", "2 + 2 +");
         testExpression("55 + + + +", "55", "55 +");
+        testExpression("+ 100 negate + + +","-100", "0 + -100 +");
+        testExpression("98 + + 34 + +", "132", "98 + 34 +");
+        testExpression("+ + 732 negate + + 901 + +", "169", "0 + -732 + 901 +");
         //add with zero
         testExpression("0 + 0 +", "0", "0 + 0 +");
         testExpression("+ 0 =", "0", "");
@@ -120,6 +126,7 @@ public class ControllerTest {
         testExpression("2 + 2 negate =", "0", "");
         testExpression("2 negate + 2 +", "0", "-2 + 2 +");
         testExpression("32 negate + 32 =", "0", "");
+        testExpression("9823 + 9823 negate +","0","9823 + -9823 +");
         testExpression(",00001 + ,00001 negate +", "0", "0,00001 + -0,00001 +");
         testExpression("36,6 negate + 36,6 negate +", "-73,2", "-36,6 + -36,6 +");
         //several equals
@@ -132,12 +139,16 @@ public class ControllerTest {
         //add with lowest possible
         testExpression(",0000000000000001 + ,0000000000000001 =", "0,0000000000000002", "");
         testExpression(",0000000000000001 + ,0000000000000001 negate =", "0", "");
+        testExpression(",0000000000000001 negate + ,0000000000000001 =", "0", "");
         testExpression(",0000000000000001 + ,0000000000000009 =", "0,000000000000001", "");
         testExpression(",0000000000000001 + ,0000000000000009 negate =", "-0,0000000000000008", "");
+        testExpression(",0000000000000001 negate + ,0000000000000009 =", "0,0000000000000008", "");
         //add with highest possible
         testExpression("9999999999999999 + 1 =", "1e+16", "");
         testExpression("9999999999999999 + =", "2e+16", "");
-        testExpression("999,999999999999 + ,000000000001 =", "1 000", "");
+        testExpression("9999999999999999 + 9999999999999999 negate =", "0", "");
+        testExpression("9999999999999999 + 8888888888888888 negate =", "1 111 111 111 111 111", "");
+        testExpression("1234567890123456 + 8765432109876543 =", "9 999 999 999 999 999", "");
         testExpression("9999999999999999 + ,00000000000001 =", "9 999 999 999 999 999", "");
     }
 

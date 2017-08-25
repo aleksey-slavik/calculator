@@ -75,12 +75,12 @@ public class Controller implements Initializable {
      */
     private int historyPos;
 
-    private boolean canChange;
+    private boolean isEditable;
 
     /**
      * true if can calculate intermediate result
      */
-    private boolean canCalculateResult;
+    private boolean isCalculateResult;
 
     /**
      * for calculateSqr, calculateSqrt, calculateNegate and calculateInverse
@@ -201,15 +201,15 @@ public class Controller implements Initializable {
             normalStatement();
         }
 
-        if (checkSize() && !canChange) {
+        if (checkSize() && !isEditable) {
             return;
         }
 
         String digit = ((Button) event.getSource()).getText();
 
-        if (getNumericFieldText().equals(DEFAULT_NUMERIC_FIELD_VALUE) || canChange) {
+        if (getNumericFieldText().equals(DEFAULT_NUMERIC_FIELD_VALUE) || isEditable) {
             setNumericFieldText(digit);
-            canChange = false;
+            isEditable = false;
         } else {
             appendNumericFieldText(digit);
         }
@@ -229,16 +229,16 @@ public class Controller implements Initializable {
         }
 
         try {
-            if (canCalculateResult) {
+            if (isCalculateResult) {
                 setNumericFieldNumber(calculator.calculateEqualsResult(getNumericFieldNumber()));
             } else {
                 setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
                 history.clearHistory();
                 setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             }
-            canCalculateResult = true;
+            isCalculateResult = true;
             isSequence = false;
-            canChange = true;
+            isEditable = true;
         } catch (ZeroDivideException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         } catch (OverflowException e) {
@@ -254,9 +254,9 @@ public class Controller implements Initializable {
             appendNumericFieldText(COMMA);
         }
 
-        if (canChange || canCalculateResult) {
-            canChange = false;
-            canCalculateResult = false;
+        if (isEditable || isCalculateResult) {
+            isEditable = false;
+            isCalculateResult = false;
             setNumericFieldText(ZERO_WITH_COMMA);
         }
     }
@@ -335,7 +335,7 @@ public class Controller implements Initializable {
             setNumericFieldNumber(calculator.percent(getNumericFieldNumber()));
             String value = getNumericFieldText().replace(" ", "");
 
-            if (canChange) {
+            if (isEditable) {
                 history.replace(value);
                 setHistoryFieldText(history.getHistory());
             } else {
@@ -344,7 +344,8 @@ public class Controller implements Initializable {
             }
         }
 
-        canChange = true;
+        isEditable = true;
+        isPreviousUnary = true;
     }
 
     @FXML
@@ -380,7 +381,7 @@ public class Controller implements Initializable {
         }
 
         isPreviousUnary = true;
-        canChange = true;
+        isEditable = true;
     }
 
     @FXML
@@ -405,7 +406,7 @@ public class Controller implements Initializable {
         }
 
         isPreviousUnary = true;
-        canChange = true;
+        isEditable = true;
     }
 
     @FXML
@@ -414,7 +415,7 @@ public class Controller implements Initializable {
             normalStatement();
         }
 
-        if (canChange) {
+        if (isEditable) {
             return;
         }
 
@@ -450,7 +451,7 @@ public class Controller implements Initializable {
         }
 
         isPreviousUnary = true;
-        canChange = true;
+        isEditable = true;
     }
 
     @FXML
@@ -462,7 +463,7 @@ public class Controller implements Initializable {
     @FXML
     private void memoryRecallClick() {
         setNumericFieldNumber(memory.memoryRecall());
-        canChange = false;
+        isEditable = false;
     }
 
     @FXML
@@ -472,7 +473,7 @@ public class Controller implements Initializable {
         }
 
         memory.memoryAdd(getNumericFieldNumber());
-        canChange = false;
+        isEditable = false;
     }
 
     @FXML
@@ -482,7 +483,7 @@ public class Controller implements Initializable {
         }
 
         memory.memorySubtract(getNumericFieldNumber());
-        canChange = false;
+        isEditable = false;
     }
 
     @FXML
@@ -492,13 +493,13 @@ public class Controller implements Initializable {
         }
 
         memory.memoryStore(getNumericFieldNumber());
-        canChange = false;
+        isEditable = false;
     }
 
     @FXML
     private void clearClick() {
-        canChange = false;
-        canCalculateResult = false;
+        isEditable = false;
+        isCalculateResult = false;
         isPreviousUnary = false;
         isSequence = false;
         normalStatement();
@@ -524,7 +525,7 @@ public class Controller implements Initializable {
                 setHistoryFieldText(history.getHistory());
                 setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
                 calculator.changeOperator(getNumericFieldNumber(), operator);
-            } else if (canChange) {
+            } else if (isEditable) {
                 history.replaceLastSign(operator);
                 setHistoryFieldText(history.getHistory());
                 calculator.changeOperator(getNumericFieldNumber(), operator);
@@ -546,8 +547,8 @@ public class Controller implements Initializable {
         }
 
         isSequence = true;
-        canChange = true;
-        canCalculateResult = false;
+        isEditable = true;
+        isCalculateResult = false;
         isPreviousUnary = false;
     }
 

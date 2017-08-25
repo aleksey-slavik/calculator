@@ -58,11 +58,6 @@ public class ViewTest {
     private static Stage stage;
 
     /**
-     * Numeric field label
-     */
-    private static Label numericField;
-
-    /**
      * Title label
      */
     private static Label title;
@@ -83,8 +78,10 @@ public class ViewTest {
     @BeforeClass
     public static void initJFX() throws InterruptedException {
         new JFXPanel();
+
         Platform.runLater(() -> {
             stage = new Stage();
+
             try {
                 new Launcher().start(stage);
             } catch (Exception e) {
@@ -92,7 +89,6 @@ public class ViewTest {
             }
 
             Scene scene = stage.getScene();
-            numericField = (Label) scene.lookup("#numericField");
             menuPane = (AnchorPane) scene.lookup("#navigator");
             title = (Label) scene.lookup("#title");
             hide = (Button) scene.lookup("#hide");
@@ -100,6 +96,7 @@ public class ViewTest {
             menuShow = (Button) scene.lookup("menuShow");
             menuClose = (Button) scene.lookup("#menuClose");
         });
+
         WaitForAsyncUtils.waitForFxEvents();
     }
 
@@ -117,6 +114,7 @@ public class ViewTest {
         moveTest(123, 298);
         moveTest(1530, 457);
         moveTest(534, 341);
+
         //random tests
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
@@ -287,55 +285,6 @@ public class ViewTest {
         robot.clickOn(menuClose);
         Thread.sleep(350);
         assertEquals(-260, menuPane.getTranslateX(), 0.1);
-    }
-
-    /**
-     * Check font size of numeric field depending on the count of chars in field
-     */
-    @Test
-    public void numericFontResizeTest() {
-        numericFontResizeTest("1", 47);
-        numericFontResizeTest("546", 47);
-        numericFontResizeTest("-5 826", 47);
-        numericFontResizeTest("12 345", 47);
-        numericFontResizeTest("432 567 622", 47);
-        numericFontResizeTest("285 759 234,", 43);
-        numericFontResizeTest("-989 999 999", 43);
-        numericFontResizeTest("3 423 987 423", 39);
-        numericFontResizeTest("5 673 567 567,1", 34);
-        numericFontResizeTest("-3 576 565,560745", 30);
-        numericFontResizeTest("-43 655 765 753,14", 28);
-        numericFontResizeTest("-99 991 989 999 999", 27);
-        numericFontResizeTest("-13 544 668,345235346", 24);
-        numericFontResizeTest("-9 827 409 827 459 809", 23);
-
-        numericFontResizeTest("0", 47);
-        numericFontResizeTest("0,1", 47);
-        numericFontResizeTest("-0,1", 47);
-        numericFontResizeTest("0,000001", 47);
-        numericFontResizeTest("4,97837288", 47);
-        numericFontResizeTest("2,8798798779", 43);
-        numericFontResizeTest("8,896798793209", 36);
-        numericFontResizeTest("3,2368767867647", 34);
-        numericFontResizeTest("5,83453276767633", 32);
-        numericFontResizeTest("1,998749879873477", 30);
-        numericFontResizeTest("0,0000000000000001", 28);
-
-        numericFontResizeTest("1,e+16", 47);
-        numericFontResizeTest("2,e-17", 47);
-        numericFontResizeTest("2,835987e+33", 43);
-        numericFontResizeTest("4,345870981e-100", 32);
-        numericFontResizeTest("7,9823988822e+223", 30);
-        numericFontResizeTest("6,34509898981e-5334", 27);
-        numericFontResizeTest("9,999999999999998e+31", 24);
-        numericFontResizeTest("6,8335479827987452e+111", 22);
-        numericFontResizeTest("9,4527984759283745e+1103", 21);
-        numericFontResizeTest("9,9999999999999999e+9999", 21);
-
-        numericFontResizeTest("Overflow", 47);
-        numericFontResizeTest("Invalid input", 39);
-        numericFontResizeTest("Result is undefined", 27);
-        numericFontResizeTest("Cannot divide by zero", 24);
     }
 
     /**
@@ -547,19 +496,6 @@ public class ViewTest {
         list.add(GuiTest.find("#clear"));
         list.add(GuiTest.find("#clear_expr"));
         return list;
-    }
-
-    /**
-     * Check font size of numeric field depending on the count of chars in field.
-     * Append string value to numeric field and check font size.
-     *
-     * @param value given numeric value
-     * @param font  font size
-     */
-    private void numericFontResizeTest(String value, int font) {
-        Platform.runLater(() -> numericField.setText(value));
-        WaitForAsyncUtils.waitForFxEvents();
-        assertEquals(font, numericField.getFont().getSize(), 0.1);
     }
 
     /**
