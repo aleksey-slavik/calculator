@@ -21,13 +21,14 @@ public class Calculator {
     private static final BigDecimal HUNDRED = BigDecimal.valueOf(100);
 
     /**
-     * divide operation scale
+     * Divide operation scale.
+     * For increase accuracy of operation need to increase
      */
     private static final int DIVIDE_SCALE = 11000;
 
     /**
-     * maximum scale of calculator.
-     * numbers with scale bigger than this value throws overflow
+     * Maximum scale of calculator.
+     * Numbers with scale bigger than this value throws overflow
      */
     private static final int MAX_SCALE = 10000;
 
@@ -51,6 +52,13 @@ public class Calculator {
      */
     private boolean isNextOperator;
 
+    /**
+     * Change current operator and save given value as the left operand.
+     * Usually called when binary operator are pressed.
+     *
+     * @param value     given value
+     * @param operator  given operator
+     */
     public void changeOperator(BigDecimal value, Operator operator) {
         isNextOperator = false;
 
@@ -61,14 +69,32 @@ public class Calculator {
         this.operator = operator;
     }
 
+    /**
+     * Return current statement of operator
+     *
+     * @return  current operator
+     */
     public Operator getOperator() {
         return operator;
     }
 
+    /**
+     * Change operator to default
+     */
     public void resetOperator() {
         operator = Operator.EMPTY;
     }
 
+    /**
+     * Calculate current expression using current left operand and operator.
+     * Right operand used if current operation was not already done
+     *
+     * @param value     given value
+     * @return          result of calculation
+     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
     public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         if (!isNextOperator) {
             right = value;
@@ -79,6 +105,15 @@ public class Calculator {
         return left;
     }
 
+    /**
+     * Calculate current expression using current left and right operands and operator.
+     *
+     * @param value     given value
+     * @return          result of calculation
+     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
     public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         isNextOperator = false;
         right = value;
@@ -86,6 +121,15 @@ public class Calculator {
         return left;
     }
 
+    /**
+     * Calculate current expression using current left and right operands and operator.
+     *
+     * @param value     given value
+     * @return          result of calculation
+     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
     public BigDecimal calculateEqualsResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         if (left.equals(BigDecimal.ZERO)) {
             left = value;
@@ -95,6 +139,14 @@ public class Calculator {
         return left;
     }
 
+    /**
+     * Calculate expression using left and right operands and operator from current statement of Calculator object.
+     *
+     * @return          result of calculation
+     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
     private BigDecimal calculate() throws OverflowException, ZeroDivideException, ZeroByZeroDivideException {
         if (operator == Operator.EMPTY) {
             return BigDecimal.ZERO;
@@ -119,21 +171,43 @@ public class Calculator {
         return res;
     }
 
+    /**
+     * Add left operand to right
+     *
+     * @return      result of add
+     */
     private BigDecimal add() {
 
         return left.add(right).stripTrailingZeros();
     }
 
+    /**
+     * Subtract left operand from right
+     *
+     * @return      result of subtract
+     */
     private BigDecimal subtract() {
 
         return left.subtract(right).stripTrailingZeros();
     }
 
+    /**
+     * Multiply left and right operands
+     *
+     * @return      result of multiply
+     */
     private BigDecimal multiply() {
 
         return left.multiply(right).stripTrailingZeros();
     }
 
+    /**
+     * Divide left operand to right
+     *
+     * @return      result of divide
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
     private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
         if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
             throw new ZeroByZeroDivideException("Quotient of two zeros are not defined");
@@ -146,11 +220,23 @@ public class Calculator {
         return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
+    /**
+     * Return given percent value of left operand
+     *
+     * @param value     given percent value
+     * @return          percent value of left operand
+     */
     public BigDecimal percent(BigDecimal value) {
 
         return left.multiply(value.divide(HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP)).stripTrailingZeros();
     }
 
+    /**
+     * Return negate of given value.
+     *
+     * @param value     given value
+     * @return          negate of given value
+     */
     public BigDecimal negate(BigDecimal value) {
 
         return value.negate();

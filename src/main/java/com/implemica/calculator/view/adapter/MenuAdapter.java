@@ -2,7 +2,6 @@ package com.implemica.calculator.view.adapter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 
 /**
  * Menu adapter
@@ -11,6 +10,9 @@ import javafx.scene.Scene;
  */
 public class MenuAdapter {
 
+    /**
+     * Menu items
+     */
     private static final String[] items = new String[] {
             "Standard",
             "Scientific",
@@ -31,6 +33,11 @@ public class MenuAdapter {
             "Angle"
     };
 
+    /**
+     * Setup menu list items
+     *
+     * @return  list with menu items
+     */
     public static ObservableList<String> init() {
         ObservableList<String> list = FXCollections.observableArrayList();
         list.addAll(items);

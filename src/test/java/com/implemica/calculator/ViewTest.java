@@ -108,18 +108,18 @@ public class ViewTest {
     public void moveTest() {
         //handle tests
         moveTest(100, 100);
-        moveTest(274, 482);
-        moveTest(530, 0);
+        moveTest(274, -182);
+        moveTest(-530, 0);
         moveTest(0, 387);
-        moveTest(123, 298);
-        moveTest(1530, 457);
+        moveTest(123, -298);
+        moveTest(-430, 257);
         moveTest(534, 341);
 
         //random tests
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
-            moveTest(random.nextInt(MAX_WINDOW_WIDTH - MIN_WINDOW_WIDTH) + MIN_WINDOW_WIDTH / 2,
-                     random.nextInt(MAX_WINDOW_HEIGHT - MIN_WINDOW_HEIGHT) + MIN_WINDOW_HEIGHT / 2);
+            moveTest(random.nextInt(MAX_WINDOW_WIDTH) - MAX_WINDOW_WIDTH / 2,
+                     random.nextInt(MAX_WINDOW_HEIGHT) - MAX_WINDOW_HEIGHT / 2);
         }
     }
 
@@ -290,21 +290,69 @@ public class ViewTest {
     /**
      * Move window and check position of window
      *
-     * @param x new X coordinate of window
-     * @param y new Y coordinate of window
+     * @param dx offset of X coordinate
+     * @param dy offset of Y coordinate
      */
-    private void moveTest(int x, int y) {
+    private void moveTest(int dx, int dy) {
+        double beforeX = stage.getX();
+        double beforeY = stage.getY();
+
         robot.drag(title, MouseButton.PRIMARY);
 
         Point point = MouseInfo.getPointerInfo().getLocation();
         double offsetX = Math.abs(stage.getX() - point.getX());
         double offsetY = Math.abs(stage.getY() - point.getY());
 
-        robot.moveTo(x, y);
+        robot.moveBy(dx, dy);
         robot.drop();
 
-        assertEquals(x, stage.getX() + offsetX, 0.1);
-        assertEquals(y, stage.getY() + offsetY, 0.1);
+        double afterX = stage.getX();
+        double afterY = stage.getY();
+
+        assertEquals(checkX(beforeX, dx, offsetX), afterX, 0.1);
+        assertEquals(checkY(beforeY, dy, offsetY), afterY, 0.1);
+    }
+
+    /**
+     * Return correct value of position of window.
+     * Correct value if window is outside of the screen
+     *
+     * @param beforeX   X coordinate of window before move
+     * @param dx        offset of X coordinate of window move
+     * @param offsetX   offset of X coordinate of mouse relatively of window
+     * @return          correct X coordinate
+     */
+    private double checkX(double beforeX, int dx, double offsetX) {
+        double res = beforeX + dx;
+
+        if (res > MAX_WINDOW_WIDTH) {
+            res = MAX_WINDOW_WIDTH - offsetX - 1;
+        } else if (res < 0) {
+            res = Math.abs(offsetX);
+        }
+
+        return res;
+    }
+
+    /**
+     * Return correct value of position of window.
+     * Correct value if window is outside of the screen
+     *
+     * @param beforeY   Y coordinate of window before move
+     * @param dy        offset of Y coordinate of window move
+     * @param offsetY   offset of Y coordinate of mouse relatively of window
+     * @return          correct Y coordinate
+     */
+    private double checkY(double beforeY, int dy, double offsetY) {
+        double res = beforeY + dy;
+
+        if (res > MAX_WINDOW_HEIGHT) {
+            res = MAX_WINDOW_HEIGHT - offsetY - 1;
+        } else if (res < 0) {
+            res = Math.abs(offsetY);
+        }
+
+        return res;
     }
 
     /**
@@ -312,9 +360,12 @@ public class ViewTest {
      * Position NE, SE, SW, NW mean that resize started from corresponding corner of window.
      * Position E, W, N, S mean that resize started from random point in corresponding side of window.
      *
-     * @param dx  offset of X coordinate
-     * @param dy  offset of Y coordinate
-     * @param pos resize position
+     * @param dx            offset of X coordinate
+     * @param dy            offset of Y coordinate
+     * @param pos           resize position
+     * @param digitsFont    font size for digits group
+     * @param binaryFont    font size for binary group
+     * @param unaryFont     font size for unary group
      */
     private void resizeTest(int dx, int dy, String pos, int digitsFont, int binaryFont, int unaryFont) {
         returnNormalState();
@@ -325,61 +376,40 @@ public class ViewTest {
         double expectedWidth = stage.getWidth();
         double expectedHeight = stage.getHeight();
 
-        switch (pos) {
-            case "E":
-                robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                expectedWidth = checkWidth(beforeWidth + dx, beforeWidth, beforeX);
-                break;
-            case "W":
-                robot.drag(stage.getX() + 1, stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                WaitForAsyncUtils.waitForFxEvents();
-                expectedWidth = checkWidth(beforeWidth - dx - 1, beforeWidth, beforeX);
-                break;
-            case "N":
-                robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY() + 1, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                expectedHeight = checkHeight(beforeHeight - dy - 1, beforeHeight, beforeY);
-                break;
-            case "S":
-                robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                expectedHeight = checkHeight(beforeHeight + dy, beforeHeight, beforeY);
-                break;
-            case "NE":
-                robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + 1, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                expectedWidth = checkWidth(beforeWidth + dx, beforeWidth, beforeX);
-                expectedHeight = checkHeight(beforeHeight - dy - 1, beforeHeight, beforeY);
-                break;
-            case "SE":
-                robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                expectedWidth = checkWidth(beforeWidth + dx, beforeWidth, beforeX);
-                expectedHeight = checkHeight(beforeHeight + dy, beforeHeight, beforeY);
-                break;
-            case "SW":
-                robot.drag(stage.getX() + 1, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                expectedWidth = checkWidth(beforeWidth - dx - 1, beforeWidth, beforeX);
-                expectedHeight = checkHeight(beforeHeight + dy, beforeHeight, beforeY);
-                break;
-            case "NW":
-                robot.drag(stage.getX() + 1, stage.getY() + 1, MouseButton.PRIMARY);
-                robot.moveBy(dx, dy);
-                robot.drop();
-                expectedWidth = checkWidth(beforeWidth - dx - 1, beforeWidth, beforeX);
-                expectedHeight = checkHeight(beforeHeight - dy - 1, beforeHeight, beforeY);
-                break;
+        if (pos.equals("E")) {
+            robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
+            expectedWidth = beforeWidth + dx;
+        } else if (pos.equals("W")) {
+            robot.drag(stage.getX(), stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
+            expectedWidth = beforeWidth - dx;
+        } else if (pos.equals("N")) {
+            robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY(), MouseButton.PRIMARY);
+            expectedHeight = beforeHeight - dy;
+        } else if (pos.equals("S")) {
+            robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+            expectedHeight = beforeHeight + dy;
+        } else if (pos.equals("NE")) {
+            robot.drag(stage.getX() + beforeWidth - 1, stage.getY(), MouseButton.PRIMARY);
+            expectedWidth = beforeWidth + dx;
+            expectedHeight = beforeHeight - dy;
+        } else if (pos.equals("SE")) {
+            robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+            expectedWidth = beforeWidth + dx;
+            expectedHeight = beforeHeight + dy;
+        } else if (pos.equals("SW")) {
+            robot.drag(stage.getX(), stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+            expectedWidth = beforeWidth - dx;
+            expectedHeight = beforeHeight + dy;
+        } else if (pos.equals("NW")) {
+            robot.drag(stage.getX(), stage.getY(), MouseButton.PRIMARY);
+            expectedWidth = beforeWidth - dx;
+            expectedHeight = beforeHeight - dy;
         }
+
+        robot.moveBy(dx, dy);
+        robot.drop();
+        expectedWidth = checkWidth(expectedWidth, beforeWidth, beforeX);
+        expectedHeight = checkHeight(expectedHeight, beforeHeight, beforeY);
 
         assertEquals(expectedWidth, stage.getWidth(), 0.1);
         assertEquals(expectedHeight, stage.getHeight(), 0.1);
@@ -433,6 +463,7 @@ public class ViewTest {
      */
     private void fontResizeTest(int digitsFont, int binaryFont, int unaryFont) {
         WaitForAsyncUtils.waitForFxEvents();
+
         for (Button button : digits()) {
             assertEquals(digitsFont, button.getFont().getSize(), 0.1);
         }

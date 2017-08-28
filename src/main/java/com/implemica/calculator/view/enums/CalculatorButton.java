@@ -48,7 +48,14 @@ public enum CalculatorButton {
     EXPAND("#expand"),
     CLOSE("#exit");
 
+    /**
+     * fx:id of given button
+     */
     private String id;
+
+    /**
+     * One-to-one correspondence between keycode combinations and buttons
+     */
     private static HashMap<KeyCodeCombination, CalculatorButton> keys = new HashMap<>();
 
     CalculatorButton(String id) {
@@ -56,6 +63,9 @@ public enum CalculatorButton {
         this.id = id;
     }
 
+    /*
+     * Setup keycode combinations
+     */
     static {
         keys.put(new KeyCodeCombination(KeyCode.DIGIT0), ZERO);
         keys.put(new KeyCodeCombination(KeyCode.NUMPAD0), ZERO);
@@ -103,14 +113,31 @@ public enum CalculatorButton {
         keys.put(new KeyCodeCombination(KeyCode.M, KeyCodeCombination.CONTROL_DOWN), MS);
     }
 
+    /**
+     * Return fx:id of given button
+     *
+     * @return fx:id of given button
+     */
     public String getFXId() {
         return id;
     }
 
+    /**
+     * Return id of given button.
+     * Difference between fx:id and id is that fx:id started with '#'
+     *
+     * @return  id without first char
+     */
     public String getId() {
         return id.substring(1);
     }
 
+    /**
+     * Search button with given keycode combination
+     *
+     * @param event     given keycode combination
+     * @return          button with given keycode combination
+     */
     public static CalculatorButton searchButtonByEvent(KeyEvent event) {
         for (KeyCodeCombination code : keys.keySet()) {
             if (code.match(event)) {
