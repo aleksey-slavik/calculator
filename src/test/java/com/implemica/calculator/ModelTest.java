@@ -13,7 +13,12 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-public class ModelTest {//todo add comments and tests for history
+/**
+ * Model test for calculator
+ *
+ * @author Slavik Aleksey V.
+ */
+public class ModelTest {
 
     @Test
     public void addTest() throws Exception {

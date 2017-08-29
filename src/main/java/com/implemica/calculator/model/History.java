@@ -1,7 +1,8 @@
 package com.implemica.calculator.model;
 
 /**
- * History model
+ * History model.
+ * Consist set of method for work with history
  *
  * @author Slavik Aleksey V.
  */
@@ -123,6 +124,11 @@ public class History {
         setHistory(DEFAULT_VALUE);
     }
 
+    /**
+     * Return true if current history value is default
+     *
+     * @return  true if history is default, false otherwise
+     */
     public boolean isEmpty() {
         return history.equals(DEFAULT_VALUE);
     }

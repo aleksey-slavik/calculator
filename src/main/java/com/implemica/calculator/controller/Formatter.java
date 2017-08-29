@@ -27,10 +27,6 @@ public class Formatter {
     private static final String SPACE = " ";
     private static final String COMMA_PATTERN = "(,$)";
     private static final String COMMA_WITH_ZERO_PATTERN = "(,[0-9]*0$)";
-    /**
-     * Criteria for switch to engineering mode
-     */
-    private static final BigDecimal CRITERIA = new BigDecimal("0.001");
 
     public static String display(BigDecimal number) {
         return formatMathView(number.toPlainString());
@@ -88,14 +84,6 @@ public class Formatter {
         } else {
             stringValue = formatPlainView(number);
         }
-
-        /*
-        if (isEngineeringValue(number)) {
-            stringValue = formatEngineeringView(number);
-        } else {
-            stringValue = formatPlainView(number);
-        }
-        */
 
         return stringValue;
     }

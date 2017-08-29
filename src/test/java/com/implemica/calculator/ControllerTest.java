@@ -866,6 +866,14 @@ public class ControllerTest {
         testExpression(",000000000000001 negate M- * 85 MR", "0,000000000000001");
         testExpression("9999999999999999 M- sqrt + 67 MR", "-9 999 999 999 999 999");
 
+        //clear
+        testExpression("32453 MS C MC 2377 M- MR", "-2 377");
+        testExpression("98 M- C MC 23 MS MR", "23");
+        testExpression("4524 negate M- C MC 22 M- MR", "-22");
+        testExpression("125 M- M- M- M- MC MS MR", "125");
+        testExpression(",000000000000001 negate M+ C 85 M+ MR", "85");
+        testExpression("9999999999999999 M- sqrt MC CE 67 M- MR", "-67");
+
         //with other operations
         testExpression("98 M- C 98 M+ MR", "0");
         testExpression("9999999999999999 M+ M- M+ M- MR", "0");
@@ -1096,7 +1104,8 @@ public class ControllerTest {
 
     /**
      * Push button using item key.
-     * If alternative flag is true for push used alternative combinations of buttons if they exist
+     * If alternative flag is true for push used alternative combinations of buttons if they exist.
+     * Push memory buttons checked statement of memory buttons.
      *
      * @param item        button key
      * @param alternative true if used alternative buttons combination, false otherwise
@@ -1104,66 +1113,86 @@ public class ControllerTest {
     private void pushButton(String item, boolean alternative) {
         if (item.equals("=")) {
             controller.push(alternative ? KeyCode.EQUALS : KeyCode.ENTER);
+
         } else if (item.equals("back")) {
             controller.push(KeyCode.BACK_SPACE);
+
         } else if (item.equals("+")) {
             if (alternative) {
                 controller.push(KeyCode.ADD);
             } else {
                 controller.push(KeyCode.SHIFT, KeyCode.EQUALS);
             }
+
         } else if (item.equals("-")) {
             controller.push(alternative ? KeyCode.SUBTRACT : KeyCode.MINUS);
+
         } else if (item.equals("/")) {
             controller.push(alternative ? KeyCode.DIVIDE : KeyCode.SLASH);
+
         } else if (item.equals("*")) {
             if (alternative) {
                 controller.push(KeyCode.MULTIPLY);
             } else {
                 controller.push(KeyCode.SHIFT, KeyCode.DIGIT8);
             }
+
         } else if (item.equals("negate")) {
             controller.push(KeyCode.F9);
+
         } else if (item.equals("1/")) {
             controller.push(KeyCode.R);
+
         } else if (item.equals("CE")) {
             controller.push(KeyCode.DELETE);
+
         } else if (item.equals("C")) {
             controller.push(KeyCode.ESCAPE);
+
         } else if (item.equals("sqr")) {
             controller.push(KeyCode.Q);
+
         } else if (item.equals("sqrt")) {
             controller.push(KeyCode.SHIFT, KeyCode.DIGIT2);
+
         } else if (item.equals("%")) {
             controller.push(KeyCode.SHIFT, KeyCode.DIGIT5);
+
         } else if (item.equals("MS")) {
             disableMemoryButtonTest(isMemoryDisable);
             controller.push(KeyCode.CONTROL, KeyCode.M);
             isMemoryDisable = false;
             disableMemoryButtonTest(false);
+
         } else if (item.equals("MR")) {
             disableMemoryButtonTest(isMemoryDisable);
             controller.push(KeyCode.CONTROL, KeyCode.R);
             disableMemoryButtonTest(isMemoryDisable);
+
         } else if (item.equals("MC")) {
             disableMemoryButtonTest(isMemoryDisable);
             controller.push(KeyCode.CONTROL, KeyCode.L);
             isMemoryDisable = true;
             disableMemoryButtonTest(true);
+
         } else if (item.equals("M+")) {
             disableMemoryButtonTest(isMemoryDisable);
             controller.push(KeyCode.CONTROL, KeyCode.P);
             isMemoryDisable = false;
             disableMemoryButtonTest(false);
+
         } else if (item.equals("M-")) {
             disableMemoryButtonTest(isMemoryDisable);
             controller.push(KeyCode.CONTROL, KeyCode.Q);
             isMemoryDisable = false;
             disableMemoryButtonTest(false);
+
         } else if (item.equals("<")) {
             controller.click((Button) GuiTest.find("#left"));
+
         } else if (item.equals(">")) {
             controller.click((Button) GuiTest.find("#right"));
+
         } else {
             pushDigitButtons(item, alternative);
         }
@@ -1180,108 +1209,102 @@ public class ControllerTest {
         char[] digits = number.toCharArray();
 
         for (char item : digits) {
-            switch (item) {
-                case '0':
-                    controller.push(alternative ? KeyCode.DIGIT0 : KeyCode.NUMPAD0);
-                    break;
-                case '1':
-                    controller.push(alternative ? KeyCode.DIGIT1 : KeyCode.NUMPAD1);
-                    break;
-                case '2':
-                    controller.push(alternative ? KeyCode.DIGIT2 : KeyCode.NUMPAD2);
-                    break;
-                case '3':
-                    controller.push(alternative ? KeyCode.DIGIT3 : KeyCode.NUMPAD3);
-                    break;
-                case '4':
-                    controller.push(alternative ? KeyCode.DIGIT4 : KeyCode.NUMPAD4);
-                    break;
-                case '5':
-                    controller.push(alternative ? KeyCode.DIGIT5 : KeyCode.NUMPAD5);
-                    break;
-                case '6':
-                    controller.push(alternative ? KeyCode.DIGIT6 : KeyCode.NUMPAD6);
-                    break;
-                case '7':
-                    controller.push(alternative ? KeyCode.DIGIT7 : KeyCode.NUMPAD7);
-                    break;
-                case '8':
-                    controller.push(alternative ? KeyCode.DIGIT8 : KeyCode.NUMPAD8);
-                    break;
-                case '9':
-                    controller.push(alternative ? KeyCode.DIGIT9 : KeyCode.NUMPAD9);
-                    break;
-                case ',':
-                    controller.push(KeyCode.COMMA);
-                    break;
+            if (item == '0') {
+                controller.push(alternative ? KeyCode.DIGIT0 : KeyCode.NUMPAD0);
+            } else if (item == '1') {
+                controller.push(alternative ? KeyCode.DIGIT1 : KeyCode.NUMPAD1);
+            } else if (item == '2') {
+                controller.push(alternative ? KeyCode.DIGIT2 : KeyCode.NUMPAD2);
+            } else if (item == '3') {
+                controller.push(alternative ? KeyCode.DIGIT3 : KeyCode.NUMPAD3);
+            } else if (item == '4') {
+                controller.push(alternative ? KeyCode.DIGIT4 : KeyCode.NUMPAD4);
+            } else if (item == '5') {
+                controller.push(alternative ? KeyCode.DIGIT5 : KeyCode.NUMPAD5);
+            } else if (item == '6') {
+                controller.push(alternative ? KeyCode.DIGIT6 : KeyCode.NUMPAD6);
+            } else if (item == '7') {
+                controller.push(alternative ? KeyCode.DIGIT7 : KeyCode.NUMPAD7);
+            } else if (item == '8') {
+                controller.push(alternative ? KeyCode.DIGIT8 : KeyCode.NUMPAD8);
+            } else if (item == '9') {
+                controller.push(alternative ? KeyCode.DIGIT9 : KeyCode.NUMPAD9);
+            } else if (item == ',') {
+                controller.push(KeyCode.COMMA);
             }
         }
     }
 
     /**
-     * Push on buttons using mouse and button key
+     * Click on buttons using mouse and button key.
+     * Click on memory buttons checked statement of memory buttons.
      *
      * @param item button key
      */
     private void clickButton(String item) {
-        switch (item) {
-            case "=":
-                controller.click((Button) GuiTest.find("#equals"));
-                break;
-            case "back":
-                controller.click((Button) GuiTest.find("#backspace"));
-                break;
-            case "+":
-                controller.click((Button) GuiTest.find("#add"));
-                break;
-            case "-":
-                controller.click((Button) GuiTest.find("#subtract"));
-                break;
-            case "/":
-                controller.click((Button) GuiTest.find("#divide"));
-                break;
-            case "*":
-                controller.click((Button) GuiTest.find("#multiply"));
-                break;
-            case "negate":
-                controller.click((Button) GuiTest.find("#negate"));
-                break;
-            case "1/":
-                controller.click((Button) GuiTest.find("#inverse"));
-                break;
-            case "CE":
-                controller.click((Button) GuiTest.find("#clear_expr"));
-                break;
-            case "C":
-                controller.click((Button) GuiTest.find("#clear"));
-                break;
-            case "sqr":
-                controller.click((Button) GuiTest.find("#sqr"));
-                break;
-            case "sqrt":
-                controller.click((Button) GuiTest.find("#sqrt"));
-                break;
-            case "%":
-                controller.click((Button) GuiTest.find("#percent"));
-                break;
-            case "MS":
-                controller.click((Button) GuiTest.find("#memory_store"));
-                break;
-            case "MR":
-                controller.click((Button) GuiTest.find("#memory_recall"));
-                break;
-            case "MC":
-                controller.click((Button) GuiTest.find("#memory_clear"));
-                break;
-            case "M+":
-                controller.click((Button) GuiTest.find("#memory_add"));
-                break;
-            case "M-":
-                controller.click((Button) GuiTest.find("#memory_minus"));
-                break;
-            default:
-                clickDigitButtons(item);
-                break;
+        if (item.equals("=")) {
+            controller.click((Button) GuiTest.find("#equals"));
+        } else if (item.equals("back")) {
+            controller.click((Button) GuiTest.find("#backspace"));
+        } else if (item.equals("+")) {
+            controller.click((Button) GuiTest.find("#add"));
+        } else if (item.equals("-")) {
+            controller.click((Button) GuiTest.find("#subtract"));
+        } else if (item.equals("/")) {
+            controller.click((Button) GuiTest.find("#divide"));
+        } else if (item.equals("*")) {
+            controller.click((Button) GuiTest.find("#multiply"));
+        } else if (item.equals("negate")) {
+            controller.click((Button) GuiTest.find("#negate"));
+        } else if (item.equals("1/")) {
+            controller.click((Button) GuiTest.find("#inverse"));
+        } else if (item.equals("CE")) {
+            controller.click((Button) GuiTest.find("#clear_expr"));
+        } else if (item.equals("C")) {
+            controller.click((Button) GuiTest.find("#clear"));
+        } else if (item.equals("sqr")) {
+            controller.click((Button) GuiTest.find("#sqr"));
+        } else if (item.equals("sqrt")) {
+            controller.click((Button) GuiTest.find("#sqrt"));
+        } else if (item.equals("%")) {
+            controller.click((Button) GuiTest.find("#percent"));
+        } else if (item.equals("MS")) {
+            disableMemoryButtonTest(isMemoryDisable);
+            controller.click((Button) GuiTest.find("#memory_store"));
+            isMemoryDisable = false;
+            disableMemoryButtonTest(false);
+
+        } else if (item.equals("MR")) {
+            disableMemoryButtonTest(isMemoryDisable);
+            controller.click((Button) GuiTest.find("#memory_recall"));
+            disableMemoryButtonTest(isMemoryDisable);
+
+        } else if (item.equals("MC")) {
+            disableMemoryButtonTest(isMemoryDisable);
+            controller.click((Button) GuiTest.find("#memory_clear"));
+            isMemoryDisable = true;
+            disableMemoryButtonTest(true);
+
+        } else if (item.equals("M+")) {
+            disableMemoryButtonTest(isMemoryDisable);
+            controller.click((Button) GuiTest.find("#memory_add"));
+            isMemoryDisable = false;
+            disableMemoryButtonTest(false);
+
+        } else if (item.equals("M-")) {
+            disableMemoryButtonTest(isMemoryDisable);
+            controller.click((Button) GuiTest.find("#memory_minus"));
+            isMemoryDisable = false;
+            disableMemoryButtonTest(false);
+
+        } else if (item.equals("<")) {
+            controller.click((Button) GuiTest.find("#left"));
+
+        } else if (item.equals(">")) {
+            controller.click((Button) GuiTest.find("#right"));
+
+        } else {
+            clickDigitButtons(item);
         }
     }
 
@@ -1294,40 +1317,28 @@ public class ControllerTest {
         char[] digits = number.toCharArray();
 
         for (char item : digits) {
-            switch (item) {
-                case '0':
-                    controller.click((Button) GuiTest.find("#zero"));
-                    break;
-                case '1':
-                    controller.click((Button) GuiTest.find("#one"));
-                    break;
-                case '2':
-                    controller.click((Button) GuiTest.find("#two"));
-                    break;
-                case '3':
-                    controller.click((Button) GuiTest.find("#three"));
-                    break;
-                case '4':
-                    controller.click((Button) GuiTest.find("#four"));
-                    break;
-                case '5':
-                    controller.click((Button) GuiTest.find("#five"));
-                    break;
-                case '6':
-                    controller.click((Button) GuiTest.find("#six"));
-                    break;
-                case '7':
-                    controller.click((Button) GuiTest.find("#seven"));
-                    break;
-                case '8':
-                    controller.click((Button) GuiTest.find("#eight"));
-                    break;
-                case '9':
-                    controller.click((Button) GuiTest.find("#nine"));
-                    break;
-                case ',':
-                    controller.click((Button) GuiTest.find("#comma"));
-                    break;
+            if (item == '0') {
+                controller.click((Button) GuiTest.find("#zero"));
+            } else if (item == '1') {
+                controller.click((Button) GuiTest.find("#one"));
+            } else if (item == '2') {
+                controller.click((Button) GuiTest.find("#two"));
+            } else if (item == '3') {
+                controller.click((Button) GuiTest.find("#three"));
+            } else if (item == '4') {
+                controller.click((Button) GuiTest.find("#four"));
+            } else if (item == '5') {
+                controller.click((Button) GuiTest.find("#five"));
+            } else if (item == '6') {
+                controller.click((Button) GuiTest.find("#six"));
+            } else if (item == '7') {
+                controller.click((Button) GuiTest.find("#seven"));
+            } else if (item == '8') {
+                controller.click((Button) GuiTest.find("#eight"));
+            } else if (item == '9') {
+                controller.click((Button) GuiTest.find("#nine"));
+            } else if (item == ',') {
+                controller.click((Button) GuiTest.find("#comma"));
             }
         }
     }

@@ -232,7 +232,7 @@ public class Calculator {
     }
 
     /**
-     * Return negate of given value.
+     * Return negate number for given value.
      *
      * @param value     given value
      * @return          negate of given value
@@ -242,6 +242,13 @@ public class Calculator {
         return value.negate();
     }
 
+    /**
+     * Return inverse number for given value
+     *
+     * @param value     given value
+     * @return          inverse number
+     * @throws ZeroDivideException      throws when given number equals zero
+     */
     public BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
         if (value.equals(BigDecimal.ZERO)) {
             throw new ZeroDivideException("Divide by zero in inverse method");
@@ -250,6 +257,13 @@ public class Calculator {
         return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
+    /**
+     * Return result of squaring operation for given value
+     *
+     * @param value     given value
+     * @return          square of number
+     * @throws OverflowException    throws when scale of result is bigger than MAX_SCALE
+     */
     public BigDecimal sqr(BigDecimal value) throws OverflowException {
         BigDecimal res = value.pow(2);
 
@@ -260,6 +274,13 @@ public class Calculator {
         return res;
     }
 
+    /**
+     * Return square root for given value
+     *
+     * @param value     given value
+     * @return          square root of number
+     * @throws SquareRootException      throws when given number is negative
+     */
     public BigDecimal sqrt(BigDecimal value) throws SquareRootException {
         if (value.compareTo(BigDecimal.ZERO) < 0) {
             throw new SquareRootException("Can't get square root of " + value.toPlainString() + ". Non negative number is needed");
@@ -272,23 +293,37 @@ public class Calculator {
         return sqrt(value, BigDecimal.ONE);
     }
 
+    /**
+     * Return default statement of Calculator object
+     */
     public void clearAll() {
         left = BigDecimal.ZERO;
         right = BigDecimal.ZERO;
         resetOperator();
     }
 
+    /**
+     * Set right operand to default
+     */
     public void clearEntry() {
-
         right = BigDecimal.ZERO;
     }
 
+    /**
+     * Returns the square root calculated for the given number. Source of square root for {@link BigDecimal} is
+     * <a href="http://www.java2s.com/Code/Java/Data-Type/BigDecimalandBigIntegersqareroot.htm">square rooting a BigDecimal</a>
+     *
+     * @param number    given number
+     * @param guess     first approach
+     * @return          square root of number
+     */
     private static BigDecimal sqrt(BigDecimal number, BigDecimal guess) {
         BigDecimal two = BigDecimal.valueOf(2);
         BigDecimal result = BigDecimal.ZERO;
         BigDecimal flipA = result;
         BigDecimal flipB = result;
         boolean first = true;
+
         while (result.compareTo(guess) != 0) {
             if (!first)
                 guess = result;
@@ -296,13 +331,14 @@ public class Calculator {
                 first = false;
 
             result = number.divide(guess, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).add(guess).divide(two, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
-            // handle flip flops
+
             if (result.equals(flipB))
                 return flipA;
 
             flipB = flipA;
             flipA = result;
         }
+
         return result;
     }
 }

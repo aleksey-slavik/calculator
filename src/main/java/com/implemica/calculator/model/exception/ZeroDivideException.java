@@ -1,7 +1,8 @@
 package com.implemica.calculator.model.exception;
 
 /**
- * ZeroDivideException
+ * Custom exception for calculations.
+ * Throws when not zero number divide by zero
  *
  * @author Slavik Aleksey V.
  */

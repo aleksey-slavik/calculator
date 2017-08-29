@@ -1,7 +1,8 @@
 package com.implemica.calculator.model.exception;
 
 /**
- * SquareRootException
+ * Custom exception for calculations.
+ * Throws when the square root is taken from negative number.
  *
  * @author Slavik Aleksey V.
  */

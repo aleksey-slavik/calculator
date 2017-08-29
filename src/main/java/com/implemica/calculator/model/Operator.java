@@ -17,20 +17,25 @@ public enum  Operator {
     SQR("sqr"),
     SQRT("√");
 
+    /**
+     * Value which display in history when given operator is used
+     */
     private String text;
 
     Operator() {
-
         this.text = "";
     }
 
     Operator(String text) {
-
         this.text = text;
     }
 
+    /**
+     * Get text representation of given operator
+     *
+     * @return text representation
+     */
     public String getText() {
-
         return text;
     }
 }
