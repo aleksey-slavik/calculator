@@ -119,7 +119,7 @@ public class ViewTest {
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             moveTest(random.nextInt(MAX_WINDOW_WIDTH) - MAX_WINDOW_WIDTH / 2,
-                     random.nextInt(MAX_WINDOW_HEIGHT) - MAX_WINDOW_HEIGHT / 2);
+                    random.nextInt(MAX_WINDOW_HEIGHT) - MAX_WINDOW_HEIGHT / 2);
         }
     }
 
@@ -317,10 +317,10 @@ public class ViewTest {
      * Return correct value of position of window.
      * Correct value if window is outside of the screen
      *
-     * @param beforeX   X coordinate of window before move
-     * @param dx        offset of X coordinate of window move
-     * @param offsetX   offset of X coordinate of mouse relatively of window
-     * @return          correct X coordinate
+     * @param beforeX X coordinate of window before move
+     * @param dx      offset of X coordinate of window move
+     * @param offsetX offset of X coordinate of mouse relatively of window
+     * @return correct X coordinate
      */
     private double checkX(double beforeX, int dx, double offsetX) {
         double res = beforeX + dx;
@@ -338,10 +338,10 @@ public class ViewTest {
      * Return correct value of position of window.
      * Correct value if window is outside of the screen
      *
-     * @param beforeY   Y coordinate of window before move
-     * @param dy        offset of Y coordinate of window move
-     * @param offsetY   offset of Y coordinate of mouse relatively of window
-     * @return          correct Y coordinate
+     * @param beforeY Y coordinate of window before move
+     * @param dy      offset of Y coordinate of window move
+     * @param offsetY offset of Y coordinate of mouse relatively of window
+     * @return correct Y coordinate
      */
     private double checkY(double beforeY, int dy, double offsetY) {
         double res = beforeY + dy;
@@ -360,12 +360,12 @@ public class ViewTest {
      * Position NE, SE, SW, NW mean that resize started from corresponding corner of window.
      * Position E, W, N, S mean that resize started from random point in corresponding side of window.
      *
-     * @param dx            offset of X coordinate
-     * @param dy            offset of Y coordinate
-     * @param pos           resize position
-     * @param digitsFont    font size for digits group
-     * @param binaryFont    font size for binary group
-     * @param unaryFont     font size for unary group
+     * @param dx         offset of X coordinate
+     * @param dy         offset of Y coordinate
+     * @param pos        resize position
+     * @param digitsFont font size for digits group
+     * @param binaryFont font size for binary group
+     * @param unaryFont  font size for unary group
      */
     private void resizeTest(int dx, int dy, String pos, int digitsFont, int binaryFont, int unaryFont) {
         returnNormalState();
@@ -373,39 +373,46 @@ public class ViewTest {
         double beforeHeight = stage.getHeight();
         double beforeX = stage.getX();
         double beforeY = stage.getY();
+        //initial approach of expected width and height
         double expectedWidth = stage.getWidth();
         double expectedHeight = stage.getHeight();
+        //initial approach for drag
+        double x = stage.getX();
+        double y = stage.getY();
 
         if (pos.equals("E")) {
-            robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
+            x += beforeWidth - 1;
+            y += Math.random() * beforeHeight;
             expectedWidth = beforeWidth + dx;
         } else if (pos.equals("W")) {
-            robot.drag(stage.getX(), stage.getY() + Math.random() * beforeHeight, MouseButton.PRIMARY);
+            y += Math.random() * beforeHeight;
             expectedWidth = beforeWidth - dx;
         } else if (pos.equals("N")) {
-            robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY(), MouseButton.PRIMARY);
+            x += Math.random() * beforeWidth;
             expectedHeight = beforeHeight - dy;
         } else if (pos.equals("S")) {
-            robot.drag(stage.getX() + Math.random() * beforeWidth, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+            x += Math.random() * beforeWidth;
+            y += beforeHeight - 1;
             expectedHeight = beforeHeight + dy;
         } else if (pos.equals("NE")) {
-            robot.drag(stage.getX() + beforeWidth - 1, stage.getY(), MouseButton.PRIMARY);
+            x += beforeWidth - 1;
             expectedWidth = beforeWidth + dx;
             expectedHeight = beforeHeight - dy;
         } else if (pos.equals("SE")) {
-            robot.drag(stage.getX() + beforeWidth - 1, stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+            x += beforeWidth - 1;
+            y += beforeHeight - 1;
             expectedWidth = beforeWidth + dx;
             expectedHeight = beforeHeight + dy;
         } else if (pos.equals("SW")) {
-            robot.drag(stage.getX(), stage.getY() + beforeHeight - 1, MouseButton.PRIMARY);
+            y += beforeHeight - 1;
             expectedWidth = beforeWidth - dx;
             expectedHeight = beforeHeight + dy;
         } else if (pos.equals("NW")) {
-            robot.drag(stage.getX(), stage.getY(), MouseButton.PRIMARY);
             expectedWidth = beforeWidth - dx;
             expectedHeight = beforeHeight - dy;
         }
 
+        robot.drag(x, y, MouseButton.PRIMARY);
         robot.moveBy(dx, dy);
         robot.drop();
         expectedWidth = checkWidth(expectedWidth, beforeWidth, beforeX);
@@ -478,7 +485,7 @@ public class ViewTest {
     /**
      * Create list of digits buttons group
      *
-     * @return      digits buttons group
+     * @return digits buttons group
      */
     private ArrayList<Button> digits() {
         ArrayList<Button> list = new ArrayList<>();
@@ -499,7 +506,7 @@ public class ViewTest {
     /**
      * Create list of binary buttons group
      *
-     * @return      binary buttons group
+     * @return binary buttons group
      */
     private ArrayList<Button> binaries() {
         ArrayList<Button> list = new ArrayList<>();
@@ -515,7 +522,7 @@ public class ViewTest {
     /**
      * Create list of unary buttons group
      *
-     * @return      unary buttons group
+     * @return unary buttons group
      */
     private ArrayList<Button> unaries() {
         ArrayList<Button> list = new ArrayList<>();

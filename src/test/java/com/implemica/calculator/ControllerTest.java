@@ -10,6 +10,7 @@ import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -68,8 +69,8 @@ public class ControllerTest {
         testExpression("00234", "234", "");
         testExpression("00100", "100", "");
         testExpression("000001024", "1 024", "");
-        testExpression("9,0000", "9,", "");
-        testExpression("67,1001000", "67,10010", "");
+        testExpression("9,0000", "9,0000", "");
+        testExpression("67,1001000", "67,1001000", "");
 
         //check numeric field overflow
         testExpression("8589657657", "8 589 657 657", "");
@@ -1103,6 +1104,18 @@ public class ControllerTest {
     }
 
     /**
+     * Create list of memory buttons which are mus be disabled after MC operation
+     *
+     * @return  list of buttons
+     */
+    private ArrayList<Button> memoryDisabled() {
+        ArrayList<Button> disabled = new ArrayList<>();
+        disabled.add(GuiTest.find("#memory_clear"));
+        disabled.add(GuiTest.find("#memory_recall"));
+        return disabled;
+    }
+
+    /**
      * Push button using item key.
      * If alternative flag is true for push used alternative combinations of buttons if they exist.
      * Push memory buttons checked statement of memory buttons.
@@ -1111,90 +1124,85 @@ public class ControllerTest {
      * @param alternative true if used alternative buttons combination, false otherwise
      */
     private void pushButton(String item, boolean alternative) {
+        disableMemoryButtonTest(isMemoryDisable);
+        KeyCode first = KeyCode.UNDEFINED;
+        KeyCode second = KeyCode.UNDEFINED;
+        String fxId = "";
+
         if (item.equals("=")) {
-            controller.push(alternative ? KeyCode.EQUALS : KeyCode.ENTER);
-
+            first = alternative ? KeyCode.EQUALS : KeyCode.ENTER;
         } else if (item.equals("back")) {
-            controller.push(KeyCode.BACK_SPACE);
-
+            first = KeyCode.BACK_SPACE;
         } else if (item.equals("+")) {
             if (alternative) {
-                controller.push(KeyCode.ADD);
+                first = KeyCode.ADD;
             } else {
-                controller.push(KeyCode.SHIFT, KeyCode.EQUALS);
+                first = KeyCode.SHIFT;
+                second = KeyCode.EQUALS;
             }
-
         } else if (item.equals("-")) {
-            controller.push(alternative ? KeyCode.SUBTRACT : KeyCode.MINUS);
-
+            first = alternative ? KeyCode.SUBTRACT : KeyCode.MINUS;
         } else if (item.equals("/")) {
-            controller.push(alternative ? KeyCode.DIVIDE : KeyCode.SLASH);
-
+            first = alternative ? KeyCode.DIVIDE : KeyCode.SLASH;
         } else if (item.equals("*")) {
             if (alternative) {
-                controller.push(KeyCode.MULTIPLY);
+                first = KeyCode.MULTIPLY;
             } else {
-                controller.push(KeyCode.SHIFT, KeyCode.DIGIT8);
+                first = KeyCode.SHIFT;
+                second = KeyCode.DIGIT8;
             }
-
         } else if (item.equals("negate")) {
-            controller.push(KeyCode.F9);
-
+            first = KeyCode.F9;
         } else if (item.equals("1/")) {
-            controller.push(KeyCode.R);
-
+            first = KeyCode.R;
         } else if (item.equals("CE")) {
-            controller.push(KeyCode.DELETE);
-
+            first = KeyCode.DELETE;
         } else if (item.equals("C")) {
-            controller.push(KeyCode.ESCAPE);
-
+            first = KeyCode.ESCAPE;
         } else if (item.equals("sqr")) {
-            controller.push(KeyCode.Q);
-
+            first = KeyCode.Q;
         } else if (item.equals("sqrt")) {
-            controller.push(KeyCode.SHIFT, KeyCode.DIGIT2);
-
+            first = KeyCode.SHIFT;
+            second = KeyCode.DIGIT2;
         } else if (item.equals("%")) {
-            controller.push(KeyCode.SHIFT, KeyCode.DIGIT5);
-
+            first = KeyCode.SHIFT;
+            second = KeyCode.DIGIT5;
         } else if (item.equals("MS")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.push(KeyCode.CONTROL, KeyCode.M);
+            first = KeyCode.CONTROL;
+            second = KeyCode.M;
             isMemoryDisable = false;
-            disableMemoryButtonTest(false);
-
         } else if (item.equals("MR")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.push(KeyCode.CONTROL, KeyCode.R);
-            disableMemoryButtonTest(isMemoryDisable);
-
+            first = KeyCode.CONTROL;
+            second = KeyCode.R;
         } else if (item.equals("MC")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.push(KeyCode.CONTROL, KeyCode.L);
+            first = KeyCode.CONTROL;
+            second = KeyCode.L;
             isMemoryDisable = true;
-            disableMemoryButtonTest(true);
-
         } else if (item.equals("M+")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.push(KeyCode.CONTROL, KeyCode.P);
+            first = KeyCode.CONTROL;
+            second = KeyCode.P;
             isMemoryDisable = false;
-            disableMemoryButtonTest(false);
-
         } else if (item.equals("M-")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.push(KeyCode.CONTROL, KeyCode.Q);
+            first = KeyCode.CONTROL;
+            second = KeyCode.Q;
             isMemoryDisable = false;
-            disableMemoryButtonTest(false);
-
         } else if (item.equals("<")) {
-            controller.click((Button) GuiTest.find("#left"));
-
+            fxId = "#left";
         } else if (item.equals(">")) {
-            controller.click((Button) GuiTest.find("#right"));
+            fxId = "#right";
+        }
 
+        if (first != KeyCode.UNDEFINED) {
+            if (second != KeyCode.UNDEFINED) {
+                controller.push(first, second);
+            } else {
+                controller.push(first);
+            }
+        } else if (!fxId.isEmpty()) {
+            controller.click((Button) GuiTest.find(fxId));
         } else {
             pushDigitButtons(item, alternative);
+            disableMemoryButtonTest(isMemoryDisable);
         }
     }
 
@@ -1209,29 +1217,35 @@ public class ControllerTest {
         char[] digits = number.toCharArray();
 
         for (char item : digits) {
+            disableMemoryButtonTest(isMemoryDisable);
+            KeyCode code = KeyCode.UNDEFINED;
+
             if (item == '0') {
-                controller.push(alternative ? KeyCode.DIGIT0 : KeyCode.NUMPAD0);
+                code = alternative ? KeyCode.DIGIT0 : KeyCode.NUMPAD0;
             } else if (item == '1') {
-                controller.push(alternative ? KeyCode.DIGIT1 : KeyCode.NUMPAD1);
+                code = alternative ? KeyCode.DIGIT1 : KeyCode.NUMPAD1;
             } else if (item == '2') {
-                controller.push(alternative ? KeyCode.DIGIT2 : KeyCode.NUMPAD2);
+                code = alternative ? KeyCode.DIGIT2 : KeyCode.NUMPAD2;
             } else if (item == '3') {
-                controller.push(alternative ? KeyCode.DIGIT3 : KeyCode.NUMPAD3);
+                code = alternative ? KeyCode.DIGIT3 : KeyCode.NUMPAD3;
             } else if (item == '4') {
-                controller.push(alternative ? KeyCode.DIGIT4 : KeyCode.NUMPAD4);
+                code = alternative ? KeyCode.DIGIT4 : KeyCode.NUMPAD4;
             } else if (item == '5') {
-                controller.push(alternative ? KeyCode.DIGIT5 : KeyCode.NUMPAD5);
+                code = alternative ? KeyCode.DIGIT5 : KeyCode.NUMPAD5;
             } else if (item == '6') {
-                controller.push(alternative ? KeyCode.DIGIT6 : KeyCode.NUMPAD6);
+                code = alternative ? KeyCode.DIGIT6 : KeyCode.NUMPAD6;
             } else if (item == '7') {
-                controller.push(alternative ? KeyCode.DIGIT7 : KeyCode.NUMPAD7);
+                code = alternative ? KeyCode.DIGIT7 : KeyCode.NUMPAD7;
             } else if (item == '8') {
-                controller.push(alternative ? KeyCode.DIGIT8 : KeyCode.NUMPAD8);
+                code = alternative ? KeyCode.DIGIT8 : KeyCode.NUMPAD8;
             } else if (item == '9') {
-                controller.push(alternative ? KeyCode.DIGIT9 : KeyCode.NUMPAD9);
+                code = alternative ? KeyCode.DIGIT9 : KeyCode.NUMPAD9;
             } else if (item == ',') {
-                controller.push(KeyCode.COMMA);
+                code = KeyCode.COMMA;
             }
+
+            controller.push(code);
+            disableMemoryButtonTest(isMemoryDisable);
         }
     }
 
@@ -1242,69 +1256,57 @@ public class ControllerTest {
      * @param item button key
      */
     private void clickButton(String item) {
+        disableMemoryButtonTest(isMemoryDisable);
+        String fxId = "";
+
         if (item.equals("=")) {
-            controller.click((Button) GuiTest.find("#equals"));
+            fxId = "#equals";
         } else if (item.equals("back")) {
-            controller.click((Button) GuiTest.find("#backspace"));
+            fxId = "#backspace";
         } else if (item.equals("+")) {
-            controller.click((Button) GuiTest.find("#add"));
+            fxId = "#add";
         } else if (item.equals("-")) {
-            controller.click((Button) GuiTest.find("#subtract"));
+            fxId = "#subtract";
         } else if (item.equals("/")) {
-            controller.click((Button) GuiTest.find("#divide"));
+            fxId = "#divide";
         } else if (item.equals("*")) {
-            controller.click((Button) GuiTest.find("#multiply"));
+            fxId = "#multiply";
         } else if (item.equals("negate")) {
-            controller.click((Button) GuiTest.find("#negate"));
+            fxId = "#negate";
         } else if (item.equals("1/")) {
-            controller.click((Button) GuiTest.find("#inverse"));
+            fxId = "#inverse";
         } else if (item.equals("CE")) {
-            controller.click((Button) GuiTest.find("#clear_expr"));
+            fxId = "#clear_expr";
         } else if (item.equals("C")) {
-            controller.click((Button) GuiTest.find("#clear"));
+            fxId = "#clear";
         } else if (item.equals("sqr")) {
-            controller.click((Button) GuiTest.find("#sqr"));
+            fxId = "#sqr";
         } else if (item.equals("sqrt")) {
-            controller.click((Button) GuiTest.find("#sqrt"));
+            fxId = "#sqrt";
         } else if (item.equals("%")) {
-            controller.click((Button) GuiTest.find("#percent"));
+            fxId = "#percent";
         } else if (item.equals("MS")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.click((Button) GuiTest.find("#memory_store"));
+            fxId = "#memory_store";
             isMemoryDisable = false;
-            disableMemoryButtonTest(false);
-
         } else if (item.equals("MR")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.click((Button) GuiTest.find("#memory_recall"));
-            disableMemoryButtonTest(isMemoryDisable);
-
+            fxId = "#memory_recall";
+            disableMemoryButtonTest(false);
         } else if (item.equals("MC")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.click((Button) GuiTest.find("#memory_clear"));
+            fxId = "#memory_clear";
             isMemoryDisable = true;
-            disableMemoryButtonTest(true);
-
         } else if (item.equals("M+")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.click((Button) GuiTest.find("#memory_add"));
+            fxId = "#memory_add";
             isMemoryDisable = false;
-            disableMemoryButtonTest(false);
-
         } else if (item.equals("M-")) {
-            disableMemoryButtonTest(isMemoryDisable);
-            controller.click((Button) GuiTest.find("#memory_minus"));
+            fxId = "#memory_minus";
             isMemoryDisable = false;
-            disableMemoryButtonTest(false);
+        }
 
-        } else if (item.equals("<")) {
-            controller.click((Button) GuiTest.find("#left"));
-
-        } else if (item.equals(">")) {
-            controller.click((Button) GuiTest.find("#right"));
-
-        } else {
+        if (fxId.isEmpty()) {
             clickDigitButtons(item);
+        } else {
+            controller.click((Button) GuiTest.find(fxId));
+            disableMemoryButtonTest(isMemoryDisable);
         }
     }
 
@@ -1317,29 +1319,35 @@ public class ControllerTest {
         char[] digits = number.toCharArray();
 
         for (char item : digits) {
+            disableMemoryButtonTest(isMemoryDisable);
+            String fxId = "";
+
             if (item == '0') {
-                controller.click((Button) GuiTest.find("#zero"));
+                fxId = "#zero";
             } else if (item == '1') {
-                controller.click((Button) GuiTest.find("#one"));
+                fxId = "#one";
             } else if (item == '2') {
-                controller.click((Button) GuiTest.find("#two"));
+                fxId = "#two";
             } else if (item == '3') {
-                controller.click((Button) GuiTest.find("#three"));
+                fxId = "#three";
             } else if (item == '4') {
-                controller.click((Button) GuiTest.find("#four"));
+                fxId = "#four";
             } else if (item == '5') {
-                controller.click((Button) GuiTest.find("#five"));
+                fxId = "#five";
             } else if (item == '6') {
-                controller.click((Button) GuiTest.find("#six"));
+                fxId = "#six";
             } else if (item == '7') {
-                controller.click((Button) GuiTest.find("#seven"));
+                fxId = "#seven";
             } else if (item == '8') {
-                controller.click((Button) GuiTest.find("#eight"));
+                fxId = "#eight";
             } else if (item == '9') {
-                controller.click((Button) GuiTest.find("#nine"));
+                fxId = "#nine";
             } else if (item == ',') {
-                controller.click((Button) GuiTest.find("#comma"));
+                fxId = "#comma";
             }
+
+            controller.click((Button) GuiTest.find(fxId));
+            disableMemoryButtonTest(isMemoryDisable);
         }
     }
 
@@ -1363,18 +1371,6 @@ public class ControllerTest {
         disabled.add(GuiTest.find("#sqrt"));
         disabled.add(GuiTest.find("#sqr"));
         disabled.add(GuiTest.find("#inverse"));
-        return disabled;
-    }
-
-    /**
-     * Create list of memory buttons which are mus be disabled after MC operation
-     *
-     * @return  list of buttons
-     */
-    private ArrayList<Button> memoryDisabled() {
-        ArrayList<Button> disabled = new ArrayList<>();
-        disabled.add(GuiTest.find("#memory_clear"));
-        disabled.add(GuiTest.find("#memory_recall"));
         return disabled;
     }
 
