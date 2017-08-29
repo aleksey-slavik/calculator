@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Controller
+ * Processing work of buttons of calculator
  *
  * @author Slavik Aleksey V.
  */
@@ -60,14 +60,39 @@ public class Controller implements Initializable {
      */
     private static final String MESSAGE_INVALID_INPUT = "Invalid input";
 
+    /**
+     * Maximum of numeric field size
+     */
     private static final int NUMERIC_FIELD_SIZE = 16;
 
+    /**
+     * Pause duration when pressing buttons
+     */
+    private static final double DURATION = 0.1;
+
+    /**
+     * Width of character
+     */
+    private static final double CHAR_WIDTH = 7.5;
+
+    /**
+     * Decimal separator for {@link BigDecimal}
+     */
     private static final String DOT = ".";
 
+    /**
+     * Decimal separator for numbers in numeric field
+     */
     private static final String COMMA = ",";
 
+    /**
+     * String representation of zero with decimal separator
+     */
     private static final String ZERO_WITH_COMMA = "0,";
 
+    /**
+     * Grouping separator
+     */
     private static final String SEPARATOR = " ";
 
     /**
@@ -75,31 +100,49 @@ public class Controller implements Initializable {
      */
     private int historyPos;
 
+    /**
+     * True if can change value in numeric field
+     */
     private boolean isEditable;
 
     /**
-     * true if can calculate intermediate result
+     * True if can calculate intermediate result
      */
     private boolean isCalculateResult;
 
     /**
-     * for calculateSqr, calculateSqrt, calculateNegate and calculateInverse
+     * True if previous operator belong to unary group
      */
     private boolean isPreviousUnary;
 
     /**
-     * if error is happens
+     * True if error is happens
      */
     private boolean isError;
 
+    /**
+     * True if several operations have been carried out before
+     */
     private boolean isSequence;
 
-    private boolean isMemoryAvailable = true;
+    /**
+     * True if memory is cleared
+     */
+    private boolean isMemoryLocked = true;
 
+    /**
+     * {@link Calculator} object which consist set of calculation methods
+     */
     private Calculator calculator = new Calculator();
 
+    /**
+     * {@link History} object which consist set of methods for manage history
+     */
     private History history = new History();
 
+    /**
+     * {@link Memory} object which consist set of methods for manage memory of calculator
+     */
     private Memory memory = new Memory();
 
     @FXML
@@ -159,25 +202,34 @@ public class Controller implements Initializable {
     @FXML
     private Button right;
 
+    /**
+     * Array of buttons which are disabled when errors happens
+     */
     private Button[] disabled;
 
+    /**
+     * Array of buttons which are disabled when memory cleared
+     */
     private Button[] disabledMemory;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        //add buttons which are disabled when errors happens
         disabled = new Button[]{
                 divide, multiply, subtract, add, comma, negate,
                 memory_store, memory_recall, memory_minus, memory_add, memory_clear,
                 percent, sqrt, sqr, inverse
         };
 
+        //add buttons which are disabled when memory cleared
         disabledMemory = new Button[]{memory_clear, memory_recall};
 
+        //setup default statement of calculator
         disableMemoryButtons(true);
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
 
+        //add resize history field listener
         historyField.widthProperty().addListener(observable -> {
             if (getLabelSize() > history.getHistory().length()) {
                 historyField.setText(history.getHistory());
@@ -195,6 +247,11 @@ public class Controller implements Initializable {
         });
     }
 
+    /**
+     * Click on digits buttons processing
+     *
+     * @param event     digits event
+     */
     @FXML
     private void buttonDigitClick(ActionEvent event) {
         if (isError) {
@@ -215,6 +272,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Click on equals button processing
+     */
     @FXML
     private void buttonEqualsClick() {
         if (isError) {
@@ -248,6 +308,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Click on comma button processing
+     */
     @FXML
     private void buttonCommaClick() {
         if (!getNumericFieldText().contains(COMMA) && !checkSize()) {
@@ -261,6 +324,11 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Processing keyboard events
+     *
+     * @param event keyboard event
+     */
     @FXML
     private void operatorKeyClick(KeyEvent event) {
         CalculatorButton button = CalculatorButton.searchButtonByEvent(event);
@@ -271,6 +339,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Processing of click on left arrow in history field
+     */
     @FXML
     private void leftClick() {
         historyPos -= getLabelSize();
@@ -284,6 +355,9 @@ public class Controller implements Initializable {
         historyField.setText(history.getHistory().substring(historyPos - getLabelSize(), historyPos));
     }
 
+    /**
+     * Processing of click on right arrow in history field
+     */
     @FXML
     private void rightClick() {
         historyPos += getLabelSize();
@@ -304,6 +378,11 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Processing of click on binary operator buttons
+     *
+     * @param event     binary operator
+     */
     @FXML
     private void binaryOperatorClick(ActionEvent event) {
         String id = ((Button) event.getSource()).getId();
@@ -327,6 +406,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Processing of click on percent button
+     */
     @FXML
     private void percentClick() {
         if (!isSequence) {
@@ -348,6 +430,9 @@ public class Controller implements Initializable {
         isPreviousUnary = true;
     }
 
+    /**
+     * Processing of click on negate button
+     */
     @FXML
     private void negateClick() {
 
@@ -359,6 +444,9 @@ public class Controller implements Initializable {
         setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
     }
 
+    /**
+     * Processing of click on square button
+     */
     @FXML
     private void sqrClick() {
         String value = getNumericFieldText().replace(" ", "");
@@ -384,6 +472,9 @@ public class Controller implements Initializable {
         isEditable = true;
     }
 
+    /**
+     * Processing of click on square root button
+     */
     @FXML
     private void sqrtClick() {
         String value = getNumericFieldText().replace(" ", "");
@@ -409,6 +500,9 @@ public class Controller implements Initializable {
         isEditable = true;
     }
 
+    /**
+     * Processing of click on backspace button
+     */
     @FXML
     private void backspaceClick() {
         if (isError) {
@@ -429,6 +523,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Processing of click on inverse button
+     */
     @FXML
     private void inverseClick() {
         String value = getNumericFieldText().replace(" ", "");
@@ -454,21 +551,30 @@ public class Controller implements Initializable {
         isEditable = true;
     }
 
+    /**
+     * Processing of click on memory clear button
+     */
     @FXML
     private void memoryClearClick() {
         disableMemoryButtons(true);
         memory.memoryClear();
     }
 
+    /**
+     * Processing of click on memory recall button
+     */
     @FXML
     private void memoryRecallClick() {
         setNumericFieldNumber(memory.memoryRecall());
         isEditable = false;
     }
 
+    /**
+     * Processing of click on memory add button
+     */
     @FXML
     private void memoryAddClick() {
-        if (isMemoryAvailable) {
+        if (isMemoryLocked) {
             disableMemoryButtons(false);
         }
 
@@ -476,9 +582,12 @@ public class Controller implements Initializable {
         isEditable = false;
     }
 
+    /**
+     * Processing of click on memory subtract button
+     */
     @FXML
     private void memorySubtractClick() {
-        if (isMemoryAvailable) {
+        if (isMemoryLocked) {
             disableMemoryButtons(false);
         }
 
@@ -486,9 +595,12 @@ public class Controller implements Initializable {
         isEditable = false;
     }
 
+    /**
+     * Processing of click on memory store button
+     */
     @FXML
     private void memoryStoreClick() {
-        if (isMemoryAvailable) {
+        if (isMemoryLocked) {
             disableMemoryButtons(false);
         }
 
@@ -496,6 +608,9 @@ public class Controller implements Initializable {
         isEditable = false;
     }
 
+    /**
+     * Processing of click on clear button
+     */
     @FXML
     private void clearClick() {
         isEditable = false;
@@ -506,6 +621,9 @@ public class Controller implements Initializable {
         calculator.clearAll();
     }
 
+    /**
+     * Processing of click on clear entry button
+     */
     @FXML
     private void clearEntryClick() {
         if (isError) {
@@ -516,6 +634,14 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Processing of click on binary operator button.
+     *
+     * @param operator      operator
+     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE, defined in {@link Calculator}
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
     private void processBinaryOperator(Operator operator) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         String value = getNumericFieldText().replace(" ", "");
 
@@ -552,11 +678,20 @@ public class Controller implements Initializable {
         isPreviousUnary = false;
     }
 
+    /**
+     * Return current statement of numeric field
+     *
+     * @return  numeric field value
+     */
     private String getNumericFieldText() {
-
         return numericField.getText();
     }
 
+    /**
+     * Write given value to numeric field
+     *
+     * @param value     given value
+     */
     private void setNumericFieldText(String value) {
         if (!isError) {
             value = Formatter.display(value);
@@ -565,16 +700,30 @@ public class Controller implements Initializable {
         numericField.setText(value);
     }
 
+    /**
+     * Get current statement of numeric field and convert that into {@link BigDecimal}
+     *
+     * @return  number from numeric field
+     */
     private BigDecimal getNumericFieldNumber() {
         String value = getNumericFieldText().replace(" ", "").replace(COMMA, DOT);
         return new BigDecimal(value);
     }
 
+    /**
+     * Write given number into numeric field
+     *
+     * @param number    given number
+     */
     private void setNumericFieldNumber(BigDecimal number) {
-
         numericField.setText(Formatter.display(number));
     }
 
+    /**
+     * Write given value into history field.
+     *
+     * @param value     given history value
+     */
     private void setHistoryFieldText(String value) {
         if (value.length() > getLabelSize()) {
             left.setVisible(true);
@@ -591,19 +740,34 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Add given value to current history and save that in history field
+     *
+     * @param value     given history value
+     */
     private void appendNumericFieldText(String value) {
 
         setNumericFieldText(getNumericFieldText() + value);
     }
 
+    /**
+     * Simulate pressing on given button for key events click
+     *
+     * @param button    given button
+     */
     private void clickOnButton(Button button) {
         button.arm();
         button.fire();
-        PauseTransition pause = new PauseTransition(Duration.seconds(0.1));
+        PauseTransition pause = new PauseTransition(Duration.seconds(DURATION));
         pause.setOnFinished(e -> button.disarm());
         pause.play();
     }
 
+    /**
+     * Change statement of buttons in list at entrance and exit from error statement
+     *
+     * @param disable   true if buttons must be disabled, else otherwise
+     */
     private void disableButtons(boolean disable) {
         isError = disable;
         for (Button item : disabled) {
@@ -611,18 +775,32 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Change statement of buttons in list when cleaning and writing to memory
+     *
+     * @param disable   true if buttons must be disabled, else otherwise
+     */
     private void disableMemoryButtons(boolean disable) {
-        isMemoryAvailable = disable;
+        isMemoryLocked = disable;
         for (Button item : disabledMemory) {
             item.setDisable(disable);
         }
     }
 
+    /**
+     * Return maximum count of chars which can be placed in history label
+     *
+     * @return      count of chars
+     */
     private int getLabelSize() {
-
-        return (int) (historyField.getWidth() / 7.5);
+        return (int) (historyField.getWidth() / CHAR_WIDTH);
     }
 
+    /**
+     * Check numeric field length
+     *
+     * @return      true if length of numeric field is bigger than max length, false otherwise
+     */
     private boolean checkSize() {
         String str = getNumericFieldText().replace(COMMA, "").replace("-", "").replace(" ", "");
         if (str.startsWith("0")) {
@@ -632,15 +810,23 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Return normal statement for calculator
+     */
     private void normalStatement() {
         disableButtons(false);
-        disableMemoryButtons(isMemoryAvailable);
+        disableMemoryButtons(isMemoryLocked);
         calculator.resetOperator();
         history.clearHistory();
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
     }
 
+    /**
+     * Set error statement for calculator with given error message in numeric field
+     *
+     * @param error     error message
+     */
     private void errorStatement(String error) {
         disableButtons(true);
         setNumericFieldText(error);
