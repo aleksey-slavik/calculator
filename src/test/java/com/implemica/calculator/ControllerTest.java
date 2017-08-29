@@ -10,7 +10,6 @@ import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -1118,7 +1117,7 @@ public class ControllerTest {
     /**
      * Push button using item key.
      * If alternative flag is true for push used alternative combinations of buttons if they exist.
-     * Push memory buttons checked statement of memory buttons.
+     * Check statement of memory buttons.
      *
      * @param item        button key
      * @param alternative true if used alternative buttons combination, false otherwise
@@ -1208,7 +1207,8 @@ public class ControllerTest {
 
     /**
      * Push digits buttons using number key.
-     * If alternative flag is true for push used alternative combinations of buttons if they exist
+     * If alternative flag is true for push used alternative combinations of buttons if they exist.
+     * Check statement of memory buttons.
      *
      * @param number      number key
      * @param alternative true if used alternative buttons combination, false otherwise
@@ -1251,7 +1251,7 @@ public class ControllerTest {
 
     /**
      * Click on buttons using mouse and button key.
-     * Click on memory buttons checked statement of memory buttons.
+     * Check statement of memory buttons.
      *
      * @param item button key
      */
@@ -1311,7 +1311,8 @@ public class ControllerTest {
     }
 
     /**
-     * Push digits buttons using mouse and number key
+     * Push digits buttons using mouse and number key.
+     * Check statement of memory buttons.
      *
      * @param number number key
      */

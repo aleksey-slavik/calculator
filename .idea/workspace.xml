@@ -7,10 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/Demo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/view/CalculatorView.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/view/CalculatorView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,17 +26,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ControllerTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ControllerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="1301" column="36" lean-forward="false" selection-start-line="1301" selection-start-column="36" selection-end-line="1301" selection-end-column="36" />
-              <folding>
-                <element signature="e#759#916#0" expanded="true" />
-                <element signature="e#840#841#0" expanded="false" />
-                <element signature="e#905#906#0" expanded="false" />
-                <element signature="e#915#916#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="529">
+              <caret line="1286" column="30" lean-forward="true" selection-start-line="1286" selection-start-column="30" selection-end-line="1286" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -44,10 +39,22 @@
       <file leaf-file-name="ViewTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-797">
-              <caret line="378" column="35" lean-forward="false" selection-start-line="378" selection-start-column="35" selection-end-line="378" selection-end-column="35" />
+            <state relative-caret-position="1236">
+              <caret line="435" column="37" lean-forward="true" selection-start-line="435" selection-start-column="37" selection-end-line="435" selection-end-column="37" />
               <folding>
                 <element signature="e#1788#2375#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Demo.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Demo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -110,11 +117,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/adapter/MenuAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/CalculatorView.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/implemica/calculator/Demo.java" />
       </list>
     </option>
   </component>
@@ -389,7 +397,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ViewTest.resizeTest">
+  <component name="RunManager" selected="JUnit.ControllerTest.mouseClickAndAlternativeTest">
     <configuration default="false" name="ControllerTest.multiplyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -733,9 +741,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ViewTest.resizeTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ControllerTest.mouseClickAndAlternativeTest" />
         <item index="1" class="java.lang.String" itemvalue="JUnit.ControllerTest.combinationTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ControllerTest.mouseClickAndAlternativeTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ViewTest.resizeTest" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.ControllerTest.memoryTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.ControllerTest.multiplyTest" />
       </list>
@@ -1056,7 +1064,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504003674820</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="test refactoring">
+      <created>1504015226405</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1504015226405</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1069,11 +1084,8 @@
     <history-entry file="ControllerTest_combinationTest - 2017.08.29 at 16h 34m 45s.xml">
       <configuration name="ControllerTest.combinationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ControllerTest_mouseClickAndAlternativeTest - 2017.08.29 at 15h 50m 24s.xml">
-      <configuration name="ControllerTest.mouseClickAndAlternativeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ControllerTest_mouseClickAndAlternativeTest - 2017.08.29 at 16h 00m 24s.xml">
-      <configuration name="ControllerTest.mouseClickAndAlternativeTest" configurationId="JUnit" />
+    <history-entry file="ControllerTest_combinationTest - 2017.08.29 at 17h 11m 58s.xml">
+      <configuration name="ControllerTest.combinationTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ControllerTest_mouseClickAndAlternativeTest - 2017.08.29 at 16h 09m 05s.xml">
       <configuration name="ControllerTest.mouseClickAndAlternativeTest" configurationId="JUnit" />
@@ -1085,6 +1097,9 @@
       <configuration name="ControllerTest.mouseClickAndAlternativeTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ControllerTest_mouseClickAndAlternativeTest - 2017.08.29 at 16h 30m 18s.xml">
+      <configuration name="ControllerTest.mouseClickAndAlternativeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ControllerTest_mouseClickAndAlternativeTest - 2017.08.29 at 17h 13m 36s.xml">
       <configuration name="ControllerTest.mouseClickAndAlternativeTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ViewTest_resizeTest - 2017.08.29 at 16h 50m 28s.xml">
@@ -1153,7 +1168,6 @@
     <MESSAGE value="fix font resize test" />
     <MESSAGE value="refactoring tests" />
     <MESSAGE value="add memory to model" />
-    <MESSAGE value="test refactoring" />
     <MESSAGE value="format refactoring" />
     <MESSAGE value="controller refactoring" />
     <MESSAGE value="add new tests" />
@@ -1162,7 +1176,8 @@
     <MESSAGE value="add model tests" />
     <MESSAGE value="test fix" />
     <MESSAGE value="add javadoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="add javadoc" />
+    <MESSAGE value="test refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="test refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1175,7 +1190,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/ResizeListener.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/ListView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -1321,13 +1335,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/History.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="79" column="16" lean-forward="false" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ResizeListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1887">
@@ -1381,14 +1388,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2210">
-          <caret line="138" column="61" lean-forward="false" selection-start-line="138" selection-start-column="61" selection-end-line="138" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/adapter/MenuAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1411,25 +1410,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3553">
-          <caret line="214" column="35" lean-forward="false" selection-start-line="214" selection-start-column="35" selection-end-line="214" selection-end-column="35" />
-          <folding>
-            <element signature="e#2320#2321#0" expanded="false" />
-            <element signature="e#2381#2382#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2312">
-          <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="147" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1448,35 +1428,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2856">
+          <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="147" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/History.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="79" column="7" lean-forward="true" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Formatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3519">
+          <caret line="214" column="35" lean-forward="false" selection-start-line="214" selection-start-column="35" selection-end-line="214" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3408">
-          <caret line="316" column="42" lean-forward="true" selection-start-line="316" selection-start-column="42" selection-end-line="316" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="342">
+          <caret line="833" column="1" lean-forward="true" selection-start-line="833" selection-start-column="1" selection-end-line="833" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="138" column="61" lean-forward="false" selection-start-line="138" selection-start-column="61" selection-end-line="138" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="1286" column="30" lean-forward="true" selection-start-line="1286" selection-start-column="30" selection-end-line="1286" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ViewTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-797">
-          <caret line="378" column="35" lean-forward="false" selection-start-line="378" selection-start-column="35" selection-end-line="378" selection-end-column="35" />
+        <state relative-caret-position="1236">
+          <caret line="435" column="37" lean-forward="true" selection-start-line="435" selection-start-column="37" selection-end-line="435" selection-end-column="37" />
           <folding>
             <element signature="e#1788#2375#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/implemica/calculator/ControllerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/implemica/calculator/Demo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="1301" column="36" lean-forward="false" selection-start-line="1301" selection-start-column="36" selection-end-line="1301" selection-end-column="36" />
+        <state relative-caret-position="357">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="e#759#916#0" expanded="true" />
-            <element signature="e#840#841#0" expanded="false" />
-            <element signature="e#905#906#0" expanded="false" />
-            <element signature="e#915#916#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
