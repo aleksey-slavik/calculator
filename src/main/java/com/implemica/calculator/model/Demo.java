@@ -24,11 +24,11 @@ public class Demo {
     private static BigDecimal simpleExample() {
         Calculator calculator = new Calculator();
         BigDecimal res = null;
+        BigDecimal two = new BigDecimal(2);
 
         try {
-            BigDecimal tmp = BigDecimal.valueOf(2);
-            calculator.changeOperator(tmp, Operator.ADD);
-            res = calculator.calculateResult(BigDecimal.valueOf(2));
+            calculator.changeOperator(two, Operator.ADD);
+            res = calculator.calculateResult(two);
         } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException e) {
             e.printStackTrace();
         }
@@ -38,23 +38,30 @@ public class Demo {
 
     /**
      * Complex example of using model.
-     * 7 - 10 MS 3 SQRT + MR =
+     * 7 - 10 = M+ / 3 = M+ M+ 3 SQRT + MR =
      *
      * @return      result of calculation
      */
     private static BigDecimal complexExample() {
         Calculator calculator = new Calculator();
         BigDecimal res = null;
+        BigDecimal seven = new BigDecimal(7);
+        BigDecimal ten = new BigDecimal(10);
+        BigDecimal three = new BigDecimal(3);
 
         try {
-            BigDecimal tmp = BigDecimal.valueOf(7);
-            calculator.changeOperator(tmp, Operator.SUBTRACT);
-            calculator.memoryStore(BigDecimal.valueOf(10));
-            tmp = calculator.sqrt(BigDecimal.valueOf(3));
-            tmp = calculator.calculateIntermediateResult(tmp);
-            calculator.changeOperator(tmp, Operator.ADD);
-            tmp = calculator.memoryRecall();
-            res = calculator.calculateResult(tmp);
+            BigDecimal tmp = seven;
+            calculator.changeOperator(tmp, Operator.SUBTRACT); // 7 -
+            tmp = calculator.calculateResult(ten); // 10 =
+            calculator.memoryAdd(tmp); // M+
+            calculator.changeOperator(tmp, Operator.DIVIDE); // tmp /
+            tmp = calculator.calculateResult(three); // 3 =
+            calculator.memoryAdd(tmp); // M+
+            calculator.memoryAdd(tmp); // M+
+            tmp = calculator.sqrt(three); // SQRT 3
+            calculator.changeOperator(tmp, Operator.ADD); // tmp +
+            tmp = calculator.memoryRecall(); // MR
+            res = calculator.calculateResult(tmp); // tmp =
         } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException | SquareRootException e) {
             e.printStackTrace();
         }
@@ -64,6 +71,6 @@ public class Demo {
 
     public static void main(String[] args) {
         System.out.println("2 + 2 = " + simpleExample());
-        System.out.println("7 - 10 MS 3 SQRT + MR = " + complexExample());
+        System.out.println("7 - 10 = M+ / 3 = M+ M+ 3 SQRT + MR = " + complexExample());
     }
 }

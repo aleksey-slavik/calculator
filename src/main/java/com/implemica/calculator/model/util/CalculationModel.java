@@ -57,11 +57,7 @@ public class CalculationModel {
      */
     public void changeOperator(BigDecimal value, Operator operator) {
         isNextOperator = false;
-
-        if (left.equals(BigDecimal.ZERO)) {
-            left = value;
-        }
-
+        left = value;
         this.operator = operator;
     }
 

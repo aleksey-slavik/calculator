@@ -109,7 +109,7 @@ public class CalculatorView {
     /**
      * Setup view scheme and main view listeners
      *
-     * @param primaryStage  window stage
+     * @param primaryStage window stage
      */
     public void initStage(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
