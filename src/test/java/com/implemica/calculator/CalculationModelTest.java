@@ -1,12 +1,12 @@
 package com.implemica.calculator;
 
-import com.implemica.calculator.model.Memory;
-import com.implemica.calculator.model.Operator;
+import com.implemica.calculator.model.util.CalculationModel;
+import com.implemica.calculator.model.util.MemoryModel;
+import com.implemica.calculator.model.util.Operator;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
 import com.implemica.calculator.model.exception.ZeroDivideException;
-import com.implemica.calculator.model.Calculator;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -14,11 +14,11 @@ import java.math.BigDecimal;
 import static org.junit.Assert.*;
 
 /**
- * Model test for calculator
+ * CalculationModel test for calculator
  *
  * @author Slavik Aleksey V.
  */
-public class ModelTest {
+public class CalculationModelTest {
 
     @Test
     public void addTest() throws Exception {
@@ -226,16 +226,16 @@ public class ModelTest {
     }
 
     private void sqrtTest(String value, String expected) throws SquareRootException {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.sqrt(new BigDecimal(value));
+        BigDecimal actualValue = calculationModel.sqrt(new BigDecimal(value));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void sqrtFailTest(String value) {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         try {
-            calculator.sqrt(new BigDecimal(value));
+            calculationModel.sqrt(new BigDecimal(value));
             fail("Current value " + value + " is valid for square root");
         } catch (SquareRootException e) {
             //expected
@@ -243,23 +243,23 @@ public class ModelTest {
     }
 
     private void negateTest(String actual, String expected) {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.negate(new BigDecimal(actual));
+        BigDecimal actualValue = calculationModel.negate(new BigDecimal(actual));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void sqrTest(String actual, String expected) throws OverflowException {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.sqr(new BigDecimal(actual));
+        BigDecimal actualValue = calculationModel.sqr(new BigDecimal(actual));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void sqrFailTest(String value) {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         try {
-            calculator.sqr(new BigDecimal(value));
+            calculationModel.sqr(new BigDecimal(value));
             fail("Scale of SQR for current value " + value + " isn't bigger than 10000");
         } catch (OverflowException e) {
             //expected
@@ -267,16 +267,16 @@ public class ModelTest {
     }
 
     private void inverseTest(String actual, String expected) throws ZeroDivideException {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculator.inverse(new BigDecimal(actual));
+        BigDecimal actualValue = calculationModel.inverse(new BigDecimal(actual));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void inverseFailTest(String value) {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         try {
-            calculator.inverse(new BigDecimal(value));
+            calculationModel.inverse(new BigDecimal(value));
             fail("Inverse of " + value + " doesn't call exception. Exception called only when value equals zero");
         } catch (ZeroDivideException e) {
             //expected
@@ -284,22 +284,22 @@ public class ModelTest {
     }
 
     private void binaryTest(String left, Operator operator, String right, String expected) throws Exception {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         BigDecimal leftValue = new BigDecimal(left);
         BigDecimal rightValue = new BigDecimal(right);
         BigDecimal expectedValue = new BigDecimal(expected);
-        calculator.changeOperator(leftValue, operator);
-        BigDecimal actualValue = calculator.calculateResult(rightValue);
+        calculationModel.changeOperator(leftValue, operator);
+        BigDecimal actualValue = calculationModel.calculateResult(rightValue);
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void binaryFail(String left, Operator operator, String right) {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         BigDecimal leftValue = new BigDecimal(left);
         BigDecimal rightValue = new BigDecimal(right);
-        calculator.changeOperator(leftValue, operator);
+        calculationModel.changeOperator(leftValue, operator);
         try {
-            calculator.calculateResult(rightValue);
+            calculationModel.calculateResult(rightValue);
             fail("Values " + left + " and " + right + " don't throw exceptions for " + operator);
         } catch (ZeroByZeroDivideException | ZeroDivideException | OverflowException e) {
             //expected
@@ -307,62 +307,62 @@ public class ModelTest {
     }
 
     private void percentTest(String left, Operator operator, String right, String expected) {
-        Calculator calculator = new Calculator();
+        CalculationModel calculationModel = new CalculationModel();
         BigDecimal leftValue = new BigDecimal(left);
         BigDecimal rightValue = new BigDecimal(right);
         BigDecimal expectedValue = new BigDecimal(expected);
-        calculator.changeOperator(leftValue, operator);
-        BigDecimal actualValue = calculator.percent(rightValue);
+        calculationModel.changeOperator(leftValue, operator);
+        BigDecimal actualValue = calculationModel.percent(rightValue);
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void memoryStoreTest(String value, String expected) {
-        Memory memory = new Memory();
+        MemoryModel memoryModel = new MemoryModel();
         BigDecimal expectedValue = new BigDecimal(expected);
         BigDecimal pushValue = new BigDecimal(value);
-        memory.memoryStore(pushValue);
-        assertEquals(expectedValue, memory.memoryRecall());
+        memoryModel.memoryStore(pushValue);
+        assertEquals(expectedValue, memoryModel.memoryRecall());
 
-        memory = new Memory();
-        memory.memoryAdd(pushValue);
-        assertEquals(expectedValue, memory.memoryRecall());
+        memoryModel = new MemoryModel();
+        memoryModel.memoryAdd(pushValue);
+        assertEquals(expectedValue, memoryModel.memoryRecall());
 
-        memory = new Memory();
+        memoryModel = new MemoryModel();
         expectedValue = expectedValue.negate();
-        memory.memorySubtract(pushValue);
-        BigDecimal actualValue = memory.memoryRecall();
+        memoryModel.memorySubtract(pushValue);
+        BigDecimal actualValue = memoryModel.memoryRecall();
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void memoryAddTest(String current, String value, String expected) {
-        Memory memory = new Memory();
+        MemoryModel memoryModel = new MemoryModel();
         BigDecimal memoryValue = new BigDecimal(current);
         BigDecimal pushValue = new BigDecimal(value);
         BigDecimal expectedValue = new BigDecimal(expected);
-        memory.memoryStore(memoryValue);
-        memory.memoryAdd(pushValue);
-        BigDecimal actualValue = memory.memoryRecall();
+        memoryModel.memoryStore(memoryValue);
+        memoryModel.memoryAdd(pushValue);
+        BigDecimal actualValue = memoryModel.memoryRecall();
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
     private void memorySubtractTest(String current, String value, String expected) {
-        Memory memory = new Memory();
+        MemoryModel memoryModel = new MemoryModel();
         BigDecimal memoryValue = new BigDecimal(current);
         BigDecimal pushValue = new BigDecimal(value);
         BigDecimal expectedValue = new BigDecimal(expected);
-        memory.memoryStore(memoryValue);
-        memory.memorySubtract(pushValue);
-        BigDecimal actualValue = memory.memoryRecall();
+        memoryModel.memoryStore(memoryValue);
+        memoryModel.memorySubtract(pushValue);
+        BigDecimal actualValue = memoryModel.memoryRecall();
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
 
     }
 
     private void memoryClearTest(String current) {
-        Memory memory = new Memory();
+        MemoryModel memoryModel = new MemoryModel();
         BigDecimal memoryValue = new BigDecimal(current);
-        memory.memoryStore(memoryValue);
-        memory.memoryClear();
-        BigDecimal actualValue = memory.memoryRecall();
+        memoryModel.memoryStore(memoryValue);
+        memoryModel.memoryClear();
+        BigDecimal actualValue = memoryModel.memoryRecall();
         assertEquals("expected: " + BigDecimal.ZERO + "\n actual: " + actualValue, true, BigDecimal.ZERO.compareTo(actualValue) == 0);
     }
 }

@@ -1,4 +1,4 @@
-package com.implemica.calculator.model;
+package com.implemica.calculator.model.util;
 
 /**
  * Enumeration of calculator operations, which need to work with history of calculator and binary operations.

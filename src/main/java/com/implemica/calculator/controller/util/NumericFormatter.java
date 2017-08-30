@@ -1,4 +1,4 @@
-package com.implemica.calculator.controller;
+package com.implemica.calculator.controller.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  *
  * @author Slavik Aleksey V.
  */
-public class Formatter {
+public class NumericFormatter {
     /**
      * Maximum of length of number in plain form
      */

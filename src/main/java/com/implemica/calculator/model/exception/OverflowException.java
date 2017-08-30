@@ -1,11 +1,11 @@
 package com.implemica.calculator.model.exception;
 
-import com.implemica.calculator.model.Calculator;
+import com.implemica.calculator.model.util.CalculationModel;
 
 /**
  * Custom exception for calculations.
  * Throws when scale of result of calculation is bigger than maximum scale.
- * Maximum scale determined in {@link Calculator}.
+ * Maximum scale determined in {@link CalculationModel}.
  *
  * @author Slavik Aleksey V.
  */

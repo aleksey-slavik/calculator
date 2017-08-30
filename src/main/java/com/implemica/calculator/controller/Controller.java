@@ -1,9 +1,10 @@
 package com.implemica.calculator.controller;
 
+import com.implemica.calculator.controller.util.NumericFormatter;
+import com.implemica.calculator.controller.util.HistoryFormatter;
 import com.implemica.calculator.model.Calculator;
-import com.implemica.calculator.model.History;
-import com.implemica.calculator.model.Memory;
-import com.implemica.calculator.model.Operator;
+import com.implemica.calculator.model.util.CalculationModel;
+import com.implemica.calculator.model.util.Operator;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
@@ -131,19 +132,14 @@ public class Controller implements Initializable {
     private boolean isMemoryLocked = true;
 
     /**
-     * {@link Calculator} object which consist set of calculation methods
+     * {@link Calculator} object which consist set of methods for calculation
      */
     private Calculator calculator = new Calculator();
 
     /**
-     * {@link History} object which consist set of methods for manage history
+     * {@link HistoryFormatter} object which consist set of methods for manage history
      */
-    private History history = new History();
-
-    /**
-     * {@link Memory} object which consist set of methods for manage memory of calculator
-     */
-    private Memory memory = new Memory();
+    private HistoryFormatter history = new HistoryFormatter();
 
     @FXML
     private Label numericField;
@@ -557,7 +553,7 @@ public class Controller implements Initializable {
     @FXML
     private void memoryClearClick() {
         disableMemoryButtons(true);
-        memory.memoryClear();
+        calculator.memoryClear();
     }
 
     /**
@@ -565,7 +561,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private void memoryRecallClick() {
-        setNumericFieldNumber(memory.memoryRecall());
+        setNumericFieldNumber(calculator.memoryRecall());
         isEditable = false;
     }
 
@@ -578,7 +574,7 @@ public class Controller implements Initializable {
             disableMemoryButtons(false);
         }
 
-        memory.memoryAdd(getNumericFieldNumber());
+        calculator.memoryAdd(getNumericFieldNumber());
         isEditable = false;
     }
 
@@ -591,7 +587,7 @@ public class Controller implements Initializable {
             disableMemoryButtons(false);
         }
 
-        memory.memorySubtract(getNumericFieldNumber());
+        calculator.memorySubtract(getNumericFieldNumber());
         isEditable = false;
     }
 
@@ -604,7 +600,7 @@ public class Controller implements Initializable {
             disableMemoryButtons(false);
         }
 
-        memory.memoryStore(getNumericFieldNumber());
+        calculator.memoryStore(getNumericFieldNumber());
         isEditable = false;
     }
 
@@ -638,7 +634,7 @@ public class Controller implements Initializable {
      * Processing of click on binary operator button.
      *
      * @param operator      operator
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE, defined in {@link Calculator}
+     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
      * @throws ZeroByZeroDivideException    throws when zero divided by zero
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
@@ -694,7 +690,7 @@ public class Controller implements Initializable {
      */
     private void setNumericFieldText(String value) {
         if (!isError) {
-            value = Formatter.display(value);
+            value = NumericFormatter.display(value);
         }
 
         numericField.setText(value);
@@ -716,7 +712,7 @@ public class Controller implements Initializable {
      * @param number    given number
      */
     private void setNumericFieldNumber(BigDecimal number) {
-        numericField.setText(Formatter.display(number));
+        numericField.setText(NumericFormatter.display(number));
     }
 
     /**

@@ -52,9 +52,9 @@ public class CalculatorView {
     private static final String ABOUT_ICON_PATH = "/images/about.png";
 
     /**
-     * Calculator title
+     * CalculationModel title
      */
-    private static final String TITLE = "Calculator";
+    private static final String TITLE = "CalculationModel";
 
     /**
      * Id of exit button

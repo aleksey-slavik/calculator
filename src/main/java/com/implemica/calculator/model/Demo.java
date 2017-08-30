@@ -1,8 +1,6 @@
-package com.implemica.calculator;
+package com.implemica.calculator.model;
 
-import com.implemica.calculator.model.Calculator;
-import com.implemica.calculator.model.Memory;
-import com.implemica.calculator.model.Operator;
+import com.implemica.calculator.model.util.Operator;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
@@ -25,10 +23,11 @@ public class Demo {
      */
     private static BigDecimal simpleExample() {
         Calculator calculator = new Calculator();
-        BigDecimal res = BigDecimal.valueOf(2);
+        BigDecimal res = null;
 
         try {
-            calculator.changeOperator(res, Operator.ADD);
+            BigDecimal tmp = BigDecimal.valueOf(2);
+            calculator.changeOperator(tmp, Operator.ADD);
             res = calculator.calculateResult(BigDecimal.valueOf(2));
         } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException e) {
             e.printStackTrace();
@@ -45,17 +44,17 @@ public class Demo {
      */
     private static BigDecimal complexExample() {
         Calculator calculator = new Calculator();
-        Memory memory = new Memory();
-        BigDecimal res = BigDecimal.valueOf(7);
+        BigDecimal res = null;
 
         try {
-            calculator.changeOperator(res, Operator.SUBTRACT);
-            memory.memoryStore(BigDecimal.valueOf(10));
-            res = calculator.sqrt(BigDecimal.valueOf(3));
-            res = calculator.calculateIntermediateResult(res);
-            calculator.changeOperator(res, Operator.ADD);
-            res = memory.memoryRecall();
-            res = calculator.calculateResult(res);
+            BigDecimal tmp = BigDecimal.valueOf(7);
+            calculator.changeOperator(tmp, Operator.SUBTRACT);
+            calculator.memoryStore(BigDecimal.valueOf(10));
+            tmp = calculator.sqrt(BigDecimal.valueOf(3));
+            tmp = calculator.calculateIntermediateResult(tmp);
+            calculator.changeOperator(tmp, Operator.ADD);
+            tmp = calculator.memoryRecall();
+            res = calculator.calculateResult(tmp);
         } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException | SquareRootException e) {
             e.printStackTrace();
         }

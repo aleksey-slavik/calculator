@@ -4,53 +4,29 @@ import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
 import com.implemica.calculator.model.exception.ZeroDivideException;
+import com.implemica.calculator.model.util.CalculationModel;
+import com.implemica.calculator.model.util.MemoryModel;
+import com.implemica.calculator.model.util.Operator;
 
 import java.math.BigDecimal;
 
 /**
- * Calculator operations.
- * Consist main calculator operations such as add, subtract, multiply, divide, negate, percent, inverse, sqr, sqrt and equals
+ * Calculator model.
+ * Consist methods of CalculationModel and MemoryModel classes
  *
  * @author Slavik Aleksey V.
  */
 public class Calculator {
 
     /**
-     * BigDecimal representation of 100
+     * {@link CalculationModel} object
      */
-    private static final BigDecimal HUNDRED = BigDecimal.valueOf(100);
+    private CalculationModel calculation = new CalculationModel();
 
     /**
-     * Divide operation scale.
-     * For increase accuracy of operation need to increase
+     * {@link MemoryModel} object
      */
-    private static final int DIVIDE_SCALE = 11000;
-
-    /**
-     * Maximum scale of calculator.
-     * Numbers with scale bigger than this value throws overflow
-     */
-    private static final int MAX_SCALE = 10000;
-
-    /**
-     * Left operand of equation
-     */
-    private BigDecimal left = BigDecimal.ZERO;
-
-    /**
-     * Right operand of equation
-     */
-    private BigDecimal right = BigDecimal.ZERO;
-
-    /**
-     * Operation of equation
-     */
-    private Operator operator = Operator.EMPTY;
-
-    /**
-     * Is true, if some operation was already done.
-     */
-    private boolean isNextOperator;
+    private MemoryModel memory = new MemoryModel();
 
     /**
      * Change current operator and save given value as the left operand.
@@ -60,13 +36,7 @@ public class Calculator {
      * @param operator  given operator
      */
     public void changeOperator(BigDecimal value, Operator operator) {
-        isNextOperator = false;
-
-        if (left.equals(BigDecimal.ZERO)) {
-            left = value;
-        }
-
-        this.operator = operator;
+        calculation.changeOperator(value, operator);
     }
 
     /**
@@ -75,14 +45,14 @@ public class Calculator {
      * @return  current operator
      */
     public Operator getOperator() {
-        return operator;
+        return calculation.getOperator();
     }
 
     /**
      * Change operator to default
      */
     public void resetOperator() {
-        operator = Operator.EMPTY;
+        calculation.resetOperator();
     }
 
     /**
@@ -96,17 +66,11 @@ public class Calculator {
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
     public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        if (!isNextOperator) {
-            right = value;
-        }
-
-        isNextOperator = true;
-        left = calculate();
-        return left;
+        return calculation.calculateResult(value);
     }
 
     /**
-     * Calculate current expression using current left and right operands and operator.
+     * Calculate current expression using current left operand, given value as right operand, and operator.
      *
      * @param value     given value
      * @return          result of calculation
@@ -115,14 +79,11 @@ public class Calculator {
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
     public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        isNextOperator = false;
-        right = value;
-        left = calculate();
-        return left;
+        return calculation.calculateIntermediateResult(value);
     }
 
     /**
-     * Calculate current expression using current left and right operands and operator.
+     * Calculate current expression using given value as left operand, right operand and operator.
      *
      * @param value     given value
      * @return          result of calculation
@@ -131,93 +92,7 @@ public class Calculator {
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
     public BigDecimal calculateEqualsResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        if (left.equals(BigDecimal.ZERO)) {
-            left = value;
-        }
-
-        left = calculate();
-        return left;
-    }
-
-    /**
-     * Calculate expression using left and right operands and operator from current statement of Calculator object.
-     *
-     * @return          result of calculation
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
-     */
-    private BigDecimal calculate() throws OverflowException, ZeroDivideException, ZeroByZeroDivideException {
-        if (operator == Operator.EMPTY) {
-            return BigDecimal.ZERO;
-        }
-
-        BigDecimal res = BigDecimal.ZERO;
-
-        if (operator == Operator.ADD) {
-            res = add();
-        } else if (operator == Operator.SUBTRACT) {
-            res = subtract();
-        } else if (operator == Operator.MULTIPLY) {
-            res = multiply();
-        } else if (operator == Operator.DIVIDE) {
-            res = divide();
-        }
-
-        if (Math.abs(res.scale() - res.precision()) >= MAX_SCALE) {
-            throw new OverflowException("Scale of result is bigger than max scale value");
-        }
-
-        return res;
-    }
-
-    /**
-     * Add left operand to right
-     *
-     * @return      result of add
-     */
-    private BigDecimal add() {
-
-        return left.add(right).stripTrailingZeros();
-    }
-
-    /**
-     * Subtract left operand from right
-     *
-     * @return      result of subtract
-     */
-    private BigDecimal subtract() {
-
-        return left.subtract(right).stripTrailingZeros();
-    }
-
-    /**
-     * Multiply left and right operands
-     *
-     * @return      result of multiply
-     */
-    private BigDecimal multiply() {
-
-        return left.multiply(right).stripTrailingZeros();
-    }
-
-    /**
-     * Divide left operand to right
-     *
-     * @return      result of divide
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
-     */
-    private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
-        if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
-            throw new ZeroByZeroDivideException("Quotient of two zeros are not defined");
-        }
-
-        if (right.equals(BigDecimal.ZERO)) {
-            throw new ZeroDivideException("Divide by zero in expression: " + left + " / " + right);
-        }
-
-        return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return calculation.calculateEqualsResult(value);
     }
 
     /**
@@ -227,8 +102,7 @@ public class Calculator {
      * @return          percent value of left operand
      */
     public BigDecimal percent(BigDecimal value) {
-
-        return left.multiply(value.divide(HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP)).stripTrailingZeros();
+        return calculation.percent(value);
     }
 
     /**
@@ -238,8 +112,7 @@ public class Calculator {
      * @return          negate of given value
      */
     public BigDecimal negate(BigDecimal value) {
-
-        return value.negate();
+        return calculation.negate(value);
     }
 
     /**
@@ -250,11 +123,7 @@ public class Calculator {
      * @throws ZeroDivideException      throws when given number equals zero
      */
     public BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
-        if (value.equals(BigDecimal.ZERO)) {
-            throw new ZeroDivideException("Divide by zero in inverse method");
-        }
-
-        return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return calculation.inverse(value);
     }
 
     /**
@@ -265,13 +134,7 @@ public class Calculator {
      * @throws OverflowException    throws when scale of result is bigger than MAX_SCALE
      */
     public BigDecimal sqr(BigDecimal value) throws OverflowException {
-        BigDecimal res = value.pow(2);
-
-        if (Math.abs(res.scale()) >= MAX_SCALE) {
-            throw new OverflowException("Scale of result of sqr is bigger than max scale value");
-        }
-
-        return res;
+        return calculation.sqr(value);
     }
 
     /**
@@ -282,63 +145,63 @@ public class Calculator {
      * @throws SquareRootException      throws when given number is negative
      */
     public BigDecimal sqrt(BigDecimal value) throws SquareRootException {
-        if (value.compareTo(BigDecimal.ZERO) < 0) {
-            throw new SquareRootException("Can't get square root of " + value.toPlainString() + ". Non negative number is needed");
-        }
-
-        if (value.equals(BigDecimal.ZERO)) {
-            return BigDecimal.ZERO;
-        }
-
-        return sqrt(value, BigDecimal.ONE);
+        return calculation.sqrt(value);
     }
 
     /**
-     * Return default statement of Calculator object
+     * Return default statement of CalculationModel object
      */
     public void clearAll() {
-        left = BigDecimal.ZERO;
-        right = BigDecimal.ZERO;
-        resetOperator();
+        calculation.clearAll();
     }
 
     /**
      * Set right operand to default
      */
     public void clearEntry() {
-        right = BigDecimal.ZERO;
+        calculation.clearAll();
     }
 
     /**
-     * Returns the square root calculated for the given number. Source of square root for {@link BigDecimal} is
-     * <a href="http://www.java2s.com/Code/Java/Data-Type/BigDecimalandBigIntegersqareroot.htm">square rooting a BigDecimal</a>
-     *
-     * @param number    given number
-     * @param guess     first approach
-     * @return          square root of number
+     * Set memory value to default
      */
-    private static BigDecimal sqrt(BigDecimal number, BigDecimal guess) {
-        BigDecimal two = BigDecimal.valueOf(2);
-        BigDecimal result = BigDecimal.ZERO;
-        BigDecimal flipA = result;
-        BigDecimal flipB = result;
-        boolean first = true;
+    public void memoryClear() {
+        memory.memoryClear();
+    }
 
-        while (result.compareTo(guess) != 0) {
-            if (!first)
-                guess = result;
-            else
-                first = false;
+    /**
+     * Save given value in memory
+     *
+     * @param value     given value
+     */
+    public void memoryStore(BigDecimal value) {
+        memory.memoryStore(value);
+    }
 
-            result = number.divide(guess, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).add(guess).divide(two, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+    /**
+     * Add given value to current memory value
+     *
+     * @param value     given value
+     */
+    public void memoryAdd(BigDecimal value) {
+        memory.memoryAdd(value);
+    }
 
-            if (result.equals(flipB))
-                return flipA;
+    /**
+     * Subtract given value to current memory value
+     *
+     * @param value     given value
+     */
+    public void memorySubtract(BigDecimal value) {
+        memory.memorySubtract(value);
+    }
 
-            flipB = flipA;
-            flipA = result;
-        }
-
-        return result;
+    /**
+     * Get current memory value
+     *
+     * @return  current memory value
+     */
+    public BigDecimal memoryRecall() {
+        return memory.memoryRecall();
     }
 }

@@ -1,14 +1,14 @@
-package com.implemica.calculator.model;
+package com.implemica.calculator.model.util;
 
 import java.math.BigDecimal;
 
 /**
- * Calculator memory.
+ * CalculationModel memory.
  * Consist main memory operations such as MC, MR, M+, M- and MS
  *
  * @author Slavik Aleksey V.
  */
-public class Memory {
+public class MemoryModel {
 
     /**
      * Default memory value

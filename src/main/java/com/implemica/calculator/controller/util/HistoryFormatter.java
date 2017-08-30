@@ -1,12 +1,14 @@
-package com.implemica.calculator.model;
+package com.implemica.calculator.controller.util;
+
+import com.implemica.calculator.model.util.Operator;
 
 /**
- * History model.
+ * HistoryFormatter model.
  * Consist set of method for work with history
  *
  * @author Slavik Aleksey V.
  */
-public class History {
+public class HistoryFormatter {
 
     /**
      * Default history value
@@ -29,7 +31,7 @@ public class History {
     private static final String RIGHT_BRACKET = ")";
 
     /**
-     * History value
+     * HistoryFormatter value
      */
     private String history = DEFAULT_VALUE;
 
