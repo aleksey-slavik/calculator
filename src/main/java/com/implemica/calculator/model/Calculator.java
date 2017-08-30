@@ -159,7 +159,7 @@ public class Calculator {
      * Set right operand to default
      */
     public void clearEntry() {
-        calculation.clearAll();
+        calculation.clearEntry();
     }
 
     /**
@@ -196,11 +196,6 @@ public class Calculator {
         memory.memorySubtract(value);
     }
 
-    /**
-     * Get current memory value
-     *
-     * @return  current memory value
-     */
     public BigDecimal memoryRecall() {
         return memory.memoryRecall();
     }

@@ -132,7 +132,7 @@ public class Controller implements Initializable {
     private boolean isMemoryLocked = true;
 
     /**
-     * {@link Calculator} object which consist set of methods for calculation
+     * {@link Calculator} object which consist set of methds of calculation methods
      */
     private Calculator calculator = new Calculator();
 

@@ -44,11 +44,6 @@ public class CalculationModel {
     private Operator operator = Operator.EMPTY;
 
     /**
-     * Is true, if some operation was already done.
-     */
-    private boolean isNextOperator;
-
-    /**
      * Change current operator and save given value as the left operand.
      * Usually called when binary operator are pressed.
      *
@@ -56,7 +51,6 @@ public class CalculationModel {
      * @param operator  given operator
      */
     public void changeOperator(BigDecimal value, Operator operator) {
-        isNextOperator = false;
         left = value;
         this.operator = operator;
     }
@@ -88,11 +82,8 @@ public class CalculationModel {
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
     public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        if (!isNextOperator) {
             right = value;
-        }
 
-        isNextOperator = true;
         left = calculate();
         return left;
     }
@@ -107,7 +98,7 @@ public class CalculationModel {
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
     public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        isNextOperator = false;
+
         right = value;
         left = calculate();
         return left;
