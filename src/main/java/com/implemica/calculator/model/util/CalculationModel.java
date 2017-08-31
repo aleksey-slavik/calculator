@@ -47,19 +47,18 @@ public class CalculationModel {
      * Change current operator and save given value as the left operand.
      * Usually called when binary operator are pressed.
      *
-     * @param value     given value
-     * @param operator  given operator
+     * @param value    given value
+     * @param operator given operator
      */
     public void changeOperator(BigDecimal value, Operator operator) {
-        if (left.equals(BigDecimal.ZERO))
-            left = value;
+        left = value;
         this.operator = operator;
     }
 
     /**
      * Return current statement of operator
      *
-     * @return  current operator
+     * @return current operator
      */
     public Operator getOperator() {
         return operator;
@@ -75,14 +74,14 @@ public class CalculationModel {
     /**
      * Calculate current expression using given value as left operand, right operand and operator.
      *
-     * @param value     given value
-     * @return          result of calculation
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
+     * @param value given value
+     * @return result of calculation
+     * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideException       throws when not zero number divided by zero
      */
     public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        left = value;
+        right = value;
         left = calculate();
         return left;
     }
@@ -90,14 +89,14 @@ public class CalculationModel {
     /**
      * Calculate current expression using current left operand, given value as right operand, and operator.
      *
-     * @param value     given value
-     * @return          result of calculation
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
+     * @param value given value
+     * @return result of calculation
+     * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideException       throws when not zero number divided by zero
      */
     public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        right = value;
+        left = value;
         left = calculate();
         return left;
     }
@@ -105,31 +104,29 @@ public class CalculationModel {
     /**
      * Return given percent value of left operand
      *
-     * @param value     given percent value
-     * @return          percent value of left operand
+     * @param value given percent value
+     * @return percent value of left operand
      */
     public BigDecimal percent(BigDecimal value) {
-
         return left.multiply(value.divide(HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP)).stripTrailingZeros();
     }
 
     /**
      * Return negate number for given value.
      *
-     * @param value     given value
-     * @return          negate of given value
+     * @param value given value
+     * @return negate of given value
      */
     public BigDecimal negate(BigDecimal value) {
-
         return value.negate();
     }
 
     /**
      * Return inverse number for given value
      *
-     * @param value     given value
-     * @return          inverse number
-     * @throws ZeroDivideException      throws when given number equals zero
+     * @param value given value
+     * @return inverse number
+     * @throws ZeroDivideException throws when given number equals zero
      */
     public BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
         if (value.equals(BigDecimal.ZERO)) {
@@ -142,9 +139,9 @@ public class CalculationModel {
     /**
      * Return result of squaring operation for given value
      *
-     * @param value     given value
-     * @return          square of number
-     * @throws OverflowException    throws when scale of result is bigger than MAX_SCALE
+     * @param value given value
+     * @return square of number
+     * @throws OverflowException throws when scale of result is bigger than MAX_SCALE
      */
     public BigDecimal sqr(BigDecimal value) throws OverflowException {
         BigDecimal res = value.pow(2);
@@ -159,9 +156,9 @@ public class CalculationModel {
     /**
      * Return square root for given value
      *
-     * @param value     given value
-     * @return          square root of number
-     * @throws SquareRootException      throws when given number is negative
+     * @param value given value
+     * @return square root of number
+     * @throws SquareRootException throws when given number is negative
      */
     public BigDecimal sqrt(BigDecimal value) throws SquareRootException {
         if (value.compareTo(BigDecimal.ZERO) < 0) {
@@ -194,10 +191,10 @@ public class CalculationModel {
     /**
      * Calculate expression using left and right operands and operator from current statement of CalculationModel object.
      *
-     * @return          result of calculation
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
+     * @return result of calculation
+     * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideException       throws when not zero number divided by zero
      */
     private BigDecimal calculate() throws OverflowException, ZeroDivideException, ZeroByZeroDivideException {
         if (operator == Operator.EMPTY) {
@@ -226,39 +223,36 @@ public class CalculationModel {
     /**
      * Add left operand to right
      *
-     * @return      result of add
+     * @return result of add
      */
     private BigDecimal add() {
-
         return left.add(right).stripTrailingZeros();
     }
 
     /**
      * Subtract left operand from right
      *
-     * @return      result of subtract
+     * @return result of subtract
      */
     private BigDecimal subtract() {
-
         return left.subtract(right).stripTrailingZeros();
     }
 
     /**
      * Multiply left and right operands
      *
-     * @return      result of multiply
+     * @return result of multiply
      */
     private BigDecimal multiply() {
-
         return left.multiply(right).stripTrailingZeros();
     }
 
     /**
      * Divide left operand to right
      *
-     * @return      result of divide
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
+     * @return result of divide
+     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideException       throws when not zero number divided by zero
      */
     private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
         if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
@@ -276,9 +270,9 @@ public class CalculationModel {
      * Returns the square root calculated for the given number. Source of square root for {@link BigDecimal} is
      * <a href="http://www.java2s.com/Code/Java/Data-Type/BigDecimalandBigIntegersqareroot.htm">square rooting a BigDecimal</a>
      *
-     * @param number    given number
-     * @param guess     first approach
-     * @return          square root of number
+     * @param number given number
+     * @param guess  first approach
+     * @return square root of number
      */
     private static BigDecimal sqrt(BigDecimal number, BigDecimal guess) {
         BigDecimal two = BigDecimal.valueOf(2);
@@ -293,7 +287,9 @@ public class CalculationModel {
             else
                 first = false;
 
-            result = number.divide(guess, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).add(guess).divide(two, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+            result = number.divide(guess, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP)
+                    .add(guess)
+                    .divide(two, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
 
             if (result.equals(flipB))
                 return flipA;

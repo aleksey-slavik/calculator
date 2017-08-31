@@ -81,8 +81,8 @@ public class NumericFormatter {
     /**
      * Return correct string representation of given number
      *
-     * @param number    given number
-     * @return          string representation of number
+     * @param number given number
+     * @return string representation of number
      */
     public static String display(BigDecimal number) {
         return formatMathView(number.toPlainString());
@@ -91,8 +91,8 @@ public class NumericFormatter {
     /**
      * Return correct string representation of given string
      *
-     * @param number    given string
-     * @return          correct string representation
+     * @param number given string
+     * @return correct string representation
      */
     public static String display(String number) {
         Pattern commaReg = Pattern.compile(COMMA_PATTERN);
@@ -131,8 +131,8 @@ public class NumericFormatter {
     /**
      * Choose plain or engineering form of given number
      *
-     * @param numberStr     input number
-     * @return              output representation of number
+     * @param numberStr input number
+     * @return output representation of number
      */
     private static String formatMathView(String numberStr) {
         BigDecimal number = new BigDecimal(numberStr);
@@ -143,7 +143,7 @@ public class NumericFormatter {
 
         String stringValue;
 
-        BigDecimal plain = new BigDecimal(formatPlainView(number).replace(" ", "").replace(",","."));
+        BigDecimal plain = new BigDecimal(formatPlainView(number).replace(" ", "").replace(",", "."));
 
         if (plain.abs().compareTo(MIN_PLAIN_VALUE) < 0 || plain.abs().compareTo(MAX_PLAIN_VALUE) > 0) {
             stringValue = formatEngineeringView(number);
@@ -159,8 +159,8 @@ public class NumericFormatter {
     /**
      * Formatting for engineering representation of given number
      *
-     * @param number    given number
-     * @return          string representation of given number
+     * @param number given number
+     * @return string representation of given number
      */
     private static String formatEngineeringView(BigDecimal number) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -177,8 +177,8 @@ public class NumericFormatter {
     /**
      * Check correct form for engineering representation of number
      *
-     * @param number    given number
-     * @return          correct representation of given number
+     * @param number given number
+     * @return correct representation of given number
      */
     private static String checkEngineeringView(String number) {
         String format = number.toLowerCase();
@@ -193,8 +193,8 @@ public class NumericFormatter {
     /**
      * Formatting for plain representation of given number
      *
-     * @param number    given number
-     * @return          string representation of given number
+     * @param number given number
+     * @return string representation of given number
      */
     private static String formatPlainView(BigDecimal number) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -211,13 +211,14 @@ public class NumericFormatter {
     /**
      * return count of digits in fractional part of number in plain form
      *
-     * @param number    given number
-     * @return          count of digits in fractional part
+     * @param number given number
+     * @return count of digits in fractional part
      */
     private static int getFractionDigitsCount(String number) {
         if (!number.contains(".")) {
             return 0;
         }
+
         if (number.startsWith("-0.")) {
             return NEGATE_PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".");
         } else if (number.startsWith("-")) {
@@ -225,6 +226,7 @@ public class NumericFormatter {
         } else if (number.startsWith("0.")) {
             return PLAIN_WITH_SEPARATOR_LENGTH - number.indexOf(".");
         }
+
         return MAX_PLAIN_SCALE - number.indexOf(".");
     }
 }

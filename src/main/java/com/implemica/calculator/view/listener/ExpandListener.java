@@ -22,10 +22,7 @@ public class ExpandListener implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        if (stage.isMaximized()) {
-            stage.setMaximized(false);
-        } else {
-            stage.setMaximized(true);
-        }
+        boolean isMaximized = !stage.isMaximized();
+        stage.setMaximized(isMaximized);
     }
 }

@@ -22,10 +22,7 @@ public class HideListener implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        if (stage.isIconified()) {
-            stage.setIconified(false);
-        } else {
-            stage.setIconified(true);
-        }
+        boolean isIconified = !stage.isIconified();
+        stage.setIconified(isIconified);
     }
 }

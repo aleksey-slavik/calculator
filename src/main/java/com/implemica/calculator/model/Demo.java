@@ -19,7 +19,7 @@ public class Demo {
      * Simple example of using model.
      * 2 + 2 =
      *
-     * @return      result of calculation
+     * @return result of calculation
      */
     private static BigDecimal simpleExample() {
         Calculator calculator = new Calculator();
@@ -40,7 +40,7 @@ public class Demo {
      * Complex example of using model.
      * 7 - 10 = M+ / 3 = M+ M+ 3 SQRT + MR =
      *
-     * @return      result of calculation
+     * @return result of calculation
      */
     private static BigDecimal complexExample() {
         Calculator calculator = new Calculator();

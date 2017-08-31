@@ -1,11 +1,14 @@
 package com.implemica.calculator.view.listener;
 
+import com.implemica.calculator.view.enums.CalculatorButton;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import java.util.ArrayList;
+
+import static com.implemica.calculator.view.enums.CalculatorButton.*;
 
 /**
  * Resize font of button during window resize
@@ -76,17 +79,17 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Digit group of buttons
      */
-    private static ArrayList<String> digits = new ArrayList<>();
+    private static ArrayList<CalculatorButton> digits = new ArrayList<>();
 
     /**
      * Binary group of buttons
      */
-    private static ArrayList<String> binary = new ArrayList<>();
+    private static ArrayList<CalculatorButton> binary = new ArrayList<>();
 
     /**
      * Unary group of buttons
      */
-    private static ArrayList<String> unary = new ArrayList<>();
+    private static ArrayList<CalculatorButton> unary = new ArrayList<>();
 
     /**
      * Scene of window
@@ -101,32 +104,32 @@ public class ButtonResizeListener implements InvalidationListener {
      * Add buttons to groups
      */
     static {
-        digits.add("#zero");
-        digits.add("#one");
-        digits.add("#two");
-        digits.add("#three");
-        digits.add("#four");
-        digits.add("#five");
-        digits.add("#six");
-        digits.add("#seven");
-        digits.add("#eight");
-        digits.add("#nine");
-        digits.add("#comma");
+        digits.add(ZERO);
+        digits.add(ONE);
+        digits.add(TWO);
+        digits.add(THREE);
+        digits.add(FOUR);
+        digits.add(FIVE);
+        digits.add(SIX);
+        digits.add(SEVEN);
+        digits.add(EIGHT);
+        digits.add(NINE);
+        digits.add(COMMA);
 
-        binary.add("#equals");
-        binary.add("#add");
-        binary.add("#subtract");
-        binary.add("#divide");
-        binary.add("#multiply");
-        binary.add("#backspace");
+        binary.add(EQUALS);
+        binary.add(ADD);
+        binary.add(SUBTRACT);
+        binary.add(DIVIDE);
+        binary.add(MULTIPLY);
+        binary.add(BACK);
 
-        unary.add("#negate");
-        unary.add("#percent");
-        unary.add("#sqr");
-        unary.add("#sqrt");
-        unary.add("#inverse");
-        unary.add("#clear");
-        unary.add("#clear_expr");
+        unary.add(NEGATE);
+        unary.add(PERCENT);
+        unary.add(SQR);
+        unary.add(SQRT);
+        unary.add(INVERSE);
+        unary.add(C);
+        unary.add(CE);
     }
 
     @Override
@@ -145,23 +148,23 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Change font size for all groups
      *
-     * @param digitSize     size of digit group buttons
-     * @param binarySize    size of binary group buttons
-     * @param unarySize     size of unary group buttons
+     * @param digitSize  size of digit group buttons
+     * @param binarySize size of binary group buttons
+     * @param unarySize  size of unary group buttons
      */
     private void resize(int digitSize, int binarySize, int unarySize) {
-        for (String id : digits) {
-            Button bt = (Button) scene.lookup(id);
+        for (CalculatorButton button : digits) {
+            Button bt = (Button) scene.lookup(button.getFXId());
             bt.setStyle(getFontString(digitSize));
         }
 
-        for (String id : binary) {
-            Button digit = (Button) scene.lookup(id);
+        for (CalculatorButton button : binary) {
+            Button digit = (Button) scene.lookup(button.getFXId());
             digit.setStyle(getFontString(binarySize));
         }
 
-        for (String id : unary) {
-            Button bt = (Button) scene.lookup(id);
+        for (CalculatorButton button : unary) {
+            Button bt = (Button) scene.lookup(button.getFXId());
             bt.setStyle(getFontString(unarySize));
         }
     }
@@ -169,8 +172,8 @@ public class ButtonResizeListener implements InvalidationListener {
     /**
      * Create style string with given font size
      *
-     * @param size  font size
-     * @return      style with new font size
+     * @param size font size
+     * @return style with new font size
      */
     private String getFontString(int size) {
         return "-fx-font-size: " + size + "px;";

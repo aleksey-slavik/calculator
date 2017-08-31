@@ -246,7 +246,7 @@ public class Controller implements Initializable {
     /**
      * Click on digits buttons processing
      *
-     * @param event     digits event
+     * @param event digits event
      */
     @FXML
     private void buttonDigitClick(ActionEvent event) {
@@ -286,9 +286,9 @@ public class Controller implements Initializable {
 
         try {
             if (isCalculateResult) {
-                setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
-            } else {
                 setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
+            } else {
+                setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
                 history.clearHistory();
                 setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             }
@@ -377,7 +377,7 @@ public class Controller implements Initializable {
     /**
      * Processing of click on binary operator buttons
      *
-     * @param event     binary operator
+     * @param event binary operator
      */
     @FXML
     private void binaryOperatorClick(ActionEvent event) {
@@ -415,11 +415,10 @@ public class Controller implements Initializable {
 
             if (isEditable) {
                 history.replace(value);
-                setHistoryFieldText(history.getHistory());
             } else {
                 history.appendHistory(value);
-                setHistoryFieldText(history.getHistory());
             }
+            setHistoryFieldText(history.getHistory());
         }
 
         isEditable = true;
@@ -449,14 +448,13 @@ public class Controller implements Initializable {
 
         if (history.isEmpty()) {
             history.setHistory(history.surround(Operator.SQR, value));
-            setHistoryFieldText(history.getHistory());
         } else if (isPreviousUnary) {
             history.surround(Operator.SQR);
-            setHistoryFieldText(history.getHistory());
         } else {
             history.appendHistory(history.surround(Operator.SQR, value));
-            setHistoryFieldText(history.getHistory());
         }
+
+        setHistoryFieldText(history.getHistory());
 
         try {
             setNumericFieldNumber(calculator.sqr(getNumericFieldNumber()));
@@ -477,14 +475,13 @@ public class Controller implements Initializable {
 
         if (history.isEmpty()) {
             history.setHistory(history.surround(Operator.SQRT, value));
-            setHistoryFieldText(history.getHistory());
         } else if (isPreviousUnary) {
             history.surround(Operator.SQRT);
-            setHistoryFieldText(history.getHistory());
         } else {
             history.appendHistory(history.surround(Operator.SQRT, value));
-            setHistoryFieldText(history.getHistory());
         }
+
+        setHistoryFieldText(history.getHistory());
 
         try {
             setNumericFieldNumber(calculator.sqrt(getNumericFieldNumber()));
@@ -528,14 +525,13 @@ public class Controller implements Initializable {
 
         if (history.isEmpty()) {
             history.setHistory(history.surround(Operator.INVERSE, value));
-            setHistoryFieldText(history.getHistory());
         } else if (isPreviousUnary) {
             history.surround(Operator.INVERSE);
-            setHistoryFieldText(history.getHistory());
         } else {
             history.appendHistory(history.surround(Operator.INVERSE, value));
-            setHistoryFieldText(history.getHistory());
         }
+
+        setHistoryFieldText(history.getHistory());
 
         try {
             setNumericFieldNumber(calculator.inverse(getNumericFieldNumber()));
@@ -633,10 +629,10 @@ public class Controller implements Initializable {
     /**
      * Processing of click on binary operator button.
      *
-     * @param operator      operator
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
+     * @param operator operator
+     * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
+     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideException       throws when not zero number divided by zero
      */
     private void processBinaryOperator(Operator operator) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         String value = getNumericFieldText().replace(" ", "");
@@ -645,12 +641,12 @@ public class Controller implements Initializable {
         if (isSequence) {
             if (isPreviousUnary) {
                 history.appendHistory(operator.getText());
-                setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
+                setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
             } else if (isEditable) {
                 history.replaceLastSign(operator);
             } else {
                 history.appendHistory(value + SEPARATOR + operator.getText());
-                setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
+                setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
             }
         } else {
             if (isPreviousUnary) {
@@ -671,7 +667,7 @@ public class Controller implements Initializable {
     /**
      * Return current statement of numeric field
      *
-     * @return  numeric field value
+     * @return numeric field value
      */
     private String getNumericFieldText() {
         return numericField.getText();
@@ -680,7 +676,7 @@ public class Controller implements Initializable {
     /**
      * Write given value to numeric field
      *
-     * @param value     given value
+     * @param value given value
      */
     private void setNumericFieldText(String value) {
         if (!isError) {
@@ -693,7 +689,7 @@ public class Controller implements Initializable {
     /**
      * Get current statement of numeric field and convert that into {@link BigDecimal}
      *
-     * @return  number from numeric field
+     * @return number from numeric field
      */
     private BigDecimal getNumericFieldNumber() {
         String value = getNumericFieldText().replace(" ", "").replace(COMMA, DOT);
@@ -703,7 +699,7 @@ public class Controller implements Initializable {
     /**
      * Write given number into numeric field
      *
-     * @param number    given number
+     * @param number given number
      */
     private void setNumericFieldNumber(BigDecimal number) {
         numericField.setText(NumericFormatter.display(number));
@@ -712,7 +708,7 @@ public class Controller implements Initializable {
     /**
      * Write given value into history field.
      *
-     * @param value     given history value
+     * @param value given history value
      */
     private void setHistoryFieldText(String value) {
         if (value.length() > getLabelSize()) {
@@ -732,7 +728,7 @@ public class Controller implements Initializable {
     /**
      * Add given value to current history and save that in history field
      *
-     * @param value     given history value
+     * @param value given history value
      */
     private void appendNumericFieldText(String value) {
         setNumericFieldText(getNumericFieldText() + value);
@@ -741,7 +737,7 @@ public class Controller implements Initializable {
     /**
      * Simulate pressing on given button for key events click
      *
-     * @param button    given button
+     * @param button given button
      */
     private void clickOnButton(Button button) {
         button.arm();
@@ -754,7 +750,7 @@ public class Controller implements Initializable {
     /**
      * Change statement of buttons in list at entrance and exit from error statement
      *
-     * @param disable   true if buttons must be disabled, else otherwise
+     * @param disable true if buttons must be disabled, else otherwise
      */
     private void disableButtons(boolean disable) {
         isError = disable;
@@ -766,7 +762,7 @@ public class Controller implements Initializable {
     /**
      * Change statement of buttons in list when cleaning and writing to memory
      *
-     * @param disable   true if buttons must be disabled, else otherwise
+     * @param disable true if buttons must be disabled, else otherwise
      */
     private void disableMemoryButtons(boolean disable) {
         isMemoryLocked = disable;
@@ -778,7 +774,7 @@ public class Controller implements Initializable {
     /**
      * Return maximum count of chars which can be placed in history label
      *
-     * @return      count of chars
+     * @return count of chars
      */
     private int getLabelSize() {
         return (int) (historyField.getWidth() / CHAR_WIDTH);
@@ -787,10 +783,11 @@ public class Controller implements Initializable {
     /**
      * Check numeric field length
      *
-     * @return      true if length of numeric field is bigger than max length, false otherwise
+     * @return true if length of numeric field is bigger than max length, false otherwise
      */
     private boolean checkSize() {
         String str = getNumericFieldText().replace(COMMA, "").replace("-", "").replace(" ", "");
+
         if (str.startsWith("0")) {
             return str.length() >= NUMERIC_FIELD_SIZE + 1;
         } else {
@@ -813,7 +810,7 @@ public class Controller implements Initializable {
     /**
      * Set error statement for calculator with given error message in numeric field
      *
-     * @param error     error message
+     * @param error error message
      */
     private void errorStatement(String error) {
         disableButtons(true);

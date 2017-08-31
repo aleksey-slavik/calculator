@@ -50,7 +50,6 @@ public class HistoryFormatter {
      * @param text new history value
      */
     public void setHistory(String text) {
-
         history = text;
     }
 
@@ -66,12 +65,11 @@ public class HistoryFormatter {
     /**
      * Surround given value using given function
      *
-     * @param operator  given function
-     * @param value     given value
+     * @param operator given function
+     * @param value    given value
      * @return surrounded value using given function
      */
     public String surround(Operator operator, String value) {
-
         return operator.getText() + LEFT_BRACKET + value + RIGHT_BRACKET;
     }
 
@@ -81,7 +79,6 @@ public class HistoryFormatter {
      * @param operator given function
      */
     public void surround(Operator operator) {
-
         replace(surround(operator, getLastElement()));
     }
 
@@ -129,7 +126,7 @@ public class HistoryFormatter {
     /**
      * Return true if current history value is default
      *
-     * @return  true if history is default, false otherwise
+     * @return true if history is default, false otherwise
      */
     public boolean isEmpty() {
         return history.equals(DEFAULT_VALUE);

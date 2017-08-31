@@ -19,7 +19,6 @@ public class MemoryModel {
      * Set memory value to default
      */
     public void memoryClear() {
-
         memory = BigDecimal.ZERO;
     }
 
@@ -29,7 +28,6 @@ public class MemoryModel {
      * @param value     given value
      */
     public void memoryStore(BigDecimal value) {
-
         memory = value;
     }
 
@@ -39,7 +37,6 @@ public class MemoryModel {
      * @param value     given value
      */
     public void memoryAdd(BigDecimal value) {
-
         memory = memory.add(value);
     }
 
@@ -49,7 +46,6 @@ public class MemoryModel {
      * @param value     given value
      */
     public void memorySubtract(BigDecimal value) {
-
         memory = memory.subtract(value);
     }
 
@@ -59,7 +55,6 @@ public class MemoryModel {
      * @return  current memory value
      */
     public BigDecimal memoryRecall() {
-
         return memory;
     }
 }

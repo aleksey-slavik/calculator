@@ -41,12 +41,7 @@ public enum CalculatorButton {
     MR("#memory_recall"),
     M_MINUS("#memory_minus"),
     M_PLUS("#memory_add"),
-    MS("#memory_store"),
-    MENU_OPEN("#menuOpen"),
-    MENU_CLOSE("#menuClose"),
-    HIDE("#hide"),
-    EXPAND("#expand"),
-    CLOSE("#exit");
+    MS("#memory_store");
 
     /**
      * fx:id of given button

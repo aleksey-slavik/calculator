@@ -39,24 +39,24 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     private double dy;
 
     /**
-     *
+     * True, if window must be resize to right direction
      */
-    private boolean isMoveH;
+    private boolean isRightResize;
 
     /**
-     *
+     * True, if window must be resize to bottom direction
      */
-    private boolean isMoveV;
+    private boolean isBottomResize;
 
     /**
-     *
+     * True, if window must be resize to left direction
      */
-    private boolean isResizeH;
+    private boolean isLeftResize;
 
     /**
-     *
+     * True, if window must be resize to top direction
      */
-    private boolean isResizeV;
+    private boolean isTopResize;
 
     /**
      * Main window scene
@@ -81,10 +81,10 @@ public class ResizeListener implements EventHandler<MouseEvent> {
             dx = stage.getWidth() - event.getX();
             dy = stage.getHeight() - event.getY();
         } else if (MouseEvent.MOUSE_DRAGGED.equals(event.getEventType())) {
-            if (isResizeH) {
+            if (isLeftResize) {
                 changeWidth(event);
             }
-            if (isResizeV) {
+            if (isTopResize) {
                 changeHeight(event);
             }
         }
@@ -93,78 +93,81 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     /**
      * Change cursor type and setup flags for further processing
      *
-     * @param event     mouse event
+     * @param event mouse event
      */
     private void changeCursor(MouseEvent event) {
+        Cursor cursor;
+
         if (event.getX() < BORDER && event.getY() < BORDER) {
-            scene.setCursor(Cursor.NW_RESIZE);
-            isResizeH = true;
-            isResizeV = true;
-            isMoveH = true;
-            isMoveV = true;
+            cursor = Cursor.NW_RESIZE;
+            isLeftResize = true;
+            isTopResize = true;
+            isRightResize = true;
+            isBottomResize = true;
         } else if (event.getX() < BORDER && event.getY() > scene.getHeight() - BORDER) {
-            scene.setCursor(Cursor.SW_RESIZE);
-            isResizeH = true;
-            isResizeV = true;
-            isMoveH = true;
-            isMoveV = false;
+            cursor = Cursor.SW_RESIZE;
+            isLeftResize = true;
+            isTopResize = true;
+            isRightResize = true;
+            isBottomResize = false;
         } else if (event.getX() > scene.getWidth() - BORDER && event.getY() < BORDER) {
-            scene.setCursor(Cursor.NE_RESIZE);
-            isResizeH = true;
-            isResizeV = true;
-            isMoveH = false;
-            isMoveV = true;
+            cursor = Cursor.NE_RESIZE;
+            isLeftResize = true;
+            isTopResize = true;
+            isRightResize = false;
+            isBottomResize = true;
         } else if (event.getX() > scene.getWidth() - BORDER && event.getY() > scene.getHeight() - BORDER) {
-            scene.setCursor(Cursor.SE_RESIZE);
-            isResizeH = true;
-            isResizeV = true;
-            isMoveH = false;
-            isMoveV = false;
+            cursor = Cursor.SE_RESIZE;
+            isLeftResize = true;
+            isTopResize = true;
+            isRightResize = false;
+            isBottomResize = false;
         } else if (event.getX() < BORDER || event.getX() > scene.getWidth() - BORDER) {
-            scene.setCursor(Cursor.E_RESIZE);
-            isResizeH = true;
-            isResizeV = false;
-            isMoveH = (event.getX() < BORDER);
-            isMoveV = false;
+            cursor = Cursor.E_RESIZE;
+            isLeftResize = true;
+            isTopResize = false;
+            isRightResize = (event.getX() < BORDER);
+            isBottomResize = false;
         } else if (event.getY() < BORDER || event.getY() > scene.getHeight() - BORDER) {
-            scene.setCursor(Cursor.N_RESIZE);
-            isResizeH = false;
-            isResizeV = true;
-            isMoveH = false;
-            isMoveV = (event.getY() < BORDER);
+            cursor = Cursor.N_RESIZE;
+            isLeftResize = false;
+            isTopResize = true;
+            isRightResize = false;
+            isBottomResize = (event.getY() < BORDER);
         } else {
-            scene.setCursor(Cursor.DEFAULT);
-            isResizeH = false;
-            isResizeV = false;
-            isMoveH = false;
-            isMoveV = false;
+            cursor = Cursor.DEFAULT;
+            isLeftResize = false;
+            isTopResize = false;
+            isRightResize = false;
+            isBottomResize = false;
         }
+
+        scene.setCursor(cursor);
     }
 
     /**
      * Change width of window
      *
-     * @param event     mouse event
+     * @param event mouse event
      */
     private void changeWidth(MouseEvent event) {
-        double deltaX;
+        double deltaX = stage.getX() - event.getScreenX();
+        double width = stage.getWidth();
 
-        if (stage.getWidth() <= MIN_WIDTH) {
-            if (isMoveH) {
-                deltaX = stage.getX() - event.getScreenX();
+        if (width <= MIN_WIDTH) {
+            if (isRightResize) {
                 if (event.getX() < 0) {
-                    stage.setWidth(deltaX + stage.getWidth());
+                    stage.setWidth(deltaX + width);
                     stage.setX(event.getScreenX());
                 }
             } else {
-                if (event.getX() + dx - stage.getWidth() > 0) {
+                if (event.getX() + dx - width > 0) {
                     stage.setWidth(event.getX() + dx);
                 }
             }
-        } else if (stage.getWidth() > MIN_WIDTH) {
-            if (isMoveH) {
-                deltaX = stage.getX() - event.getScreenX();
-                stage.setWidth(deltaX + stage.getWidth());
+        } else if (width > MIN_WIDTH) {
+            if (isRightResize) {
+                stage.setWidth(deltaX + width);
                 stage.setX(event.getScreenX());
             } else {
                 stage.setWidth(event.getX() + dx);
@@ -174,27 +177,27 @@ public class ResizeListener implements EventHandler<MouseEvent> {
 
     /**
      * Change height of window
-     * @param event     mouse event
+     *
+     * @param event mouse event
      */
     private void changeHeight(MouseEvent event) {
-        double deltaY;
+        double deltaY = stage.getY() - event.getScreenY();
+        double height = stage.getHeight();
 
-        if (stage.getHeight() <= MIN_HEIGHT) {
-            if (isMoveV) {
-                deltaY = stage.getY() - event.getScreenY();
+        if (height <= MIN_HEIGHT) {
+            if (isBottomResize) {
                 if (event.getY() < 0) {
-                    stage.setHeight(deltaY + stage.getHeight());
+                    stage.setHeight(deltaY + height);
                     stage.setY(event.getScreenY());
                 }
             } else {
-                if (event.getY() + dy - stage.getHeight() > 0) {
+                if (event.getY() + dy - height > 0) {
                     stage.setHeight(event.getY() + dy);
                 }
             }
-        } else if (stage.getHeight() > MIN_HEIGHT) {
-            if (isMoveV) {
-                deltaY = stage.getY() - event.getScreenY();
-                stage.setHeight(deltaY + stage.getHeight());
+        } else if (height > MIN_HEIGHT) {
+            if (isBottomResize) {
+                stage.setHeight(deltaY + height);
                 stage.setY(event.getScreenY());
             } else {
                 stage.setHeight(event.getY() + dy);

@@ -1,6 +1,7 @@
 package com.implemica.calculator.view.listener;
 
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -32,12 +33,16 @@ public class MoveWindowListener implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        if (MouseEvent.MOUSE_PRESSED.equals(event.getEventType())) {
-            xPos = stage.getX() - event.getScreenX();
-            yPos = stage.getY() - event.getScreenY();
-        } else if (MouseEvent.MOUSE_DRAGGED.equals(event.getEventType())) {
-            stage.setX(event.getScreenX() + xPos);
-            stage.setY(event.getScreenY() + yPos);
+        double screenX = event.getScreenX();
+        double screenY = event.getScreenY();
+        EventType type = event.getEventType();
+
+        if (type.equals(MouseEvent.MOUSE_PRESSED)) {
+            xPos = stage.getX() - screenX;
+            yPos = stage.getY() - screenY;
+        } else if (type.equals(MouseEvent.MOUSE_DRAGGED)) {
+            stage.setX(screenX + xPos);
+            stage.setY(screenY + yPos);
         }
     }
 }

@@ -59,21 +59,24 @@ public class NumericResizeListener implements InvalidationListener {
     public void invalidated(Observable observable) {
         Label field = (Label) scene.lookup(FIELD_SELECTOR);
         int length = field.getText().length();
+        int font;
 
         if (length < BIG_FONT_COUNT) {
-            field.setStyle(getFontString(FONT_BIG));
+            font = FONT_BIG;
         } else if (length < MEDIUM_FONT_COUNT) {
-            field.setStyle(getFontString(FONT_MEDIUM));
+            font = FONT_MEDIUM;
         } else {
-            field.setStyle(getFontString(FONT_SMALL));
+            font = FONT_SMALL;
         }
+
+        field.setStyle(getFontString(font));
     }
 
     /**
      * Create style string with given font size
      *
-     * @param size  font size
-     * @return      style with new font size
+     * @param size font size
+     * @return style with new font size
      */
     private String getFontString(int size) {
         return "-fx-font-size: " + size + "px;";
