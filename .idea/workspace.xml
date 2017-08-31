@@ -7,31 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4edf667c-e4c2-4da8-b930-c5cd7bca4260" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/css/root.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/fxml/root.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/about.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/history-clock-button_318-76874.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/history.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/history_.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/images/menu.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/implemica/calculator/controller/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/calculator.iml" afterPath="$PROJECT_DIR$/calculator.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/util/HistoryFormatter.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/util/HistoryFormatter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/util/NumericFormatter.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/controller/util/NumericFormatter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Demo.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/Demo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/util/CalculationModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/util/CalculationModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/util/MemoryModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/model/util/MemoryModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/enums/CalculatorButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ButtonResizeListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ExpandListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ExpandListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/HideListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/HideListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/MoveWindowListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/MoveWindowListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/NumericResizeListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ResizeListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/calculator/view/listener/ResizeListener.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -1190,7 +1167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504109024486</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="view refactoring">
+      <created>1504190258031</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1504190258031</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1272,7 +1256,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix history field" />
     <MESSAGE value="fix controller" />
     <MESSAGE value="test view fix" />
     <MESSAGE value="fix controller test" />
@@ -1297,7 +1280,8 @@
     <MESSAGE value="add new model class" />
     <MESSAGE value="fix demo" />
     <MESSAGE value="fix model" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix model" />
+    <MESSAGE value="view refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="view refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
