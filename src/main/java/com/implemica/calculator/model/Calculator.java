@@ -56,8 +56,7 @@ public class Calculator {
     }
 
     /**
-     * Calculate current expression using current left operand and operator.
-     * Right operand used if current operation was not already done
+     * Calculate current expression using given value as left operand, right operand and operator.
      *
      * @param value     given value
      * @return          result of calculation
@@ -80,19 +79,6 @@ public class Calculator {
      */
     public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         return calculation.calculateIntermediateResult(value);
-    }
-
-    /**
-     * Calculate current expression using given value as left operand, right operand and operator.
-     *
-     * @param value     given value
-     * @return          result of calculation
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
-     */
-    public BigDecimal calculateEqualsResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        return calculation.calculateEqualsResult(value);
     }
 
     /**

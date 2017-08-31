@@ -51,7 +51,8 @@ public class CalculationModel {
      * @param operator  given operator
      */
     public void changeOperator(BigDecimal value, Operator operator) {
-        left = value;
+        if (left.equals(BigDecimal.ZERO))
+            left = value;
         this.operator = operator;
     }
 
@@ -72,8 +73,7 @@ public class CalculationModel {
     }
 
     /**
-     * Calculate current expression using current left operand and operator.
-     * Right operand used if current operation was not already done
+     * Calculate current expression using given value as left operand, right operand and operator.
      *
      * @param value     given value
      * @return          result of calculation
@@ -82,8 +82,7 @@ public class CalculationModel {
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
     public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-            right = value;
-
+        left = value;
         left = calculate();
         return left;
     }
@@ -98,109 +97,9 @@ public class CalculationModel {
      * @throws ZeroDivideException          throws when not zero number divided by zero
      */
     public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-
         right = value;
         left = calculate();
         return left;
-    }
-
-    /**
-     * Calculate current expression using given value as left operand, right operand and operator.
-     *
-     * @param value     given value
-     * @return          result of calculation
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
-     */
-    public BigDecimal calculateEqualsResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
-        if (left.equals(BigDecimal.ZERO)) {
-            left = value;
-        }
-
-        left = calculate();
-        return left;
-    }
-
-    /**
-     * Calculate expression using left and right operands and operator from current statement of CalculationModel object.
-     *
-     * @return          result of calculation
-     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
-     */
-    private BigDecimal calculate() throws OverflowException, ZeroDivideException, ZeroByZeroDivideException {
-        if (operator == Operator.EMPTY) {
-            return BigDecimal.ZERO;
-        }
-
-        BigDecimal res = BigDecimal.ZERO;
-
-        if (operator == Operator.ADD) {
-            res = add();
-        } else if (operator == Operator.SUBTRACT) {
-            res = subtract();
-        } else if (operator == Operator.MULTIPLY) {
-            res = multiply();
-        } else if (operator == Operator.DIVIDE) {
-            res = divide();
-        }
-
-        if (Math.abs(res.scale() - res.precision()) >= MAX_SCALE) {
-            throw new OverflowException("Scale of result is bigger than max scale value");
-        }
-
-        return res;
-    }
-
-    /**
-     * Add left operand to right
-     *
-     * @return      result of add
-     */
-    private BigDecimal add() {
-
-        return left.add(right).stripTrailingZeros();
-    }
-
-    /**
-     * Subtract left operand from right
-     *
-     * @return      result of subtract
-     */
-    private BigDecimal subtract() {
-
-        return left.subtract(right).stripTrailingZeros();
-    }
-
-    /**
-     * Multiply left and right operands
-     *
-     * @return      result of multiply
-     */
-    private BigDecimal multiply() {
-
-        return left.multiply(right).stripTrailingZeros();
-    }
-
-    /**
-     * Divide left operand to right
-     *
-     * @return      result of divide
-     * @throws ZeroByZeroDivideException    throws when zero divided by zero
-     * @throws ZeroDivideException          throws when not zero number divided by zero
-     */
-    private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
-        if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
-            throw new ZeroByZeroDivideException("Quotient of two zeros are not defined");
-        }
-
-        if (right.equals(BigDecimal.ZERO)) {
-            throw new ZeroDivideException("Divide by zero in expression: " + left + " / " + right);
-        }
-
-        return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
     /**
@@ -290,6 +189,87 @@ public class CalculationModel {
      */
     public void clearEntry() {
         right = BigDecimal.ZERO;
+    }
+
+    /**
+     * Calculate expression using left and right operands and operator from current statement of CalculationModel object.
+     *
+     * @return          result of calculation
+     * @throws OverflowException            throws when scale of result is bigger than MAX_SCALE
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
+    private BigDecimal calculate() throws OverflowException, ZeroDivideException, ZeroByZeroDivideException {
+        if (operator == Operator.EMPTY) {
+            return BigDecimal.ZERO;
+        }
+
+        BigDecimal res = BigDecimal.ZERO;
+
+        if (operator == Operator.ADD) {
+            res = add();
+        } else if (operator == Operator.SUBTRACT) {
+            res = subtract();
+        } else if (operator == Operator.MULTIPLY) {
+            res = multiply();
+        } else if (operator == Operator.DIVIDE) {
+            res = divide();
+        }
+
+        if (Math.abs(res.scale() - res.precision()) >= MAX_SCALE) {
+            throw new OverflowException("Scale of result is bigger than max scale value");
+        }
+
+        return res;
+    }
+
+    /**
+     * Add left operand to right
+     *
+     * @return      result of add
+     */
+    private BigDecimal add() {
+
+        return left.add(right).stripTrailingZeros();
+    }
+
+    /**
+     * Subtract left operand from right
+     *
+     * @return      result of subtract
+     */
+    private BigDecimal subtract() {
+
+        return left.subtract(right).stripTrailingZeros();
+    }
+
+    /**
+     * Multiply left and right operands
+     *
+     * @return      result of multiply
+     */
+    private BigDecimal multiply() {
+
+        return left.multiply(right).stripTrailingZeros();
+    }
+
+    /**
+     * Divide left operand to right
+     *
+     * @return      result of divide
+     * @throws ZeroByZeroDivideException    throws when zero divided by zero
+     * @throws ZeroDivideException          throws when not zero number divided by zero
+     */
+    private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
+        if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
+            throw new ZeroByZeroDivideException("Quotient of two zeros are not defined");
+        }
+
+        if (right.equals(BigDecimal.ZERO)) {
+            throw new ZeroDivideException("Divide by zero in expression: " + left + " / " + right);
+        }
+
+        return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
     /**

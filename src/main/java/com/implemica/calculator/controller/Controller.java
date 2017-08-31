@@ -286,9 +286,9 @@ public class Controller implements Initializable {
 
         try {
             if (isCalculateResult) {
-                setNumericFieldNumber(calculator.calculateEqualsResult(getNumericFieldNumber()));
-            } else {
                 setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
+            } else {
+                setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
                 history.clearHistory();
                 setHistoryFieldText(DEFAULT_HISTORY_FIELD_VALUE);
             }
@@ -641,33 +641,27 @@ public class Controller implements Initializable {
     private void processBinaryOperator(Operator operator) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
         String value = getNumericFieldText().replace(" ", "");
 
+
         if (isSequence) {
             if (isPreviousUnary) {
                 history.appendHistory(operator.getText());
-                setHistoryFieldText(history.getHistory());
                 setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
-                calculator.changeOperator(getNumericFieldNumber(), operator);
             } else if (isEditable) {
                 history.replaceLastSign(operator);
-                setHistoryFieldText(history.getHistory());
-                calculator.changeOperator(getNumericFieldNumber(), operator);
             } else {
                 history.appendHistory(value + SEPARATOR + operator.getText());
-                setHistoryFieldText(history.getHistory());
                 setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
-                calculator.changeOperator(getNumericFieldNumber(), operator);
             }
         } else {
-            calculator.changeOperator(getNumericFieldNumber(), operator);
             if (isPreviousUnary) {
                 history.appendHistory(operator.getText());
-                setHistoryFieldText(history.getHistory());
             } else {
                 history.setHistory(value + SEPARATOR + operator.getText());
-                setHistoryFieldText(value + SEPARATOR + operator.getText());
             }
         }
 
+        calculator.changeOperator(getNumericFieldNumber(), operator);
+        setHistoryFieldText(history.getHistory());
         isSequence = true;
         isEditable = true;
         isCalculateResult = false;
@@ -724,16 +718,15 @@ public class Controller implements Initializable {
         if (value.length() > getLabelSize()) {
             left.setVisible(true);
             right.setVisible(false);
-            history.setHistory(value);
-            historyPos = history.getHistory().length();
             historyField.setText(history.getHistory().substring(value.length() - getLabelSize() + 1));
         } else {
             left.setVisible(false);
             right.setVisible(false);
             historyField.setText(value);
-            history.setHistory(value);
-            historyPos = history.getHistory().length();
         }
+
+        history.setHistory(value);
+        historyPos = history.getHistory().length();
     }
 
     /**
@@ -742,7 +735,6 @@ public class Controller implements Initializable {
      * @param value     given history value
      */
     private void appendNumericFieldText(String value) {
-
         setNumericFieldText(getNumericFieldText() + value);
     }
 

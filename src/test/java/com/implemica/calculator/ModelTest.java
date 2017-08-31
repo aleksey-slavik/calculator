@@ -14,11 +14,11 @@ import java.math.BigDecimal;
 import static org.junit.Assert.*;
 
 /**
- * CalculationModel test for calculator
+ * Model test for calculator
  *
  * @author Slavik Aleksey V.
  */
-public class CalculationModelTest {
+public class ModelTest {
 
     @Test
     public void addTest() throws Exception {
