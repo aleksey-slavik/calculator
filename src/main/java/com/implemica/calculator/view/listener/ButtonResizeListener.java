@@ -135,14 +135,23 @@ public class ButtonResizeListener implements InvalidationListener {
     @Override
     public void invalidated(Observable observable) {
         double height = scene.getHeight();
+        int digit, binary, unary;
 
         if (height > BIG_HEIGHT) {
-            resize(DIGIT_BIG_FONT_SIZE, BINARY_BIG_FONT_SIZE, UNARY_BIG_FONT_SIZE);
+            digit = DIGIT_BIG_FONT_SIZE;
+            binary = BINARY_BIG_FONT_SIZE;
+            unary = UNARY_BIG_FONT_SIZE;
         } else if (height > MEDIUM_HEIGHT) {
-            resize(DIGIT_MEDIUM_FONT_SIZE, BINARY_MEDIUM_FONT_SIZE, UNARY_MEDIUM_FONT_SIZE);
+            digit = DIGIT_MEDIUM_FONT_SIZE;
+            binary = BINARY_MEDIUM_FONT_SIZE;
+            unary = UNARY_MEDIUM_FONT_SIZE;
         } else {
-            resize(DIGIT_SMALL_FONT_SIZE, BINARY_SMALL_FONT_SIZE, UNARY_SMALL_FONT_SIZE);
+            digit = DIGIT_SMALL_FONT_SIZE;
+            binary = BINARY_SMALL_FONT_SIZE;
+            unary = UNARY_SMALL_FONT_SIZE;
         }
+
+        resize(digit, binary, unary);
     }
 
     /**

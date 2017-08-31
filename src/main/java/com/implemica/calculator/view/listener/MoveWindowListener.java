@@ -33,16 +33,14 @@ public class MoveWindowListener implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        double screenX = event.getScreenX();
-        double screenY = event.getScreenY();
         EventType type = event.getEventType();
 
         if (type.equals(MouseEvent.MOUSE_PRESSED)) {
-            xPos = stage.getX() - screenX;
-            yPos = stage.getY() - screenY;
+            xPos = stage.getX() - event.getScreenX();
+            yPos = stage.getY() - event.getScreenY();
         } else if (type.equals(MouseEvent.MOUSE_DRAGGED)) {
-            stage.setX(screenX + xPos);
-            stage.setY(screenY + yPos);
+            stage.setX(event.getScreenX() + xPos);
+            stage.setY(event.getScreenY() + yPos);
         }
     }
 }

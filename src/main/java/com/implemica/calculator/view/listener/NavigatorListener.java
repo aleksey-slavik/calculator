@@ -41,13 +41,13 @@ public class NavigatorListener implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         AnchorPane navigator = (AnchorPane) scene.lookup(MENU_PANE_SELECTOR);
-        TranslateTransition openMenu = new TranslateTransition(new Duration(MOVE_DURATION), navigator);
-        openMenu.setToX(0);
-        TranslateTransition closeMenu = new TranslateTransition(new Duration(MOVE_DURATION), navigator);
 
         if (navigator.getTranslateX() != 0) {
+            TranslateTransition openMenu = new TranslateTransition(new Duration(MOVE_DURATION), navigator);
+            openMenu.setToX(0);
             openMenu.play();
         } else {
+            TranslateTransition closeMenu = new TranslateTransition(new Duration(MOVE_DURATION), navigator);
             closeMenu.setToX(HIDE_TRANSLATE);
             closeMenu.play();
         }
