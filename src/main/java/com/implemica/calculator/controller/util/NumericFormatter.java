@@ -49,6 +49,11 @@ public class NumericFormatter {
     private static final BigDecimal MIN_PLAIN_VALUE = new BigDecimal("0.0000000000000001");
 
     /**
+     * Input formatter
+     */
+    private static final DecimalFormat f = new DecimalFormat();
+
+    /**
      * Decimal separator for {@link BigDecimal}
      */
     private static final String DOT = ".";
@@ -228,5 +233,73 @@ public class NumericFormatter {
         }
 
         return MAX_PLAIN_SCALE - number.indexOf(".");
+    }
+
+    /**
+     * Format display output
+     *
+     * @param input value to display
+     * @param displayScale input scale for display
+     * @return formatted string
+     */
+    public static String display(BigDecimal input, int displayScale) {
+        input = input.stripTrailingZeros();
+        int inputScale = input.scale();
+        int inputPrecision = input.precision();
+
+        StringBuilder pattern;
+
+        if (input.abs().compareTo(MIN_PLAIN_VALUE) == -1 && inputScale > displayScale) {
+            pattern = new StringBuilder("0.###############E0");
+        } else
+        //if number have more then scale count digits before point then show in engi mode
+        {
+            int digitsIntegerPart = inputPrecision - inputScale;
+
+            if (digitsIntegerPart > displayScale) {
+                pattern = new StringBuilder("0.");
+
+                if (inputScale > 0) {
+                    for (int i = 0; i < inputScale; i++) {
+                        pattern.append("0");
+                    }
+                } else {
+                    pattern.append("###############");
+                }
+
+                pattern.append("E0");
+            } else {
+                //show not more then scale count digits on display
+                pattern = new StringBuilder("###,###.#");
+                for (int i = 0; i < displayScale - digitsIntegerPart; i++) {
+                    pattern.append("#");
+                }
+
+                input = input.setScale(displayScale, BigDecimal.ROUND_HALF_UP);
+            }
+        }
+        f.applyPattern(pattern.toString());
+        return f.format(input);
+    }
+
+    /**
+     * Formats input number
+     *
+     * @return formatted input number to display
+     */
+    public static String formatInput() {
+        int scale = InputNumber.getInputScale();
+        StringBuilder pattern = new StringBuilder("###,##0.");
+
+        if (scale != 0) {
+            for (int i = 0; i < scale; i++) {
+                pattern.append("0");
+            }
+        } else {
+            pattern = new StringBuilder("###,###");
+        }
+
+        f.applyPattern(pattern.toString());
+        return f.format(InputNumber.getInput());
     }
 }
