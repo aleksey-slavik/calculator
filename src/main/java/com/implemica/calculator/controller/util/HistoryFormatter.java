@@ -1,6 +1,8 @@
 package com.implemica.calculator.controller.util;
 
-import com.implemica.calculator.model.enums.BinaryOperator;
+import com.implemica.calculator.model.Calculator;
+import com.implemica.calculator.model.enums.UnaryOperator;
+import com.implemica.calculator.model.util.Operation;
 
 /**
  * HistoryFormatter model.
@@ -31,104 +33,45 @@ public class HistoryFormatter {
     private static final String RIGHT_BRACKET = ")";
 
     /**
-     * HistoryFormatter value
-     */
-    private String history = DEFAULT_VALUE;
-
-    /**
-     * Get current history value
-     *
-     * @return history value
-     */
-    public String getHistory() {
-        return history;
-    }
-
-    /**
-     * Setup history value
-     *
-     * @param text new history value
-     */
-    public void setHistory(String text) {
-        history = text;
-    }
-
-    /**
-     * Append value to current history
-     *
-     * @param text append value
-     */
-    public void appendHistory(String text) {
-        history += SPACE + text;
-    }
-
-    /**
      * Surround given value using given function
      *
      * @param operator given function
      * @param value    given value
      * @return surrounded value using given function
      */
-    public String surround(BinaryOperator operator, String value) {
+    private static String surround(UnaryOperator operator, String value) {
         return operator.getText() + LEFT_BRACKET + value + RIGHT_BRACKET;
     }
 
     /**
-     * Surround last element of history using given function
+     * Return string representation of current history.
+     * History is contained in given {@link Calculator} object
      *
-     * @param operator given function
+     * @param calculator given statement of calculator
+     * @return string representation of history
      */
-    public void surround(BinaryOperator operator) {
-        replace(surround(operator, getLastElement()));
-    }
+    public static String parseHistory(Calculator calculator) {
+        StringBuilder res = new StringBuilder(DEFAULT_VALUE);
 
-    /**
-     * Return last element of history
-     *
-     * @return last element of history
-     */
-    private String getLastElement() {
-        int start = history.lastIndexOf(SPACE) + 1;
-        return history.substring(start);
-    }
-
-    /**
-     * Replacement of the last element of history using given expression
-     *
-     * @param text expression
-     */
-    public void replace(String text) {
-        int lastSpace = history.lastIndexOf(SPACE) + 1;
-
-        if (lastSpace == -1) {
-            lastSpace = 0;
+        for (Operation operation : calculator.getHistory()) {
+            StringBuilder tmp = new StringBuilder(DEFAULT_VALUE);
+            //tmp.append(NumericFormatter.display(operation.getOperand()).replace(" ",""));
+            tmp.append(operation.getOperand());
+            for (UnaryOperator unary : operation.getUnaryOperators()) {
+                tmp.replace(0, tmp.length(), surround(unary, tmp.toString()));
+            }
+            tmp.append(SPACE);
+            if (operation.getBinaryOperator() != null) {
+                tmp.append(operation.getBinaryOperator().getText());
+                tmp.append(SPACE);
+            }
+            res.append(tmp);
         }
 
-        history = history.substring(0, lastSpace) + text;
-    }
+        if (res.toString().endsWith(SPACE)) {
+            return res.toString().substring(0, res.toString().length() - 1);
+        }
 
-    /**
-     * Replacement of the last sign history
-     *
-     * @param operator new sign
-     */
-    public void replaceLastSign(BinaryOperator operator) {
-        replace(operator.getText());
-    }
-
-    /**
-     * Set history to default
-     */
-    public void clearHistory() {
-        setHistory(DEFAULT_VALUE);
-    }
-
-    /**
-     * Return true if current history value is default
-     *
-     * @return true if history is default, false otherwise
-     */
-    public boolean isEmpty() {
-        return history.equals(DEFAULT_VALUE);
+        return res.toString();
     }
 }
