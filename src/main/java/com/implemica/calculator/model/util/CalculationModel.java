@@ -1,5 +1,6 @@
 package com.implemica.calculator.model.util;
 
+import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.exception.*;
 
 import java.math.BigDecimal;
@@ -41,7 +42,7 @@ public class CalculationModel {
     /**
      * Operation of equation
      */
-    private Operator operator = Operator.EMPTY;
+    private BinaryOperator operator;
 
     /**
      * Change current operator and save given value as the left operand.
@@ -50,7 +51,7 @@ public class CalculationModel {
      * @param value    given value
      * @param operator given operator
      */
-    public void changeOperator(BigDecimal value, Operator operator) {
+    public void changeOperator(BigDecimal value, BinaryOperator operator) {
         left = value;
         this.operator = operator;
     }
@@ -60,7 +61,7 @@ public class CalculationModel {
      *
      * @return current operator
      */
-    public Operator getOperator() {
+    public BinaryOperator getOperator() {
         return operator;
     }
 
@@ -68,7 +69,7 @@ public class CalculationModel {
      * Change operator to default
      */
     public void resetOperator() {
-        operator = Operator.EMPTY;
+        operator = null;
     }
 
     /**
@@ -197,19 +198,19 @@ public class CalculationModel {
      * @throws ZeroDivideException       throws when not zero number divided by zero
      */
     private BigDecimal calculate() throws OverflowException, ZeroDivideException, ZeroByZeroDivideException {
-        if (operator == Operator.EMPTY) {
+        if (operator == null) {
             return BigDecimal.ZERO;
         }
 
         BigDecimal res = BigDecimal.ZERO;
 
-        if (operator == Operator.ADD) {
+        if (operator == BinaryOperator.ADD) {
             res = add();
-        } else if (operator == Operator.SUBTRACT) {
+        } else if (operator == BinaryOperator.SUBTRACT) {
             res = subtract();
-        } else if (operator == Operator.MULTIPLY) {
+        } else if (operator == BinaryOperator.MULTIPLY) {
             res = multiply();
-        } else if (operator == Operator.DIVIDE) {
+        } else if (operator == BinaryOperator.DIVIDE) {
             res = divide();
         }
 

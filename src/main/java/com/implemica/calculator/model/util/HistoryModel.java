@@ -1,5 +1,8 @@
 package com.implemica.calculator.model.util;
 
+import com.implemica.calculator.model.enums.BinaryOperator;
+import com.implemica.calculator.model.enums.UnaryOperator;
+
 import java.util.ArrayList;
 
 /**
@@ -9,34 +12,34 @@ import java.util.ArrayList;
  */
 public class HistoryModel {
 
-    private static ArrayList<Operator> history = new ArrayList<>();
+    private ArrayList<Operation> history = new ArrayList<>();
 
-    public static void append(Operator operator) {
-        history.add(operator);
+    public void append(Operation operation) {
+        history.add(operation);
     }
 
-    public static void replaceLast(Operator operator) {
-        history.remove(history.size() - 1);
-        history.add(operator);
+    public void changeLast(Operation operation) {
+        getLastOperation();
+        history.add(operation);
     }
 
-    public static void clear() {
+    public void changeBinary(BinaryOperator operator) {
+        getLastOperation().setBinaryOperator(operator);
+    }
+
+    public void appendUnary(UnaryOperator operator) {
+        getLastOperation().addUnaryOperator(operator);
+    }
+
+    public void clear() {
         history.clear();
     }
 
-    public static void main(String[] args) {
-        append(Operator.DIVIDE);
-        append(Operator.MULTIPLY);
-        for (Operator operator: history) {
-            System.out.println(operator.getText());
-        }
-        replaceLast(Operator.ADD);
-        for (Operator operator: history) {
-            System.out.println(operator.getText());
-        }
-        clear();
-        for (Operator operator: history) {
-            System.out.println(operator.getText());
-        }
+    public ArrayList<Operation> getHistory() {
+        return history;
+    }
+
+    private Operation getLastOperation() {
+        return history.get(history.size() - 1);
     }
 }

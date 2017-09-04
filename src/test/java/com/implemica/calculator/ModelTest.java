@@ -2,7 +2,7 @@ package com.implemica.calculator;
 
 import com.implemica.calculator.model.util.CalculationModel;
 import com.implemica.calculator.model.util.MemoryModel;
-import com.implemica.calculator.model.util.Operator;
+import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
@@ -22,87 +22,87 @@ public class ModelTest {
 
     @Test
     public void addTest() throws Exception {
-        binaryTest("1", Operator.ADD, "1", "2");
-        binaryTest("28", Operator.ADD, "-82", "-54");
-        binaryTest("-739", Operator.ADD, "-55", "-794");
-        binaryTest("0", Operator.ADD, "23", "23");
-        binaryTest("-4", Operator.ADD, "0", "-4");
-        binaryTest("-89", Operator.ADD, "89", "0");
-        binaryTest("1.39", Operator.ADD, "0.98766", "2.37766");
-        binaryTest("-0.1", Operator.ADD, "5987.999", "5987.899");
-        binaryTest("-2133.9", Operator.ADD, "-8799.38833", "-10933.28833");
-        binaryTest("-9999999999999999", Operator.ADD, "-1", "-10000000000000000");
-        binaryTest("9999999999999999", Operator.ADD, "1", "10000000000000000");
+        binaryTest("1", BinaryOperator.ADD, "1", "2");
+        binaryTest("28", BinaryOperator.ADD, "-82", "-54");
+        binaryTest("-739", BinaryOperator.ADD, "-55", "-794");
+        binaryTest("0", BinaryOperator.ADD, "23", "23");
+        binaryTest("-4", BinaryOperator.ADD, "0", "-4");
+        binaryTest("-89", BinaryOperator.ADD, "89", "0");
+        binaryTest("1.39", BinaryOperator.ADD, "0.98766", "2.37766");
+        binaryTest("-0.1", BinaryOperator.ADD, "5987.999", "5987.899");
+        binaryTest("-2133.9", BinaryOperator.ADD, "-8799.38833", "-10933.28833");
+        binaryTest("-9999999999999999", BinaryOperator.ADD, "-1", "-10000000000000000");
+        binaryTest("9999999999999999", BinaryOperator.ADD, "1", "10000000000000000");
     }
 
     @Test
     public void subtractTest() throws Exception {
-        binaryTest("1", Operator.SUBTRACT, "1", "0");
-        binaryTest("1", Operator.SUBTRACT, "-1", "2");
-        binaryTest("-1", Operator.SUBTRACT, "1", "-2");
-        binaryTest("23", Operator.SUBTRACT, "23", "0");
-        binaryTest("1961", Operator.SUBTRACT, "-49", "2010");
-        binaryTest("0.1", Operator.SUBTRACT, "0.1", "0");
-        binaryTest("0.0000000000000001", Operator.SUBTRACT, "0.0000000000000001", "0");
-        binaryTest("0.0000000000000001", Operator.SUBTRACT, "-0.0000000000000001", "0.0000000000000002");
-        binaryTest("-0.0000000000000001", Operator.SUBTRACT, "0.0000000000000001", "-0.0000000000000002");
-        binaryTest("-0.0000000000000001", Operator.SUBTRACT, "-0.0000000000000001", "0");
-        binaryTest("9999999999999999", Operator.SUBTRACT, "9999999999999999", "0");
+        binaryTest("1", BinaryOperator.SUBTRACT, "1", "0");
+        binaryTest("1", BinaryOperator.SUBTRACT, "-1", "2");
+        binaryTest("-1", BinaryOperator.SUBTRACT, "1", "-2");
+        binaryTest("23", BinaryOperator.SUBTRACT, "23", "0");
+        binaryTest("1961", BinaryOperator.SUBTRACT, "-49", "2010");
+        binaryTest("0.1", BinaryOperator.SUBTRACT, "0.1", "0");
+        binaryTest("0.0000000000000001", BinaryOperator.SUBTRACT, "0.0000000000000001", "0");
+        binaryTest("0.0000000000000001", BinaryOperator.SUBTRACT, "-0.0000000000000001", "0.0000000000000002");
+        binaryTest("-0.0000000000000001", BinaryOperator.SUBTRACT, "0.0000000000000001", "-0.0000000000000002");
+        binaryTest("-0.0000000000000001", BinaryOperator.SUBTRACT, "-0.0000000000000001", "0");
+        binaryTest("9999999999999999", BinaryOperator.SUBTRACT, "9999999999999999", "0");
     }
 
     @Test
     public void divideTest() throws Exception {
-        binaryTest("1", Operator.DIVIDE, "1", "1");
-        binaryTest("0", Operator.DIVIDE, "1", "0");
-        binaryTest("10", Operator.DIVIDE, "5", "2");
-        binaryTest("81", Operator.DIVIDE, "-9", "-9");
-        binaryTest("1", Operator.DIVIDE, "100", "0.01");
-        binaryTest("10000", Operator.DIVIDE, "0.0001", "100000000");
-        binaryTest("0.0003", Operator.DIVIDE, "0.0003", "1");
-        binaryTest("9999999999999999", Operator.DIVIDE, "9", "1111111111111111");
-        binaryTest("9999999999999999", Operator.DIVIDE, "-0.1", "-99999999999999990");
-        binaryTest("0.0000000000000001", Operator.DIVIDE, "-10", "-0.00000000000000001");
-        binaryTest("0.0000000000000001", Operator.DIVIDE, "0.0000000000000001", "1");
+        binaryTest("1", BinaryOperator.DIVIDE, "1", "1");
+        binaryTest("0", BinaryOperator.DIVIDE, "1", "0");
+        binaryTest("10", BinaryOperator.DIVIDE, "5", "2");
+        binaryTest("81", BinaryOperator.DIVIDE, "-9", "-9");
+        binaryTest("1", BinaryOperator.DIVIDE, "100", "0.01");
+        binaryTest("10000", BinaryOperator.DIVIDE, "0.0001", "100000000");
+        binaryTest("0.0003", BinaryOperator.DIVIDE, "0.0003", "1");
+        binaryTest("9999999999999999", BinaryOperator.DIVIDE, "9", "1111111111111111");
+        binaryTest("9999999999999999", BinaryOperator.DIVIDE, "-0.1", "-99999999999999990");
+        binaryTest("0.0000000000000001", BinaryOperator.DIVIDE, "-10", "-0.00000000000000001");
+        binaryTest("0.0000000000000001", BinaryOperator.DIVIDE, "0.0000000000000001", "1");
     }
 
     @Test
     public void multiplyTest() throws Exception {
-        binaryTest("1", Operator.MULTIPLY, "1", "1");
-        binaryTest("1", Operator.MULTIPLY, "0", "0");
-        binaryTest("0", Operator.MULTIPLY, "-1", "0");
-        binaryTest("0", Operator.MULTIPLY, "0", "0");
-        binaryTest("0.0001", Operator.MULTIPLY, "10000", "1");
-        binaryTest("12345679", Operator.MULTIPLY, "-9", "-111111111");
-        binaryTest("20", Operator.MULTIPLY, "0.5", "10");
-        binaryTest("9999999999999999", Operator.MULTIPLY, "1", "9999999999999999");
-        binaryTest("9999999999999999", Operator.MULTIPLY, "-10", "-99999999999999990");
-        binaryTest("0.0000000000000001", Operator.MULTIPLY, "-0.1", "-0.00000000000000001");
-        binaryTest("0.0000000000000001", Operator.MULTIPLY, "1", "0.0000000000000001");
+        binaryTest("1", BinaryOperator.MULTIPLY, "1", "1");
+        binaryTest("1", BinaryOperator.MULTIPLY, "0", "0");
+        binaryTest("0", BinaryOperator.MULTIPLY, "-1", "0");
+        binaryTest("0", BinaryOperator.MULTIPLY, "0", "0");
+        binaryTest("0.0001", BinaryOperator.MULTIPLY, "10000", "1");
+        binaryTest("12345679", BinaryOperator.MULTIPLY, "-9", "-111111111");
+        binaryTest("20", BinaryOperator.MULTIPLY, "0.5", "10");
+        binaryTest("9999999999999999", BinaryOperator.MULTIPLY, "1", "9999999999999999");
+        binaryTest("9999999999999999", BinaryOperator.MULTIPLY, "-10", "-99999999999999990");
+        binaryTest("0.0000000000000001", BinaryOperator.MULTIPLY, "-0.1", "-0.00000000000000001");
+        binaryTest("0.0000000000000001", BinaryOperator.MULTIPLY, "1", "0.0000000000000001");
     }
 
     @Test
     public void binaryFail() {
-        binaryFail("9.9e+9999", Operator.ADD, "0.1e+9999");
-        binaryFail("-5.9e+9999", Operator.ADD, "-4.1e+9999");
-        binaryFail("6.9e+9999", Operator.SUBTRACT, "-3.1e+9999");
-        binaryFail("-7.9e+9999", Operator.SUBTRACT, "2.1e+9999");
-        binaryFail("5.e+9999", Operator.MULTIPLY, "2");
-        binaryFail("2.5e+9999", Operator.DIVIDE, "-0.25");
+        binaryFail("9.9e+9999", BinaryOperator.ADD, "0.1e+9999");
+        binaryFail("-5.9e+9999", BinaryOperator.ADD, "-4.1e+9999");
+        binaryFail("6.9e+9999", BinaryOperator.SUBTRACT, "-3.1e+9999");
+        binaryFail("-7.9e+9999", BinaryOperator.SUBTRACT, "2.1e+9999");
+        binaryFail("5.e+9999", BinaryOperator.MULTIPLY, "2");
+        binaryFail("2.5e+9999", BinaryOperator.DIVIDE, "-0.25");
     }
 
     @Test
     public void percentTest() {
-        percentTest("1000", Operator.ADD, "10", "100");
-        percentTest("100", Operator.ADD, "1", "1");
-        percentTest("25", Operator.MULTIPLY, "0", "0");
-        percentTest("-25", Operator.DIVIDE, "20", "-5");
-        percentTest("45", Operator.ADD, "-45", "-20.25");
-        percentTest("-1024", Operator.MULTIPLY, "-200", "2048");
-        percentTest("0", Operator.DIVIDE, "9999999999", "0");
-        percentTest("9999999999999999", Operator.SUBTRACT, "0", "0");
-        percentTest("9999999999999999", Operator.SUBTRACT, "100", "9999999999999999");
-        percentTest("1000000000000000", Operator.SUBTRACT, "0.0000000000000001", "0.001");
-        percentTest("0.0000000000000001", Operator.SUBTRACT, "1000000000000000000", "1");
+        percentTest("1000", BinaryOperator.ADD, "10", "100");
+        percentTest("100", BinaryOperator.ADD, "1", "1");
+        percentTest("25", BinaryOperator.MULTIPLY, "0", "0");
+        percentTest("-25", BinaryOperator.DIVIDE, "20", "-5");
+        percentTest("45", BinaryOperator.ADD, "-45", "-20.25");
+        percentTest("-1024", BinaryOperator.MULTIPLY, "-200", "2048");
+        percentTest("0", BinaryOperator.DIVIDE, "9999999999", "0");
+        percentTest("9999999999999999", BinaryOperator.SUBTRACT, "0", "0");
+        percentTest("9999999999999999", BinaryOperator.SUBTRACT, "100", "9999999999999999");
+        percentTest("1000000000000000", BinaryOperator.SUBTRACT, "0.0000000000000001", "0.001");
+        percentTest("0.0000000000000001", BinaryOperator.SUBTRACT, "1000000000000000000", "1");
     }
 
     @Test
@@ -283,7 +283,7 @@ public class ModelTest {
         }
     }
 
-    private void binaryTest(String left, Operator operator, String right, String expected) throws Exception {
+    private void binaryTest(String left, BinaryOperator operator, String right, String expected) throws Exception {
         CalculationModel calculationModel = new CalculationModel();
         BigDecimal leftValue = new BigDecimal(left);
         BigDecimal rightValue = new BigDecimal(right);
@@ -293,7 +293,7 @@ public class ModelTest {
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
-    private void binaryFail(String left, Operator operator, String right) {
+    private void binaryFail(String left, BinaryOperator operator, String right) {
         CalculationModel calculationModel = new CalculationModel();
         BigDecimal leftValue = new BigDecimal(left);
         BigDecimal rightValue = new BigDecimal(right);
@@ -306,7 +306,7 @@ public class ModelTest {
         }
     }
 
-    private void percentTest(String left, Operator operator, String right, String expected) {
+    private void percentTest(String left, BinaryOperator operator, String right, String expected) {
         CalculationModel calculationModel = new CalculationModel();
         BigDecimal leftValue = new BigDecimal(left);
         BigDecimal rightValue = new BigDecimal(right);

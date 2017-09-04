@@ -1,6 +1,6 @@
 package com.implemica.calculator.model;
 
-import com.implemica.calculator.model.util.Operator;
+import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
@@ -27,7 +27,7 @@ public class Demo {
         BigDecimal two = new BigDecimal(2);
 
         try {
-            calculator.changeOperator(two, Operator.ADD);
+            calculator.changeOperator(two, BinaryOperator.ADD);
             res = calculator.calculateResult(two);
         } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException e) {
             e.printStackTrace();
@@ -51,15 +51,15 @@ public class Demo {
 
         try {
             BigDecimal tmp = seven;
-            calculator.changeOperator(tmp, Operator.SUBTRACT); // 7 -
+            calculator.changeOperator(tmp, BinaryOperator.SUBTRACT); // 7 -
             tmp = calculator.calculateResult(ten); // 10 =
             calculator.memoryAdd(tmp); // M+
-            calculator.changeOperator(tmp, Operator.DIVIDE); // tmp /
+            calculator.changeOperator(tmp, BinaryOperator.DIVIDE); // tmp /
             tmp = calculator.calculateResult(three); // 3 =
             calculator.memoryAdd(tmp); // M+
             calculator.memoryAdd(tmp); // M+
             tmp = calculator.sqrt(three); // SQRT 3
-            calculator.changeOperator(tmp, Operator.ADD); // tmp +
+            calculator.changeOperator(tmp, BinaryOperator.ADD); // tmp +
             tmp = calculator.memoryRecall(); // MR
             res = calculator.calculateResult(tmp); // tmp =
         } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException | SquareRootException e) {

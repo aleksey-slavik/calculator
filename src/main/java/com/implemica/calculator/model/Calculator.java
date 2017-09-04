@@ -1,14 +1,18 @@
 package com.implemica.calculator.model;
 
+import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
 import com.implemica.calculator.model.exception.ZeroDivideException;
 import com.implemica.calculator.model.util.CalculationModel;
+import com.implemica.calculator.model.util.HistoryModel;
 import com.implemica.calculator.model.util.MemoryModel;
-import com.implemica.calculator.model.util.Operator;
+import com.implemica.calculator.model.enums.BinaryOperator;
+import com.implemica.calculator.model.util.Operation;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 /**
  * Calculator model.
@@ -29,13 +33,18 @@ public class Calculator {
     private MemoryModel memory = new MemoryModel();
 
     /**
+     * {@link HistoryModel} object
+     */
+    private HistoryModel history = new HistoryModel();
+
+    /**
      * Change current operator and save given value as the left operand.
      * Usually called when binary operator are pressed.
      *
      * @param value     given value
      * @param operator  given operator
      */
-    public void changeOperator(BigDecimal value, Operator operator) {
+    public void changeOperator(BigDecimal value, BinaryOperator operator) {
         calculation.changeOperator(value, operator);
     }
 
@@ -44,7 +53,7 @@ public class Calculator {
      *
      * @return  current operator
      */
-    public Operator getOperator() {
+    public BinaryOperator getOperator() {
         return calculation.getOperator();
     }
 
@@ -185,4 +194,29 @@ public class Calculator {
     public BigDecimal memoryRecall() {
         return memory.memoryRecall();
     }
+
+    public void appendOperation(Operation operator) {
+        history.append(operator);
+    }
+
+    public void changeLast(Operation operator) {
+        history.changeLast(operator);
+    }
+
+    public void changeBinary(BinaryOperator operator) {
+        history.changeBinary(operator);
+    }
+
+    public void appendUnary(UnaryOperator operator) {
+        history.appendUnary(operator);
+    }
+
+    public void clearHistory() {
+        history.clear();
+    }
+
+    public ArrayList<Operation> getHistory() {
+        return history.getHistory();
+    }
+
 }

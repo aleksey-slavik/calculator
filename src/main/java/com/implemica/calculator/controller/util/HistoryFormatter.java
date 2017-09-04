@@ -1,6 +1,6 @@
 package com.implemica.calculator.controller.util;
 
-import com.implemica.calculator.model.util.Operator;
+import com.implemica.calculator.model.enums.BinaryOperator;
 
 /**
  * HistoryFormatter model.
@@ -69,7 +69,7 @@ public class HistoryFormatter {
      * @param value    given value
      * @return surrounded value using given function
      */
-    public String surround(Operator operator, String value) {
+    public String surround(BinaryOperator operator, String value) {
         return operator.getText() + LEFT_BRACKET + value + RIGHT_BRACKET;
     }
 
@@ -78,7 +78,7 @@ public class HistoryFormatter {
      *
      * @param operator given function
      */
-    public void surround(Operator operator) {
+    public void surround(BinaryOperator operator) {
         replace(surround(operator, getLastElement()));
     }
 
@@ -112,7 +112,7 @@ public class HistoryFormatter {
      *
      * @param operator new sign
      */
-    public void replaceLastSign(Operator operator) {
+    public void replaceLastSign(BinaryOperator operator) {
         replace(operator.getText());
     }
 
