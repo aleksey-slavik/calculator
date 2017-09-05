@@ -333,13 +333,14 @@ public class Controller implements Initializable {
         }
 
         int delta = historyPos - size;
+        boolean isPositiveDelta = delta >= 0;
         int start = 0;
 
-        if (delta >= 0) {
+        if (isPositiveDelta) {
             start = delta;
         }
 
-        left.setVisible(delta >= 0);
+        left.setVisible(isPositiveDelta);
         historyField.setText(history.substring(start, historyPos));
     }
 
@@ -364,6 +365,11 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Processing of click on unary operator buttons
+     *
+     * @param event unary operator
+     */
     @FXML
     private void unaryOperatorClick(ActionEvent event) {
         String id = ((Button) event.getSource()).getId();
@@ -378,6 +384,34 @@ public class Controller implements Initializable {
         } catch (SquareRootException e) {
             errorStatement(MESSAGE_INVALID_INPUT);
         }
+    }
+
+    /**
+     * Processing of click on memory operator buttons
+     *
+     * @param event memory operator
+     */
+    @FXML
+    private void memoryOperatorClick(ActionEvent event) {
+        String id = ((Button) event.getSource()).getId();
+        CalculatorButton button = CalculatorButton.searchButtonById(id);
+        isMemoryLocked = false;
+
+        if (button == CalculatorButton.MC) {
+            calculator.memoryClear();
+            isMemoryLocked = true;
+        } else if (button == CalculatorButton.MR) {
+            setNumericFieldNumber(calculator.memoryRecall());
+        } else if (button == CalculatorButton.MS) {
+            calculator.memoryStore(getNumericFieldNumber());
+        } else if (button == CalculatorButton.M_PLUS) {
+            calculator.memoryAdd(getNumericFieldNumber());
+        } else if (button == CalculatorButton.M_MINUS) {
+            calculator.memorySubtract(getNumericFieldNumber());
+        }
+
+        isEditable = false;
+        disableMemoryButtons(isMemoryLocked);
     }
 
     /**
@@ -428,31 +462,6 @@ public class Controller implements Initializable {
         numericField.setText(number);
     }
 
-    @FXML
-    private void memoryOperatorClick(ActionEvent event) {
-        String id = ((Button) event.getSource()).getId();
-        CalculatorButton button = CalculatorButton.searchButtonById(id);
-
-        if (button == CalculatorButton.MC) {
-            calculator.memoryClear();
-            isMemoryLocked = true;
-        } else if (button == CalculatorButton.MR) {
-            setNumericFieldNumber(calculator.memoryRecall());
-        } else if (button == CalculatorButton.MS) {
-            calculator.memoryStore(getNumericFieldNumber());
-            isMemoryLocked = false;
-        } else if (button == CalculatorButton.M_PLUS) {
-            calculator.memoryAdd(getNumericFieldNumber());
-            isMemoryLocked = false;
-        } else if (button == CalculatorButton.M_MINUS) {
-            calculator.memorySubtract(getNumericFieldNumber());
-            isMemoryLocked = false;
-        }
-
-        isEditable = false;
-        disableMemoryButtons(isMemoryLocked);
-    }
-
     /**
      * Processing of click on clear button
      */
@@ -489,29 +498,22 @@ public class Controller implements Initializable {
      * @throws ZeroDivideException       throws when not zero number divided by zero
      */
     private void processBinaryOperator(BinaryOperator operator) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
+        BigDecimal operand = getNumericFieldNumber();
         Operation operation = new Operation();
-        operation.setOperand(getNumericFieldNumber());
+        operation.setOperand(operand);
         operation.setBinaryOperator(operator);
 
-        if (isSequence) {
-            if (isPreviousUnary) {
-                calculator.changeBinary(operator);
-                setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
-            } else if (isEditable) {
-                calculator.changeBinary(operator);
-            } else {
-                calculator.appendOperation(operation);
-                setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
-            }
+        if (isPreviousUnary || isEditable) {
+            calculator.changeBinary(operator);
         } else {
-            if (isPreviousUnary) {
-                calculator.changeBinary(operator);
-            } else {
-                calculator.appendOperation(operation);
-            }
+            calculator.appendOperation(operation);
         }
 
-        calculator.changeOperator(getNumericFieldNumber(), operator);
+        if (isSequence || isPreviousUnary) {
+            setNumericFieldNumber(calculator.calculateResult(operand));
+        }
+
+        calculator.changeOperator(operand, operator);
         updateHistoryField();
         isSequence = true;
         isEditable = true;
@@ -528,15 +530,17 @@ public class Controller implements Initializable {
      * @throws SquareRootException throws when during square root operation of negative number
      */
     private void processUnaryOperator(UnaryOperator operator) throws OverflowException, ZeroDivideException, SquareRootException {
+        BigDecimal operand = getNumericFieldNumber();
+
         if (!isPreviousUnary) {
             Operation operation = new Operation();
-            operation.setOperand(getNumericFieldNumber());
+            operation.setOperand(operand);
             calculator.appendOperation(operation);
         }
 
         calculator.appendUnary(operator);
         updateHistoryField();
-        setNumericFieldNumber(calculator.calculateUnary(operator, getNumericFieldNumber()));
+        setNumericFieldNumber(calculator.calculateUnary(operator, operand));
         isPreviousUnary = true;
         isEditable = true;
     }
@@ -617,6 +621,7 @@ public class Controller implements Initializable {
      */
     private void disableButtons(boolean disable) {
         isError = disable;
+
         for (Button item : disabled) {
             item.setDisable(disable);
         }
@@ -629,6 +634,7 @@ public class Controller implements Initializable {
      */
     private void disableMemoryButtons(boolean disable) {
         isMemoryLocked = disable;
+
         for (Button item : disabledMemory) {
             item.setDisable(disable);
         }
