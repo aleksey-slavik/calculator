@@ -1,8 +1,5 @@
 package com.implemica.calculator.controller;
 
-import com.implemica.calculator.controller.util.HistoryFormatter;
-import com.implemica.calculator.controller.util.InputNumber;
-import com.implemica.calculator.controller.util.NumericFormatter;
 import com.implemica.calculator.model.Calculator;
 import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.util.CalculationModel;
@@ -26,6 +23,10 @@ import javafx.util.Duration;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.implemica.calculator.controller.util.InputNumber.*;
+import static com.implemica.calculator.controller.util.NumericFormatter.*;
+import static com.implemica.calculator.controller.util.HistoryFormatter.*;
 
 /**
  * Processing work of buttons of calculator
@@ -79,6 +80,9 @@ public class Controller implements Initializable {
      */
     private static final String COMMA = ",";
 
+    /**
+     * String representation of history, which show in history field
+     */
     private String history = DEFAULT_HISTORY_FIELD_VALUE;
 
     /**
@@ -121,9 +125,15 @@ public class Controller implements Initializable {
      */
     private Calculator calculator = new Calculator();
 
+    /**
+     * Numeric and history fields
+     */
     @FXML
     private Label numericField, historyField;
 
+    /**
+     * Calculator buttons
+     */
     @FXML
     private Button negate, comma, add, subtract, multiply, divide, inverse, sqr, sqrt, percent,
             memory_clear, memory_recall, memory_add, memory_minus, memory_store, left, right;
@@ -184,24 +194,14 @@ public class Controller implements Initializable {
             normalStatement();
         }
 
-        /*
-        if (checkSize() && !isEditable) {
-            return;
-        }
-
-        String digit = ((Button) event.getSource()).getText();
-
-        if (getNumericFieldText().equals(DEFAULT_NUMERIC_FIELD_VALUE) || isEditable) {
-            setNumericFieldText(digit);
+        if (isEditable) {
+            clearInput();
             isEditable = false;
-        } else {
-            appendNumericFieldText(digit);
         }
-        */
 
         String digit = ((Button) event.getSource()).getText();
-        InputNumber.appendDigit(digit);
-        numericField.setText(NumericFormatter.formatInput());
+        appendDigit(digit);
+        numericField.setText(formatInput());
     }
 
     /**
@@ -245,21 +245,10 @@ public class Controller implements Initializable {
      */
     @FXML
     private void buttonCommaClick() {
-        /*
-        if (!getNumericFieldText().contains(COMMA) && !checkSize()) {
-            appendNumericFieldText(COMMA);
-        }
+        String number = formatInput();
 
-        if (isEditable || isCalculateResult) {
-            isEditable = false;
-            isCalculateResult = false;
-            setNumericFieldText(ZERO_WITH_COMMA);
-        }
-        */
-
-        String number = NumericFormatter.formatInput();
-        if (!InputNumber.isInputPointSet() && InputNumber.canInput()) {
-            InputNumber.addPointToInput();
+        if (!isInputPointSet() && canInput()) {
+            addPointToInput();
             number += COMMA;
         }
 
@@ -378,7 +367,6 @@ public class Controller implements Initializable {
      */
     @FXML
     private void negateClick() {
-
         if (isPreviousUnary) {
             calculator.appendUnary(UnaryOperator.NEGATE);
             updateHistoryField();
@@ -448,24 +436,13 @@ public class Controller implements Initializable {
             return;
         }
 
-        InputNumber.backspaceInput();
-        String number = NumericFormatter.formatInput();
-        if (InputNumber.getInputScale() == 0 && InputNumber.isInputPointSet()) {
+        backspaceInput();
+        String number = formatInput();
+        if (getInputScale() == 0 && isInputPointSet()) {
             number += COMMA;
         }
 
         numericField.setText(number);
-
-        /*
-        String value = getNumericFieldText().replace(" ", "");
-        int minLength = value.contains("-") ? 3 : 2;
-
-        if (value.length() < minLength) {
-            setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
-        } else {
-            setNumericFieldText(value.substring(0, value.length() - 1));
-        }
-        */
     }
 
     /**
@@ -560,7 +537,7 @@ public class Controller implements Initializable {
         isSequence = false;
         normalStatement();
         calculator.clearAll();
-        InputNumber.clearInput();
+        clearInput();
     }
 
     /**
@@ -630,10 +607,6 @@ public class Controller implements Initializable {
      * @param value given value
      */
     private void setNumericFieldText(String value) {
-        if (!isError) {
-            value = NumericFormatter.display(value);
-        }
-
         numericField.setText(value);
     }
 
@@ -643,8 +616,7 @@ public class Controller implements Initializable {
      * @return number from numeric field
      */
     private BigDecimal getNumericFieldNumber() {
-        //String value = getNumericFieldText().replace(" ", "").replace(COMMA, DOT);
-        return NumericFormatter.parseInput(getNumericFieldText());
+        return parseInput(getNumericFieldText());
     }
 
     /**
@@ -653,14 +625,15 @@ public class Controller implements Initializable {
      * @param number given number
      */
     private void setNumericFieldNumber(BigDecimal number) {
-        numericField.setText(NumericFormatter.display(number));
+        numericField.setText(display(number));
     }
 
     /**
      * Write given value into history field.
      */
     private void updateHistoryField() {
-        history = HistoryFormatter.parseHistory(calculator);
+        history = parseHistory(calculator);
+
         if (history.length() > getLabelSize()) {
             left.setVisible(true);
             right.setVisible(false);

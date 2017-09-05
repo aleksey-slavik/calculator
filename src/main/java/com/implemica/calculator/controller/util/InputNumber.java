@@ -3,7 +3,7 @@ package com.implemica.calculator.controller.util;
 import java.math.BigDecimal;
 
 /**
- *
+ * Representation of number which is entered in numeric field
  *
  * @author Slavik Aleksey V.
  */
@@ -19,7 +19,7 @@ public class InputNumber {
     private static int scale;
 
     /**
-     * Shows if point set
+     * Shows if point is present
      */
     private static boolean isPointSet = false;
 
@@ -38,7 +38,6 @@ public class InputNumber {
             if (isPointSet) {
                 scale++;
             }
-
             input = input.multiply(BigDecimal.TEN).add(new BigDecimal(digit));
         }
     }
