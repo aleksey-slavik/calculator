@@ -2,7 +2,7 @@ package com.implemica.calculator.model.exception;
 
 /**
  * Custom exception for calculations.
- * Throws when zero divide by zero only.
+ * Thrown when zero divide by zero only.
  *
  * @author Slavik Aleksey V.
  */

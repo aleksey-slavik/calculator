@@ -1,7 +1,9 @@
 package com.implemica.calculator.model.enums;
 
 /**
- * Created by Joker on 03.09.2017.
+ * Enumeration of unary calculator operations.
+ *
+ * @author Slavik Aleksey V.
  */
 public enum  UnaryOperator {
 

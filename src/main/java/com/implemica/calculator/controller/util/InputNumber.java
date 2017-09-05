@@ -38,6 +38,7 @@ public class InputNumber {
             if (isPointSet) {
                 scale++;
             }
+
             input = input.multiply(BigDecimal.TEN).add(new BigDecimal(digit));
         }
     }

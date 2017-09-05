@@ -1,5 +1,6 @@
 package com.implemica.calculator;
 
+import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.util.CalculationModel;
 import com.implemica.calculator.model.util.MemoryModel;
 import com.implemica.calculator.model.enums.BinaryOperator;
@@ -106,7 +107,7 @@ public class ModelTest {
     }
 
     @Test
-    public void negateTest() {
+    public void negateTest() throws Exception{
         negateTest("-1", "1");
         negateTest("0", "0");
         negateTest("1", "-1");
@@ -121,7 +122,7 @@ public class ModelTest {
     }
 
     @Test
-    public void sqrTest() throws OverflowException {
+    public void sqrTest() throws Exception {
         sqrTest("-22", "484");
         sqrTest("-1", "1");
         sqrTest("0", "0");
@@ -136,7 +137,7 @@ public class ModelTest {
     }
 
     @Test
-    public void sqrFail() {
+    public void sqrFail() throws Exception {
         sqrFailTest("-1.e+5000");
         sqrFailTest("-1.e-5000");
         sqrFailTest("-2.38476e+7349");
@@ -144,7 +145,7 @@ public class ModelTest {
     }
 
     @Test
-    public void sqrtTest() throws SquareRootException {
+    public void sqrtTest() throws Exception {
         sqrtTest("0", "0");
         sqrtTest("1", "1");
         sqrtTest("9", "3");
@@ -159,7 +160,7 @@ public class ModelTest {
     }
 
     @Test
-    public void sqrtFail() {
+    public void sqrtFail() throws Exception {
         sqrtFailTest("-1.1e-6433");
         sqrtFailTest("-1");
         sqrtFailTest("-954");
@@ -167,7 +168,7 @@ public class ModelTest {
     }
 
     @Test
-    public void inverseTest() throws ZeroDivideException {
+    public void inverseTest() throws Exception {
         inverseTest("1", "1");
         inverseTest("-25", "-0.04");
         inverseTest("-0.04", "-25");
@@ -178,7 +179,7 @@ public class ModelTest {
     }
 
     @Test
-    public void inverseFail() {
+    public void inverseFail() throws Exception{
         inverseFailTest("0");
         inverseFailTest("-0");
         inverseFailTest("0.");
@@ -198,21 +199,21 @@ public class ModelTest {
     @Test
     public void memoryAddTest() {
         memoryAddTest("12", "3", "15");
-        memoryAddTest("23", "-23","0");
-        memoryAddTest("987987","0","987987");
-        memoryAddTest("1.e+9999","-1.e+9999", "0");
-        memoryAddTest("999999999999999","1","1000000000000000");
-        memoryAddTest("0.0000000000000001","1","1.0000000000000001");
+        memoryAddTest("23", "-23", "0");
+        memoryAddTest("987987", "0", "987987");
+        memoryAddTest("1.e+9999", "-1.e+9999", "0");
+        memoryAddTest("999999999999999", "1", "1000000000000000");
+        memoryAddTest("0.0000000000000001", "1", "1.0000000000000001");
     }
 
     @Test
     public void memorySubtractTest() {
         memorySubtractTest("12", "3", "9");
-        memorySubtractTest("23", "23","0");
-        memorySubtractTest("987987","0","987987");
-        memorySubtractTest("1.e+9999","1.e+9999", "0");
-        memorySubtractTest("999999999999999","-1","1000000000000000");
-        memorySubtractTest("0.0000000000000001","-1","1.0000000000000001");
+        memorySubtractTest("23", "23", "0");
+        memorySubtractTest("987987", "0", "987987");
+        memorySubtractTest("1.e+9999", "1.e+9999", "0");
+        memorySubtractTest("999999999999999", "-1", "1000000000000000");
+        memorySubtractTest("0.0000000000000001", "-1", "1.0000000000000001");
     }
 
     @Test
@@ -225,58 +226,58 @@ public class ModelTest {
         memoryClearTest("0.0000000000000001");
     }
 
-    private void sqrtTest(String value, String expected) throws SquareRootException {
+    private void sqrtTest(String value, String expected) throws Exception {
         CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculationModel.sqrt(new BigDecimal(value));
+        BigDecimal actualValue = calculationModel.calculateUnary(UnaryOperator.SQRT, new BigDecimal(value));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
-    private void sqrtFailTest(String value) {
+    private void sqrtFailTest(String value) throws Exception {
         CalculationModel calculationModel = new CalculationModel();
         try {
-            calculationModel.sqrt(new BigDecimal(value));
+            calculationModel.calculateUnary(UnaryOperator.SQRT, new BigDecimal(value));
             fail("Current value " + value + " is valid for square root");
         } catch (SquareRootException e) {
             //expected
         }
     }
 
-    private void negateTest(String actual, String expected) {
+    private void negateTest(String actual, String expected) throws Exception{
         CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculationModel.negate(new BigDecimal(actual));
+        BigDecimal actualValue = calculationModel.calculateUnary(UnaryOperator.NEGATE, new BigDecimal(actual));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
-    private void sqrTest(String actual, String expected) throws OverflowException {
+    private void sqrTest(String actual, String expected) throws Exception {
         CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculationModel.sqr(new BigDecimal(actual));
+        BigDecimal actualValue = calculationModel.calculateUnary(UnaryOperator.SQR, new BigDecimal(actual));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
-    private void sqrFailTest(String value) {
+    private void sqrFailTest(String value) throws Exception {
         CalculationModel calculationModel = new CalculationModel();
         try {
-            calculationModel.sqr(new BigDecimal(value));
+            calculationModel.calculateUnary(UnaryOperator.SQR, new BigDecimal(value));
             fail("Scale of SQR for current value " + value + " isn't bigger than 10000");
         } catch (OverflowException e) {
             //expected
         }
     }
 
-    private void inverseTest(String actual, String expected) throws ZeroDivideException {
+    private void inverseTest(String actual, String expected) throws Exception {
         CalculationModel calculationModel = new CalculationModel();
         BigDecimal expectedValue = new BigDecimal(expected);
-        BigDecimal actualValue = calculationModel.inverse(new BigDecimal(actual));
+        BigDecimal actualValue = calculationModel.calculateUnary(UnaryOperator.INVERSE, new BigDecimal(actual));
         assertEquals("expected: " + expected + "\n actual: " + actualValue, true, expectedValue.compareTo(actualValue) == 0);
     }
 
-    private void inverseFailTest(String value) {
+    private void inverseFailTest(String value) throws Exception{
         CalculationModel calculationModel = new CalculationModel();
         try {
-            calculationModel.inverse(new BigDecimal(value));
+            calculationModel.calculateUnary(UnaryOperator.INVERSE, new BigDecimal(value));
             fail("Inverse of " + value + " doesn't call exception. Exception called only when value equals zero");
         } catch (ZeroDivideException e) {
             //expected

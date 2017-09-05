@@ -1,6 +1,7 @@
 package com.implemica.calculator.model;
 
 import com.implemica.calculator.model.enums.BinaryOperator;
+import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.SquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
@@ -58,7 +59,7 @@ public class Demo {
             tmp = calculator.calculateResult(three); // 3 =
             calculator.memoryAdd(tmp); // M+
             calculator.memoryAdd(tmp); // M+
-            tmp = calculator.sqrt(three); // SQRT 3
+            tmp = calculator.calculateUnary(UnaryOperator.SQRT, three); // SQRT 3
             calculator.changeOperator(tmp, BinaryOperator.ADD); // tmp +
             tmp = calculator.memoryRecall(); // MR
             res = calculator.calculateResult(tmp); // tmp =

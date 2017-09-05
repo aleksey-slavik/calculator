@@ -1,7 +1,7 @@
 package com.implemica.calculator.model.enums;
 
 /**
- * Enumeration of calculator operations, which need to work with history of calculator and binary operations.
+ * Enumeration of binary calculator operations.
  *
  * @author Slavik Aleksey V.
  */
@@ -10,8 +10,7 @@ public enum BinaryOperator {
     ADD("+"),
     SUBTRACT("-"),
     DIVIDE("÷"),
-    MULTIPLY("×"),
-    EQUALS("=");
+    MULTIPLY("×");
 
     /**
      * Value which display in history when given operator is used

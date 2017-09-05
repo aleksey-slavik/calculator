@@ -121,7 +121,7 @@ public enum CalculatorButton {
      * Return id of given button.
      * Difference between fx:id and id is that fx:id started with '#'
      *
-     * @return  id without first char
+     * @return id without first char
      */
     public String getId() {
         return id.substring(1);
@@ -130,13 +130,29 @@ public enum CalculatorButton {
     /**
      * Search button with given keycode combination
      *
-     * @param event     given keycode combination
-     * @return          button with given keycode combination
+     * @param event given keycode combination
+     * @return button with given keycode combination
      */
     public static CalculatorButton searchButtonByEvent(KeyEvent event) {
         for (KeyCodeCombination code : keys.keySet()) {
             if (code.match(event)) {
                 return keys.get(code);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Search button with given id
+     *
+     * @param id given id
+     * @return button with given id
+     */
+    public static CalculatorButton searchButtonById(String id) {
+        for (CalculatorButton button : CalculatorButton.values()) {
+            if (button.getId().equals(id)) {
+                return button;
             }
         }
 

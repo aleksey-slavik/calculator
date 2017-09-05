@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
+import static com.implemica.calculator.controller.util.InputNumber.*;
+
 /**
  * Number formatter for calculator numbers.
  *
@@ -45,6 +47,7 @@ public class NumericFormatter {
 
             if (digitsIntegerPart > MAX_PLAIN_SCALE) {
                 pattern = new StringBuilder("0.");
+
                 if (inputScale > 0) {
                     for (int i = 0; i < inputScale; i++) {
                         pattern.append("0");
@@ -56,6 +59,7 @@ public class NumericFormatter {
                 pattern.append("E0");
             } else {
                 pattern = new StringBuilder("###,###.#");
+
                 for (int i = 0; i < MAX_PLAIN_SCALE - digitsIntegerPart; i++) {
                     pattern.append("#");
                 }
@@ -69,12 +73,12 @@ public class NumericFormatter {
     }
 
     /**
-     * Formats input number
+     * Formats current input number, which saved in {@link InputNumber} object
      *
      * @return formatted input number to display
      */
     public static String formatInput() {
-        int scale = InputNumber.getInputScale();
+        int scale = getInputScale();
         StringBuilder pattern = new StringBuilder("###,##0.");
 
         if (scale != 0) {
@@ -86,7 +90,7 @@ public class NumericFormatter {
         }
 
         format.applyPattern(pattern.toString());
-        return format.format(InputNumber.getInput());
+        return format.format(getInput());
     }
 
     /**

@@ -22,6 +22,7 @@ import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static com.implemica.calculator.controller.util.InputNumber.*;
@@ -148,6 +149,16 @@ public class Controller implements Initializable {
      */
     private Button[] disabledMemory;
 
+    /**
+     * One-to-one correspondence between {@link CalculatorButton) and {@link BinaryOperator}
+     */
+    private HashMap<CalculatorButton, BinaryOperator> binaryGroup = new HashMap<>();
+
+    /**
+     * One-to-one correspondence between {@link CalculatorButton) and {@link UnaryOperator}
+     */
+    private HashMap<CalculatorButton, UnaryOperator> unaryGroup = new HashMap<>();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //add buttons which are disabled when errors happens
@@ -160,6 +171,18 @@ public class Controller implements Initializable {
         //add buttons which are disabled when memory cleared
         disabledMemory = new Button[]{memory_clear, memory_recall};
 
+        //add binary buttons to map
+        binaryGroup.put(CalculatorButton.ADD, BinaryOperator.ADD);
+        binaryGroup.put(CalculatorButton.SUBTRACT, BinaryOperator.SUBTRACT);
+        binaryGroup.put(CalculatorButton.DIVIDE, BinaryOperator.DIVIDE);
+        binaryGroup.put(CalculatorButton.MULTIPLY, BinaryOperator.MULTIPLY);
+
+        //add unary buttons to map
+        unaryGroup.put(CalculatorButton.NEGATE, UnaryOperator.NEGATE);
+        unaryGroup.put(CalculatorButton.INVERSE, UnaryOperator.INVERSE);
+        unaryGroup.put(CalculatorButton.SQR, UnaryOperator.SQR);
+        unaryGroup.put(CalculatorButton.SQRT, UnaryOperator.SQRT);
+
         //setup default statement of calculator
         disableMemoryButtons(true);
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
@@ -167,19 +190,23 @@ public class Controller implements Initializable {
 
         //add resize history field listener
         historyField.widthProperty().addListener(observable -> {
-            if (getLabelSize() > history.length()) {
-                historyField.setText(history);
+            int label = getLabelSize();
+            String subHistory = history.substring(0, historyPos);
+
+            if (label > history.length()) {
+                subHistory = history;
             } else {
-                if (getLabelSize() < history.substring(0, historyPos).length()) {
-                    historyField.setText(history.substring(0, historyPos));
+                if (label < subHistory.length()) {
                     left.setVisible(true);
                 } else {
-                    int newPos = historyPos - getLabelSize();
+                    int newPos = historyPos - label;
                     newPos = newPos < 0 ? 0 : newPos;
-                    historyField.setText(history.substring(newPos, historyPos));
+                    subHistory = history.substring(newPos, historyPos);
                     left.setVisible(false);
                 }
             }
+
+            historyField.setText(subHistory);
         });
     }
 
@@ -221,13 +248,17 @@ public class Controller implements Initializable {
         }
 
         try {
+            BigDecimal res = getNumericFieldNumber();
+
             if (isCalculateResult) {
-                setNumericFieldNumber(calculator.calculateIntermediateResult(getNumericFieldNumber()));
+                res = calculator.calculateIntermediateResult(res);
             } else {
-                setNumericFieldNumber(calculator.calculateResult(getNumericFieldNumber()));
+                res = calculator.calculateResult(res);
                 calculator.clearHistory();
                 updateHistoryField();
             }
+
+            setNumericFieldNumber(res);
             isCalculateResult = true;
             isSequence = false;
             isEditable = true;
@@ -275,15 +306,16 @@ public class Controller implements Initializable {
      */
     @FXML
     private void leftClick() {
-        historyPos -= getLabelSize();
+        int size = getLabelSize();
+        historyPos -= size;
 
-        if (historyPos - getLabelSize() < 0) {
-            historyPos = getLabelSize();
+        if (historyPos - size < 0) {
+            historyPos = size;
             left.setVisible(false);
         }
 
         right.setVisible(true);
-        historyField.setText(history.substring(historyPos - getLabelSize(), historyPos));
+        historyField.setText(history.substring(historyPos - size, historyPos));
     }
 
     /**
@@ -291,22 +323,24 @@ public class Controller implements Initializable {
      */
     @FXML
     private void rightClick() {
-        historyPos += getLabelSize();
+        int size = getLabelSize();
+        int historyLength = history.length();
+        historyPos += size;
 
-        if (historyPos > history.length()) {
-            historyPos = history.length();
+        if (historyPos > historyLength) {
+            historyPos = historyLength;
             right.setVisible(false);
         }
 
-        int delta = historyPos - getLabelSize();
+        int delta = historyPos - size;
+        int start = 0;
 
-        if (delta < 0) {
-            left.setVisible(false);
-            historyField.setText(history.substring(0, historyPos));
-        } else {
-            left.setVisible(true);
-            historyField.setText(history.substring(delta, historyPos));
+        if (delta >= 0) {
+            start = delta;
         }
+
+        left.setVisible(delta >= 0);
+        historyField.setText(history.substring(start, historyPos));
     }
 
     /**
@@ -317,23 +351,32 @@ public class Controller implements Initializable {
     @FXML
     private void binaryOperatorClick(ActionEvent event) {
         String id = ((Button) event.getSource()).getId();
+        CalculatorButton button = CalculatorButton.searchButtonById(id);
 
         try {
-            if (id.equals(CalculatorButton.ADD.getId())) {
-                processBinaryOperator(BinaryOperator.ADD);
-            } else if (id.equals(CalculatorButton.SUBTRACT.getId())) {
-                processBinaryOperator(BinaryOperator.SUBTRACT);
-            } else if (id.equals(CalculatorButton.DIVIDE.getId())) {
-                processBinaryOperator(BinaryOperator.DIVIDE);
-            } else if (id.equals(CalculatorButton.MULTIPLY.getId())) {
-                processBinaryOperator(BinaryOperator.MULTIPLY);
-            }
+            processBinaryOperator(binaryGroup.get(button));
         } catch (ZeroByZeroDivideException e) {
             errorStatement(MESSAGE_ZERO_DIVIDE_BY_ZERO);
         } catch (ZeroDivideException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         } catch (OverflowException e) {
             errorStatement(MESSAGE_OVERFLOW);
+        }
+    }
+
+    @FXML
+    private void unaryOperatorClick(ActionEvent event) {
+        String id = ((Button) event.getSource()).getId();
+        CalculatorButton button = CalculatorButton.searchButtonById(id);
+
+        try {
+            processUnaryOperator(unaryGroup.get(button));
+        } catch (OverflowException e) {
+            errorStatement(MESSAGE_OVERFLOW);
+        } catch (ZeroDivideException e) {
+            errorStatement(MESSAGE_DIVIDE_BY_ZERO);
+        } catch (SquareRootException e) {
+            errorStatement(MESSAGE_INVALID_INPUT);
         }
     }
 
@@ -363,67 +406,6 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Processing of click on negate button
-     */
-    @FXML
-    private void negateClick() {
-        if (isPreviousUnary) {
-            calculator.appendUnary(UnaryOperator.NEGATE);
-            updateHistoryField();
-        }
-
-        setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
-    }
-
-    /**
-     * Processing of click on square button
-     */
-    @FXML
-    private void sqrClick() {
-        if (!isPreviousUnary) {
-            Operation operation = new Operation();
-            operation.setOperand(getNumericFieldNumber());
-            calculator.appendOperation(operation);
-        }
-
-        calculator.appendUnary(UnaryOperator.SQR);
-        updateHistoryField();
-
-        try {
-            setNumericFieldNumber(calculator.sqr(getNumericFieldNumber()));
-        } catch (OverflowException e) {
-            errorStatement(MESSAGE_OVERFLOW);
-        }
-
-        isPreviousUnary = true;
-        isEditable = true;
-    }
-
-    /**
-     * Processing of click on square root button
-     */
-    @FXML
-    private void sqrtClick() {
-        if (!isPreviousUnary) {
-            Operation operation = new Operation();
-            operation.setOperand(getNumericFieldNumber());
-            calculator.appendOperation(operation);
-        }
-
-        calculator.appendUnary(UnaryOperator.SQRT);
-        updateHistoryField();
-
-        try {
-            setNumericFieldNumber(calculator.sqrt(getNumericFieldNumber()));
-        } catch (SquareRootException e) {
-            errorStatement(MESSAGE_INVALID_INPUT);
-        }
-
-        isPreviousUnary = true;
-        isEditable = true;
-    }
-
-    /**
      * Processing of click on backspace button
      */
     @FXML
@@ -438,6 +420,7 @@ public class Controller implements Initializable {
 
         backspaceInput();
         String number = formatInput();
+
         if (getInputScale() == 0 && isInputPointSet()) {
             number += COMMA;
         }
@@ -445,85 +428,29 @@ public class Controller implements Initializable {
         numericField.setText(number);
     }
 
-    /**
-     * Processing of click on inverse button
-     */
     @FXML
-    private void inverseClick() {
-        if (!isPreviousUnary) {
-            Operation operation = new Operation();
-            operation.setOperand(getNumericFieldNumber());
-            calculator.appendOperation(operation);
+    private void memoryOperatorClick(ActionEvent event) {
+        String id = ((Button) event.getSource()).getId();
+        CalculatorButton button = CalculatorButton.searchButtonById(id);
+
+        if (button == CalculatorButton.MC) {
+            calculator.memoryClear();
+            isMemoryLocked = true;
+        } else if (button == CalculatorButton.MR) {
+            setNumericFieldNumber(calculator.memoryRecall());
+        } else if (button == CalculatorButton.MS) {
+            calculator.memoryStore(getNumericFieldNumber());
+            isMemoryLocked = false;
+        } else if (button == CalculatorButton.M_PLUS) {
+            calculator.memoryAdd(getNumericFieldNumber());
+            isMemoryLocked = false;
+        } else if (button == CalculatorButton.M_MINUS) {
+            calculator.memorySubtract(getNumericFieldNumber());
+            isMemoryLocked = false;
         }
 
-        calculator.appendUnary(UnaryOperator.INVERSE);
-        updateHistoryField();
-
-        try {
-            setNumericFieldNumber(calculator.inverse(getNumericFieldNumber()));
-        } catch (ZeroDivideException e) {
-            errorStatement(MESSAGE_DIVIDE_BY_ZERO);
-        }
-
-        isPreviousUnary = true;
-        isEditable = true;
-    }
-
-    /**
-     * Processing of click on memory clear button
-     */
-    @FXML
-    private void memoryClearClick() {
-        disableMemoryButtons(true);
-        calculator.memoryClear();
-    }
-
-    /**
-     * Processing of click on memory recall button
-     */
-    @FXML
-    private void memoryRecallClick() {
-        setNumericFieldNumber(calculator.memoryRecall());
         isEditable = false;
-    }
-
-    /**
-     * Processing of click on memory add button
-     */
-    @FXML
-    private void memoryAddClick() {
-        if (isMemoryLocked) {
-            disableMemoryButtons(false);
-        }
-
-        calculator.memoryAdd(getNumericFieldNumber());
-        isEditable = false;
-    }
-
-    /**
-     * Processing of click on memory subtract button
-     */
-    @FXML
-    private void memorySubtractClick() {
-        if (isMemoryLocked) {
-            disableMemoryButtons(false);
-        }
-
-        calculator.memorySubtract(getNumericFieldNumber());
-        isEditable = false;
-    }
-
-    /**
-     * Processing of click on memory store button
-     */
-    @FXML
-    private void memoryStoreClick() {
-        if (isMemoryLocked) {
-            disableMemoryButtons(false);
-        }
-
-        calculator.memoryStore(getNumericFieldNumber());
-        isEditable = false;
+        disableMemoryButtons(isMemoryLocked);
     }
 
     /**
@@ -593,6 +520,28 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Processing of click on binary operator button.
+     *
+     * @param operator operator
+     * @throws OverflowException   throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
+     * @throws ZeroDivideException throws when not zero number divided by zero
+     * @throws SquareRootException throws when during square root operation of negative number
+     */
+    private void processUnaryOperator(UnaryOperator operator) throws OverflowException, ZeroDivideException, SquareRootException {
+        if (!isPreviousUnary) {
+            Operation operation = new Operation();
+            operation.setOperand(getNumericFieldNumber());
+            calculator.appendOperation(operation);
+        }
+
+        calculator.appendUnary(operator);
+        updateHistoryField();
+        setNumericFieldNumber(calculator.calculateUnary(operator, getNumericFieldNumber()));
+        isPreviousUnary = true;
+        isEditable = true;
+    }
+
+    /**
      * Return current statement of numeric field
      *
      * @return numeric field value
@@ -632,19 +581,20 @@ public class Controller implements Initializable {
      * Write given value into history field.
      */
     private void updateHistoryField() {
+        int size = getLabelSize();
         history = parseHistory(calculator);
+        int length = history.length();
+        String subHistory = history;
+        boolean checkLength = length > size;
 
-        if (history.length() > getLabelSize()) {
-            left.setVisible(true);
-            right.setVisible(false);
-            historyField.setText(history.substring(history.length() - getLabelSize() + 1));
-        } else {
-            left.setVisible(false);
-            right.setVisible(false);
-            historyField.setText(history);
+        if (checkLength) {
+            subHistory = history.substring(length - size + 1);
         }
 
-        historyPos = history.length();
+        left.setVisible(checkLength);
+        right.setVisible(false);
+        historyPos = length;
+        historyField.setText(subHistory);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.implemica.calculator.controller.util;
 
 import com.implemica.calculator.model.Calculator;
+import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.util.Operation;
 
@@ -51,26 +52,33 @@ public class HistoryFormatter {
      * @return string representation of history
      */
     public static String parseHistory(Calculator calculator) {
-        StringBuilder res = new StringBuilder(DEFAULT_VALUE);
+        StringBuilder builder = new StringBuilder(DEFAULT_VALUE);
 
         for (Operation operation : calculator.getHistory()) {
             StringBuilder tmp = new StringBuilder(DEFAULT_VALUE);
             tmp.append(operation.getOperand());
+
             for (UnaryOperator unary : operation.getUnaryOperators()) {
                 tmp.replace(0, tmp.length(), surround(unary, tmp.toString()));
             }
+
             tmp.append(SPACE);
-            if (operation.getBinaryOperator() != null) {
-                tmp.append(operation.getBinaryOperator().getText());
+            BinaryOperator binary = operation.getBinaryOperator();
+
+            if (binary != null) {
+                tmp.append(binary.getText());
                 tmp.append(SPACE);
             }
-            res.append(tmp);
+
+            builder.append(tmp);
         }
 
-        if (res.toString().endsWith(SPACE)) {
-            return res.toString().substring(0, res.toString().length() - 1);
+        String res = builder.toString();
+
+        if (res.endsWith(SPACE)) {
+            res = res.substring(0, res.length() - 1);
         }
 
-        return res.toString();
+        return res;
     }
 }

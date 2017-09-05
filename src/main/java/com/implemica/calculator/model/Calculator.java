@@ -91,6 +91,20 @@ public class Calculator {
     }
 
     /**
+     * Return result of given unary operation for given value
+     *
+     * @param operator given operator
+     * @param value    given value
+     * @return result of given unary operation for given value
+     * @throws OverflowException   throws when scale of result is bigger than MAX_SCALE
+     * @throws SquareRootException throws when during square root operation of negative number
+     * @throws ZeroDivideException throws when not zero number divided by zero
+     */
+    public BigDecimal calculateUnary(UnaryOperator operator, BigDecimal value) throws OverflowException, SquareRootException, ZeroDivideException {
+        return calculation.calculateUnary(operator, value);
+    }
+
+    /**
      * Return given percent value of left operand
      *
      * @param value given percent value
@@ -98,49 +112,6 @@ public class Calculator {
      */
     public BigDecimal percent(BigDecimal value) {
         return calculation.percent(value);
-    }
-
-    /**
-     * Return negate number for given value.
-     *
-     * @param value given value
-     * @return negate of given value
-     */
-    public BigDecimal negate(BigDecimal value) {
-        return calculation.negate(value);
-    }
-
-    /**
-     * Return inverse number for given value
-     *
-     * @param value given value
-     * @return inverse number
-     * @throws ZeroDivideException throws when given number equals zero
-     */
-    public BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
-        return calculation.inverse(value);
-    }
-
-    /**
-     * Return result of squaring operation for given value
-     *
-     * @param value given value
-     * @return square of number
-     * @throws OverflowException throws when scale of result is bigger than MAX_SCALE
-     */
-    public BigDecimal sqr(BigDecimal value) throws OverflowException {
-        return calculation.sqr(value);
-    }
-
-    /**
-     * Return square root for given value
-     *
-     * @param value given value
-     * @return square root of number
-     * @throws SquareRootException throws when given number is negative
-     */
-    public BigDecimal sqrt(BigDecimal value) throws SquareRootException {
-        return calculation.sqrt(value);
     }
 
     /**

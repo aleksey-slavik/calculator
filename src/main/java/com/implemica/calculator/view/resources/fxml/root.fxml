@@ -37,7 +37,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#negateClick" styleClass="negate" text="±" GridPane.rowIndex="8"/>
+                mnemonicParsing="false" onAction="#unaryOperatorClick" styleClass="negate" text="±" GridPane.rowIndex="8"/>
         <Button fx:id="one" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
                 onAction="#buttonDigitClick" styleClass="digits" text="1" GridPane.rowIndex="7"/>
         <Button fx:id="zero" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
@@ -80,12 +80,12 @@
                 mnemonicParsing="false" onAction="#percentClick" styleClass="operators" text="\%"
                 GridPane.rowIndex="3"/>
         <Button fx:id="sqrt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#sqrtClick" styleClass="operators" text="√" GridPane.columnIndex="1"
+                mnemonicParsing="false" onAction="#unaryOperatorClick" styleClass="operators" text="√" GridPane.columnIndex="1"
                 GridPane.rowIndex="3"/>
         <Button fx:id="sqr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                onAction="#sqrClick" styleClass="operators" text="𝑥²" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                onAction="#unaryOperatorClick" styleClass="operators" text="𝑥²" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
         <Button fx:id="inverse" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#inverseClick" styleClass="operators" text="¹⁄𝑥"
+                mnemonicParsing="false" onAction="#unaryOperatorClick" styleClass="operators" text="¹⁄𝑥"
                 GridPane.columnIndex="3" GridPane.rowIndex="3"/>
         <Button fx:id="clear" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                 mnemonicParsing="false" onAction="#clearClick" styleClass="controls" text="C" GridPane.columnIndex="1"
@@ -123,35 +123,35 @@
                 </tooltip>
             </Button>
             <Button fx:id="memory_store" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryStoreClick" prefHeight="25.0"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryOperatorClick" prefHeight="25.0"
                     prefWidth="45.0" styleClass="memory" text="MS" GridPane.columnIndex="4">
                 <tooltip>
                     <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory store"/>
                 </tooltip>
             </Button>
             <Button fx:id="memory_minus" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memorySubtractClick" prefHeight="25.0"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryOperatorClick" prefHeight="25.0"
                     prefWidth="45.0" styleClass="memory" text="M-" GridPane.columnIndex="3">
                 <tooltip>
                     <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory subtract"/>
                 </tooltip>
             </Button>
             <Button fx:id="memory_add" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryAddClick" prefHeight="25.0"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryOperatorClick" prefHeight="25.0"
                     prefWidth="45.0" styleClass="memory" text="M+" GridPane.columnIndex="2">
                 <tooltip>
                     <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory add"/>
                 </tooltip>
             </Button>
             <Button fx:id="memory_recall" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryRecallClick" prefHeight="25.0"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryOperatorClick" prefHeight="25.0"
                     prefWidth="45.0" styleClass="memory" text="MR" GridPane.columnIndex="1">
                 <tooltip>
                     <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Memory recall"/>
                 </tooltip>
             </Button>
             <Button fx:id="memory_clear" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryClearClick" prefHeight="25.0"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryOperatorClick" prefHeight="25.0"
                     prefWidth="45.0" styleClass="memory" text="MC">
                 <tooltip>
                     <Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Clear all memory"/>

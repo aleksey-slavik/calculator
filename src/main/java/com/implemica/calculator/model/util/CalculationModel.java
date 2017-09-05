@@ -1,6 +1,7 @@
 package com.implemica.calculator.model.util;
 
 import com.implemica.calculator.model.enums.BinaryOperator;
+import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.exception.*;
 
 import java.math.BigDecimal;
@@ -52,7 +53,10 @@ public class CalculationModel {
      * @param operator given operator
      */
     public void changeOperator(BigDecimal value, BinaryOperator operator) {
-        left = value;
+        if (left.equals(BigDecimal.ZERO)) {
+            left = value;
+        }
+
         this.operator = operator;
     }
 
@@ -113,64 +117,29 @@ public class CalculationModel {
     }
 
     /**
-     * Return negate number for given value.
+     * Return result of given unary operation for given value
      *
-     * @param value given value
-     * @return negate of given value
+     * @param operator given operator
+     * @param value    given value
+     * @return result of given unary operation for given value
+     * @throws OverflowException   throws when scale of result is bigger than MAX_SCALE
+     * @throws SquareRootException throws when given number is negative
+     * @throws ZeroDivideException throws when not zero number divided by zero
      */
-    public BigDecimal negate(BigDecimal value) {
-        return value.negate();
-    }
+    public BigDecimal calculateUnary(UnaryOperator operator, BigDecimal value) throws OverflowException, SquareRootException, ZeroDivideException {
+        BigDecimal res = BigDecimal.ZERO;
 
-    /**
-     * Return inverse number for given value
-     *
-     * @param value given value
-     * @return inverse number
-     * @throws ZeroDivideException throws when given number equals zero
-     */
-    public BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
-        if (value.equals(BigDecimal.ZERO)) {
-            throw new ZeroDivideException("Divide by zero in inverse method");
-        }
-
-        return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
-    }
-
-    /**
-     * Return result of squaring operation for given value
-     *
-     * @param value given value
-     * @return square of number
-     * @throws OverflowException throws when scale of result is bigger than MAX_SCALE
-     */
-    public BigDecimal sqr(BigDecimal value) throws OverflowException {
-        BigDecimal res = value.pow(2);
-
-        if (Math.abs(res.scale()) >= MAX_SCALE) {
-            throw new OverflowException("Scale of result of sqr is bigger than max scale value");
+        if (operator == UnaryOperator.SQR) {
+            res = sqr(value);
+        } else if (operator == UnaryOperator.SQRT) {
+            res = sqrt(value);
+        } else if (operator == UnaryOperator.INVERSE) {
+            res = inverse(value);
+        } else if (operator == UnaryOperator.NEGATE) {
+            res = negate(value);
         }
 
         return res;
-    }
-
-    /**
-     * Return square root for given value
-     *
-     * @param value given value
-     * @return square root of number
-     * @throws SquareRootException throws when given number is negative
-     */
-    public BigDecimal sqrt(BigDecimal value) throws SquareRootException {
-        if (value.compareTo(BigDecimal.ZERO) < 0) {
-            throw new SquareRootException("Can't get square root of " + value.toPlainString() + ". Non negative number is needed");
-        }
-
-        if (value.equals(BigDecimal.ZERO)) {
-            return BigDecimal.ZERO;
-        }
-
-        return sqrt(value, BigDecimal.ONE);
     }
 
     /**
@@ -246,6 +215,67 @@ public class CalculationModel {
      */
     private BigDecimal multiply() {
         return left.multiply(right).stripTrailingZeros();
+    }
+
+    /**
+     * Return negate number for given value.
+     *
+     * @param value given value
+     * @return negate of given value
+     */
+    private BigDecimal negate(BigDecimal value) {
+        return value.negate();
+    }
+
+    /**
+     * Return inverse number for given value
+     *
+     * @param value given value
+     * @return inverse number
+     * @throws ZeroDivideException throws when given number equals zero
+     */
+    private BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
+        if (value.equals(BigDecimal.ZERO)) {
+            throw new ZeroDivideException("Divide by zero in inverse method");
+        }
+
+        return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+    }
+
+    /**
+     * Return result of squaring operation for given value
+     *
+     * @param value given value
+     * @return square of number
+     * @throws OverflowException throws when scale of result is bigger than MAX_SCALE
+     */
+    private BigDecimal sqr(BigDecimal value) throws OverflowException {
+        BigDecimal res = value.pow(2);
+
+        if (Math.abs(res.scale()) >= MAX_SCALE) {
+            throw new OverflowException("Scale of result of sqr is bigger than max scale value");
+        }
+
+        return res;
+    }
+
+    /**
+     * Return square root for given value
+     *
+     * @param value given value
+     * @return square root of number
+     * @throws SquareRootException throws when given number is negative
+     */
+    private BigDecimal sqrt(BigDecimal value) throws SquareRootException {
+        if (value.compareTo(BigDecimal.ZERO) < 0) {
+            throw new SquareRootException("Can't get square root of " + value.toPlainString() + ". Non negative number is needed");
+        }
+
+        if (value.equals(BigDecimal.ZERO)) {
+            return BigDecimal.ZERO;
+        }
+
+        return sqrt(value, BigDecimal.ONE);
     }
 
     /**
