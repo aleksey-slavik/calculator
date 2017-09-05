@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -89,9 +90,9 @@ public class NumericFormatter {
      * @param number given number
      * @return string representation of number
      */
-    public static String display(BigDecimal number) {
-        return formatMathView(number.toPlainString());
-    }
+    //public static String display(BigDecimal number) {
+    //    return formatMathView(number.toPlainString());
+    //}
 
     /**
      * Return correct string representation of given string
@@ -239,24 +240,21 @@ public class NumericFormatter {
      * Format display output
      *
      * @param input value to display
-     * @param displayScale input scale for display
      * @return formatted string
      */
-    public static String display(BigDecimal input, int displayScale) {
+    public static String display(BigDecimal input) {
         input = input.stripTrailingZeros();
         int inputScale = input.scale();
         int inputPrecision = input.precision();
 
         StringBuilder pattern;
 
-        if (input.abs().compareTo(MIN_PLAIN_VALUE) == -1 && inputScale > displayScale) {
+        if (input.abs().compareTo(MIN_PLAIN_VALUE) == -1 && inputScale > MAX_PLAIN_SCALE) {
             pattern = new StringBuilder("0.###############E0");
-        } else
-        //if number have more then scale count digits before point then show in engi mode
-        {
+        } else {
             int digitsIntegerPart = inputPrecision - inputScale;
 
-            if (digitsIntegerPart > displayScale) {
+            if (digitsIntegerPart > MAX_PLAIN_SCALE) {
                 pattern = new StringBuilder("0.");
 
                 if (inputScale > 0) {
@@ -271,13 +269,14 @@ public class NumericFormatter {
             } else {
                 //show not more then scale count digits on display
                 pattern = new StringBuilder("###,###.#");
-                for (int i = 0; i < displayScale - digitsIntegerPart; i++) {
+                for (int i = 0; i < MAX_PLAIN_SCALE - digitsIntegerPart; i++) {
                     pattern.append("#");
                 }
 
-                input = input.setScale(displayScale, BigDecimal.ROUND_HALF_UP);
+                input = input.setScale(MAX_PLAIN_SCALE, BigDecimal.ROUND_HALF_UP);
             }
         }
+
         f.applyPattern(pattern.toString());
         return f.format(input);
     }
@@ -301,5 +300,18 @@ public class NumericFormatter {
 
         f.applyPattern(pattern.toString());
         return f.format(InputNumber.getInput());
+    }
+
+    public static BigDecimal parseInput(String number) {
+        BigDecimal res = null;
+        f.setParseBigDecimal(true);
+
+        try {
+            res = (BigDecimal) f.parse(number);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return res;
     }
 }

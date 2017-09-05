@@ -1,6 +1,7 @@
 package com.implemica.calculator.controller;
 
 import com.implemica.calculator.controller.util.HistoryFormatter;
+import com.implemica.calculator.controller.util.InputNumber;
 import com.implemica.calculator.controller.util.NumericFormatter;
 import com.implemica.calculator.model.Calculator;
 import com.implemica.calculator.model.enums.UnaryOperator;
@@ -64,11 +65,6 @@ public class Controller implements Initializable {
     private static final String MESSAGE_INVALID_INPUT = "Invalid input";
 
     /**
-     * Maximum of numeric field size
-     */
-    private static final int NUMERIC_FIELD_SIZE = 16;
-
-    /**
      * Pause duration when pressing buttons
      */
     private static final double DURATION = 0.1;
@@ -79,19 +75,9 @@ public class Controller implements Initializable {
     private static final double CHAR_WIDTH = 7.5;
 
     /**
-     * Decimal separator for {@link BigDecimal}
-     */
-    private static final String DOT = ".";
-
-    /**
      * Decimal separator for numbers in numeric field
      */
     private static final String COMMA = ",";
-
-    /**
-     * String representation of zero with decimal separator
-     */
-    private static final String ZERO_WITH_COMMA = "0,";
 
     private String history = DEFAULT_HISTORY_FIELD_VALUE;
 
@@ -198,6 +184,7 @@ public class Controller implements Initializable {
             normalStatement();
         }
 
+        /*
         if (checkSize() && !isEditable) {
             return;
         }
@@ -210,6 +197,11 @@ public class Controller implements Initializable {
         } else {
             appendNumericFieldText(digit);
         }
+        */
+
+        String digit = ((Button) event.getSource()).getText();
+        InputNumber.appendDigit(digit);
+        numericField.setText(NumericFormatter.formatInput());
     }
 
     /**
@@ -253,6 +245,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private void buttonCommaClick() {
+        /*
         if (!getNumericFieldText().contains(COMMA) && !checkSize()) {
             appendNumericFieldText(COMMA);
         }
@@ -262,6 +255,15 @@ public class Controller implements Initializable {
             isCalculateResult = false;
             setNumericFieldText(ZERO_WITH_COMMA);
         }
+        */
+
+        String number = NumericFormatter.formatInput();
+        if (!InputNumber.isInputPointSet() && InputNumber.canInput()) {
+            InputNumber.addPointToInput();
+            number += COMMA;
+        }
+
+        numericField.setText(number);
     }
 
     /**
@@ -446,6 +448,15 @@ public class Controller implements Initializable {
             return;
         }
 
+        InputNumber.backspaceInput();
+        String number = NumericFormatter.formatInput();
+        if (InputNumber.getInputScale() == 0 && InputNumber.isInputPointSet()) {
+            number += COMMA;
+        }
+
+        numericField.setText(number);
+
+        /*
         String value = getNumericFieldText().replace(" ", "");
         int minLength = value.contains("-") ? 3 : 2;
 
@@ -454,6 +465,7 @@ public class Controller implements Initializable {
         } else {
             setNumericFieldText(value.substring(0, value.length() - 1));
         }
+        */
     }
 
     /**
@@ -548,6 +560,7 @@ public class Controller implements Initializable {
         isSequence = false;
         normalStatement();
         calculator.clearAll();
+        InputNumber.clearInput();
     }
 
     /**
@@ -630,8 +643,8 @@ public class Controller implements Initializable {
      * @return number from numeric field
      */
     private BigDecimal getNumericFieldNumber() {
-        String value = getNumericFieldText().replace(" ", "").replace(COMMA, DOT);
-        return new BigDecimal(value);
+        //String value = getNumericFieldText().replace(" ", "").replace(COMMA, DOT);
+        return NumericFormatter.parseInput(getNumericFieldText());
     }
 
     /**
@@ -659,15 +672,6 @@ public class Controller implements Initializable {
         }
 
         historyPos = history.length();
-    }
-
-    /**
-     * Add given value to current history and save that in history field
-     *
-     * @param value given history value
-     */
-    private void appendNumericFieldText(String value) {
-        setNumericFieldText(getNumericFieldText() + value);
     }
 
     /**
@@ -714,21 +718,6 @@ public class Controller implements Initializable {
      */
     private int getLabelSize() {
         return (int) (historyField.getWidth() / CHAR_WIDTH);
-    }
-
-    /**
-     * Check numeric field length
-     *
-     * @return true if length of numeric field is bigger than max length, false otherwise
-     */
-    private boolean checkSize() {
-        String str = getNumericFieldText().replace(COMMA, "").replace("-", "").replace(" ", "");
-
-        if (str.startsWith("0")) {
-            return str.length() >= NUMERIC_FIELD_SIZE + 1;
-        } else {
-            return str.length() >= NUMERIC_FIELD_SIZE;
-        }
     }
 
     /**

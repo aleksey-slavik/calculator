@@ -33,7 +33,7 @@ public class InputNumber {
      *
      * @param digit input digit
      */
-    public static void addToInput(String digit) {
+    public static void appendDigit(String digit) {
         if (canInput()) {
             if (isPointSet) {
                 scale++;
@@ -107,7 +107,7 @@ public class InputNumber {
      *
      * @return permission for input
      */
-    private static boolean canInput() {
+    public static boolean canInput() {
         return input.precision() < MAX_DIGITS && scale < MAX_DIGITS;
     }
 }
