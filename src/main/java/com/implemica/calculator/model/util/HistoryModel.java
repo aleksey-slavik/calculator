@@ -87,7 +87,7 @@ public class HistoryModel {
     /**
      * Remove last operation in sequence
      */
-    private void removeLastOperation() {
+    public void removeLastOperation() {
         history.remove(history.size() - 1);
     }
 

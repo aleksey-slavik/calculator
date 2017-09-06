@@ -229,6 +229,12 @@ public class Controller implements Initializable {
         String digit = ((Button) event.getSource()).getText();
         appendDigit(digit);
         numericField.setText(formatInput());
+
+        if (isPreviousUnary) {
+            calculator.removeLastOperation();
+            updateHistoryField();
+            isPreviousUnary = false;
+        }
     }
 
     /**

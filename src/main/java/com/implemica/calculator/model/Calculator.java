@@ -218,6 +218,13 @@ public class Calculator {
     }
 
     /**
+     * Remove last operation in sequence
+     */
+    public void removeLastOperation() {
+        history.removeLastOperation();
+    }
+
+    /**
      * Return current statement of history
      *
      * @return current statement of history
