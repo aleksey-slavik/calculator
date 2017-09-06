@@ -258,10 +258,11 @@ public class Controller implements Initializable {
                 updateHistoryField();
             }
 
+            clearInput();
             setNumericFieldNumber(res);
             isCalculateResult = true;
             isSequence = false;
-            isEditable = true;
+            isEditable = false;
         } catch (ZeroDivideException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         } catch (OverflowException e) {
@@ -486,6 +487,7 @@ public class Controller implements Initializable {
         } else {
             setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
             calculator.clearEntry();
+            clearInput();
         }
     }
 
@@ -507,10 +509,9 @@ public class Controller implements Initializable {
             calculator.changeBinary(operator);
         } else {
             calculator.appendOperation(operation);
-        }
-
-        if (isSequence || isPreviousUnary) {
-            setNumericFieldNumber(calculator.calculateResult(operand));
+            if (isSequence) {
+                setNumericFieldNumber(calculator.calculateResult(operand));
+            }
         }
 
         calculator.changeOperator(operand, operator);
