@@ -7,7 +7,7 @@ import javafx.scene.input.KeyEvent;
 import java.util.HashMap;
 
 /**
- * Buttons of calculator with corresponding id and keycode combinations
+ * Buttons of calculator with corresponding fxId and keycode combinations
  *
  * @author Slavik Aleksey V.
  */
@@ -44,18 +44,18 @@ public enum CalculatorButton {
     MS("#memory_store");
 
     /**
-     * fx:id of given button
+     * fx:fxId of given button
      */
-    private String id;
+    private String fxId;
 
     /**
      * One-to-one correspondence between keycode combinations and buttons
      */
     private static HashMap<KeyCodeCombination, CalculatorButton> keys = new HashMap<>();
 
-    CalculatorButton(String id) {
+    CalculatorButton(String fxId) {
 
-        this.id = id;
+        this.fxId = fxId;
     }
 
     /*
@@ -114,18 +114,18 @@ public enum CalculatorButton {
      * @return fx:id of given button
      */
     public String getFXId() {
-        return id;
+        return fxId;
     }
 
     /**
      * Return id of given button.
-     * Difference between fx:id and id is that fx:id started with '#'
+     * Difference between fx:id and fxId is that fx:fxId started with '#'
      *
      * @return id without first char
      */
     public String getId() {
-        return id.substring(1);
-    }
+        return fxId.substring(1);
+    }//todo remove
 
     /**
      * Search button with given keycode combination
@@ -144,10 +144,10 @@ public enum CalculatorButton {
     }
 
     /**
-     * Search button with given id
+     * Search button with given fxId
      *
-     * @param id given id
-     * @return button with given id
+     * @param id given fxId
+     * @return button with given fxId
      */
     public static CalculatorButton searchButtonById(String id) {
         for (CalculatorButton button : CalculatorButton.values()) {
