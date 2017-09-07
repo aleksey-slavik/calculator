@@ -6,9 +6,9 @@ package com.implemica.calculator.model.exception;
  *
  * @author Slavik Aleksey V.
  */
-public class SquareRootException extends Exception {
+public class NegativeSquareRootException extends Exception {
 
-    public SquareRootException(String message) {
+    public NegativeSquareRootException(String message) {
         super(message);
     }
 }

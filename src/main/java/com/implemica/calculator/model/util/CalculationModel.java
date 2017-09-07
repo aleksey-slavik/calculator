@@ -83,9 +83,9 @@ public class CalculationModel {
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
      * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws ZeroDivideException       throws when not zero number divided by zero
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
+    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
         right = value;
         left = calculate();
         return left;
@@ -98,9 +98,9 @@ public class CalculationModel {
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
      * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws ZeroDivideException       throws when not zero number divided by zero
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
+    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
         left = value;
         left = calculate();
         return left;
@@ -123,10 +123,10 @@ public class CalculationModel {
      * @param value    given value
      * @return result of given unary operation for given value
      * @throws OverflowException   throws when scale of result is bigger than MAX_SCALE
-     * @throws SquareRootException throws when given number is negative
-     * @throws ZeroDivideException throws when not zero number divided by zero
+     * @throws NegativeSquareRootException throws when given number is negative
+     * @throws DivideByZeroException throws when not zero number divided by zero
      */
-    public BigDecimal calculateUnary(UnaryOperator operator, BigDecimal value) throws OverflowException, SquareRootException, ZeroDivideException {
+    public BigDecimal calculateUnary(UnaryOperator operator, BigDecimal value) throws OverflowException, NegativeSquareRootException, DivideByZeroException {
         BigDecimal res = BigDecimal.ZERO;
 
         if (operator == UnaryOperator.SQR) {
@@ -164,9 +164,9 @@ public class CalculationModel {
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
      * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws ZeroDivideException       throws when not zero number divided by zero
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    private BigDecimal calculate() throws OverflowException, ZeroDivideException, ZeroByZeroDivideException {
+    private BigDecimal calculate() throws OverflowException, DivideByZeroException, ZeroByZeroDivideException {
         if (operator == null) {
             return BigDecimal.ZERO;
         }
@@ -232,11 +232,11 @@ public class CalculationModel {
      *
      * @param value given value
      * @return inverse number
-     * @throws ZeroDivideException throws when given number equals zero
+     * @throws DivideByZeroException throws when given number equals zero
      */
-    private BigDecimal inverse(BigDecimal value) throws ZeroDivideException {
+    private BigDecimal inverse(BigDecimal value) throws DivideByZeroException {
         if (value.equals(BigDecimal.ZERO)) {
-            throw new ZeroDivideException("Divide by zero in inverse method");
+            throw new DivideByZeroException("Divide by zero in inverse method");
         }
 
         return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
@@ -264,11 +264,11 @@ public class CalculationModel {
      *
      * @param value given value
      * @return square root of number
-     * @throws SquareRootException throws when given number is negative
+     * @throws NegativeSquareRootException throws when given number is negative
      */
-    private BigDecimal sqrt(BigDecimal value) throws SquareRootException {
+    private BigDecimal sqrt(BigDecimal value) throws NegativeSquareRootException {
         if (value.compareTo(BigDecimal.ZERO) < 0) {
-            throw new SquareRootException("Can't get square root of " + value.toPlainString() + ". Non negative number is needed");
+            throw new NegativeSquareRootException("Can't get square root of " + value.toPlainString() + ". Non negative number is needed");
         }
 
         if (value.equals(BigDecimal.ZERO)) {
@@ -283,15 +283,15 @@ public class CalculationModel {
      *
      * @return result of divide
      * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws ZeroDivideException       throws when not zero number divided by zero
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    private BigDecimal divide() throws ZeroByZeroDivideException, ZeroDivideException {
+    private BigDecimal divide() throws ZeroByZeroDivideException, DivideByZeroException {
         if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
             throw new ZeroByZeroDivideException("Quotient of two zeros are not defined");
         }
 
         if (right.equals(BigDecimal.ZERO)) {
-            throw new ZeroDivideException("Divide by zero in expression: " + left + " / " + right);
+            throw new DivideByZeroException("Divide by zero in expression: " + left + " / " + right);
         }
 
         return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();

@@ -1,5 +1,6 @@
 package com.implemica.calculator;
 
+import com.sun.javafx.robot.impl.FXRobotHelper;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -63,6 +64,11 @@ public class ViewTest {
     private static Label title;
 
     /**
+     * Numeric display
+     */
+    private static Label numeric;
+
+    /**
      * Pane of navigation menu
      */
     private static AnchorPane menuPane;
@@ -71,8 +77,20 @@ public class ViewTest {
      * Hide button
      */
     private static Button hide;
+
+    /**
+     * Expand button
+     */
     private static Button expand;
+
+    /**
+     * Show menu button
+     */
     private static Button menuShow;
+
+    /**
+     * Close menu button
+     */
     private static Button menuClose;
 
     @BeforeClass
@@ -91,6 +109,7 @@ public class ViewTest {
             Scene scene = stage.getScene();
             menuPane = (AnchorPane) scene.lookup("#navigator");
             title = (Label) scene.lookup("#title");
+            numeric = (Label) scene.lookup("#numericField");
             hide = (Button) scene.lookup("#hide");
             expand = (Button) scene.lookup("#expand");
             menuShow = (Button) scene.lookup("menuShow");
@@ -121,6 +140,25 @@ public class ViewTest {
             moveTest(random.nextInt(MAX_WINDOW_WIDTH) - MAX_WINDOW_WIDTH / 2,
                     random.nextInt(MAX_WINDOW_HEIGHT) - MAX_WINDOW_HEIGHT / 2);
         }
+    }
+
+    /**
+     * Check that alert window is showing
+     *
+     */
+    @Test
+    public void alertTest() throws Exception {
+        alertTest("yy8798797.987yyut", "#add");
+        alertTest("oigg", "#subtract");
+        alertTest("qbsTT", "#divide");
+        alertTest("inr18yattt,,,", "#multiply");
+        alertTest(".01e9222", "#sqr");
+        alertTest("CPS777", "#sqrt");
+        alertTest("  oiua", "#inverse");
+        alertTest("an ioiuy", "#negate");
+        alertTest("trytry","#memory_store");
+        alertTest("iunmavc","#memory_add");
+        alertTest("nmewnniucvna","#memory_minus");
     }
 
     /**
@@ -353,6 +391,32 @@ public class ViewTest {
         }
 
         return res;
+    }
+
+    /**
+     * Insert into numeric field given value. Search button by his fxId.
+     * Press given button. Check that alert window is focused and main window is not focused.
+     *
+     * @param value given numeric field value
+     * @param buttonId given fxId of button
+     */
+    private void alertTest(String value, String buttonId) throws Exception {
+        WaitForAsyncUtils.waitForFxEvents();
+        Platform.runLater(() -> numeric.setText(value));
+
+        WaitForAsyncUtils.waitForFxEvents();
+        Button button = (Button) stage.getScene().lookup(buttonId);
+        Platform.runLater(button::fire);
+        Thread.sleep(1000);
+
+        Stage main = FXRobotHelper.getStages().get(0);
+        Stage alert = FXRobotHelper.getStages().get(1);
+
+        WaitForAsyncUtils.waitForFxEvents();
+        assertTrue(alert.isFocused());
+        assertFalse(main.isFocused());
+
+        Platform.runLater(alert::close);
     }
 
     /**

@@ -5,6 +5,8 @@ import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.util.Operation;
 
+import static com.implemica.calculator.controller.util.NumericFormatter.*;
+
 /**
  * HistoryFormatter model.
  * Consist set of method for work with history
@@ -51,12 +53,12 @@ public class HistoryFormatter {
      * @param calculator given statement of calculator
      * @return string representation of history
      */
-    public static String parseHistory(Calculator calculator) {
+    public static String formatHistory(Calculator calculator) {
         StringBuilder builder = new StringBuilder(DEFAULT_VALUE);
 
         for (Operation operation : calculator.getHistory()) {
             StringBuilder tmp = new StringBuilder(DEFAULT_VALUE);
-            tmp.append(operation.getOperand());
+            tmp.append(formatNumber(operation.getOperand()));
 
             for (UnaryOperator unary : operation.getUnaryOperators()) {
                 tmp.replace(0, tmp.length(), surround(unary, tmp.toString()));
@@ -75,10 +77,6 @@ public class HistoryFormatter {
 
         String res = builder.toString();
 
-        if (res.endsWith(SPACE)) {
-            res = res.substring(0, res.length() - 1);
-        }
-
-        return res;
+        return res.trim();
     }
 }

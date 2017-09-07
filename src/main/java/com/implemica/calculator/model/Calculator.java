@@ -2,9 +2,9 @@ package com.implemica.calculator.model;
 
 import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
-import com.implemica.calculator.model.exception.SquareRootException;
+import com.implemica.calculator.model.exception.NegativeSquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
-import com.implemica.calculator.model.exception.ZeroDivideException;
+import com.implemica.calculator.model.exception.DivideByZeroException;
 import com.implemica.calculator.model.util.CalculationModel;
 import com.implemica.calculator.model.util.HistoryModel;
 import com.implemica.calculator.model.util.MemoryModel;
@@ -71,9 +71,9 @@ public class Calculator {
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
      * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws ZeroDivideException       throws when not zero number divided by zero
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
+    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
         return calculation.calculateResult(value);
     }
 
@@ -84,9 +84,9 @@ public class Calculator {
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
      * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws ZeroDivideException       throws when not zero number divided by zero
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
+    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
         return calculation.calculateIntermediateResult(value);
     }
 
@@ -97,10 +97,10 @@ public class Calculator {
      * @param value    given value
      * @return result of given unary operation for given value
      * @throws OverflowException   throws when scale of result is bigger than MAX_SCALE
-     * @throws SquareRootException throws when during square root operation of negative number
-     * @throws ZeroDivideException throws when not zero number divided by zero
+     * @throws NegativeSquareRootException throws when during square root operation of negative number
+     * @throws DivideByZeroException throws when not zero number divided by zero
      */
-    public BigDecimal calculateUnary(UnaryOperator operator, BigDecimal value) throws OverflowException, SquareRootException, ZeroDivideException {
+    public BigDecimal calculateUnary(UnaryOperator operator, BigDecimal value) throws OverflowException, NegativeSquareRootException, DivideByZeroException {
         return calculation.calculateUnary(operator, value);
     }
 

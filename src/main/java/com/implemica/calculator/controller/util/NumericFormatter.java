@@ -2,6 +2,7 @@ package com.implemica.calculator.controller.util;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 
 import static com.implemica.calculator.controller.util.InputNumber.*;
@@ -27,13 +28,23 @@ public class NumericFormatter {
      */
     private static final DecimalFormat format = new DecimalFormat();
 
+    /*
+     * Setup "e" as exponent separator
+     */
+    static {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setExponentSeparator("e");
+        format.setDecimalFormatSymbols(symbols);
+        format.setParseBigDecimal(true);
+    }
+
     /**
      * Return correct string representation of given number
      *
      * @param input given number
      * @return string representation of number
      */
-    public static String display(BigDecimal input) {
+    public static String formatNumber(BigDecimal input) {
         input = input.stripTrailingZeros();
         int inputScale = input.scale();
         int inputPrecision = input.precision();
@@ -75,9 +86,9 @@ public class NumericFormatter {
     /**
      * Formats current input number, which saved in {@link InputNumber} object
      *
-     * @return formatted input number to display
+     * @return formatted input number to formatNumber
      */
-    public static String formatInput() {
+    public static String formatNumber() {
         int scale = getInputScale();
         StringBuilder pattern = new StringBuilder("###,##0.");
 
@@ -99,16 +110,7 @@ public class NumericFormatter {
      * @param number given string
      * @return number
      */
-    public static BigDecimal parseInput(String number) {
-        BigDecimal res = null;
-        format.setParseBigDecimal(true);
-
-        try {
-            res = (BigDecimal) format.parse(number);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return res;
+    public static BigDecimal parseInput(String number) throws ParseException {
+        return (BigDecimal) format.parse(number);
     }
 }

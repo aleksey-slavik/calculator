@@ -3,9 +3,9 @@ package com.implemica.calculator.model;
 import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
-import com.implemica.calculator.model.exception.SquareRootException;
+import com.implemica.calculator.model.exception.NegativeSquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
-import com.implemica.calculator.model.exception.ZeroDivideException;
+import com.implemica.calculator.model.exception.DivideByZeroException;
 
 import java.math.BigDecimal;
 
@@ -30,7 +30,7 @@ public class Demo {
         try {
             calculator.changeOperator(two, BinaryOperator.ADD);
             res = calculator.calculateResult(two);
-        } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException e) {
+        } catch (OverflowException | ZeroByZeroDivideException | DivideByZeroException e) {
             e.printStackTrace();
         }
 
@@ -63,7 +63,7 @@ public class Demo {
             calculator.changeOperator(tmp, BinaryOperator.ADD); // tmp +
             tmp = calculator.memoryRecall(); // MR
             res = calculator.calculateResult(tmp); // tmp =
-        } catch (OverflowException | ZeroByZeroDivideException | ZeroDivideException | SquareRootException e) {
+        } catch (OverflowException | ZeroByZeroDivideException | DivideByZeroException | NegativeSquareRootException e) {
             e.printStackTrace();
         }
 

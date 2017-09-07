@@ -1,27 +1,35 @@
 package com.implemica.calculator.controller;
 
+import com.implemica.calculator.controller.util.NumericFormatter;
 import com.implemica.calculator.model.Calculator;
 import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.util.CalculationModel;
 import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
-import com.implemica.calculator.model.exception.SquareRootException;
+import com.implemica.calculator.model.exception.NegativeSquareRootException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
-import com.implemica.calculator.model.exception.ZeroDivideException;
+import com.implemica.calculator.model.exception.DivideByZeroException;
 import com.implemica.calculator.model.util.Operation;
+import com.implemica.calculator.view.CalculatorView;
 import com.implemica.calculator.view.enums.CalculatorButton;
 import javafx.animation.PauseTransition;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Popup;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -137,7 +145,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private Button negate, comma, add, subtract, multiply, divide, inverse, sqr, sqrt, percent,
-            memory_clear, memory_recall, memory_add, memory_minus, memory_store, left, right;
+            memory_clear, memory_recall, memory_add, memory_minus, memory_store, historyLeft, historyRight;
 
     /**
      * Array of buttons which are disabled when errors happens
@@ -189,24 +197,27 @@ public class Controller implements Initializable {
         updateHistoryField();
 
         //add resize history field listener
-        historyField.widthProperty().addListener(observable -> {
-            int label = getLabelSize();
-            String subHistory = history.substring(0, historyPos);
+        historyField.widthProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                int label = getLabelSize();
+                String subHistory = history.substring(0, historyPos);
 
-            if (label > history.length()) {
-                subHistory = history;
-            } else {
-                if (label < subHistory.length()) {
-                    left.setVisible(true);
+                if (label > history.length()) {
+                    subHistory = history;
                 } else {
-                    int newPos = historyPos - label;
-                    newPos = newPos < 0 ? 0 : newPos;
-                    subHistory = history.substring(newPos, historyPos);
-                    left.setVisible(false);
+                    if (label < subHistory.length()) {
+                        historyLeft.setVisible(true);
+                    } else {
+                        int newPos = historyPos - label;
+                        newPos = newPos < 0 ? 0 : newPos;
+                        subHistory = history.substring(newPos, historyPos);
+                        historyLeft.setVisible(false);
+                    }
                 }
-            }
 
-            historyField.setText(subHistory);
+                historyField.setText(subHistory);
+            }
         });
     }
 
@@ -228,7 +239,7 @@ public class Controller implements Initializable {
 
         String digit = ((Button) event.getSource()).getText();
         appendDigit(digit);
-        numericField.setText(formatInput());
+        numericField.setText(formatNumber());
 
         if (isPreviousUnary) {
             calculator.removeLastOperation();
@@ -269,7 +280,7 @@ public class Controller implements Initializable {
             isCalculateResult = true;
             isSequence = false;
             isEditable = false;
-        } catch (ZeroDivideException e) {
+        } catch (DivideByZeroException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         } catch (OverflowException e) {
             errorStatement(MESSAGE_OVERFLOW);
@@ -283,7 +294,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private void buttonCommaClick() {
-        String number = formatInput();
+        String number = formatNumber();
 
         if (!isInputPointSet() && canInput()) {
             addPointToInput();
@@ -309,7 +320,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Processing of click on left arrow in history field
+     * Processing of click on historyLeft arrow in history field
      */
     @FXML
     private void leftClick() {
@@ -318,15 +329,15 @@ public class Controller implements Initializable {
 
         if (historyPos - size < 0) {
             historyPos = size;
-            left.setVisible(false);
+            historyLeft.setVisible(false);
         }
 
-        right.setVisible(true);
+        historyRight.setVisible(true);
         historyField.setText(history.substring(historyPos - size, historyPos));
     }
 
     /**
-     * Processing of click on right arrow in history field
+     * Processing of click on historyRight arrow in history field
      */
     @FXML
     private void rightClick() {
@@ -336,7 +347,7 @@ public class Controller implements Initializable {
 
         if (historyPos > historyLength) {
             historyPos = historyLength;
-            right.setVisible(false);
+            historyRight.setVisible(false);
         }
 
         int delta = historyPos - size;
@@ -347,7 +358,7 @@ public class Controller implements Initializable {
             start = delta;
         }
 
-        left.setVisible(isPositiveDelta);
+        historyLeft.setVisible(isPositiveDelta);
         historyField.setText(history.substring(start, historyPos));
     }
 
@@ -365,7 +376,7 @@ public class Controller implements Initializable {
             processBinaryOperator(binaryGroup.get(button));
         } catch (ZeroByZeroDivideException e) {
             errorStatement(MESSAGE_ZERO_DIVIDE_BY_ZERO);
-        } catch (ZeroDivideException e) {
+        } catch (DivideByZeroException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         } catch (OverflowException e) {
             errorStatement(MESSAGE_OVERFLOW);
@@ -386,9 +397,9 @@ public class Controller implements Initializable {
             processUnaryOperator(unaryGroup.get(button));
         } catch (OverflowException e) {
             errorStatement(MESSAGE_OVERFLOW);
-        } catch (ZeroDivideException e) {
+        } catch (DivideByZeroException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
-        } catch (SquareRootException e) {
+        } catch (NegativeSquareRootException e) {
             errorStatement(MESSAGE_INVALID_INPUT);
         }
     }
@@ -460,7 +471,7 @@ public class Controller implements Initializable {
         }
 
         backspaceInput();
-        String number = formatInput();
+        String number = formatNumber();
 
         if (getInputScale() == 0 && isInputPointSet()) {
             number += COMMA;
@@ -503,9 +514,9 @@ public class Controller implements Initializable {
      * @param operator operator
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
      * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws ZeroDivideException       throws when not zero number divided by zero
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    private void processBinaryOperator(BinaryOperator operator) throws OverflowException, ZeroByZeroDivideException, ZeroDivideException {
+    private void processBinaryOperator(BinaryOperator operator) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
         BigDecimal operand = getNumericFieldNumber();
         Operation operation = new Operation();
         operation.setOperand(operand);
@@ -533,10 +544,10 @@ public class Controller implements Initializable {
      *
      * @param operator operator
      * @throws OverflowException   throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
-     * @throws ZeroDivideException throws when not zero number divided by zero
-     * @throws SquareRootException throws when during square root operation of negative number
+     * @throws DivideByZeroException throws when not zero number divided by zero
+     * @throws NegativeSquareRootException throws when during square root operation of negative number
      */
-    private void processUnaryOperator(UnaryOperator operator) throws OverflowException, ZeroDivideException, SquareRootException {
+    private void processUnaryOperator(UnaryOperator operator) throws OverflowException, DivideByZeroException, NegativeSquareRootException {
         BigDecimal operand = getNumericFieldNumber();
 
         if (!isPreviousUnary) {
@@ -576,7 +587,21 @@ public class Controller implements Initializable {
      * @return number from numeric field
      */
     private BigDecimal getNumericFieldNumber() {
-        return parseInput(getNumericFieldText());
+        BigDecimal number;
+
+        try {
+            number = parseInput(getNumericFieldText());
+        } catch (ParseException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Parse exception");
+            alert.setContentText("Error while formatting number from numeric field. Number has wrong format");
+            alert.showAndWait();
+            normalStatement();
+            throw new IllegalStateException();
+        }
+
+        return number;
     }
 
     /**
@@ -585,7 +610,7 @@ public class Controller implements Initializable {
      * @param number given number
      */
     private void setNumericFieldNumber(BigDecimal number) {
-        numericField.setText(display(number));
+        numericField.setText(NumericFormatter.formatNumber(number));
     }
 
     /**
@@ -593,7 +618,7 @@ public class Controller implements Initializable {
      */
     private void updateHistoryField() {
         int size = getLabelSize();
-        history = parseHistory(calculator);
+        history = formatHistory(calculator);
         int length = history.length();
         String subHistory = history;
         boolean checkLength = length > size;
@@ -602,8 +627,8 @@ public class Controller implements Initializable {
             subHistory = history.substring(length - size + 1);
         }
 
-        left.setVisible(checkLength);
-        right.setVisible(false);
+        historyLeft.setVisible(checkLength);
+        historyRight.setVisible(false);
         historyPos = length;
         historyField.setText(subHistory);
     }
@@ -664,8 +689,10 @@ public class Controller implements Initializable {
         disableMemoryButtons(isMemoryLocked);
         calculator.resetOperator();
         calculator.clearHistory();
+        clearInput();
         setNumericFieldText(DEFAULT_NUMERIC_FIELD_VALUE);
         updateHistoryField();
+        isPreviousUnary = false;
     }
 
     /**

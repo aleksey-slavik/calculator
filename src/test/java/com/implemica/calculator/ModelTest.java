@@ -4,10 +4,10 @@ import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.util.CalculationModel;
 import com.implemica.calculator.model.util.MemoryModel;
 import com.implemica.calculator.model.enums.BinaryOperator;
-import com.implemica.calculator.model.exception.SquareRootException;
+import com.implemica.calculator.model.exception.NegativeSquareRootException;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
-import com.implemica.calculator.model.exception.ZeroDivideException;
+import com.implemica.calculator.model.exception.DivideByZeroException;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -238,7 +238,7 @@ public class ModelTest {
         try {
             calculationModel.calculateUnary(UnaryOperator.SQRT, new BigDecimal(value));
             fail("Current value " + value + " is valid for square root");
-        } catch (SquareRootException e) {
+        } catch (NegativeSquareRootException e) {
             //expected
         }
     }
@@ -279,7 +279,7 @@ public class ModelTest {
         try {
             calculationModel.calculateUnary(UnaryOperator.INVERSE, new BigDecimal(value));
             fail("Inverse of " + value + " doesn't call exception. Exception called only when value equals zero");
-        } catch (ZeroDivideException e) {
+        } catch (DivideByZeroException e) {
             //expected
         }
     }
@@ -302,7 +302,7 @@ public class ModelTest {
         try {
             calculationModel.calculateResult(rightValue);
             fail("Values " + left + " and " + right + " don't throw exceptions for " + operator);
-        } catch (ZeroByZeroDivideException | ZeroDivideException | OverflowException e) {
+        } catch (ZeroByZeroDivideException | DivideByZeroException | OverflowException e) {
             //expected
         }
     }

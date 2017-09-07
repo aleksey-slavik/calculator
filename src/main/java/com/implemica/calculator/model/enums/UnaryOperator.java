@@ -13,7 +13,7 @@ public enum  UnaryOperator {
     SQRT("√");
 
     /**
-     * Value which display in history when given operator is used
+     * Value which formatNumber in history when given operator is used
      */
     private String text;
 
