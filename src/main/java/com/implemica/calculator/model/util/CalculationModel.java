@@ -82,10 +82,10 @@ public class CalculationModel {
      * @param value given value
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideByZeroException throws when zero divided by zero
      * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
+    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroDivideByZeroException, DivideByZeroException {
         right = value;
         left = calculate();
         return left;
@@ -97,10 +97,10 @@ public class CalculationModel {
      * @param value given value
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideByZeroException throws when zero divided by zero
      * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
+    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroDivideByZeroException, DivideByZeroException {
         left = value;
         left = calculate();
         return left;
@@ -163,10 +163,10 @@ public class CalculationModel {
      *
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideByZeroException throws when zero divided by zero
      * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    private BigDecimal calculate() throws OverflowException, DivideByZeroException, ZeroByZeroDivideException {
+    private BigDecimal calculate() throws OverflowException, DivideByZeroException, ZeroDivideByZeroException {
         if (operator == null) {
             return BigDecimal.ZERO;
         }
@@ -282,12 +282,12 @@ public class CalculationModel {
      * Divide left operand to right
      *
      * @return result of divide
-     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideByZeroException throws when zero divided by zero
      * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    private BigDecimal divide() throws ZeroByZeroDivideException, DivideByZeroException {
+    private BigDecimal divide() throws ZeroDivideByZeroException, DivideByZeroException {
         if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
-            throw new ZeroByZeroDivideException("Quotient of two zeros are not defined");
+            throw new ZeroDivideByZeroException("Quotient of two zeros are not defined");
         }
 
         if (right.equals(BigDecimal.ZERO)) {

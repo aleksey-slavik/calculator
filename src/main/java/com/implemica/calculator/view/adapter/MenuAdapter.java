@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Menu adapter
+ * Menu adapter. Consist all menu items
  *
  * @author Slavik Aleksey V.
  */

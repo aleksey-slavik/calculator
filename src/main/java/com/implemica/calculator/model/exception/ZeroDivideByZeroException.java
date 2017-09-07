@@ -6,9 +6,9 @@ package com.implemica.calculator.model.exception;
  *
  * @author Slavik Aleksey V.
  */
-public class ZeroByZeroDivideException extends Exception {
+public class ZeroDivideByZeroException extends Exception {
 
-    public ZeroByZeroDivideException(String message) {
+    public ZeroDivideByZeroException(String message) {
         super(message);
     }
 }

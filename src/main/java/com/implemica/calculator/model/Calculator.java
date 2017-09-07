@@ -3,7 +3,7 @@ package com.implemica.calculator.model;
 import com.implemica.calculator.model.enums.UnaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.NegativeSquareRootException;
-import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
+import com.implemica.calculator.model.exception.ZeroDivideByZeroException;
 import com.implemica.calculator.model.exception.DivideByZeroException;
 import com.implemica.calculator.model.util.CalculationModel;
 import com.implemica.calculator.model.util.HistoryModel;
@@ -70,10 +70,10 @@ public class Calculator {
      * @param value given value
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideByZeroException throws when zero divided by zero
      * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
+    public BigDecimal calculateResult(BigDecimal value) throws OverflowException, ZeroDivideByZeroException, DivideByZeroException {
         return calculation.calculateResult(value);
     }
 
@@ -83,10 +83,10 @@ public class Calculator {
      * @param value given value
      * @return result of calculation
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE
-     * @throws ZeroByZeroDivideException throws when zero divided by zero
+     * @throws ZeroDivideByZeroException throws when zero divided by zero
      * @throws DivideByZeroException       throws when not zero number divided by zero
      */
-    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
+    public BigDecimal calculateIntermediateResult(BigDecimal value) throws OverflowException, ZeroDivideByZeroException, DivideByZeroException {
         return calculation.calculateIntermediateResult(value);
     }
 

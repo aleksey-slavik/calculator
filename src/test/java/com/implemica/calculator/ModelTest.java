@@ -6,7 +6,7 @@ import com.implemica.calculator.model.util.MemoryModel;
 import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.exception.NegativeSquareRootException;
 import com.implemica.calculator.model.exception.OverflowException;
-import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
+import com.implemica.calculator.model.exception.ZeroDivideByZeroException;
 import com.implemica.calculator.model.exception.DivideByZeroException;
 import org.junit.Test;
 
@@ -302,7 +302,7 @@ public class ModelTest {
         try {
             calculationModel.calculateResult(rightValue);
             fail("Values " + left + " and " + right + " don't throw exceptions for " + operator);
-        } catch (ZeroByZeroDivideException | DivideByZeroException | OverflowException e) {
+        } catch (ZeroDivideByZeroException | DivideByZeroException | OverflowException e) {
             //expected
         }
     }

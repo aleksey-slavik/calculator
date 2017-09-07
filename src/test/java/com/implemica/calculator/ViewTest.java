@@ -144,7 +144,6 @@ public class ViewTest {
 
     /**
      * Check that alert window is showing
-     *
      */
     @Test
     public void alertTest() throws Exception {
@@ -156,9 +155,9 @@ public class ViewTest {
         alertTest("CPS777", "#sqrt");
         alertTest("  oiua", "#inverse");
         alertTest("an ioiuy", "#negate");
-        alertTest("trytry","#memory_store");
-        alertTest("iunmavc","#memory_add");
-        alertTest("nmewnniucvna","#memory_minus");
+        alertTest("trytry", "#memory_store");
+        alertTest("iunmavc", "#memory_add");
+        alertTest("nmewnniucvna", "#memory_minus");
     }
 
     /**
@@ -397,7 +396,7 @@ public class ViewTest {
      * Insert into numeric field given value. Search button by his fxId.
      * Press given button. Check that alert window is focused and main window is not focused.
      *
-     * @param value given numeric field value
+     * @param value    given numeric field value
      * @param buttonId given fxId of button
      */
     private void alertTest(String value, String buttonId) throws Exception {
@@ -407,8 +406,8 @@ public class ViewTest {
         WaitForAsyncUtils.waitForFxEvents();
         Button button = (Button) stage.getScene().lookup(buttonId);
         Platform.runLater(button::fire);
-        Thread.sleep(1000);
 
+        Thread.sleep(1000);
         Stage main = FXRobotHelper.getStages().get(0);
         Stage alert = FXRobotHelper.getStages().get(1);
 
@@ -417,6 +416,7 @@ public class ViewTest {
         assertFalse(main.isFocused());
 
         Platform.runLater(alert::close);
+
     }
 
     /**

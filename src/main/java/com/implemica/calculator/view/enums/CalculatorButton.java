@@ -44,7 +44,7 @@ public enum CalculatorButton {
     MS("#memory_store");
 
     /**
-     * fx:fxId of given button
+     * fx:id of given button
      */
     private String fxId;
 
@@ -118,16 +118,6 @@ public enum CalculatorButton {
     }
 
     /**
-     * Return id of given button.
-     * Difference between fx:id and fxId is that fx:fxId started with '#'
-     *
-     * @return id without first char
-     */
-    public String getId() {
-        return fxId.substring(1);
-    }//todo remove
-
-    /**
      * Search button with given keycode combination
      *
      * @param event given keycode combination
@@ -146,12 +136,12 @@ public enum CalculatorButton {
     /**
      * Search button with given fxId
      *
-     * @param id given fxId
+     * @param fxId given fxId
      * @return button with given fxId
      */
-    public static CalculatorButton searchButtonById(String id) {
+    public static CalculatorButton searchButtonById(String fxId) {
         for (CalculatorButton button : CalculatorButton.values()) {
-            if (button.getId().equals(id)) {
+            if (button.getFXId().equals(fxId)) {
                 return button;
             }
         }

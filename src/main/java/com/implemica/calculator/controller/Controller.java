@@ -7,10 +7,9 @@ import com.implemica.calculator.model.util.CalculationModel;
 import com.implemica.calculator.model.enums.BinaryOperator;
 import com.implemica.calculator.model.exception.OverflowException;
 import com.implemica.calculator.model.exception.NegativeSquareRootException;
-import com.implemica.calculator.model.exception.ZeroByZeroDivideException;
+import com.implemica.calculator.model.exception.ZeroDivideByZeroException;
 import com.implemica.calculator.model.exception.DivideByZeroException;
 import com.implemica.calculator.model.util.Operation;
-import com.implemica.calculator.view.CalculatorView;
 import com.implemica.calculator.view.enums.CalculatorButton;
 import javafx.animation.PauseTransition;
 import javafx.beans.InvalidationListener;
@@ -23,8 +22,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Popup;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
@@ -80,7 +77,7 @@ public class Controller implements Initializable {
     private static final double DURATION = 0.1;
 
     /**
-     * Width of character
+     * Width of character in pixels
      */
     private static final double CHAR_WIDTH = 7.5;
 
@@ -284,7 +281,7 @@ public class Controller implements Initializable {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
         } catch (OverflowException e) {
             errorStatement(MESSAGE_OVERFLOW);
-        } catch (ZeroByZeroDivideException e) {
+        } catch (ZeroDivideByZeroException e) {
             errorStatement(MESSAGE_ZERO_DIVIDE_BY_ZERO);
         }
     }
@@ -369,12 +366,11 @@ public class Controller implements Initializable {
      */
     @FXML
     private void binaryOperatorClick(ActionEvent event) {
-        String id = ((Button) event.getSource()).getId();
-        CalculatorButton button = CalculatorButton.searchButtonById(id);
+        CalculatorButton button = getButtonFromEvent(event);
 
         try {
             processBinaryOperator(binaryGroup.get(button));
-        } catch (ZeroByZeroDivideException e) {
+        } catch (ZeroDivideByZeroException e) {
             errorStatement(MESSAGE_ZERO_DIVIDE_BY_ZERO);
         } catch (DivideByZeroException e) {
             errorStatement(MESSAGE_DIVIDE_BY_ZERO);
@@ -390,8 +386,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private void unaryOperatorClick(ActionEvent event) {
-        String id = ((Button) event.getSource()).getId();
-        CalculatorButton button = CalculatorButton.searchButtonById(id);
+        CalculatorButton button = getButtonFromEvent(event);
 
         try {
             processUnaryOperator(unaryGroup.get(button));
@@ -411,8 +406,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private void memoryOperatorClick(ActionEvent event) {
-        String id = ((Button) event.getSource()).getId();
-        CalculatorButton button = CalculatorButton.searchButtonById(id);
+        CalculatorButton button = getButtonFromEvent(event);
         isMemoryLocked = false;
 
         if (button == CalculatorButton.MC) {
@@ -513,10 +507,10 @@ public class Controller implements Initializable {
      *
      * @param operator operator
      * @throws OverflowException         throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
-     * @throws ZeroByZeroDivideException throws when zero divided by zero
-     * @throws DivideByZeroException       throws when not zero number divided by zero
+     * @throws ZeroDivideByZeroException throws when zero divided by zero
+     * @throws DivideByZeroException     throws when not zero number divided by zero
      */
-    private void processBinaryOperator(BinaryOperator operator) throws OverflowException, ZeroByZeroDivideException, DivideByZeroException {
+    private void processBinaryOperator(BinaryOperator operator) throws OverflowException, ZeroDivideByZeroException, DivideByZeroException {
         BigDecimal operand = getNumericFieldNumber();
         Operation operation = new Operation();
         operation.setOperand(operand);
@@ -543,8 +537,8 @@ public class Controller implements Initializable {
      * Processing of click on binary operator button.
      *
      * @param operator operator
-     * @throws OverflowException   throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
-     * @throws DivideByZeroException throws when not zero number divided by zero
+     * @throws OverflowException           throws when scale of result is bigger than MAX_SCALE, defined in {@link CalculationModel}
+     * @throws DivideByZeroException       throws when not zero number divided by zero
      * @throws NegativeSquareRootException throws when during square root operation of negative number
      */
     private void processUnaryOperator(UnaryOperator operator) throws OverflowException, DivideByZeroException, NegativeSquareRootException {
@@ -703,5 +697,16 @@ public class Controller implements Initializable {
     private void errorStatement(String error) {
         disableButtons(true);
         setNumericFieldText(error);
+    }
+
+    /**
+     * Search {@link CalculatorButton} corresponding given event from calculator
+     *
+     * @param event calculator event
+     * @return button
+     */
+    private CalculatorButton getButtonFromEvent(ActionEvent event) {
+        String fxId = "#" + ((Button) event.getSource()).getId();
+        return CalculatorButton.searchButtonById(fxId);
     }
 }
