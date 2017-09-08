@@ -34,6 +34,8 @@ public class NumericFormatter {
     static {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setExponentSeparator("e");
+        symbols.setGroupingSeparator(' ');
+        symbols.setDecimalSeparator(',');
         format.setDecimalFormatSymbols(symbols);
         format.setParseBigDecimal(true);
     }

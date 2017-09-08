@@ -113,7 +113,7 @@ public class CalculationModel {
      * @return percent value of left operand
      */
     public BigDecimal percent(BigDecimal value) {
-        return left.multiply(value.divide(HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP)).stripTrailingZeros();
+        return left.multiply(value.divide(HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP));
     }
 
     /**
@@ -196,7 +196,7 @@ public class CalculationModel {
      * @return result of add
      */
     private BigDecimal add() {
-        return left.add(right).stripTrailingZeros();
+        return left.add(right);
     }
 
     /**
@@ -205,7 +205,7 @@ public class CalculationModel {
      * @return result of subtract
      */
     private BigDecimal subtract() {
-        return left.subtract(right).stripTrailingZeros();
+        return left.subtract(right);
     }
 
     /**
@@ -214,7 +214,7 @@ public class CalculationModel {
      * @return result of multiply
      */
     private BigDecimal multiply() {
-        return left.multiply(right).stripTrailingZeros();
+        return left.multiply(right);
     }
 
     /**
@@ -239,7 +239,7 @@ public class CalculationModel {
             throw new DivideByZeroException("Divide by zero in inverse method");
         }
 
-        return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return BigDecimal.ONE.divide(value, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
     /**
@@ -286,15 +286,15 @@ public class CalculationModel {
      * @throws DivideByZeroException       throws when not zero number divided by zero
      */
     private BigDecimal divide() throws ZeroDivideByZeroException, DivideByZeroException {
-        if (left.equals(BigDecimal.ZERO) && right.equals(BigDecimal.ZERO)) {
-            throw new ZeroDivideByZeroException("Quotient of two zeros are not defined");
-        }
-
         if (right.equals(BigDecimal.ZERO)) {
+            if (left.equals(BigDecimal.ZERO)) {
+                throw new ZeroDivideByZeroException("Quotient of two zeros are not defined");
+            }
+
             throw new DivideByZeroException("Divide by zero in expression: " + left + " / " + right);
         }
 
-        return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
     /**

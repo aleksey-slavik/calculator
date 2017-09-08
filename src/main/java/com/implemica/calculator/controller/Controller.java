@@ -213,7 +213,7 @@ public class Controller implements Initializable {
             @Override
             public void invalidated(Observable observable) {
                 int label = getLabelSize();
-                String subHistory = history.substring(0, historyPos);
+                String subHistory = history.substring(0, historyPos); //todo
 
                 if (label > history.length()) {
                     subHistory = history;
@@ -311,9 +311,8 @@ public class Controller implements Initializable {
         if (!isInputPointSet() && canInput()) {
             addPointToInput();
             number += COMMA;
+            numericField.setText(number);
         }
-
-        numericField.setText(number);
     }
 
     /**
@@ -607,7 +606,7 @@ public class Controller implements Initializable {
             alert.setContentText(ALERT_CONTENT);
             alert.showAndWait();
             normalStatement();
-            throw new IllegalStateException();
+            throw new RuntimeException();
         }
 
         return number;
