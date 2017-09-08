@@ -72,6 +72,21 @@ public class Controller implements Initializable {
     private static final String MESSAGE_INVALID_INPUT = "Invalid input";
 
     /**
+     * Title of the alert window
+     */
+    private static final String ALERT_TITLE = "Error";
+
+    /**
+     * Header of the alert window
+     */
+    private static final String ALERT_HEADER = "Parse exception";
+
+    /**
+     * Content of the alert window
+     */
+    private static final String ALERT_CONTENT = "Error while formatting number from numeric field. Number has wrong format";
+
+    /**
      * Pause duration when pressing buttons
      */
     private static final double DURATION = 0.1;
@@ -587,9 +602,9 @@ public class Controller implements Initializable {
             number = parseInput(getNumericFieldText());
         } catch (ParseException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Parse exception");
-            alert.setContentText("Error while formatting number from numeric field. Number has wrong format");
+            alert.setTitle(ALERT_TITLE);
+            alert.setHeaderText(ALERT_HEADER);
+            alert.setContentText(ALERT_CONTENT);
             alert.showAndWait();
             normalStatement();
             throw new IllegalStateException();
