@@ -125,6 +125,7 @@ public class ViewTest {
      */
     @Test
     public void moveTest() {
+        //handle tests
         moveTest(100, 100);
         moveTest(274, -182);
         moveTest(-530, 0);
@@ -132,6 +133,14 @@ public class ViewTest {
         moveTest(123, -298);
         moveTest(-430, 257);
         moveTest(534, 341);
+        moveTest(-27,-436);
+
+        //random tests
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
+            moveTest(random.nextInt(MIN_WINDOW_WIDTH) - MIN_WINDOW_WIDTH / 2,
+                    random.nextInt(MIN_WINDOW_HEIGHT) - MIN_WINDOW_HEIGHT / 2);
+        }
     }
 
     /**
@@ -139,16 +148,16 @@ public class ViewTest {
      */
     @Test
     public void alertTest() throws Exception {
-        alertTest("yy8798797.987yyut", "#add");
-        alertTest("oigg", "#subtract");
-        alertTest("qbsTT", "#divide");
-        alertTest("inr18yattt,,,", "#multiply");
-        alertTest(".01e9222", "#sqr");
-        alertTest("CPS777", "#sqrt");
-        alertTest("  oiua", "#inverse");
-        alertTest("trytry", "#memory_store");
-        alertTest("iunmavc", "#memory_add");
-        alertTest("nmewnniucvna", "#memory_minus");
+        alertTest("yy8798797.987yyut");
+        alertTest("oigg");
+        alertTest("qbsTT");
+        alertTest("inr18yattt,,,");
+        alertTest(".01e9222");
+        alertTest("CPS777");
+        alertTest("  oiua");
+        alertTest("trytry");
+        alertTest("iunmavc");
+        alertTest("nmewnniucvna");
     }
 
     /**
@@ -384,18 +393,19 @@ public class ViewTest {
     }
 
     /**
-     * Insert into numeric field given value. Search button by his fxId.
-     * Press given button. Check that alert window is focused and main window is not focused.
+     * Insert into numeric field given value.
+     * Press random button from parse group. Check that alert window is focused and main window is not focused.
      *
      * @param value    given numeric field value
-     * @param buttonId given fxId of button
      */
-    private void alertTest(String value, String buttonId) throws Exception {
+    private void alertTest(String value) throws Exception {
         WaitForAsyncUtils.waitForFxEvents();
         Platform.runLater(() -> numeric.setText(value));
 
         WaitForAsyncUtils.waitForFxEvents();
-        Button button = (Button) stage.getScene().lookup(buttonId);
+        Random random = new Random();
+        int pos = random.nextInt(parseGroup().size());
+        Button button = parseGroup().get(pos);
         Platform.runLater(button::fire);
 
         Thread.sleep(1000);
@@ -408,6 +418,26 @@ public class ViewTest {
 
         Platform.runLater(alert::close);
 
+    }
+
+    /**
+     * Create list of buttons group, that used parsing
+     *
+     * @return parse buttons group
+     */
+    private ArrayList<Button> parseGroup() {
+        ArrayList<Button> list = new ArrayList<>();
+        list.add(GuiTest.find("#add"));
+        list.add(GuiTest.find("#subtract"));
+        list.add(GuiTest.find("#divide"));
+        list.add(GuiTest.find("#multiply"));
+        list.add(GuiTest.find("#sqr"));
+        list.add(GuiTest.find("#sqrt"));
+        list.add(GuiTest.find("#inverse"));
+        list.add(GuiTest.find("#memory_store"));
+        list.add(GuiTest.find("#memory_add"));
+        list.add(GuiTest.find("#memory_minus"));
+        return list;
     }
 
     /**

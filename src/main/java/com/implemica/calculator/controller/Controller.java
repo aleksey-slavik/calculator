@@ -212,20 +212,18 @@ public class Controller implements Initializable {
         historyField.widthProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
-                int label = getLabelSize();
-                String subHistory = history.substring(0, historyPos); //todo
+                int labelSize = getLabelSize();
+                String subHistory = history.substring(0, historyPos);
 
-                if (label > history.length()) {
+                if (labelSize < subHistory.length()) {
+                    historyLeft.setVisible(true);
+                } else if (labelSize > history.length()) {
                     subHistory = history;
                 } else {
-                    if (label < subHistory.length()) {
-                        historyLeft.setVisible(true);
-                    } else {
-                        int newPos = historyPos - label;
-                        newPos = newPos < 0 ? 0 : newPos;
-                        subHistory = history.substring(newPos, historyPos);
-                        historyLeft.setVisible(false);
-                    }
+                    int newPos = historyPos - labelSize;
+                    newPos = newPos < 0 ? 0 : newPos;
+                    subHistory = history.substring(newPos, historyPos);
+                    historyLeft.setVisible(false);
                 }
 
                 historyField.setText(subHistory);
