@@ -475,7 +475,8 @@ public class Controller implements Initializable {
             updateHistoryField();
         }
 
-        setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
+        changeSign();
+        setNumericFieldNumber(getInput());
     }
 
     /**

@@ -335,4 +335,8 @@ public class CalculationModel {
 
         return result;
     }
+
+    public static void main(String[] args) {
+        System.out.println(new BigDecimal("2e-10000").compareTo(new BigDecimal("1e-10000")));
+    }
 }

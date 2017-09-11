@@ -110,4 +110,11 @@ public class InputNumber {
     public static boolean canInput() {
         return input.precision() < MAX_DIGITS && scale < MAX_DIGITS;
     }
+
+    /**
+     * Negate current input value
+     */
+    public static void changeSign() {
+        input = input.negate();
+    }
 }

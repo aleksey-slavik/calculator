@@ -91,19 +91,16 @@ public class ControllerTest {
         testExpression("9999999999999999 + 1 - 1 =", "9 999 999 999 999 999");
         testExpression("9999999999999999 negate - 1 =", "-1e16");
         testExpression("9999999999999999 negate - 1 + 1 =", "-9 999 999 999 999 999");
-        testExpression("9999999999999999 + 0,1 = = = =", "9 999 999 999 999 999");
-        testExpression("9999999999999999 + 0,1 = = = = =", "1e16");
-        testExpression("9999999999999999 + 0,4999999999999999 =", "9 999 999 999 999 999");
-        testExpression("9999999999999999 + 0,4999999999999999 + 0,000000000000001 =", "1e16");
+        testExpression("9999999999999999 + 0,1 = = = = = = = = =", "9 999 999 999 999 999,9");
+        testExpression("9999999999999999 + 0,1 = = = = = = = = = =", "1e16");
+
         //negative power
         testExpression("0,0000000000000001 / 10 =", "1e-17");
         testExpression("0,0000000000000001 / 10 * 10 =", "0,0000000000000001");
         testExpression("0,0000000000000001 negate / 10 =", "-1e-17");
         testExpression("0,0000000000000001 negate / 10 * 10 =", "-0,0000000000000001");
-        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 - MR = = = = =", "0,0000000000000001");
+        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 - MR =", "9e-17");
         testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 - MR = = = = = =", "4e-17");
-        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 negate + MR = = = = =", "-0,0000000000000001");
-        testExpression("0,0000000000000001 / 10 = MS C 0,0000000000000001 negate + MR = = = = = =", "-4e-17");
     }
 
     /**
@@ -631,7 +628,7 @@ public class ControllerTest {
         testExpression("0 + 10 % =", "0", "");
         testExpression("100 + 0 % =", "100", "");
         testExpression("987,88 + 0 % =", "987,88", "");
-        testExpression(",0001 negate + 0 % =", "-0,0001", "");
+        testExpression("0,0001 negate + 0 % =", "-0,0001", "");
 
         //with hundred
         testExpression("100 + 100 % =", "200", "");
@@ -644,18 +641,18 @@ public class ControllerTest {
         //with highest possible
         testExpression("0 + 9999999999999999 % =", "0", "");
         testExpression("9999999999999999 % =", "0", "");
-        testExpression("9999999999999999 + 9999999999999999 % =", "1,00000000000001e+30", "");
+        testExpression("9999999999999999 + 9999999999999999 % =", "1,00000000000001e30", "");
         testExpression("9999999999999999 + 0 % =", "9 999 999 999 999 999", "");
-        testExpression("9999999999999999 * 9999999999999999 % =", "9,999999999999997e+45", "");
-        testExpression("9999999999999999 - 9999999999999999 % =", "-9,999999999999898e+29", "");
+        testExpression("9999999999999999 * 9999999999999999 % =", "9,999999999999999e45", "");
+        testExpression("9999999999999999 - 9999999999999999 % =", "-9,9999999999999e29", "");
 
         //with lowest possible
         testExpression("0 + 0,00000000000001 % =", "0", "");
         testExpression("0,00000000000001 % =", "0", "");
-        testExpression(",0000000000000001 + 1 % =", "0,0000000000000001", "");
-        testExpression(",0000000000000001 - 1 % =", "0,0000000000000001", "");
-        testExpression(",0000000000000001 + 100 % =", "0,0000000000000002", "");
-        testExpression(",0000000000000001 + ,0000000000000001 % =", "0,0000000000000001", "");
+        testExpression("0,0000000000000001 + 1 % =", "0,0000000000000001", "");
+        testExpression("0,0000000000000001 - 1 % =", "9,9e-17", "");
+        testExpression("0,0000000000000001 + 100 % =", "0,0000000000000002", "");
+        testExpression("0,0000000000000001 + 0,0000000000000001 % =", "0,0000000000000001", "");
 
         //several percent
         testExpression("100 + 10 % % % =", "110", "");
@@ -663,7 +660,7 @@ public class ControllerTest {
         testExpression("200 + 10 % % % =", "280", "");
         testExpression("45 + 45 % % =", "54,1125", "");
         testExpression("196 + 240 % % % =", "2 003,08864", "");
-        testExpression(",0001 + ,0001 % % =", "0,0001000000000001", "");
+        testExpression("0,0001 + 0,0001 % % =", "0,0001000000000001", "");
     }
 
     /**
@@ -675,7 +672,7 @@ public class ControllerTest {
         testExpression("back", "0");
         testExpression(", back", "0");
         testExpression(",1 back", "0,");
-        testExpression(",1 negate back", "-0,");
+        testExpression(",1 negate back", "0,");
 
         //delete all digits
         testExpression("back", "0");
@@ -699,7 +696,7 @@ public class ControllerTest {
         testExpression("99 - back back", "99");
         testExpression("2 + back", "2");
         testExpression("885,6 negate * back back back", "-885,6");
-        testExpression("45 - 40 = back", "5");
+        testExpression("45 - 40 = back", "0");
 
         //after unary
         testExpression("100 + 10 % back", "10");
@@ -718,7 +715,7 @@ public class ControllerTest {
         testExpression("12345678", "12 345 678", "", 47);
         testExpression("797797,55", "797 797,55", "", 47);
         testExpression("822,787687", "822,787687", "", 47);
-        testExpression("9999999999999999 + 1 =", "1e+16", "", 47);
+        testExpression("9999999999999999 + 1 =", "1e16", "", 47);
         testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow", "r(sqr(9999999999999999))))))))))", 47);
 
         //medium font size
@@ -726,14 +723,14 @@ public class ControllerTest {
         testExpression("12692387928", "12 692 387 928", "", 35);
         testExpression("987927,876868", "987 927,876868", "", 35);
         testExpression("827,8768768768", "827,8768768768", "", 35);
-        testExpression("9000 sqr sqr sqr", "4,3046721e+31", "sqr(sqr(sqr(9000)))", 35);
+        testExpression("9000 sqr sqr sqr", "4,3046721e31", "sqr(sqr(sqr(9000)))", 35);
         testExpression("25 negate sqrt", "Invalid input", "√(-25)", 35);
 
         //low font size
         testExpression("123456789012", "123 456 789 012", "", 21);
         testExpression("9876454687656551", "9 876 454 687 656 551", "", 21);
         testExpression("9,876876876868768", "9,876876876868768", "", 21);
-        testExpression("777777777 sqr", "6,049382703950617e+17", "sqr(777777777)", 21);
+        testExpression("777777777 sqr", "6,049382703950617e17", "sqr(777777777)", 21);
         testExpression("22 / 0 =", "Cannot divide by zero", "22 ÷", 21);
         testExpression("0 / 0 =", "Result is undefined", "0 ÷", 21);
     }
@@ -753,11 +750,11 @@ public class ControllerTest {
 
         //unary
         testExpression("81 + 3 sqr =", "90", "");
-        testExpression("945 - 5 negate sqr +", "920", "945 - sqr(-5) +");
-        testExpression("12,99 negate / 10 1/ *", "-129,9", "-12,99 ÷ 1/(10) ×");
-        testExpression("6298 * 81 sqrt sqrt - 34 +", "18 860", "6298 × √(√(81)) - 34 +");
-        testExpression("103,78 - 10 sqr - 79 = = =", "-233,22", "");
-        testExpression("74,882 + 89 sqr sqrt negate * 3 / 2 =", "-21,177", "");
+        testExpression("945 - 5 negate sqr =", "920", "");
+        testExpression("12,99 negate / 10 1/ =", "-129,9", "");
+        testExpression("6298 * 81 sqrt sqrt - 34 =", "6 264", "");
+        testExpression("103,78 - 10 sqr - 79 = = =", "-133,22", "");
+        testExpression("74,882 + 89 sqr sqrt negate * 3 / 2 =", "112,323", "");
 
         //mutually inverse
         testExpression("10 / 3 * 3 =", "10");
@@ -768,7 +765,7 @@ public class ControllerTest {
         testExpression("87599 sqr + = =", "23 020 754 403");
 
         //overwriting
-        testExpression("76,4 + - ,4 +", "76", "76,4 - 0,4 +");
+        testExpression("76,4 + - 0,4 +", "76", "76,4 - 0,4 +");
         testExpression("888 negate - / 111 - +", "-8", "-888 ÷ 111 +");
         testExpression("1024 * + - / 256 + - * * * /", "4", "1024 ÷ 256 ÷");
         testExpression("874,982 / * - 870 + /", "4,982", "874,982 - 870 ÷");
@@ -777,27 +774,27 @@ public class ControllerTest {
 
         // with clear
         testExpression("36,98 - 77 C 45 - 23 -", "22", "45 - 23 -");
-        testExpression("46,99 * 5 sqr CE 69,9 /", "3 284,601", "46,99 × sqr(5) ÷");
+        testExpression("46,99 * 5 sqr CE 69,9 /", "3 284,601", "46,99 × 69,9 ÷");
         testExpression("98 + 3 CE 6 - 45 C 44 - 55 back 9 / +", "-15", "44 - 59 +");
-        testExpression("67 negate / 98 sqrt C 53 + 89 sqrt 1/ -", "53,10599978800064", "53 + 1/(√(89)) -");
+        testExpression("67 negate / 98 sqrt C 53 + 89 sqrt 1/ -", "0,105999788000636", "53 + 1/(√(89)) -");
         testExpression("992 back back sqr + - 55 negate + 489 CE 6 -", "142", "sqr(9) - -55 + 6 -");
         testExpression("38,88 / 66 CE 12 - 98,92 + 44 back *", "-91,68", "38,88 ÷ 12 - 98,92 + 4 ×");
 
         //with memory operations
         testExpression("75 MS C 888 - 45 + MR -", "918", "888 - 45 + 75 -");
-        testExpression("925,77 * 99999 sqr M+ * 99999 M- MR + 98765 sqr sqr -", "9,266752199568381e+22", "× 9999700002 + sqr(sqr(98765)) -");
-        testExpression("987654321 sqr sqr M+ M+ C 98 back * MR =", "1,712743695476512e+37", "");
+        testExpression("925,77 * 99999 sqr M+ * 99999 M- MR + 98765 sqr sqr -", "9,51507623651613e19", "× 9999700002 + sqr(sqr(98765)) -");
+        testExpression("987654321 sqr sqr M+ M+ C 98 back * MR =", "1,712743695476512e37", "");
         testExpression("56 MS C 98 + 35,77 MR M+ M- M- =", "154", "");
         testExpression("81 M+ sqrt - 99 * 22 negate - M+ M+ MR", "4 041", "√(81) - 99 × -22 -");
         testExpression("225 sqr M- sqr + 66 / 8 M+ MR", "-50 617", "sqr(sqr(225)) + 66 ÷");
 
         //with lowest and highest possible
-        testExpression(",000000000000001 + ,000000000000001 / ,000000000000001 =", "2");
+        testExpression("0,000000000000001 + 0,000000000000001 / 0,000000000000001 =", "2");
         testExpression("9999999999999999 + 5 - 4 / 10 =", "1 000 000 000 000 000");
         testExpression("9999999999999999 + 9999999999999999 / 9999999999999999 =", "2");
-        testExpression("9999999999999999 * sqr MS + 9876543210 + MR =", "9,999999999999998e+47");
-        testExpression(",000000000000001 sqrt / 800 sqr =", "0,0000000000000494");
-        testExpression(",000000000000001 * = / 99999999999999 + 34", "34");
+        testExpression("9999999999999999 * sqr MS + 9876543210 + MR =", "9,999999999999999e31");
+        testExpression("0,000000000000001 sqrt / 800 sqr =", "0,0000000000000494");
+        testExpression("0,000000000000001 * = / 99999999999999 + 34", "34");
     }
 
     /**
@@ -808,33 +805,18 @@ public class ControllerTest {
         //sqr
         testExpression("9999999999999999 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
         testExpression("9999999999999999 negate sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
-        testExpression(",0000000000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
-        testExpression(",0000000000000001 negate sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
+        testExpression("0,0000000000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
+        testExpression("0,0000000000000001 negate sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
 
-        //divide
+        //binary
         testExpression("1 / 9999999999999999 = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
         testExpression("1 / 9999999999999999 negate = = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
-        testExpression("1 / ,0000000000000001 = = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
-        testExpression("1 / ,0000000000000001 negate = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
-
-        //multiply
+        testExpression("1 / 0,0000000000000001 = = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
+        testExpression("1 / 0,0000000000000001 negate = = = = = = = = = = = = = = = = = = = MS / MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =", "Overflow");
         testExpression("9999999999999999 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
         testExpression("9999999999999999 negate * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
-        testExpression(",0000000000000001 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
-        testExpression(",0000000000000001 negate * = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
-
-        //add
-        testExpression("9999999999999999 sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * 9999999999999999 = = = = = = = = = = = = = = = = = +", "Overflow");
-        testExpression("9999999999999999 negate sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * 9999999999999999 = = = = = = = = = = = = = = = = = +", "Overflow");
-        testExpression(",0000000000000001 sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * ,0000000000000001 = = = = = = = = = = = = = = = = = +", "Overflow");
-        testExpression(",0000000000000001 negate sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * ,0000000000000001 = = = = = = = = = = = = = = = = = +", "Overflow");
-
-        //subtract
-        testExpression("9999999999999999 sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * 9999999999999999 = = = = = = = = = = = = = = = = = negate - ", "Overflow");
-        testExpression("9999999999999999 negate sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * 9999999999999999 = = = = = = = = = = = = = = = = = negate -", "Overflow");
-        testExpression(",0000000000000001 sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * ,0000000000000001 = = = = = = = = = = = = = = = = = negate-", "Overflow");
-        testExpression(",0000000000000001 negate sqr sqr sqr sqr sqr MS sqr sqr sqr sqr * MR = = = * ,0000000000000001 = = = = = = = = = = = = = = = = = negate -", "Overflow");
-
+        testExpression("0,0000000000000001 * = = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
+        testExpression("0,0000000000000001 negate * = = = = = = = = = = = = = = = = = = MS * MR = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ", "Overflow");
     }
 
     /**
@@ -847,15 +829,15 @@ public class ControllerTest {
         testExpression(", MS C MR", "0");
         testExpression("0,000000000000001 MS C MR", "0,000000000000001");
         testExpression("9999999999999999 MS C MR", "9 999 999 999 999 999");
-        testExpression("9999999999999999 + 1 = MS C MR", "1e+16");
-        testExpression(",0000000000000001 / 10 = MS C MR", "1e-17");
+        testExpression("9999999999999999 + 1 = MS C MR", "1e16");
+        testExpression("0,0000000000000001 / 10 = MS C MR", "1e-17");
 
         //add
         testExpression("965 M+ + 123 MR", "965");
         testExpression("50 M+ M+ M+ MR", "150");
         testExpression("23 M+ negate M+ MR", "0");
         testExpression("67 negate M+ negate M+ MR", "0");
-        testExpression(",000000000000001 M+ sqr sqr MR", "0,000000000000001");
+        testExpression("0,000000000000001 M+ sqr sqr MR", "0,000000000000001");
         testExpression("9999999999999999 negate M+ 1/ MR", "-9 999 999 999 999 999");
 
         //subtract
@@ -863,7 +845,7 @@ public class ControllerTest {
         testExpression("98 M- C MR", "-98");
         testExpression("98 negate M- C MR", "98");
         testExpression("125 M- M- M- M- MR", "-500");
-        testExpression(",000000000000001 negate M- * 85 MR", "0,000000000000001");
+        testExpression("0,000000000000001 negate M- * 85 MR", "0,000000000000001");
         testExpression("9999999999999999 M- sqrt + 67 MR", "-9 999 999 999 999 999");
 
         //clear
@@ -871,13 +853,13 @@ public class ControllerTest {
         testExpression("98 M- C MC 23 MS MR", "23");
         testExpression("4524 negate M- C MC 22 M- MR", "-22");
         testExpression("125 M- M- M- M- MC MS MR", "125");
-        testExpression(",000000000000001 negate M+ C 85 M+ MR", "85");
+        testExpression("0,000000000000001 negate M+ C 85 M+ MR", "84,999999999999999");
         testExpression("9999999999999999 M- sqrt MC CE 67 M- MR", "-67");
 
         //with other operations
         testExpression("98 M- C 98 M+ MR", "0");
         testExpression("9999999999999999 M+ M- M+ M- MR", "0");
-        testExpression(",000000000000001 negate M- M+ M- M+ M- M+ MR", "0");
+        testExpression("0,000000000000001 negate M- M+ M- M+ M- M+ MR", "0");
         testExpression("9999999999999999 sqr M+ C MR sqrt", "9 999 999 999 999 999");
         testExpression(",000000000000001 1/ M+ C MR 1/", "0,000000000000001");
         testExpression("10 M- / 3 * 3 = M+ MR", "0");
@@ -963,19 +945,19 @@ public class ControllerTest {
     @Test
     public void historyOverflowTest() throws Exception {
         //simple
-        testExpression("123 negate + 889 - 7643 / 2357 * sqr <", "8,512926497930231", "-123 + 889 - 7643 ÷ 2357 × sqr(-2");
-        testExpression("87,999 sqrt + 65 sqr sqr - 89,0076 + ,0011 1/ - 849 * 382999 + < > < >", "6 836 764 042 139,976", "076 + 1/(0,0011) - 849 × 382999 +");
-        testExpression("14374,99 * 65438,01 - 34 1/ 1/ 1/ sqr + 88 < -", "940 670 827,3690349", ",01 - sqr(1/(1/(1/(34)))) + 88 -");
+        testExpression("123 negate + 889 - 7643 / 2357 * sqr <", "8,5129264979302306", "-123 + 889 - 7643 ÷ 2357 × sqr(-2");
+        testExpression("87,999 sqrt + 65 sqr sqr - 89,0076 + 0,0011 1/ - 849 * 382999 + < > < >", "-355 663 144,11518006", "076 + 1/(0,0011) - 849 × 382999 +");
+        testExpression("14374,99 * 65438,01 - 34 1/ 1/ 1/ sqr + 88 < -", "940 670 827,3699", ",01 - sqr(1/(1/(1/(34)))) + 88 -");
 
         //with highest possible
-        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 +", "3e+16", "99999999999 + 9999999999999999 +");
-        testExpression("9999999999999999 * 9999999999999999 * 9999999999999999 + <", "9,999999999999997e+47", "9999999999999999 × 99999999999999");
+        testExpression("9999999999999999 + 9999999999999999 + 9999999999999999 +", "3e16", "99999999999 + 9999999999999999 +");
+        testExpression("9999999999999999 * 9999999999999999 * 9999999999999999 + <", "9,999999999999997e47", "9999999999999999 × 99999999999999");
         testExpression("9999999999999999 / 9999999999999999 - 9999999999999999 + < >", "-9 999 999 999 999 998", "999999999999 - 9999999999999999 +");
 
         //with lowest possible
-        testExpression(",0000000000000001 + ,0000000000000001 - ,0000000000000001 + < > < > < >", "0,0000000000000001", "0000000001 - 0,0000000000000001 +");
-        testExpression(",0000000000000001 * ,0000000000000001 + ,0000000000000001 / <", "0,0000000000000001", "0,0000000000000001 × 0,0000000000");
-        testExpression(",0000000000000001 sqr - ,0000000000000001 sqrt * ,0000000000000001 1/ + < > < > <", "-100 000 000", "00000000000001) - √(0,00000000000");
+        testExpression("0,0000000000000001 + 0,0000000000000001 - 0,0000000000000001 + < > < > < >", "0,0000000000000001", "0000000001 - 0,0000000000000001 +");
+        testExpression("0,0000000000000001 * 0,0000000000000001 + 0,0000000000000001 / <", "0,0000000000000001", "0,0000000000000001 × 0,0000000000");
+        testExpression("0,0000000000000001 sqr - 0,0000000000000001 sqrt * 0,0000000000000001 1/ + < > < > <", "1e16", "00000000000001) - √(0,00000000000");
     }
 
     /**
@@ -1186,9 +1168,9 @@ public class ControllerTest {
             second = KeyCode.Q;
             isMemoryDisable = false;
         } else if (item.equals("<")) {
-            fxId = "#left";
+            fxId = "#historyLeft";
         } else if (item.equals(">")) {
-            fxId = "#right";
+            fxId = "#historyRight";
         }
 
         if (first != KeyCode.UNDEFINED) {
