@@ -7,26 +7,8 @@ package com.implemica.calculator.model.enums;
  */
 public enum BinaryOperator {
 
-    ADD("+"),
-    SUBTRACT("-"),
-    DIVIDE("÷"),
-    MULTIPLY("×");
-
-    /**
-     * Value which formatNumber in history when given operator is used
-     */
-    private String text;
-
-    BinaryOperator(String text) {
-        this.text = text;
-    }
-
-    /**
-     * Get text representation of given operator
-     *
-     * @return text representation
-     */
-    public String getText() {
-        return text;
-    }
+    ADD,
+    SUBTRACT,
+    DIVIDE,
+    MULTIPLY
 }

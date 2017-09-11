@@ -21,7 +21,7 @@ public class InputNumber {
     /**
      * Shows if point is present
      */
-    private static boolean isPointSet = false;
+    private static boolean isPointSet;
 
     /**
      * Input number
