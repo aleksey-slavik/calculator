@@ -115,6 +115,16 @@ public class Calculator {
     }
 
     /**
+     * Return negate number for given value.
+     *
+     * @param value given value
+     * @return negate of given value
+     */
+    public BigDecimal negate(BigDecimal value) {
+        return calculation.negate(value);
+    }
+
+    /**
      * Return default statement of CalculationModel object
      */
     public void clearAll() {

@@ -87,14 +87,14 @@ public class ControllerTest {
     @Test
     public void engineeringTest() throws Exception {
         //positive power
-        testExpression("9999999999999999 + 1 =", "1e+16");
+        testExpression("9999999999999999 + 1 =", "1e16");
         testExpression("9999999999999999 + 1 - 1 =", "9 999 999 999 999 999");
-        testExpression("9999999999999999 negate - 1 =", "-1e+16");
+        testExpression("9999999999999999 negate - 1 =", "-1e16");
         testExpression("9999999999999999 negate - 1 + 1 =", "-9 999 999 999 999 999");
-        testExpression("9999999999999999 + ,1 = = = =", "9 999 999 999 999 999");
-        testExpression("9999999999999999 + ,1 = = = = =", "1e+16");
-        testExpression("9999999999999999 + ,4999999999999999 =", "9 999 999 999 999 999");
-        testExpression("9999999999999999 + ,4999999999999999 + ,000000000000001 =", "1e+16");
+        testExpression("9999999999999999 + 0,1 = = = =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 + 0,1 = = = = =", "1e16");
+        testExpression("9999999999999999 + 0,4999999999999999 =", "9 999 999 999 999 999");
+        testExpression("9999999999999999 + 0,4999999999999999 + 0,000000000000001 =", "1e16");
         //negative power
         testExpression("0,0000000000000001 / 10 =", "1e-17");
         testExpression("0,0000000000000001 / 10 * 10 =", "0,0000000000000001");
@@ -132,7 +132,7 @@ public class ControllerTest {
         testExpression("+ 0 =", "0", "");
         testExpression("78 + 0 +", "78", "78 + 0 +");
         testExpression("93,4 negate + 0 +", "-93,4", "-93,4 + 0 +");
-        testExpression("0 + ,5 =", "0,5", "");
+        testExpression("0 + 0,5 =", "0,5", "");
         testExpression("0 + 9481 negate +", "-9 481", "0 + -9481 +");
 
         //add opposite numbers
@@ -140,7 +140,7 @@ public class ControllerTest {
         testExpression("2 negate + 2 +", "0", "-2 + 2 +");
         testExpression("32 negate + 32 =", "0", "");
         testExpression("9823 + 9823 negate +", "0", "9823 + -9823 +");
-        testExpression(",00001 + ,00001 negate +", "0", "0,00001 + -0,00001 +");
+        testExpression("0,00001 + 0,00001 negate +", "0", "0,00001 + -0,00001 +");
         testExpression("36,6 negate + 36,6 negate +", "-73,2", "-36,6 + -36,6 +");
 
         //several equals
@@ -149,23 +149,23 @@ public class ControllerTest {
         testExpression("1 + = = = = = = = =", "9", "");
         testExpression("+ 5 = = = = = = = = = =", "50", "");
         testExpression("1 + = = = = = + 1 negate = = = = =", "1", "");
-        testExpression(",1 negate + = = = + ,1 = = = =", "0", "");
+        testExpression("0,1 negate + = = = + 0,1 = = = =", "0", "");
 
         //add with lowest possible
-        testExpression(",0000000000000001 + ,0000000000000001 =", "0,0000000000000002", "");
-        testExpression(",0000000000000001 + ,0000000000000001 negate =", "0", "");
-        testExpression(",0000000000000001 negate + ,0000000000000001 =", "0", "");
-        testExpression(",0000000000000001 + ,0000000000000009 =", "0,000000000000001", "");
-        testExpression(",0000000000000001 + ,0000000000000009 negate =", "-0,0000000000000008", "");
-        testExpression(",0000000000000001 negate + ,0000000000000009 =", "0,0000000000000008", "");
+        testExpression("0,0000000000000001 + 0,0000000000000001 =", "0,0000000000000002", "");
+        testExpression("0,0000000000000001 + 0,0000000000000001 negate =", "0", "");
+        testExpression("0,0000000000000001 negate + 0,0000000000000001 =", "0", "");
+        testExpression("0,0000000000000001 + 0,0000000000000009 =", "0,000000000000001", "");
+        testExpression("0,0000000000000001 + 0,0000000000000009 negate =", "-0,0000000000000008", "");
+        testExpression("0,0000000000000001 negate + 0,0000000000000009 =", "0,0000000000000008", "");
 
         //add with highest possible
-        testExpression("9999999999999999 + 1 =", "1e+16", "");
-        testExpression("9999999999999999 + =", "2e+16", "");
+        testExpression("9999999999999999 + 1 =", "1e16", "");
+        testExpression("9999999999999999 + =", "2e16", "");
         testExpression("9999999999999999 + 9999999999999999 negate =", "0", "");
         testExpression("9999999999999999 + 8888888888888888 negate =", "1 111 111 111 111 111", "");
         testExpression("1234567890123456 + 8765432109876543 =", "9 999 999 999 999 999", "");
-        testExpression("9999999999999999 + ,00000000000001 =", "9 999 999 999 999 999", "");
+        testExpression("9999999999999999 + 0,00000000000001 =", "9 999 999 999 999 999", "");
     }
 
     /**
@@ -185,7 +185,7 @@ public class ControllerTest {
         testExpression("- - -", "0", "0 -");
         testExpression("23 - - - - - -", "23", "23 -");
         testExpression("74 negate - - - -", "-74", "-74 -");
-        testExpression(",04 - 1,96 - - -", "-1,92", "0,04 - 1,96 -");
+        testExpression("0,04 - 1,96 - - -", "-1,92", "0,04 - 1,96 -");
         testExpression("78 - - 88 - -", "-10", "78 - 88 -");
         testExpression("- - - 176 - - - 873 - - -", "-1 049", "0 - 176 - 873 -");
 
@@ -210,7 +210,7 @@ public class ControllerTest {
         testExpression("234 - 234 negate -", "468", "234 - -234 -");
         testExpression("98,7 negate - 98,7 -", "-197,4", "-98,7 - 98,7 -");
         testExpression("528,99712 - 528,99712 negate =", "1 057,99424", "");
-        testExpression(",0001 negate - ,0001 =", "-0,0002", "");
+        testExpression("0,0001 negate - 0,0001 =", "-0,0002", "");
         testExpression("9879872 - 9879872 negate =", "19 759 744", "");
 
         //several equals
@@ -219,23 +219,23 @@ public class ControllerTest {
         testExpression("1 - = = = = = = = =", "-7", "");
         testExpression("- 5 = = = = = = = = = =", "-50", "");
         testExpression("1 - = = = = = - 1 negate = = = = =", "1", "");
-        testExpression(",1 negate - = = = - ,1 = = = =", "-0,2", "");
+        testExpression("0,1 negate - = = = - 0,1 = = = =", "-0,2", "");
 
         //subtract with lowest possible
         testExpression("0,00000000000001 - 0,00000000000001 =", "0", "");
         testExpression("0,00000000000001 - 0,00000000000001 negate =", "0,00000000000002", "");
         testExpression("0,00000000000001 - 0,00000000000002 =", "-0,00000000000001", "");
         testExpression("0,00000000000001 - 0,00000000000002 negate =", "0,00000000000003", "");
-        testExpression(",0000000000000001 negate - ,0000000000000009 =", "-0,000000000000001", "");
-        testExpression(",0000000000000001 - ,0000000000000009 =", "-0,0000000000000008", "");
+        testExpression("0,0000000000000001 negate - 0,0000000000000009 =", "-0,000000000000001", "");
+        testExpression("0,0000000000000001 - 0,0000000000000009 =", "-0,0000000000000008", "");
 
         //subtract with highest possible
         testExpression("9999999999999999 - 9999999999999999 =", "0", "");
         testExpression("9999999999999999 - 9999999999999998 =", "1", "");
         testExpression("9999999999999998 - 9999999999999999 =", "-1", "");
-        testExpression("9999999999999999 - 9999999999999999 negate =", "2e+16", "");
+        testExpression("9999999999999999 - 9999999999999999 negate =", "2e16", "");
         testExpression("1234567890123456 negate - 8765432109876543 =", "-9 999 999 999 999 999", "");
-        testExpression("9999999999999999 - ,00000000000001 negate =", "9 999 999 999 999 999", "");
+        testExpression("9999999999999999 - 0,00000000000001 negate =", "9 999 999 999 999 999", "");
     }
 
     /**
@@ -264,7 +264,7 @@ public class ControllerTest {
         testExpression("3 / 1 =", "3", "");
         testExpression("1768 / 1 =", "1 768", "");
         testExpression("987342 negate / 1 =", "-987 342", "");
-        testExpression(",0000000000000001 / 1 /", "0,0000000000000001", "0,0000000000000001 ÷ 1 ÷");
+        testExpression("0,0000000000000001 / 1 /", "0,0000000000000001", "0,0000000000000001 ÷ 1 ÷");
         testExpression("9999999999999999 / 1 =", "9 999 999 999 999 999", "");
 
         //divide same numbers
@@ -272,7 +272,7 @@ public class ControllerTest {
         testExpression("987 / 987 =", "1", "");
         testExpression("81 negate / 81 negate /", "1", "-81 ÷ -81 ÷");
         testExpression("981,001234 / 981,001234 =", "1", "");
-        testExpression(",90877070701 / ,90877070701 /", "1", "0,90877070701 ÷ 0,90877070701 ÷");
+        testExpression("0,90877070701 / 0,90877070701 /", "1", "0,90877070701 ÷ 0,90877070701 ÷");
         testExpression("9814309834701987 / 9814309834701987 =", "1", "");
 
         //several equals
@@ -281,29 +281,29 @@ public class ControllerTest {
         testExpression("81 / 3 = = =", "3", "");
         testExpression("10 / 2 = =", "2,5", "");
         testExpression("10 / 2 = = =", "1,25", "");
-        testExpression("625 / 5 = = = = = / ,2 = = = = =", "625", "");
+        testExpression("625 / 5 = = = = = / 0,2 = = = = =", "625", "");
 
         //several divide
         testExpression("/ / /", "0", "0 ÷");
         testExpression("23 / / / / / /", "23", "23 ÷");
         testExpression("74 negate / / / /", "-74", "-74 ÷");
-        testExpression(",04 / 1,96 / / /", "0,0204081632653061", "0,04 ÷ 1,96 ÷");
+        testExpression("0,04 / 1,96 / / /", "0,0204081632653061", "0,04 ÷ 1,96 ÷");
         testExpression("78 / / 88 / /", "0,8863636363636364", "78 ÷ 88 ÷");
-        testExpression("/ / / 176 / / / 873 / / /", "0", "0 ÷ 176 ÷ 873 ÷");
+        testExpression("/ / / 176 / / /", "0", "0 ÷ 176 ÷");
 
         //divide with lower possible
-        testExpression(",0000000000000001 / 10 +", "1e-17", "0,0000000000000001 ÷ 10 +");
-        testExpression(",0000000000000001 / 3 =", "3,333333333333333e-17", "");
-        testExpression(",0000000000000001 / ,0000000000000001 =", "1", "");
-        testExpression(",0000000000000001 / ,0000000000000002 =", "0,5", "");
-        testExpression(",0000000000000002 / ,0000000000000001 -", "2", "000000002 ÷ 0,0000000000000001 -");
-        testExpression(",0000000000000001 / 9999999999999999 =", "1e-32", "");
+        testExpression("0,0000000000000001 / 10 +", "1e-17", "0,0000000000000001 ÷ 10 +");
+        testExpression("0,0000000000000001 / 3 =", "3,333333333333333e-17", "");
+        testExpression("0,0000000000000001 / 0,0000000000000001 =", "1", "");
+        testExpression("0,0000000000000001 / 0,0000000000000002 =", "0,5", "");
+        testExpression("0,0000000000000002 / 0,0000000000000001 -", "2", "000000002 ÷ 0,0000000000000001 -");
+        testExpression("0,0000000000000001 / 9999999999999999 =", "1e-32", "");
 
         //divide with higher possible
         testExpression("9999999999999999 / 9 =", "1 111 111 111 111 111", "");
-        testExpression("9999999999999999 / 7 -", "1 428 571 428 571 428", "9999999999999999 ÷ 7 -");
-        testExpression("9999999999999999 / 0,1 =", "9,999999999999999e+16", "");
-        testExpression("9999999999999999 / 0,00000000000001 =", "9,999999999999999e+29", "");
+        testExpression("9999999999999999 / 7 -", "1 428 571 428 571 428,4", "9999999999999999 ÷ 7 -");
+        testExpression("9999999999999999 / 0,1 =", "9,999999999999999e16", "");
+        testExpression("9999999999999999 / 0,00000000000001 =", "9,999999999999999e29", "");
         testExpression("9999999999999999 / 9999999999999999 /", "1", "99999999999 ÷ 9999999999999999 ÷");
         testExpression("9999999999999999 / 8888888888888888 +", "1,125", "99999999999 ÷ 8888888888888888 +");
     }
@@ -332,7 +332,7 @@ public class ControllerTest {
         testExpression("*", "0", "0 ×");
         testExpression("1 * 1 =", "1", "");
         testExpression("0 * 1 =", "0", "");
-        testExpression(",0001 * 10000 =", "1", "");
+        testExpression("0,0001 * 10000 =", "1", "");
         testExpression("12345679 * 9 =", "111 111 111", "");
         testExpression("20 * 0,5 negate =", "-10", "");
 
@@ -357,16 +357,16 @@ public class ControllerTest {
         testExpression("10 * 0,1 =", "1", "");
         testExpression("25 negate * 0,04 negate *", "1", "-25 × -0,04 ×");
         testExpression("0,0009765625 * 1024 =", "1", "");
-        testExpression("1000000 * ,000001 *", "1", "1000000 × 0,000001 ×");
+        testExpression("1000000 * 0,000001 *", "1", "1000000 × 0,000001 ×");
         testExpression("0,000064 * 15625 =", "1", "");
 
         //several multiply
         testExpression("* * *", "0", "0 ×");
         testExpression("23 * * * * * *", "23", "23 ×");
         testExpression("74 negate * * *", "-74", "-74 ×");
-        testExpression(",04 * 1,96 * * *", "0,0784", "0,04 × 1,96 ×");
+        testExpression("0,04 * 1,96 * * *", "0,0784", "0,04 × 1,96 ×");
         testExpression("78 * * 88 * *", "6 864", "78 × 88 ×");
-        testExpression("* * * 176 * * * 873 * * *", "0", "0 × 176 × 873 ×");
+        testExpression("* * * 176 * * *", "0", "0 × 176 ×");
 
         //several equals
         testExpression("5 * =", "25", "");
@@ -374,23 +374,23 @@ public class ControllerTest {
         testExpression("3 * = * =", "81", "");
         testExpression("0,1 * = * 10 =", "0,1", "");
         testExpression("3 * = = =", "81", "");
-        testExpression("10 * = = * ,1 = =", "10", "");
+        testExpression("10 * = = * 0,1 = =", "10", "");
 
         //with highest possible
-        testExpression("9999999999999999 * 9999999999999999 =", "9,999999999999998e+31", "");
-        testExpression("9999999999999999 * 9999999999999999 negate =", "-9,999999999999998e+31", "");
+        testExpression("9999999999999999 * 9999999999999999 =", "9,999999999999998e31", "");
+        testExpression("9999999999999999 * 9999999999999999 negate =", "-9,999999999999998e31", "");
         testExpression("9999999999999999 * 0,1 =", "999 999 999 999 999,9", "");
-        testExpression("9999999999999999 * 10 =", "9,999999999999999e+16", "");
+        testExpression("9999999999999999 * 10 =", "9,999999999999999e16", "");
         testExpression("9999999999999999 * 0,00000000000001 =", "99,99999999999999", "");
-        testExpression("9999999999999999 * 8888888888888888 *", "8,888888888888887e+31", "99999999999 × 8888888888888888 ×");
+        testExpression("9999999999999999 * 8888888888888888 *", "8,888888888888887e31", "99999999999 × 8888888888888888 ×");
 
         //with lowest possible
         testExpression("0,00000000000001 * 0,00000000000001 =", "1e-28", "");
         testExpression("0,00000000000001 * 0,00000000000001 negate =", "-1e-28", "");
-        testExpression(",0000000000000001 * 10 *", "0,000000000000001", "0,0000000000000001 × 10 ×");
-        testExpression(",0000000000000001 * 3 =", "0,0000000000000003", "");
-        testExpression(",0000000000000001 * ,0000000000000002 =", "2e-32", "");
-        testExpression(",0000000000000001 * 9999999999999999 =", "0,9999999999999999", "");
+        testExpression("0,0000000000000001 * 10 *", "0,000000000000001", "0,0000000000000001 × 10 ×");
+        testExpression("0,0000000000000001 * 3 =", "0,0000000000000003", "");
+        testExpression("0,0000000000000001 * 0,0000000000000002 =", "2e-32", "");
+        testExpression("0,0000000000000001 * 9999999999999999 =", "0,9999999999999999", "");
     }
 
     /**
@@ -403,14 +403,14 @@ public class ControllerTest {
         testExpression("0 negate", "0");
         testExpression("1 negate", "-1");
         testExpression("1 negate negate", "1");
-        testExpression("5 negate 8", "-58");
+        testExpression("5 negate 8", "58");
         testExpression("87,08 negate", "-87,08");
 
         //several negate
         testExpression("3 negate negate", "3");
         testExpression("2 negate negate negate", "-2");
-        testExpression(",01 negate negate", "0,01");
-        testExpression("9 negate 7 negate", "97");
+        testExpression("0,01 negate negate", "0,01");
+        testExpression("9 negate 7 negate", "-97");
         testExpression("negate 3 negate negate 1 negate", "-31");
         testExpression("negate 98 negate negate 12 negate negate negate", "-9 812");
 
@@ -450,7 +450,7 @@ public class ControllerTest {
         testExpression("1 + 5 1/ 1/", "5", "1 + 1/(1/(5))");
         testExpression("77 - 1024 1/ 1/", "1 024", "77 - 1/(1/(1024))");
         testExpression("1000000 1/ 1/ 1/ 1/", "1 000 000", "1/(1/(1/(1/(1000000))))");
-        testExpression("98 1/ 1/ - 12 1/ 1/", "12", "1/(1/(98)) - 1/(1/(12))");
+        testExpression("98 1/ 1/ - 10 1/ 1/", "10", "1/(1/(98)) - 1/(1/(10))");
 
         //with lowest possible
         testExpression("0,00000000000001 1/", "100 000 000 000 000", "1/(0,00000000000001)");
@@ -463,10 +463,10 @@ public class ControllerTest {
         //with highest possible
         testExpression("9999999999999999 1/", "0,0000000000000001", "1/(9999999999999999)");
         testExpression("9999999999999999 negate 1/", "-0,0000000000000001", "1/(-9999999999999999)");
-        testExpression("9999999999999999 1/ 1/", "1e+16", "1/(1/(9999999999999999))");
-        testExpression("9999999999999999 negate 1/ 1/", "-1e+16", "1/(1/(-9999999999999999))");
+        testExpression("9999999999999999 1/ 1/", "1e16", "1/(1/(9999999999999999))");
+        testExpression("9999999999999999 negate 1/ 1/", "-1e16", "1/(1/(-9999999999999999))");
         testExpression("9999999999999999 1/ 1/ 1/", "0,0000000000000001", "1/(1/(1/(9999999999999999)))");
-        testExpression("9999999999999999 negate 1/ 1/ 1/ 1/", "-1e+16", "1/(1/(1/(1/(-9999999999999999))))");
+        testExpression("9999999999999999 negate 1/ 1/ 1/ 1/", "-1e16", "1/(1/(1/(1/(-9999999999999999))))");
     }
 
     /**
@@ -506,7 +506,7 @@ public class ControllerTest {
 
         //with one
         testExpression("1 sqr", "1", "sqr(1)");
-        testExpression("1 negate sqr", "1", "sqr(negate(1))");
+        testExpression("1 negate sqr", "1", "sqr(-1)");
         testExpression("1 sqr sqr sqr", "1", "sqr(sqr(sqr(1)))");
         testExpression("21 - 20 = sqr", "1", "sqr(1)");
         testExpression("10 / 10 = sqr", "1", "sqr(1)");
@@ -516,33 +516,33 @@ public class ControllerTest {
         testExpression("sqr sqr", "0", "sqr(sqr(0))");
         testExpression("sqr sqr sqr", "0", "sqr(sqr(sqr(0)))");
         testExpression("10 sqr sqr", "10 000", "sqr(sqr(10))");
-        testExpression(",001 sqr sqr", "0,000000000001", "sqr(sqr(0,001))");
+        testExpression("0,001 sqr sqr", "0,000000000001", "sqr(sqr(0,001))");
         testExpression("10 sqr sqr sqr", "100 000 000", "sqr(sqr(sqr(10)))");
         testExpression("125 sqr sqr", "244 140 625", "sqr(sqr(125))");
 
         //with negative numbers
-        testExpression("2 negate sqr", "4", "sqr(negate(2))");
-        testExpression("5 negate sqr", "25", "sqr(negate(5))");
-        testExpression(",002 negate sqr", "0,000004", "sqr(negate(0,002))");
-        testExpression("125 negate sqr sqr", "244 140 625", "sqr(sqr(negate(125)))");
+        testExpression("2 negate sqr", "4", "sqr(-2)");
+        testExpression("5 negate sqr", "25", "sqr(-5)");
+        testExpression(",002 negate sqr", "0,000004", "sqr(-0,002)");
+        testExpression("125 negate sqr sqr", "244 140 625", "sqr(sqr(-125))");
         testExpression("20 - 25 = sqr", "25", "sqr(-5)");
         testExpression("7890 - 66122 = sqr", "3 390 965 824", "sqr(-58232)");
 
         //with lowest possible
         testExpression("0,0000000000000001 sqr", "1e-32", "sqr(0,0000000000000001)");
-        testExpression("0,0000000000000001 negate sqr", "1e-32", "sqr(negate(0,0000000000000001))");
-        testExpression("0,0000000000000001 negate sqr sqr", "1e-64", "qr(sqr(negate(0,0000000000000001)))");
+        testExpression("0,0000000000000001 negate sqr", "1e-32", "sqr(-0,0000000000000001)");
+        testExpression("0,0000000000000001 negate sqr sqr", "1e-64", "sqr(sqr(-0,0000000000000001))");
         testExpression("0,0000000000000001 sqr sqr", "1e-64", "sqr(sqr(0,0000000000000001))");
-        testExpression("0,0000000000000001 negate sqr sqr sqr", "1e-128", "r(sqr(sqr(negate(0,0000000000000001))))");
+        testExpression("0,0000000000000001 negate sqr sqr sqr", "1e-128", "r(sqr(sqr(-0,0000000000000001)))");
         testExpression("0,0000000000000001 sqr sqr sqr", "1e-128", "sqr(sqr(sqr(0,0000000000000001)))");
 
         //with highest possible
-        testExpression("9999999999999999 sqr", "9,999999999999998e+31", "sqr(9999999999999999)");
-        testExpression("9999999999999999 negate sqr", "9,999999999999998e+31", "sqr(negate(9999999999999999))");
-        testExpression("9999999999999999 sqr sqr", "9,999999999999996e+63", "sqr(sqr(9999999999999999))");
-        testExpression("9999999999999999 negate sqr sqr", "9,999999999999996e+63", "sqr(sqr(negate(99999999999999990))");
-        testExpression("9999999999999999 sqr sqr sqr sqr", "9,999999999999984e+255", "sqr(sqr(sqr(9999999999999999))))");
-        testExpression("9999999999999999 negate sqr sqr sqr sqr", "9,999999999999984e+255", "qr(sqr(sqr(negate(9999999999999999)))))");
+        testExpression("9999999999999999 sqr", "9,999999999999998e31", "sqr(9999999999999999)");
+        testExpression("9999999999999999 negate sqr", "9,999999999999998e31", "sqr(-9999999999999999)");
+        testExpression("9999999999999999 sqr sqr", "9,999999999999996e63", "sqr(sqr(9999999999999999))");
+        testExpression("9999999999999999 negate sqr sqr", "9,999999999999996e63", "sqr(sqr(-9999999999999999))");
+        testExpression("9999999999999999 sqr sqr sqr sqr", "9,999999999999984e255", "sqr(sqr(sqr(9999999999999999))))");
+        testExpression("9999999999999999 negate sqr sqr sqr sqr", "9,999999999999984e255", "qr(sqr(sqr(-9999999999999999))))");
     }
 
     /**
@@ -572,7 +572,7 @@ public class ControllerTest {
         testExpression("46 + 45 negate = sqrt", "1", "√(1)");
         testExpression("21 - 20 = sqrt", "1", "√(1)");
         testExpression("10 / 10 = sqrt", "1", "√(1)");
-        testExpression("5 * ,2 = sqrt", "1", "√(1)");
+        testExpression("5 * 0,2 = sqrt", "1", "√(1)");
 
         //several sqrt
         testExpression("sqrt sqrt", "0", "√(√(0))");
@@ -591,12 +591,12 @@ public class ControllerTest {
         testExpression("0,0000000000000001 sqrt sqrt sqrt sqrt", "0,1", "√(√(√(√(0,0000000000000001))))");
 
         //with highest possible
-        testExpression("9999999999999999 sqrt", "99 999 999,99999999", "√(9999999999999999)");
-        testExpression("8888888888888888 sqrt", "94 280 904,15820633", "√(8888888888888888)");
-        testExpression("1111111111111111 sqrt", "33 333 333,33333333", "√(1111111111111111)");
-        testExpression("9999999999999999 sqrt sqrt", "9 999,999999999999", "√(√(9999999999999999))");
-        testExpression("9999999999999999 sqrt sqrt sqrt", "99,99999999999999", "√(√(√(9999999999999999)))");
-        testExpression("9999999999999999 sqrt sqrt sqrt sqrt", "9,999999999999999", "√(√(√(√(9999999999999999))))");
+        testExpression("9999999999999999 sqrt", "99 999 999,999999995", "√(9999999999999999)");
+        testExpression("8888888888888888 sqrt", "94 280 904,158206332", "√(8888888888888888)");
+        testExpression("1111111111111111 sqrt", "33 333 333,333333332", "√(1111111111111111)");
+        testExpression("9999999999999999 sqrt sqrt", "9 999,9999999999998", "√(√(9999999999999999))");
+        testExpression("9999999999999999 sqrt sqrt sqrt", "99,999999999999999", "√(√(√(9999999999999999)))");
+        testExpression("9999999999999999 sqrt sqrt sqrt sqrt", "9,9999999999999999", "√(√(√(√(9999999999999999))))");
     }
 
     /**

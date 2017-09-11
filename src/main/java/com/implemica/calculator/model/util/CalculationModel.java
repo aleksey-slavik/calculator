@@ -223,7 +223,7 @@ public class CalculationModel {
      * @param value given value
      * @return negate of given value
      */
-    private BigDecimal negate(BigDecimal value) {
+    public BigDecimal negate(BigDecimal value) {
         return value.negate();
     }
 
@@ -292,6 +292,10 @@ public class CalculationModel {
             }
 
             throw new DivideByZeroException("Divide by zero in expression: " + left + " / " + right);
+        }
+
+        if (left.equals(BigDecimal.ZERO)) {
+            return BigDecimal.ZERO;
         }
 
         return left.divide(right, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);

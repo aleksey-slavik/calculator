@@ -466,6 +466,19 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Processing of click on negate button
+     */
+    @FXML
+    private void negateClick() {
+        if (isPreviousUnary) {
+            calculator.appendUnary(UnaryOperator.NEGATE);
+            updateHistoryField();
+        }
+
+        setNumericFieldNumber(calculator.negate(getNumericFieldNumber()));
+    }
+
+    /**
      * Processing of click on backspace button
      */
     @FXML

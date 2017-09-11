@@ -37,7 +37,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                mnemonicParsing="false" onAction="#unaryOperatorClick" styleClass="negate" text="±" GridPane.rowIndex="8"/>
+                mnemonicParsing="false" onAction="#negateClick" styleClass="negate" text="±" GridPane.rowIndex="8"/>
         <Button fx:id="one" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
                 onAction="#buttonDigitClick" styleClass="digits" text="1" GridPane.rowIndex="7"/>
         <Button fx:id="zero" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"

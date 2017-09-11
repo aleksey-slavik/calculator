@@ -58,7 +58,7 @@ public class HistoryFormatter {
 
         for (Operation operation : calculator.getHistory()) {
             StringBuilder tmp = new StringBuilder(DEFAULT_VALUE);
-            tmp.append(formatNumber(operation.getOperand()));
+            tmp.append(formatNumber(operation.getOperand()).replace(" ", ""));
 
             for (UnaryOperator unary : operation.getUnaryOperators()) {
                 tmp.replace(0, tmp.length(), surround(unary, tmp.toString()));
