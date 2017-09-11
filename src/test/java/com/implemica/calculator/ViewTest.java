@@ -112,7 +112,7 @@ public class ViewTest {
             numeric = (Label) scene.lookup("#numericField");
             hide = (Button) scene.lookup("#hide");
             expand = (Button) scene.lookup("#expand");
-            menuShow = (Button) scene.lookup("menuShow");
+            menuShow = (Button) scene.lookup("#menuShow");
             menuClose = (Button) scene.lookup("#menuClose");
         });
 
@@ -125,7 +125,6 @@ public class ViewTest {
      */
     @Test
     public void moveTest() {
-        //handle tests
         moveTest(100, 100);
         moveTest(274, -182);
         moveTest(-530, 0);
@@ -133,13 +132,6 @@ public class ViewTest {
         moveTest(123, -298);
         moveTest(-430, 257);
         moveTest(534, 341);
-
-        //random tests
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            moveTest(random.nextInt(MAX_WINDOW_WIDTH) - MAX_WINDOW_WIDTH / 2,
-                    random.nextInt(MAX_WINDOW_HEIGHT) - MAX_WINDOW_HEIGHT / 2);
-        }
     }
 
     /**
@@ -154,7 +146,6 @@ public class ViewTest {
         alertTest(".01e9222", "#sqr");
         alertTest("CPS777", "#sqrt");
         alertTest("  oiua", "#inverse");
-        alertTest("an ioiuy", "#negate");
         alertTest("trytry", "#memory_store");
         alertTest("iunmavc", "#memory_add");
         alertTest("nmewnniucvna", "#memory_minus");
@@ -365,7 +356,7 @@ public class ViewTest {
         if (res > MAX_WINDOW_WIDTH) {
             res = MAX_WINDOW_WIDTH - offsetX - 1;
         } else if (res < 0) {
-            res = Math.abs(offsetX);
+            res = -offsetX;
         }
 
         return res;
@@ -386,7 +377,7 @@ public class ViewTest {
         if (res > MAX_WINDOW_HEIGHT) {
             res = MAX_WINDOW_HEIGHT - offsetY - 1;
         } else if (res < 0) {
-            res = Math.abs(offsetY);
+            res = -offsetY;
         }
 
         return res;

@@ -400,14 +400,14 @@ public class ControllerTest {
         testExpression("0 negate", "0");
         testExpression("1 negate", "-1");
         testExpression("1 negate negate", "1");
-        testExpression("5 negate 8", "58");
+        testExpression("5 8 negate", "-58");
         testExpression("87,08 negate", "-87,08");
 
         //several negate
         testExpression("3 negate negate", "3");
         testExpression("2 negate negate negate", "-2");
         testExpression("0,01 negate negate", "0,01");
-        testExpression("9 negate 7 negate", "-97");
+        testExpression("9 7 negate negate", "97");
         testExpression("negate 3 negate negate 1 negate", "-31");
         testExpression("negate 98 negate negate 12 negate negate negate", "-9 812");
 
